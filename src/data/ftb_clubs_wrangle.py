@@ -289,10 +289,11 @@ def build_fulldata():
     save_master(fulldata, "fulldata")
     #return fulldata
 
-def get_summary(group_key, agg_method="mean", base_filters={}, metric_mins={}, output_metrics=[]):
+def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_mins={}, output_metrics=[]):
 
-    #fetch from master csv
-    df = get_master("fulldata")
+    if df is None:
+        #fetch from master csv
+        df = get_master("fulldata")
     #print list(df.columns.values)
     
     #filter unwanted records
