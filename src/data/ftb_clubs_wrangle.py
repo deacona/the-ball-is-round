@@ -37,7 +37,7 @@ def master_path(stub):
     return config.MASTER_DIR+"/"+"ftb_"+stub+".txt"
 
 def get_master(stub):
-    print "Fetching "+master_path(stub)
+    # print "Fetching "+master_path(stub)
     return pd.read_csv(master_path(stub), encoding = "utf8", sep='|')
     
 #    chunksize = 1000
@@ -51,7 +51,7 @@ def get_master(stub):
 
 def save_master(dframe, stub):
     dframe.to_csv(master_path(stub), encoding='utf-8', sep='|')
-    print "... saved to "+master_path(stub)
+    # print "... saved to "+master_path(stub)
     
 def func_div(x):
     div_dict = {
