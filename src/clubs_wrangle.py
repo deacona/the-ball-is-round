@@ -5,25 +5,20 @@ Created on Mon Feb 06 16:49:37 2017
 @author: adeacon
 """
 
+import sys
 import os
 import zipfile
 import pandas as pd
-#import re
 import datetime
-#import matplotlib.pyplot as plt
+import numpy as np
 import config
+import utilities
 
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.expand_frame_repr', False)
-
-results_url = "http://football-data.co.uk/downloadm.php"
-results_dir = config.SOURCE_DIR+"/ftd"
-
-stadiums_dict = config.STADIUMS_SCRAPE
-managers_dict = config.MANAGERS_SCRAPE
+# pd.set_option('display.max_columns', 500)
+# pd.set_option('display.expand_frame_repr', False)
 
 def unzip_files():
-    for root, dirs, files in os.walk(results_dir):
+    for root, dirs, files in os.walk(config.RESULTS_SCRAPE["ftd"][1]):
         for file in files:
             if file == "data.zip":
                 #print root
@@ -33,26 +28,6 @@ def unzip_files():
                 with zipfile.ZipFile(os.path.join(root, file),"r") as zip_ref:
                     zip_ref.extractall(root)
 
-def master_path(stub):
-    return config.MASTER_DIR+"/"+"ftb_"+stub+".txt"
-
-def get_master(stub):
-    # print "Fetching "+master_path(stub)
-    return pd.read_csv(master_path(stub), encoding = "utf8", sep='|')
-    
-#    chunksize = 1000
-#    chunks = []
-#    for chunk in pd.read_csv(master_path(stub), chunksize=chunksize):
-#        # Do stuff...
-#        chunks.append(chunk)
-#    
-#    df = pd.concat(chunks, axis=0)
-#    return df
-
-def save_master(dframe, stub):
-    dframe.to_csv(master_path(stub), encoding='utf-8', sep='|')
-    # print "... saved to "+master_path(stub)
-    
 def func_div(x):
     div_dict = {
         'B1': ['Belgium',1]
@@ -95,47 +70,74 @@ def func_nogoal(x):
     else:
         return 0
 
-
 def format_results():
     pieces = []
     core_cols = ['Div','Date'] #,'HomeTeam','AwayTeam','FTHG','FTAG','FTR']
     use_cols = ['Season','Div','Country','Tier','Date','HomeTeam','AwayTeam','FTHG','FTAG','FTR','HTHG','HTAG','HTR','Attendance','Referee','HS','AS','HST','AST','HHW','AHW','HC','AC','HF','AF','HO','AO','HY','AY','HR','AR','HBP','ABP']
 
-    for root, dirs, files in os.walk(results_dir):
+    for root, dirs, files in os.walk(config.RESULTS_SCRAPE["ftd"][1]):
         for file in files:
             if file.endswith(".csv"):
                 #print root
-                #print os.path.join(root, file)
+                filepath = os.path.join(root, file)
+                print filepath
                 #print root[-9:]
-                try:
-                    df = pd.read_csv(os.path.join(root, file), encoding = "utf8", parse_dates=['Date'])
-                    #df['File'] = file
-                    df['Season'] = root[-9:]
-                    #drop useless rows
-                    df = df.dropna(subset=core_cols)
-                    pieces.append(df)
-                except:
-                    print "read_csv FAILED: "+os.path.join(root, file)
+                # try:
+                df = pd.read_csv(filepath, usecols=utilities.read_header(filepath), encoding="latin9") #, parse_dates=['Date'])
+                #df['File'] = file
+                df['Season'] = root[-9:]
+
+                if set(["HomeTeam", "AwayTeam"]).issubset(df.columns):
+                    # print df[["HomeTeam", "AwayTeam"]].head()
+                    try:
+                        df["HomeTeam"] = df["HomeTeam"].apply(lambda x: x.decode('latin9').encode('utf-8'))
+                        df["AwayTeam"] = df["AwayTeam"].apply(lambda x: x.decode('latin9').encode('utf-8'))
+                    except:
+                        df["HomeTeam"] = np.nan
+                        df["AwayTeam"] = np.nan
+
+                elif set(["HT", "AT"]).issubset(df.columns):
+                    # print df[["HT", "AT"]].head()
+                    try:
+                        df["HomeTeam"] = df["HT"].apply(lambda x: x.decode('latin9').encode('utf-8'))
+                        df["AwayTeam"] = df["AT"].apply(lambda x: x.decode('latin9').encode('utf-8'))
+                    except:
+                        df["HomeTeam"] = np.nan
+                        df["AwayTeam"] = np.nan
+                else:
+                    raise
+                print df[["HomeTeam", "AwayTeam"]].head()
+
+                #drop useless rows
+                df = df.dropna(subset=core_cols)
+
+                pieces.append(df)
+                # except:
+                #     print "read_csv FAILED: "+os.path.join(root, file)
                 #print df.count()
     
     # Concatenate everything into a single DataFrame
     dframe = pd.concat(pieces, ignore_index=True)
     
     dframe['Country'], dframe['Tier'] = zip(*dframe['Div'].map(func_div))
-    
+
+    # dframe["Date"] = pd.to_datetime(dframe['Date'], format='%d/%m/%y')
+    dframe.Date = pd.to_datetime(dframe.Date,dayfirst=True)
+
     #print dframe.describe(include="all")
     
-    save_master(dframe[use_cols], "results")
+    # print dframe[((dframe['HomeTeam']=="Middlesbrough")|(dframe['AwayTeam']=="Middlesbrough"))&(dframe['Season']=="2006-2007")][["Date", "HomeTeam", "AwayTeam"]]
+    utilities.save_master(dframe[use_cols], "results") #, enc="ascii")
     #return dframe[use_cols]
 
 def format_stadiums():
-    dgl = pd.read_csv(stadiums_dict["dgl"][1], encoding = "utf8", sep=',')
+    dgl = pd.read_csv(config.STADIUMS_SCRAPE["dgl"][1], encoding = "utf8", sep=',')
     dgl.rename(columns={'Name':'Stadium'}, inplace=True)
     dgl.set_index('Team', inplace=True)
     dgl.info()
     #print dgl.describe(include="all")
     
-    ops = pd.read_csv(stadiums_dict["ops"][1], encoding = "utf8", sep=',')
+    ops = pd.read_csv(config.STADIUMS_SCRAPE["ops"][1], encoding = "utf8", sep=',')
     ops.rename(columns={'Team':'TeamFull', 'FDCOUK':'Team'}, inplace=True)
     ops.set_index('Team', inplace=True)
     ops.info()
@@ -147,13 +149,13 @@ def format_stadiums():
     #combo.info()
     #print combo.describe(include="all")
     
-    save_master(combo, "stadiums")
+    utilities.save_master(combo, "stadiums")
     #return combo
 
 def format_managers():
     pieces = []
     #future_date = datetime.datetime(2099, 12, 31)
-    for code, endpoints in managers_dict.items():
+    for code, endpoints in config.MANAGERS_SCRAPE.items():
         dataframe = pd.read_csv(endpoints[1], encoding = "utf8", sep=',', parse_dates=['DateFrom', 'DateTo'])
         pieces.append(dataframe)
     
@@ -174,15 +176,15 @@ def format_managers():
     #print managers.describe(include="all")
     #print managers[95:105]
     
-    save_master(managers, "managers")
+    utilities.save_master(managers, "managers")
     #return managers
 
 def build_fulldata():
     print "Building fulldata dataframe from results, stadiums, managers ..."
     
-    results = get_master("results")
-    stadiums = get_master("stadiums")
-    managers = get_master("managers")
+    results = utilities.get_master("results")
+    stadiums = utilities.get_master("stadiums")
+    managers = utilities.get_master("managers")
     managers.dropna(subset=["Manager"], inplace=True)
     
     home_renames = {
@@ -233,7 +235,9 @@ def build_fulldata():
     
     allresults = pd.concat([homeresults,awayresults], ignore_index=True)
     allresults.drop(['FTR','HTR','Unnamed: 0'], axis=1, inplace=True)
-    
+
+    # print allresults[(allresults['Team']=="Middlesbrough")&(allresults['Season']=="2006-2007")]["Date"].min()
+
     for stat in stat_to_diff:
         allresults[stat+'Diff'] = allresults[stat] - allresults[stat+'Opp']
         allresults['Total'+stat] = allresults[stat] + allresults[stat+'Opp']
@@ -284,16 +288,16 @@ def build_fulldata():
     
     #fulldata.info()
     #print fulldata.describe(include="all")
-    #print fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Bournemouth")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Away')].describe(include="all")
+    # print fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['Season']=="2006-2007")]["Date"].min()#.describe(include="all")
     
-    save_master(fulldata, "fulldata")
+    utilities.save_master(fulldata, "fulldata")
     #return fulldata
 
 def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_mins={}, output_metrics=[]):
 
     if df is None:
         #fetch from master csv
-        df = get_master("fulldata")
+        df = utilities.get_master("fulldata")
     #print list(df.columns.values)
     
     #filter unwanted records
@@ -356,7 +360,7 @@ def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_m
 def main():
 
     unzip_files()
-    format_results() ## SOME FILES DO NOT LOAD
+    format_results() ## SOME TEAM NAMES DO NOT LOAD/PARSE
     format_stadiums() ## name inconsistencies??
     format_managers() ## team names don't match results/stadiums data
     build_fulldata()
