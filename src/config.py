@@ -5,10 +5,14 @@
 """
 
 import os
+import logging
 import configparser
 
+LOGFORMAT = '%(asctime)s - %(levelname)s - %(message)s'
+LOGLEVEL = logging.DEBUG
+
 conf = configparser.RawConfigParser()
-conf.read('..\src\config.ini')
+conf.read('config.ini')
 
 SOURCE_DIR = os.path.join(conf["PROJECT"]["HOMEDIR"], "data", "raw")
 MASTER_DIR = os.path.join(conf["PROJECT"]["HOMEDIR"], "data", "processed")
