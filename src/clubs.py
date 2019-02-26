@@ -9,7 +9,6 @@ import pandas as pd
 from scipy.spatial import distance
 import math
 from numpy.random import permutation
-import logging
 # from pandas.tools.plotting import scatter_matrix
 # import matplotlib.pyplot as plt
 from sklearn import model_selection
@@ -22,10 +21,14 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
+import logging
+import config
 import utilities
 
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.expand_frame_repr', False)
+logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
+
+pd.set_option('display.max_columns', 50)
+# pd.set_option('display.expand_frame_repr', False)
 
 
 def func_score(x):
@@ -97,7 +100,7 @@ def build_fulldata():
     #awayresults.info()
     #logging.debug(homeresults.describe(include="all"))
     
-    allresults = pd.concat([homeresults,awayresults], ignore_index=True)
+    allresults = pd.concat([homeresults,awayresults], ignore_index=True, sort=False)
     allresults.drop(['FTR','HTR','Unnamed: 0'], axis=1, inplace=True)
 
     # logging.debug(allresults[(allresults['Team']=="Middlesbrough")&(allresults['Season']=="2006-2007")]["Date"].min())
@@ -166,10 +169,11 @@ def build_fulldata():
 
 
 def fulldata_analysis():
-
+    logging.info("High-level analysis of all clubs data")
     fulldata = utilities.get_master("fulldata")
 
     #logging.debug(pd.show_versions())
+    logging.info("Dataframe info...")
     fulldata.info()
     #logging.debug(fulldata.describe(include="all"))
     #logging.debug(fulldata["Div"].value_counts())
@@ -186,17 +190,19 @@ def fulldata_analysis():
     buckets = ['Div','Season','Team']
     stats = 'Shots','ShotsOnTarget','Goals','Corners','Points','Win'
     filteron = 'Div'
-    values = ['E0']
+    values = ['E0','E1']
     aggfunc = 'mean'
     pseudocode = "SELECT "+aggfunc+" OF "+str(stats)+" WHERE "+filteron+" IS "+str(values)+" GROUPED BY "+str(buckets)
     logging.info("Analysis pseudocode: {0}".format(pseudocode))
     selected = fulldata[fulldata[filteron].isin(values)].groupby(buckets)[stats].agg([aggfunc])
 
+    logging.info("Describe summary dataframe...")
     print(selected.describe(include="all"))
     # pd.scatter_matrix(selected, diagonal='kde')
 
 
 def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_mins={}, output_metrics=[]):
+    logging.debug("Get summarised data")
 
     if df is None:
         #fetch from master csv
@@ -221,7 +227,7 @@ def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_m
     df_cnt = df[group_key].value_counts()
     #df_cnt.columns = ['NumberOfMatches']
     #logging.debug(df_cnt)
-    df = pd.concat([df_cnt, df_avg], axis=1)
+    df = pd.concat([df_cnt, df_avg], axis=1, sort=True)
     df.rename(columns = {group_key:'NumberOfMatches'}, inplace = True)
     df.drop(['Unnamed: 0'], axis=1, inplace=True)
     
@@ -257,7 +263,7 @@ def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_m
     if output_metrics:
         df = df[output_metrics]
     #df.info()
-    #logging.debug(df)
+    logging.debug("Showing summarised dataframe...\n{0}".format(df))
     return df
 
 
@@ -562,6 +568,9 @@ def main():
 
     build_fulldata()
     fulldata_analysis()
+    get_summary("Div")
+
+## TODO move analysis to jupyter notebooks
 
 #    find_similar()
 #    make_prediction()

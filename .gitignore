@@ -81,5 +81,8 @@ target/
 # Mac OS-specific storage files
 .DS_Store
 
+# deacona additions
 # ini file
 config.ini
+# private docs
+/private/
