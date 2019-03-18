@@ -124,6 +124,8 @@ def build_fulldata():
     
     allresults['GameWeek'] = allresults.sort_values('Date').groupby(['Season','Div','Team']).cumcount() + 1
 
+    ## TODO - Validate derived values
+
     logging.info("Process stadiums")
     stadiums = utilities.get_master("stadiums")
     stadiums.drop(['Country','TeamFull'], axis=1, inplace=True)
