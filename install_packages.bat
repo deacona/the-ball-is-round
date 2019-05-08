@@ -10,7 +10,7 @@ SET /p projectName="Enter projectName: "
 conda create --name %projectName% python=3
 
 :: Switch to new virtual env
-activate %projectName%
+conda activate %projectName%
 
 :: One shot install - one fail, all fails
 conda install --yes --file requirements.txt
