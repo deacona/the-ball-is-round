@@ -1,0 +1,101 @@
+EloRank	1YearChange	Team	EloRating	FIFARank
+1	Steady	 Brazil	2131	2
+2	Steady	 Germany	2092	1
+3	Steady	 Spain	2049	8
+4	Increase 1	 France	1987	7
+5	Decrease 2	 Argentina	1985	5
+6	Increase 4	 Portugal	1967	4
+7	Increase 2	 England	1941	13
+8	Decrease 1	 Colombia	1935	16
+9	Increase 3	 Belgium	1931	3
+10	Increase 8	 Netherlands	1907	19
+11	Increase 6	 Peru	1906	11
+12	Decrease 4	 Italy	1901	20
+13	Steady	 Uruguay	1891	17
+14	Increase 2	  Switzerland	1879	6
+15	Decrease 9	 Chile	1874	9
+16	Decrease 5	 Mexico	1857	15
+17	Decrease 4	 Croatia	1853	18
+18	Increase 16	 Denmark	1843	12
+19	Decrease 4	 Poland	1831	10
+20	Increase 1	 Sweden	1796	22
+21	Increase 1	 Iceland	1787	23
+	Increase 4	 Iran	1787	36
+23	Increase 4	 Wales	1777	21
+24	Increase 9	 Serbia	1770	35
+25	Increase 7	 United States	1764	24
+26	Increase 5	 Slovakia	1762	29
+27	Increase 1	 South Korea	1751	61
+28	Decrease 9	 Ecuador	1747	63
+	Increase 8	 Senegal	1747	28
+30	Increase 4	 Paraguay	1746	32
+31	Decrease 5	 Costa Rica	1745	25
+32	Decrease 2	 Ukraine	1741	30
+33	Increase 11	 Venezuela	1739	39
+34	Decrease 14	 Turkey	1729	37
+35	Increase 5	 Austria	1726	26
+36	Decrease 7	 Bosnia and Herzegovina	1725	41
+37	Increase 1	 Czech Republic	1722	45
+38	Decrease 14	 Republic of Ireland	1721	31
+39	Increase 7	 Scotland	1718	34
+40	Decrease 3	 Australia	1714	40
+41	Increase 17	 Morocco	1711	42
+42	Increase 4	 Romania	1706	32
+43	Increase 7	 Nigeria	1693	47
+44	Decrease 21	 Japan	1692	60
+45	Increase 3	 Russia	1685	66
+46	Increase 5	 Northern Ireland	1684	27
+47	Decrease 3	 Bolivia	1673	57
+48	Increase 4	 Panama	1669	55
+49	Increase 21	 Tunisia	1657	14
+50	Decrease 1	 Greece	1646	44
+51	Decrease 11	 Cameroon	1645	50
+52	Decrease 12	 Egypt	1643	46
+53	Increase 12	 Ghana	1617	50
+	Increase 10	 Montenegro	1617	43
+55	Steady	 Bulgaria	1615	53
+	Increase 14	 Norway	1615	48
+57	Decrease 3	 Slovenia	1606	65
+	Increase 11	 Syria	1606	76
+59	Increase 13	 Finland	1604	62
+	Increase 3	 Honduras	1604	59
+61	Decrease 22	 Ivory Coast	1602	69
+	Decrease 8	 Uzbekistan	1602	88
+63	Decrease 4	 Burkina Faso	1597	54
+	Decrease 6	 Saudi Arabia	1597	67
+65	Increase 1	 Albania	1596	56
+66	Decrease 2	 DR Congo	1583	38
+67	Decrease 24	 Hungary	1584	49
+68	Increase 8	 Jamaica	1574	54
+69	Decrease 8	 South Africa	1557	72
+70	Increase 14	 Iraq	1550	91
+71	Increase 18	 Oman	1539	87
+72	Increase 3	 Canada	1534	80
+73	Steady	 United Arab Emirates	1532	81
+74	Decrease 3	 Belarus	1531	93
+75	Decrease 19	 Israel	1527	98
+76	Decrease 16	 Algeria	1524	64
+77	Decrease 3	 China PR	1520	73
+78	Steady	 Mali	1519	67
+79	Increase 17	 Macedonia	1518	77
+80	Decrease 13	 New Zealand	1515	133
+81	Increase 1	 Guatemala	1511	141
+82	Increase 7	 Georgia	1506	95
+83	Increase 4	 Estonia	1504	93
+84	Increase 3	 Haiti	1495	108
+85	Decrease 6	 Qatar	1486	101
+86	Increase 5	 Libya	1476	100
+87	Decrease 6	 Jordan	1471	118
+88	Increase 8	 Zambia	1470	78
+89	Decrease 9	 Armenia	1464	98
+90	Increase 23	 Lebanon	1459	82
+91	Increase 10	 El Salvador	1457	85
+	Decrease 14	 North Korea	1457	110
+	Steady	 Uganda	1457	74
+94	Decrease 11	 Guinea	1455	70
+	Steady	 Northern Cyprus[a]	1455	—
+96	Increase 9	 Zimbabwe	1451	113
+97	Decrease 1	 Gabon	1439	90
+98	Decrease 12	 Kuwait[b]	1430	160
+99	Steady	 Cape Verde	1428	58
+100	Decrease 5	 Trinidad and Tobago	1425	92

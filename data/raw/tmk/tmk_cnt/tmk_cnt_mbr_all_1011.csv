@@ -1,0 +1,83 @@
+#,Player(s),,born/age,Nat.,Height,Foot,In the team since,before,Contract until,Market value
+1,,Brad Jones,"Mar 19, 1982 (28)",,"1,94 m",left,"Jul 1, 2000",,-,£1.13m  
+,,Keeper,,,,,,,,
+21,,Danny Coyne,"Aug 27, 1973 (36)",,"1,83 m",right,"Jul 6, 2009",,-,£563k  
+,,Keeper,,,,,,,,
+13,,Paul Smith,"Dec 17, 1979 (30)",,"1,93 m",right,"Mar 8, 2011",,-,£375k  
+,,Keeper,,,,,,,,
+30,,Jason Steele,"Aug 18, 1990 (19)",,"1,88 m",right,"Jul 1, 2008",,-,£188k  
+,,Keeper,,,,,,,,
+39,,Connor Ripley,"Feb 13, 1993 (17)",,"1,91 m",-,-,,-,- 
+,,Keeper,,,,,,,,
+5,,David Wheater,"Feb 14, 1987 (23)",,"1,96 m",right,"Jan 1, 2006",,-,£3.75m  
+,,Centre Back,,,,,,,,
+6,,Stephen McManus,"Sep 10, 1982 (27)",,"1,88 m",left,"Jul 13, 2010",,-,£2.63m  
+,,Centre Back,,,,,,,,
+36,,Matthew Kilgallon,"Jan 8, 1984 (26)",,"1,85 m",right,"Aug 20, 2010",,-,£1.50m  
+,,Centre Back,,,,,,,,
+25,,Rhys Williams,"Jul 14, 1988 (21)",,"1,87 m",right,"Jul 1, 2008",,30.06.2016,£1.13m  
+,,Centre Back,,,,,,,,
+4,,Matthew Bates,"Dec 10, 1986 (23)",,"1,78 m",right,"Jul 1, 2004",,-,£750k  
+,,Centre Back,,,,,,,,
+12,,Andrew Davies,"Dec 17, 1984 (25)",,"1,90 m",right,"Mar 1, 2011",,-,£750k  
+,,Centre Back,,,,,,,,
+3,,Maximilian Haas,"Dec 7, 1985 (24)",,"1,90 m",both,"Jan 1, 2011",,-,£225k  
+,,Centre Back,,,,,,,,
+24,,Seb Hines,"May 29, 1988 (22)",,"1,88 m",-,"Jul 1, 2006",,-,£188k  
+,,Centre Back,,,,,,,,
+34,,Ben Gibson,"Jan 15, 1993 (17)",,"1,85 m",left,"Jul 1, 2010",,30.06.2019,- 
+,,Centre Back,,,,,,,,
+35,,Bruno Pilatos,"Mar 30, 1993 (17)",,m,right,"Jul 1, 2010",,-,- 
+,,Centre Back,,,,,,,,
+26,,Andrew Taylor,"Aug 1, 1986 (23)",,"1,78 m",left,"Jul 1, 2005",,-,£1.13m  
+,,Left-Back,,,,,,,,
+23,,Jonathan Grounds,"Feb 2, 1988 (22)",,"1,85 m",left,"Jul 1, 2007",,-,£563k  
+,,Left-Back,,,,,,,,
+27,,Joe Bennett,"Mar 28, 1990 (20)",,"1,77 m",left,"Jul 1, 2008",,-,£75k  
+,,Left-Back,,,,,,,,
+2,,Justin Hoyte,"Nov 20, 1984 (25)",,"1,80 m",right,"Aug 1, 2008",,-,£1.50m  
+,,Right-Back,,,,,,,,
+29,,Tony McMahon,"Mar 24, 1986 (24)",,"1,80 m",right,"Jul 1, 2004",,-,£1.13m  
+,,Right-Back,,,,,,,,
+37,,Mickaël Tavares,"Oct 25, 1982 (27)",,"1,85 m",right,"Aug 1, 2010",,-,£938k  
+,,Defensive Midfield,,,,,,,,
+19,,Andy Halliday,"Oct 11, 1991 (18)",,"1,81 m",left,"Jul 1, 2010",,-,£113k  
+,,Defensive Midfield,,,,,,,,
+8,,Kevin Thomson,"Oct 14, 1984 (25)",,"1,80 m",right,"Jul 1, 2010",,-,£3.75m  
+,,Central Midfield,,,,,,,,
+18,,Gary O'Neil,"May 18, 1983 (27)",,"1,75 m",right,"Aug 31, 2007",,-,£3.00m  
+,,Central Midfield,,,,,,,,
+20,,Julio Arca,"Jan 31, 1981 (29)",,"1,75 m",left,"Jul 26, 2006",,-,£1.88m  
+,,Central Midfield,,,,,,,,
+10,,Nicky Bailey,"Jun 10, 1984 (26)",,"1,78 m",right,"Jul 1, 2010",,-,£750k  
+,,Central Midfield,,,,,,,,
+14,,Willo Flood,"Apr 10, 1985 (25)",,"1,71 m",right,"Jan 1, 2010",,-,£750k  
+,,Central Midfield,,,,,,,,
+31,,Josh Walker,"Feb 21, 1989 (21)",,"1,80 m",right,"Jul 1, 2005",,-,£375k  
+,,Central Midfield,,,,,,,,
+33,,Richard Smallwood,"Dec 29, 1990 (19)",,"1,80 m",-,"Jul 1, 2010",,-,- 
+,,Central Midfield,,,,,,,,
+17,,Barry Robson,"Nov 7, 1978 (31)",,"1,80 m",left,"Jan 1, 2010",,-,£1.88m  
+,,Right Midfield,,,,,,,,
+38,,Cameron Park,"Jul 6, 1992 (17)",,"1,78 m",left,-,,-,- 
+,,Left Midfield,,,,,,,,
+41,,Adam Reach,"Feb 3, 1993 (17)",,"1,85 m",left,-,,-,- 
+,,Left Midfield,,,,,,,,
+5,,Merouane Zemmama,"Oct 7, 1983 (26)",,"1,71 m",both,"Jan 1, 2011",,-,£938k  
+,,Attacking Midfield,,,,,,,,
+28,,Jonathan Franks,"Apr 8, 1990 (20)",,"1,74 m",both,"Jul 1, 2008",,-,£563k  
+,,Right Wing,,,,,,,,
+11,,Tarmo Kink,"Oct 6, 1985 (24)",,"1,83 m",left,"Jul 1, 2010",,-,£300k  
+,,Left Wing,,,,,,,,
+9,,Kris Boyd,"Aug 18, 1983 (26)",,"1,85 m",right,"Jul 1, 2010",,-,£5.25m  
+,,Centre Forward,,,,,,,,
+7,,Scott McDonald,"Aug 21, 1983 (26)",,"1,73 m",right,"Feb 1, 2010",,-,£3.00m  
+,,Centre Forward,,,,,,,,
+15,,Leroy Lita,"Dec 28, 1984 (25)",,"1,76 m",right,"Jul 1, 2009",,-,£1.50m  
+,,Centre Forward,,,,,,,,
+16,,Lee Miller,"Mar 18, 1983 (27)",,"1,88 m",right,"Feb 1, 2010",,-,£1.50m  
+,,Centre Forward,,,,,,,,
+32,,Marvin Emnes,"May 27, 1988 (22)",,"1,80 m",both,"Jul 1, 2008",,-,£1.50m  
+,,Centre Forward,,,,,,,,
+22,,Luke Williams,"Jun 11, 1993 (17)",,"1,85 m",-,"Jul 1, 2010",,-,- 
+,,Centre Forward,,,,,,,,

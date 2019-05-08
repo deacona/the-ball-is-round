@@ -1,0 +1,79 @@
+#,Player(s),,born/age,Nat.,Height,Foot,In the team since,before,Contract until,Market value
+1,,Jason Steele,"Aug 18, 1990 (21)",,"1,88 m",right,"Jul 1, 2008",,-,£563k  
+,,Keeper,,,,,,,,
+31,,Connor Ripley,"Feb 13, 1993 (19)",,"1,91 m",-,"Jul 1, 2011",,-,£188k  
+,,Keeper,,,,,,,,
+32,,Jayson Leutwiler,"Apr 25, 1989 (23)",,"1,92 m",right,"Aug 1, 2012",,-,£38k  
+,,Keeper,,,,,,,,
+3,,André Bikey-Amougou,"Jan 8, 1985 (27)",,"1,82 m",right,"Sep 11, 2012",,-,£1.50m  
+,,Centre Back,,,,,,,,
+6,,Stephen McManus,"Sep 10, 1982 (29)",,"1,88 m",left,"Jul 13, 2010",,-,£1.31m  
+,,Centre Back,,,,,,,,
+14,,Rhys Williams,"Jul 14, 1988 (23)",,"1,87 m",right,"Jul 1, 2008",,30.06.2016,£1.31m  
+,,Centre Back,,,,,,,,
+39,,Jonathan Woodgate,"Jan 22, 1980 (32)",,"1,88 m",right,"Jul 6, 2012",,30.06.2016,£1.13m  
+,,Centre Back,,,,,,,,
+15,,Seb Hines,"May 29, 1988 (24)",,"1,88 m",-,"Jul 1, 2006",,-,£375k  
+,,Centre Back,,,,,,,,
+35,,Christian Burgess,"Oct 7, 1991 (20)",,"1,96 m",right,"Jul 4, 2012",,-,- 
+,,Centre Back,,,,,,,,
+40,,Ben Gibson,"Jan 15, 1993 (19)",,"1,85 m",left,"Jul 1, 2010",,30.06.2019,- 
+,,Centre Back,,,,,,,,
+3,,Joe Bennett,"Mar 28, 1990 (22)",,"1,77 m",left,"Jul 1, 2008",,-,£938k  
+,,Left-Back,,,,,,,,
+4,,George Friend,"Oct 19, 1987 (24)",,"1,88 m",left,"Jul 30, 2012",,30.06.2018,£188k  
+,,Left-Back,,,,,,,,
+37,,Paul Weldon,"Nov 27, 1991 (20)",,m,-,"Jul 1, 2010",,-,- 
+,,Left-Back,,,,,,,,
+2,,Justin Hoyte,"Nov 20, 1984 (27)",,"1,80 m",right,"Aug 1, 2008",,-,£1.13m  
+,,Right-Back,,,,,,,,
+21,,Stuart Parnaby,"Jul 19, 1982 (29)",,"1,78 m",right,"Jul 2, 2012",,-,£563k  
+,,Right-Back,,,,,,,,
+28,,Andre Bennett,"Oct 22, 1994 (17)",,m,right,-,,-,- 
+,,Right-Back,,,,,,,,
+18,,Andy Halliday,"Oct 11, 1991 (20)",,"1,81 m",left,"Jul 1, 2010",,-,£188k  
+,,Defensive Midfield,,,,,,,,
+29,,Bryn Morris,"Apr 25, 1996 (16)",,"1,82 m",-,-,,-,- 
+,,Defensive Midfield,,,,,,,,
+16,,Josh McEachran,"Mar 1, 1993 (19)",,"1,78 m",left,"Aug 20, 2012",,-,£3.38m  
+,,Central Midfield,,,,,,,,
+8,,Kevin Thomson,"Oct 14, 1984 (27)",,"1,80 m",right,"Jul 1, 2010",,-,£1.50m  
+,,Central Midfield,,,,,,,,
+10,,Nicky Bailey,"Jun 10, 1984 (28)",,"1,78 m",right,"Jul 1, 2010",,-,£1.31m  
+,,Central Midfield,,,,,,,,
+7,,Grant Leadbitter,"Jan 7, 1986 (26)",,"1,77 m",right,"Jul 1, 2012",,30.06.2017,£1.13m  
+,,Central Midfield,,,,,,,,
+20,,Julio Arca,"Jan 31, 1981 (31)",,"1,75 m",left,"Jul 26, 2006",,-,£750k  
+,,Central Midfield,,,,,,,,
+33,,Richard Smallwood,"Dec 29, 1990 (21)",,"1,80 m",-,"Jul 1, 2010",,-,£188k  
+,,Central Midfield,,,,,,,,
+12,,Kieron Dyer,"Dec 29, 1978 (33)",,"1,70 m",right,"Jan 31, 2013",,-,£375k  
+,,Right Midfield,,,,,,,,
+24,,Cameron Park,"Jul 6, 1992 (19)",,"1,78 m",left,"Jul 1, 2011",,-,£56k  
+,,Left Midfield,,,,,,,,
+25,,Adam Reach,"Feb 3, 1993 (19)",,"1,85 m",left,"Jul 1, 2011",,30.06.2019,- 
+,,Left Midfield,,,,,,,,
+38,,Faris Haroun,"Sep 22, 1985 (26)",,"1,88 m",both,"Aug 1, 2011",,-,£1.13m  
+,,Attacking Midfield,,,,,,,,
+5,,Merouane Zemmama,"Oct 7, 1983 (28)",,"1,71 m",both,"Jan 1, 2011",,-,£375k  
+,,Attacking Midfield,,,,,,,,
+19,,Mustapha Carayol,"Sep 4, 1988 (23)",,"1,77 m",-,"Aug 1, 2012",,30.06.2017,£150k  
+,,Left Wing,,,,,,,,
+26,,Jordan Jones,"Oct 24, 1994 (17)",,"1,74 m",-,-,,-,- 
+,,Right Wing,,,,,,,,
+8,,Sammy Ameobi,"May 1, 1992 (20)",,"1,94 m",left,"Feb 25, 2013",,-,£1.50m  
+,,Left Wing,,,,,,,,
+9,,Marvin Emnes,"May 27, 1988 (24)",,"1,80 m",both,"Jul 1, 2008",,-,£2.63m  
+,,Centre Forward,,,,,,,,
+27,,Scott McDonald,"Aug 21, 1983 (28)",,"1,73 m",right,"Feb 1, 2010",,-,£1.88m  
+,,Centre Forward,,,,,,,,
+17,,Lukas Jutkiewicz,"Mar 28, 1989 (23)",,"1,85 m",left,"Jan 1, 2012",,-,£1.13m  
+,,Centre Forward,,,,,,,,
+30,,Ishmael Miller,"Mar 5, 1987 (25)",,"1,92 m",left,"Aug 24, 2012",,-,£750k  
+,,Centre Forward,,,,,,,,
+11,,Emmanuel Ledesma,"May 24, 1988 (24)",,"1,80 m",left,"Jul 1, 2012",,-,£188k  
+,,Centre Forward,,,,,,,,
+22,,Luke Williams,"Jun 11, 1993 (19)",,"1,85 m",-,"Jul 1, 2010",,-,£188k  
+,,Centre Forward,,,,,,,,
+23,,Curtis Main,"Jun 20, 1992 (20)",,"1,78 m",right,"Jul 1, 2011",,-,£56k  
+,,Centre Forward,,,,,,,,

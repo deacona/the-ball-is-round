@@ -1,0 +1,81 @@
+#,Player(s),,born/age,Nat.,Height,Foot,In the team since,before,Contract until,Market value
+40,,Tomás Mejías,"Jan 30, 1989 (25)",,"1,95 m",right,"Jul 5, 2014",,30.06.2018,£225k  
+,,Keeper,,,,,,,,
+13,,Dimitrios Konstantopoulos,"Nov 29, 1978 (35)",,"1,93 m",left,"Aug 17, 2013",,30.06.2016,£188k  
+,,Keeper,,,,,,,,
+-,,Jamal Blackman,"Oct 27, 1993 (20)",,"1,99 m",-,"Sep 1, 2014",,-,£150k  
+,,Keeper,,,,,,,,
+12,,Connor Ripley,"Feb 13, 1993 (21)",,"1,91 m",-,"Jul 1, 2011",,-,£131k  
+,,Keeper,,,,,,,,
+-,,Fernando Amorebieta,"Mar 29, 1985 (29)",,"1,91 m",left,"Mar 25, 2015",,-,£4.50m  
+,,Centre Back,,,,,,,,
+-,,Tomás Kalas,"May 15, 1993 (21)",,"1,84 m",right,"Jan 9, 2015",,31.05.2016,£4.50m  
+,,Centre Back,,,,,,,,
+25,,Rhys Williams,"Jul 14, 1988 (25)",,"1,87 m",right,"Jul 1, 2008",,30.06.2016,£1.13m  
+,,Centre Back,,,,,,,,
+-,,Kenneth Omeruo,"Oct 17, 1993 (20)",,"1,85 m",right,"Aug 6, 2014",,-,£750k  
+,,Centre Back,,,,,,,,
+6,,Ben Gibson,"Jan 15, 1993 (21)",,"1,85 m",left,"Jul 1, 2010",,30.06.2019,£450k  
+,,Centre Back,,,,,,,,
+-,,Seb Hines,"May 29, 1988 (26)",,"1,88 m",-,"Jul 1, 2006",,-,£375k  
+,,Centre Back,,,,,,,,
+4,,Daniel Ayala,"Nov 7, 1990 (23)",,"1,90 m",right,"Jan 24, 2014",,30.06.2017,£375k  
+,,Centre Back,,,,,,,,
+39,,Jonathan Woodgate,"Jan 22, 1980 (34)",,"1,88 m",right,"Jul 6, 2012",,30.06.2016,£225k  
+,,Centre Back,,,,,,,,
+3,,George Friend,"Oct 19, 1987 (26)",,"1,88 m",left,"Jul 30, 2012",,30.06.2018,£975k  
+,,Left-Back,,,,,,,,
+-,,James Husband,"Jan 3, 1994 (20)",,"1,79 m",left,"Jul 30, 2014",,30.06.2018,£225k  
+,,Left-Back,,,,,,,,
+-,,Dwight Tiendalli,"Oct 21, 1985 (28)",,"1,76 m",right,"Mar 26, 2015",,-,£1.50m  
+,,Right-Back,,,,,,,,
+24,,Emilio Nsue,"Sep 30, 1989 (24)",,"1,78 m",right,"Aug 2, 2014",,30.06.2017,£1.50m  
+,,Right-Back,,,,,,,,
+2,,Damià,"Apr 15, 1982 (32)",,"1,88 m",right,"Aug 8, 2014",,30.06.2016,£750k  
+,,Right-Back,,,,,,,,
+-,,Bradley Halliday,"Jul 10, 1995 (18)",,"1,80 m",right,"Jul 1, 2013",,30.06.2016,- 
+,,Right-Back,,,,,,,,
+-,,Ryan Fredericks,"Oct 10, 1992 (21)",,"1,80 m",right,"Aug 28, 2014",,-,- 
+,,Right-Back,,,,,,,,
+-,,Andre Bennett,"Oct 22, 1994 (19)",,m,right,-,,-,- 
+,,Right-Back,,,,,,,,
+28,,Bryn Morris,"Apr 25, 1996 (18)",,"1,82 m",-,"Jan 1, 2014",,30.06.2016,£263k  
+,,Defensive Midfield,,,,,,,,
+-,,Milos Veljkovic,"Sep 26, 1995 (18)",,"1,87 m",right,"Oct 16, 2014",,-,- 
+,,Defensive Midfield,,,,,,,,
+7,,Grant Leadbitter,"Jan 7, 1986 (28)",,"1,77 m",right,"Jul 1, 2012",,30.06.2017,£1.35m  
+,,Central Midfield,,,,,,,,
+8,,Adam Clayton,"Jan 14, 1989 (25)",,"1,75 m",right,"Aug 13, 2014",,30.06.2018,£1.35m  
+,,Central Midfield,,,,,,,,
+18,,Dean Whitehead,"Jan 21, 1982 (32)",,"1,83 m",right,"Jul 1, 2013",,-,£675k  
+,,Central Midfield,,,,,,,,
+-,,Richard Smallwood,"Dec 29, 1990 (23)",,"1,80 m",-,"Jul 1, 2010",,-,£450k  
+,,Central Midfield,,,,,,,,
+34,,Adam Forshaw,"Oct 8, 1991 (22)",,"1,85 m",right,"Jan 28, 2015",,30.06.2018,£188k  
+,,Central Midfield,,,,,,,,
+20,,Adam Reach,"Feb 3, 1993 (21)",,"1,85 m",left,"Jul 1, 2011",,30.06.2019,£375k  
+,,Left Midfield,,,,,,,,
+34,,Ryan Brobbel,"Mar 5, 1993 (21)",,"1,72 m",left,"Jul 1, 2011",,-,- 
+,,Left Midfield,,,,,,,,
+19,,Mustapha Carayol,"Sep 4, 1988 (25)",,"1,77 m",-,"Aug 1, 2012",,30.06.2017,£900k  
+,,Left Wing,,,,,,,,
+27,,Albert Adomah,"Dec 13, 1987 (26)",,"1,85 m",right,"Aug 8, 2013",,30.06.2017,£1.65m  
+,,Right Wing,,,,,,,,
+-,,Jordan Jones,"Oct 24, 1994 (19)",,"1,74 m",-,-,,-,- 
+,,Right Wing,,,,,,,,
+33,,Yanic Wildschut,"Nov 1, 1991 (22)",,"1,87 m",right,"Sep 1, 2014",,30.06.2016,£750k  
+,,Left Wing,,,,,,,,
+10,,Lee Tomlin,"Jan 12, 1989 (25)",,"1,80 m",right,"Jul 1, 2014",,30.06.2017,£1.13m  
+,,Secondary Striker,,,,,,,,
+21,,Jelle Vossen,"Mar 22, 1989 (25)",,"1,80 m",right,"Sep 1, 2014",,-,£3.75m  
+,,Centre Forward,,,,,,,,
+-,,Patrick Bamford,"Sep 5, 1993 (20)",,"1,85 m",left,"Aug 29, 2014",,-,£1.13m  
+,,Centre Forward,,,,,,,,
+9,,Kike,"Nov 25, 1989 (24)",,"1,86 m",right,"Jul 15, 2014",,30.06.2017,£900k  
+,,Centre Forward,,,,,,,,
+-,,Emmanuel Ledesma,"May 24, 1988 (26)",,"1,80 m",left,"Jul 1, 2012",,-,£525k  
+,,Centre Forward,,,,,,,,
+-,,Luke Williams,"Jun 11, 1993 (21)",,"1,85 m",-,"Jul 1, 2010",,-,£263k  
+,,Centre Forward,,,,,,,,
+-,,Bradley Fewster,"Jan 27, 1996 (18)",,"1,78 m",-,"Jul 1, 2014",,30.06.2016,- 
+,,Centre Forward,,,,,,,,

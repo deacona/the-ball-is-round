@@ -76,7 +76,7 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-/data/
+# /data/
 
 # Mac OS-specific storage files
 .DS_Store
@@ -86,4 +86,9 @@ target/
 config.ini
 # private docs
 /private/
+# derived data
+/data/external/
+/data/interim/
+/data/processed/
+# google cruft
 *.driveupload
