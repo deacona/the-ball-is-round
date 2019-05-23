@@ -87,8 +87,6 @@ config.ini
 # private docs
 /private/
 # derived data
-/data/external/
-/data/interim/
 /data/processed/
 # google cruft
 *.driveupload
