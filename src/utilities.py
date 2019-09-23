@@ -7,7 +7,7 @@ Created on Tue 06 Nov 2018
 
 import os
 import pandas as pd
-import config
+import src.config as config
 import requests
 from bs4 import BeautifulSoup
 import csv

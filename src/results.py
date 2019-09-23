@@ -11,8 +11,8 @@ import pandas as pd
 import numpy as np
 import logging
 import zipfile
-import config
-import utilities
+import src.config as config
+import src.utilities as utilities
 
 logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
 
