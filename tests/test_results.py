@@ -1,6 +1,9 @@
-# from datetime import datetime
-# import pandas
+#!/usr/bin/python -tt
+"""
+Created on 23/09/2019
 
+@author: adeacon
+"""
 from src.results import func_div
 
 
