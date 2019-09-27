@@ -7,7 +7,7 @@ Created on 23/09/2019
 import src.config as config
 
 
-class TestConfig(object):
+class Test(object):
 
     def test_object_types(self):
 
