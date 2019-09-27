@@ -5,76 +5,92 @@ Created on 23/09/2019
 @author: adeacon
 """
 import os
+import csv
+import pandas as pd
 import src.utilities as utilities
+
+testHome = "tests"
+testDir = os.path.join(testHome, "temp")
+testHtml = os.path.join(testDir, "dummy.html")
+testCsv = os.path.join(testDir, "dummy.csv")
+testMaster = os.path.join(testDir, "ftb_dummy.txt")
+testMessage = """<html><head></head><body><p>Hello World!</p></body></html>"""
+testHeader = ["Dummy field 1", "Dummy field 2"]
+testRow = ["1", "2"]
+testFrame = pd.DataFrame(testRow, index=testHeader)
 
 
 class Test:
 
     def setup_method(self, test_method):
-        '''remove temp dir containing dummy html and csv'''
+        '''remove/create temp dir containing dummy html and csv'''
         # configure self.attribute
-        try:
-            os.remove('tests/temp/dummy.html')
-        except:
-            pass
+        if os.path.isfile(testHtml):
+            os.remove(testHtml)
 
-        try:
-            os.rmdir("tests/temp")
-        except:
-            pass
+        if os.path.isfile(testCsv):
+            os.remove(testCsv)
 
-        os.mkdir("tests/temp")
+        if os.path.isfile(testMaster):
+            os.remove(testMaster)
 
-        with open('tests/temp/dummy.html','w') as f:
-            message = """<html>
-            <head></head>
-            <body><p>Hello World!</p></body>
-            </html>"""
+        if os.path.isdir(testDir):
+            os.rmdir(testDir)
 
-            f.write(message)
+        os.mkdir(testDir)
+
+        with open(testHtml,'w') as f:
+            f.write(testMessage)
             f.close()
+
+        with open(testCsv, 'a') as f:
+            f.write(",".join(testHeader)+"\n")
+            f.write(",".join(testRow)+"\n")
 
 
     def teardown_method(self, test_method):
         '''remove temp dir containing dummy html and csv'''
         # tear down self.attribute
-        os.remove('tests/temp/dummy.html')
-        os.rmdir("tests/temp")
-        
+        if os.path.isfile(testHtml):
+            os.remove(testHtml)
 
-    # # test returns first line of dummy csv file
-    # def read_header(filepath):
-    #     with open(filepath, "rb") as f:
-    #         reader = csv.reader(f)
-    #         i = reader.next()
-    #         i = filter(None, i)
-    #         # print i
-    #         return i
+        if os.path.isfile(testCsv):
+            os.remove(testCsv)
+
+        if os.path.isfile(testMaster):
+            os.remove(testMaster)
+
+        if os.path.isdir(testDir):
+            os.rmdir(testDir)
+                    
+
+    def test_read_header(self):
+        '''test returns first line of dummy csv file'''
+        # print(utilities.read_header(testCsv))
+        assert utilities.read_header(testCsv) == testHeader
 
 
-    def test_make_soup(url):
-        assert utilities.make_soup('file://tests/temp/dummy.html') == """<html>
-            <head></head>
-            <body><p>Hello World!</p></body>
-            </html>"""
+    # def test_make_soup(url):
+    #     assert utilities.make_soup(testHtml) == """<html>
+    #         <head></head>
+    #         <body><p>Hello World!</p></body>
+    #         </html>"""
 
 
     def test_ensure_dir(self):
-        assert utilities.ensure_dir('tests/temp/dummy.html') == 0
+        assert utilities.ensure_dir(testHtml) == 0
 
 
     def test_master_path(self):
-        assert "mydir" + os.sep + "ftb_test.txt" == utilities.master_path("test", directory="mydir")
+        assert utilities.master_path("dummy", directory=testDir) == testMaster
 
 
-    # # test return dummy dataframe from dummy csv
-    # def get_master(stub):
-    #     # print "Fetching "+master_path(stub)
-    #     return pd.read_csv(master_path(stub), encoding = "utf8", sep='|')
+    def test_get_master(self):
+        '''test return dummy dataframe from dummy csv'''
+        utilities.save_master(testFrame, "dummy", directory=testDir)
+        utilities.get_master("dummy", directory=testDir).shape == testFrame.shape
 
 
-    # # test save dummy dataframe to dummy csv
-    # def save_master(dframe, stub, enc='utf-8'):
-    #     dframe.to_csv(master_path(stub), encoding=enc, sep='|')
-    #     # dframe.to_csv(master_path(stub), sep='|')
-    #     # print "... saved to "+master_path(stub)
+    def test_save_master(self):
+        '''test save dummy dataframe to dummy csv'''
+        assert utilities.save_master(testFrame, "dummy", directory=testDir) == testMaster

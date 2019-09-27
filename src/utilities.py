@@ -14,11 +14,12 @@ import csv
 
 
 def read_header(filepath):
-    with open(filepath, "rb") as f:
+    with open(filepath, "r") as f:
         reader = csv.reader(f)
-        i = reader.next()
-        i = filter(None, i)
-        # print i
+        i = next(reader)
+        # print(i)
+        # i = filter(None, i)
+        # print(i)
         return i
 
 def make_soup(url):
@@ -55,6 +56,8 @@ def get_master(stub, directory=config.MASTER_DIR):
 #    return df
 
 def save_master(dframe, stub, directory=config.MASTER_DIR, enc='utf-8'):
-    dframe.to_csv(master_path(stub, directory=directory), encoding=enc, sep='|')
+    file = master_path(stub, directory=directory)
+    dframe.to_csv(file, encoding=enc, sep='|')
     # dframe.to_csv(master_path(stub), sep='|')
     # print "... saved to "+master_path(stub)
+    return file
