@@ -47,9 +47,9 @@ def download_results():
             logging.debug("Retrieve OK: "+str([remotefile, localfile]))
 
 
-def unzip_results_files():
+def unzip_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
     logging.info("Unzipping results files")
-    for root, dirs, files in os.walk(config.RESULTS_SCRAPE["ftd"][1]):
+    for root, dirs, files in os.walk(directory):
         for file in files:
             if file == "data.zip":
                 #logging.debug(root)
@@ -151,9 +151,9 @@ def format_results():
     #return dframe[use_cols]
 
 
-def archive_results_files():
-    logging.info("Removing/zipping unzipped results files from {0}".format(config.RESULTS_SCRAPE["ftd"][1]))
-    for root, dirs, files in os.walk(config.RESULTS_SCRAPE["ftd"][1]):
+def archive_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
+    logging.info("Removing/zipping unzipped results files from {0}".format(directory))
+    for root, dirs, files in os.walk(directory):
         for file in files:
             if file.endswith(".csv"):
                 file_to_delete = os.path.join(root, file)
