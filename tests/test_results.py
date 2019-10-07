@@ -42,20 +42,20 @@ class Test(object):
         testFrame.to_csv(testCsv)
 
 
-    # def teardown_method(self, test_method):
-    #     '''remove temp dir containing dummy files'''
-    #     # tear down self.attribute
-    #     if os.path.isfile(testZip):
-    #         os.remove(testZip)
+    def teardown_method(self, test_method):
+        '''remove temp dir containing dummy files'''
+        # tear down self.attribute
+        if os.path.isfile(testZip):
+            os.remove(testZip)
 
-    #     if os.path.isfile(testXlsx):
-    #         os.remove(testXlsx)
+        if os.path.isfile(testXlsx):
+            os.remove(testXlsx)
 
-    #     if os.path.isfile(testCsv):
-    #         os.remove(testCsv)
+        if os.path.isfile(testCsv):
+            os.remove(testCsv)
 
-    #     if os.path.isdir(testDir):
-    #         os.rmdir(testDir)
+        if os.path.isdir(testDir):
+            os.rmdir(testDir)
 
 
     def test_country_and_tier_from_div(self):
@@ -78,14 +78,15 @@ class Test(object):
         assert not (os.path.isfile(testCsv))
         assert (os.path.isfile(testZip))
 
-        # results.unzip_results_files(directory=testDir)
-        # assert (os.path.isfile(testXlsx))
-        # assert not (os.path.isfile(testCsv))
-        # assert not (os.path.isfile(testZip))
+        results.unzip_results_files(directory=testDir)
+        assert (os.path.isfile(testXlsx))
+        assert not (os.path.isfile(testCsv))
+        assert not (os.path.isfile(testZip))
 
 
-    def test_download_results(self):
-        pass
+    # def test_download_results(self):
+    #     ''' No test for downloading files from web '''
+    #     pass
 
     def test_format_results(self):
         pass
