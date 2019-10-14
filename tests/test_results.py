@@ -13,9 +13,22 @@ testDir = os.path.join(testHome, "temp")
 testCsv = os.path.join(testDir, "dummy.csv")
 testXlsx = os.path.join(testDir, "data.xlsx")
 testZip = os.path.join(testDir, "data.zip")
-testHeader = ["Dummy field 1", "Dummy field 2"]
-testRow = ["1", "2"]
-testFrame = pd.DataFrame(testRow, index=testHeader)
+testHeader = ["Dummy field 1", "Dummy field 2", "Dummy field 3"]
+testRow = ["Bucket", "Filter", "1"]
+testFrame = pd.DataFrame.from_dict({
+    testHeader[0]: [testRow[0],testRow[0]],
+    testHeader[1]: [testRow[1],testRow[1]],
+    testHeader[2]: [testRow[2],testRow[2]],
+})
+testMaster = os.path.join(testDir, "ftb_results.txt")
+testBuckets = [testHeader[0]]
+testStats = (testHeader[2])
+testFilteron = testHeader[1]
+testValues = [testRow[1]]
+testAggfunc = 'mean'
+testFrameAgg = pd.DataFrame([testRow[2]], columns=[testAggfunc])
+testFrameAgg.index.name = testHeader[0]
+testFrameAgg.rename(index={0:testRow[0]},inplace=True)
 
 
 class Test(object):
@@ -32,6 +45,9 @@ class Test(object):
         if os.path.isfile(testCsv):
             os.remove(testCsv)
 
+        if os.path.isfile(testMaster):
+            os.remove(testMaster)
+
         if os.path.isdir(testDir):
             os.rmdir(testDir)
 
@@ -40,6 +56,8 @@ class Test(object):
         testFrame.to_excel(testXlsx)
 
         testFrame.to_csv(testCsv)
+
+        testFrame.to_csv(testMaster, sep='|')
 
 
     def teardown_method(self, test_method):
@@ -53,6 +71,9 @@ class Test(object):
 
         if os.path.isfile(testCsv):
             os.remove(testCsv)
+
+        if os.path.isfile(testMaster):
+            os.remove(testMaster)
 
         if os.path.isdir(testDir):
             os.rmdir(testDir)
@@ -92,4 +113,7 @@ class Test(object):
         pass
 
     def test_results_analysis(self):
-        pass
+        assert pd.util.testing.assert_frame_equal(results.results_analysis(directory=testDir, buckets=testBuckets, stats=testStats, filteron=testFilteron, 
+                                        values=testValues, aggfunc=testAggfunc), testFrameAgg, check_dtype=False)
+
+
