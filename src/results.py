@@ -90,13 +90,13 @@ def func_div(x):
     return div_dict[x]
 
 
-def format_results():
+def format_results(directoryIn=config.RESULTS_SCRAPE["ftd"][1], directoryOut=config.MASTER_DIR):
     logging.info("Format results")
     pieces = []
     core_cols = ['Div','Date'] #,'HomeTeam','AwayTeam','FTHG','FTAG','FTR']
     use_cols = ['Season','Div','Country','Tier','Date','HomeTeam','AwayTeam','FTHG','FTAG','FTR','HTHG','HTAG','HTR','Attendance','Referee','HS','AS','HST','AST','HHW','AHW','HC','AC','HF','AF','HO','AO','HY','AY','HR','AR','HBP','ABP']
 
-    for root, dirs, files in os.walk(config.RESULTS_SCRAPE["ftd"][1]):
+    for root, dirs, files in os.walk(directoryIn):
         for file in files:
             if file.endswith(".csv"):
                 #logging.info(root)
@@ -148,7 +148,7 @@ def format_results():
     #logging.info(dframe.describe(include="all"))
     
     # logging.info(dframe[((dframe['HomeTeam']=="Middlesbrough")|(dframe['AwayTeam']=="Middlesbrough"))&(dframe['Season']=="2006-2007")][["Date", "HomeTeam", "AwayTeam"]])
-    utilities.save_master(dframe[use_cols], "results") #, enc="ascii")
+    utilities.save_master(dframe[use_cols], "results", directory=directoryOut) #, enc="ascii")
     #return dframe[use_cols]
 
 
