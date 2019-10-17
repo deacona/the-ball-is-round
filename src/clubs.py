@@ -11,19 +11,19 @@ import math
 from numpy.random import permutation
 # from pandas.tools.plotting import scatter_matrix
 # import matplotlib.pyplot as plt
-from sklearn import model_selection
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
+# from sklearn import model_selection
+# from sklearn.metrics import classification_report
+# from sklearn.metrics import confusion_matrix
+# from sklearn.metrics import accuracy_score
+# from sklearn.linear_model import LogisticRegression
+# from sklearn.tree import DecisionTreeClassifier
+# from sklearn.neighbors import KNeighborsClassifier
+# from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+# from sklearn.naive_bayes import GaussianNB
+# from sklearn.svm import SVC
 import logging
-import config
-import utilities
+import src.config as config
+import src.utilities as utilities
 
 logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
 
@@ -36,9 +36,9 @@ def func_score(x):
     if x > 0:
         return 'Win', 3, 0, 1, 1, 0, 0, 0, 1.0
     elif x < 0:
-        return 'Loss', 0, 3, 0, 0, 0, 1, 1, 0.5
+        return 'Loss', 0, 3, 0, 0, 0, 1, 1, 0.0
     else:
-        return 'Draw', 1, 1, 0, 1, 1, 1, 0, 0.0
+        return 'Draw', 1, 1, 0, 1, 1, 1, 0, 0.5
 
 
 def func_nogoal(x):
