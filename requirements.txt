@@ -9,10 +9,12 @@ chardet==3.0.4
 colorama==0.4.1
 cryptography==2.7
 cycler==0.10.0
+et-xmlfile==1.0.1
 gitdb2==2.0.5
 GitPython==2.1.13
 idna==2.8
 importlib-metadata==0.19
+jdcal==1.4.1
 kiwisolver==1.1.0
 matplotlib==2.2.2
 mkl-fft==1.0.14
@@ -20,6 +22,7 @@ mkl-random==1.0.1
 mkl-service==2.0.2
 more-itertools==7.2.0
 numpy==1.13.3
+openpyxl==3.0.0
 packaging==19.1
 pandas==0.25.1
 pbr==5.4.1
