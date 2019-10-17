@@ -8,8 +8,8 @@ Created on Mon Feb 06 16:49:37 2017
 import pandas as pd
 import datetime
 import logging
-import config
-import utilities
+import src.config as config
+import src.utilities as utilities
 
 logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
 
@@ -52,8 +52,9 @@ def download_managers():
         dataframe['YearRange'] = dataframe['YearRange'].str.strip()
         logging.debug("Top 20 year ranges...\n{0}".format(dataframe["YearRange"].value_counts()[:20]))
 
-        dataframe['DateFrom'] = dataframe['DateFrom'].str.extract('(\d\d [A-Z][a-z]+ \d\d\d\d)', expand=False).str.strip()
-        dataframe['DateTo'] = dataframe['DateTo'].str.extract('(\d\d [A-Z][a-z]+ \d\d\d\d)', expand=False).str.strip()
+        datePattern = r'(\d\d [A-Z][a-z]+ \d\d\d\d)'
+        dataframe['DateFrom'] = dataframe['DateFrom'].str.extract(datePattern, expand=False).str.strip()
+        dataframe['DateTo'] = dataframe['DateTo'].str.extract(datePattern, expand=False).str.strip()
 
         ## TODO - standardise teams (team names don't match results/stadiums data)
 
@@ -63,11 +64,11 @@ def download_managers():
         logging.debug("Retrieve OK: {0}".format(endpoints[:2]))
 
 
-def format_managers():
+def format_managers(managersDict=config.MANAGERS_SCRAPE, directoryOut=config.MASTER_DIR):
     logging.info("Formatting managers")
     pieces = []
     #future_date = datetime.datetime(2099, 12, 31)
-    for code, endpoints in config.MANAGERS_SCRAPE.items():
+    for code, endpoints in managersDict.items():
         logging.info("Loading managers data from {0}".format(endpoints[1]))
         dataframe = pd.read_csv(endpoints[1], encoding = "utf8", sep=',', parse_dates=['DateFrom', 'DateTo'])
         pieces.append(dataframe)
@@ -93,7 +94,7 @@ def format_managers():
     #logging.debug(managers.describe(include="all"))
     #logging.debug(managers[95:105])
     
-    utilities.save_master(managers, "managers")
+    utilities.save_master(managers, "managers", directory=directoryOut)
 
 
 def main():
