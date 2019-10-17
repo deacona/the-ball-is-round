@@ -8,8 +8,8 @@ Created on Mon Feb 06 16:49:37 2017
 import urllib
 import pandas as pd
 import logging
-import config
-import utilities
+import src.config as config
+import src.utilities as utilities
 
 logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
 
@@ -25,19 +25,19 @@ def download_stadiums():
             logging.warning("retrieve FAILED: {0}".format(endpoints))
 
 
-def format_stadiums():
+def format_stadiums(dgl_file=config.STADIUMS_SCRAPE["dgl"][1], ops_file=config.STADIUMS_SCRAPE["ops"][1], directoryOut=config.MASTER_DIR):
     logging.info("Formatting stadiums")
 
-    dgl_file = config.STADIUMS_SCRAPE["dgl"][1]
+    # dgl_file = config.STADIUMS_SCRAPE["dgl"][1]
     logging.info("Parsing: {0}".format(dgl_file))
     dgl = pd.read_csv(dgl_file, encoding = "utf8", sep=',')
     dgl.rename(columns={'Name':'Stadium'}, inplace=True)
     dgl.set_index('Team', inplace=True)
     logging.debug("\n{0}".format(dgl))
     
-    ops_file = config.STADIUMS_SCRAPE["ops"][1]
+    # ops_file = config.STADIUMS_SCRAPE["ops"][1]
     logging.info("Parsing: {0}".format(ops_file))
-    ops = pd.read_csv(config.STADIUMS_SCRAPE["ops"][1], encoding = "utf8", sep=',')
+    ops = pd.read_csv(ops_file, encoding = "utf8", sep=',')
     ops.rename(columns={'Team':'TeamFull', 'FDCOUK':'Team'}, inplace=True)
     ops.set_index('Team', inplace=True)
     logging.debug("\n{0}".format(ops))
@@ -50,7 +50,7 @@ def format_stadiums():
     combo.reset_index(level=0, inplace=True)
     logging.debug("\n{0}".format(combo))
     
-    utilities.save_master(combo, "stadiums")
+    utilities.save_master(combo, "stadiums", directory=directoryOut)
 
 
 def main():
