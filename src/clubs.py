@@ -170,9 +170,11 @@ def build_fulldata():
     #return fulldata
 
 
-def fulldata_analysis():
+def fulldata_analysis(directory=config.MASTER_DIR, buckets = ['Div','Season','Team'], 
+                        stats = ('Shots','ShotsOnTarget','Goals','Corners','Points','Win'),
+                        filteron = 'Div', values = ['E0','E1'], aggfunc = 'mean'):
     logging.info("High-level analysis of all clubs data")
-    fulldata = utilities.get_master("fulldata")
+    fulldata = utilities.get_master("fulldata", directory=directory)
 
     #logging.debug(pd.show_versions())
     logging.info("Dataframe info...")
@@ -189,11 +191,11 @@ def fulldata_analysis():
     #logging.debug(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['Season']=="2017-2018")].describe(include="all"))
     #logging.debug(fulldata[(fulldata['EuclideanDistance']==0)] #.head())
 
-    buckets = ['Div','Season','Team']
-    stats = 'Shots','ShotsOnTarget','Goals','Corners','Points','Win'
-    filteron = 'Div'
-    values = ['E0','E1']
-    aggfunc = 'mean'
+    # buckets = ['Div','Season','Team']
+    # stats = 'Shots','ShotsOnTarget','Goals','Corners','Points','Win'
+    # filteron = 'Div'
+    # values = ['E0','E1']
+    # aggfunc = 'mean'
     pseudocode = "SELECT "+aggfunc+" OF "+str(stats)+" WHERE "+filteron+" IS "+str(values)+" GROUPED BY "+str(buckets)
     logging.info("Analysis pseudocode: {0}".format(pseudocode))
     selected = fulldata[fulldata[filteron].isin(values)].groupby(buckets)[stats].agg([aggfunc])
@@ -201,6 +203,8 @@ def fulldata_analysis():
     logging.info("Describe summary dataframe...")
     print(selected.describe(include="all"))
     # pd.scatter_matrix(selected, diagonal='kde')
+
+    return selected
 
 
 def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_mins={}, output_metrics=[]):

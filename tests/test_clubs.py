@@ -20,23 +20,23 @@ class Test(object):
         # self.testCsv = os.path.join(self.testDir, "dummy.csv")
         # self.testXlsx = os.path.join(self.testDir, "data.xlsx")
         # self.testZip = os.path.join(self.testDir, "data.zip")
-        # self.testHeader = ["Dummy field 1", "Dummy field 2", "Dummy field 3"]
-        # self.testRow = ["Bucket", "Filter", "1"]
-        # self.testFrame = pd.DataFrame.from_dict({
-        #     self.testHeader[0]: [self.testRow[0],self.testRow[0]],
-        #     self.testHeader[1]: [self.testRow[1],self.testRow[1]],
-        #     self.testHeader[2]: [self.testRow[2],self.testRow[2]],
-        # })
-        # self.testMaster = os.path.join(self.testDir, "ftb_results.txt")
-        # self.testBuckets = [self.testHeader[0]]
-        # self.testStats = (self.testHeader[2])
-        # self.testFilteron = self.testHeader[1]
-        # self.testValues = [self.testRow[1]]
-        # self.testAggfunc = 'mean'
+        self.testHeader = ["Dummy field 1", "Dummy field 2", "Dummy field 3"]
+        self.testRow = ["Bucket", "Filter", "1"]
+        self.testFrame = pd.DataFrame.from_dict({
+            self.testHeader[0]: [self.testRow[0],self.testRow[0]],
+            self.testHeader[1]: [self.testRow[1],self.testRow[1]],
+            self.testHeader[2]: [self.testRow[2],self.testRow[2]],
+        })
+        self.testMaster = os.path.join(self.testDir, "ftb_fulldata.txt")
+        self.testBuckets = [self.testHeader[0]]
+        self.testStats = (self.testHeader[2])
+        self.testFilteron = self.testHeader[1]
+        self.testValues = [self.testRow[1]]
+        self.testAggfunc = 'mean'
         # # self.testFrameAgg = pd.DataFrame([self.testRow[2]], columns=[self.testAggfunc])
         # # self.testFrameAgg.index.name = self.testHeader[0]
         # # self.testFrameAgg.rename(index={0:self.testRow[0]},inplace=True)
-        # self.testAggValue = 1.
+        self.testAggValue = 1.
         self.testScore = [{"GoalDiff": -1, "Result": 'Loss', "Points": 0, "PointsOpp": 3, "Win": 0, "WinDraw": 0, "Draw": 0, "DrawLoss": 1, "Loss": 1, "WinShare": 0.},
                         {"GoalDiff": 10, "Result": 'Win', "Points": 3, "PointsOpp": 0, "Win": 1, "WinDraw": 1, "Draw": 0, "DrawLoss": 0, "Loss": 0, "WinShare": 1.},
                         ]
@@ -60,8 +60,8 @@ class Test(object):
         # if os.path.isfile(self.testCsvReal):
         #     os.remove(self.testCsvReal)
 
-        # if os.path.isfile(self.testMaster):
-        #     os.remove(self.testMaster)
+        if os.path.isfile(self.testMaster):
+            os.remove(self.testMaster)
 
         # if os.path.isfile(self.testMasterReal):
         #     os.remove(self.testMasterReal)
@@ -69,10 +69,10 @@ class Test(object):
         # if os.path.isdir(self.testDirReal):
         #     os.rmdir(self.testDirReal)
 
-        # if os.path.isdir(self.testDir):
-        #     os.rmdir(self.testDir)
+        if os.path.isdir(self.testDir):
+            os.rmdir(self.testDir)
 
-        # os.mkdir(self.testDir)
+        os.mkdir(self.testDir)
 
         # os.mkdir(self.testDirReal)
 
@@ -82,13 +82,35 @@ class Test(object):
 
         # self.testFrameReal.to_csv(self.testCsvReal, index=False)
 
-        # self.testFrame.to_csv(self.testMaster, sep='|')
+        self.testFrame.to_csv(self.testMaster, sep='|')
 
 
     def teardown_method(self, test_method):
         '''remove temp dir containing dummy files'''
         # tear down self.attribute
-        pass
+        # if os.path.isfile(self.testZip):
+        #     os.remove(self.testZip)
+
+        # if os.path.isfile(self.testXlsx):
+        #     os.remove(self.testXlsx)
+
+        # if os.path.isfile(self.testCsv):
+        #     os.remove(self.testCsv)
+
+        # if os.path.isfile(self.testCsvReal):
+        #     os.remove(self.testCsvReal)
+
+        if os.path.isfile(self.testMaster):
+            os.remove(self.testMaster)
+
+        # if os.path.isfile(self.testMasterReal):
+        #     os.remove(self.testMasterReal)
+
+        # if os.path.isdir(self.testDirReal):
+        #     os.rmdir(self.testDirReal)
+
+        if os.path.isdir(self.testDir):
+            os.rmdir(self.testDir)
 
 
     def test_func_score(self):
@@ -108,8 +130,14 @@ class Test(object):
 
     def test_build_fulldata(self):
         pass
+
     def test_fulldata_analysis(self):
-        pass
+        frameValues = clubs.fulldata_analysis(directory=self.testDir, buckets=self.testBuckets, stats=self.testStats, 
+                                        filteron=self.testFilteron, 
+                                        values=self.testValues, aggfunc=self.testAggfunc).values
+        frameAverage = sum(frameValues) / len(frameValues)
+        assert frameAverage == self.testAggValue
+
     def test_get_summary(self):
         pass
 
