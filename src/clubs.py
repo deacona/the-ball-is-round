@@ -48,7 +48,7 @@ def func_nogoal(x):
         return 0
 
 
-def build_fulldata():
+def build_fulldata(directory=config.MASTER_DIR):
     logging.info("Building fulldata dataframe from results, stadiums, managers ...")
     
     home_renames = {
@@ -88,7 +88,7 @@ def build_fulldata():
     #logging.debug(list(home_renames))
 
     logging.info("Process results")
-    results = utilities.get_master("results")
+    results = utilities.get_master("results", directory=directory)
     
     homeresults = results.rename(columns=home_renames)
     homeresults['HomeAway'] = 'Home'
@@ -127,7 +127,7 @@ def build_fulldata():
     ## TODO - Validate derived values
 
     logging.info("Process stadiums")
-    stadiums = utilities.get_master("stadiums")
+    stadiums = utilities.get_master("stadiums", directory=directory)
     stadiums.drop(['Country','TeamFull'], axis=1, inplace=True)
 
     fulldata = pd.merge(allresults, stadiums, on='Team', how='left')
@@ -140,7 +140,7 @@ def build_fulldata():
     #logging.debug(100000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
 
     logging.info("Process managers")
-    managers = utilities.get_master("managers")
+    managers = utilities.get_master("managers", directory=directory)
     managers.dropna(subset=["Manager"], inplace=True)
 
     fulldata = pd.merge(fulldata, managers, on='Team', how='left')
@@ -166,8 +166,8 @@ def build_fulldata():
     #logging.debug(fulldata.describe(include="all"))
     # logging.debug(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['Season']=="2006-2007")]["Date"].min()#.describe(include="all"))
     
-    utilities.save_master(fulldata, "fulldata")
-    #return fulldata
+    utilities.save_master(fulldata, "fulldata", directory=directory)
+    return fulldata
 
 
 def fulldata_analysis(directory=config.MASTER_DIR, buckets = ['Div','Season','Team'], 
@@ -235,7 +235,8 @@ def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_m
     #logging.debug(df_cnt)
     df = pd.concat([df_cnt, df_avg], axis=1, sort=True)
     df.rename(columns = {group_key:'NumberOfMatches'}, inplace = True)
-    df.drop(['Unnamed: 0'], axis=1, inplace=True)
+    if 'Unnamed: 0' in df.columns:
+        df.drop(['Unnamed: 0'], axis=1, inplace=True)
     
     #add derived metrics
     df["ShotAccuracy"] = df["ShotsOnTarget"] / df["Shots"]
