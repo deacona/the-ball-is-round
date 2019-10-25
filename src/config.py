@@ -12,7 +12,7 @@ LOGFORMAT = '%(asctime)s - %(levelname)s - %(message)s'
 LOGLEVEL = logging.WARNING
 
 conf = configparser.RawConfigParser()
-conf.read('..\src\config.ini')
+conf.read('src/config.ini')
 
 SOURCE_DIR = os.path.join(conf["PROJECT"]["HOMEDIR"], "data", "raw")
 MASTER_DIR = os.path.join(conf["PROJECT"]["HOMEDIR"], "data", "processed")

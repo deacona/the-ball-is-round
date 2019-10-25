@@ -11,8 +11,8 @@ import pandas as pd
 import numpy as np
 import logging
 import zipfile
-import config
-import utilities
+import src.config as config
+import src.utilities as utilities
 
 logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
 
@@ -31,34 +31,35 @@ def download_results():
     
     for table in soup.findAll('table', attrs={'cellspacing': '2', 'border': '0'}):
         for item in table.findAll('a', href=True):
-            #logging.debug(item.text)
-            #logging.debug(item['href'])
+            #logging.info(item.text)
+            #logging.info(item['href'])
         
             remotefile = remotepath+"/"+item['href']
-            logging.debug("Remote file: {0}".format(remotefile))
+            logging.info("Remote file: {0}".format(remotefile))
             
             localfile = config.RESULTS_SCRAPE["ftd"][1]+"/"+item.text.replace("Season ","").replace("/","-")+"/"+os.path.basename(item['href'])
-            logging.debug("Local file: {0}".format(localfile))
+            logging.info("Local file: {0}".format(localfile))
     
             utilities.ensure_dir(localfile)
             
             testfile = urllib.URLopener()
             testfile.retrieve(remotefile, localfile)
-            logging.debug("Retrieve OK: "+str([remotefile, localfile]))
+            logging.info("Retrieve OK: "+str([remotefile, localfile]))
 
 
-def unzip_results_files():
+def unzip_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
     logging.info("Unzipping results files")
-    for root, dirs, files in os.walk(config.RESULTS_SCRAPE["ftd"][1]):
+    for root, dirs, files in os.walk(directory):
         for file in files:
             if file == "data.zip":
-                #logging.debug(root)
-                #logging.debug(dirs)
-                #logging.debug(file)
+                #logging.info(root)
+                #logging.info(dirs)
+                #logging.info(file)
                 file_to_unzip = os.path.join(root, file)
-                logging.debug("File to unzip: {0}".format(file_to_unzip))
+                logging.info("File to unzip: {0}".format(file_to_unzip))
                 with zipfile.ZipFile(file_to_unzip,"r") as zip_ref:
-                    zip_ref.extractall(root)
+                    zip_ref.extractall()
+                os.remove(file_to_unzip)
 
 
 def func_div(x):
@@ -89,26 +90,26 @@ def func_div(x):
     return div_dict[x]
 
 
-def format_results():
+def format_results(directoryIn=config.RESULTS_SCRAPE["ftd"][1], directoryOut=config.MASTER_DIR):
     logging.info("Format results")
     pieces = []
     core_cols = ['Div','Date'] #,'HomeTeam','AwayTeam','FTHG','FTAG','FTR']
     use_cols = ['Season','Div','Country','Tier','Date','HomeTeam','AwayTeam','FTHG','FTAG','FTR','HTHG','HTAG','HTR','Attendance','Referee','HS','AS','HST','AST','HHW','AHW','HC','AC','HF','AF','HO','AO','HY','AY','HR','AR','HBP','ABP']
 
-    for root, dirs, files in os.walk(config.RESULTS_SCRAPE["ftd"][1]):
+    for root, dirs, files in os.walk(directoryIn):
         for file in files:
             if file.endswith(".csv"):
-                #logging.debug(root)
+                #logging.info(root)
                 filepath = os.path.join(root, file)
-                logging.debug("Filepath: {0}".format(filepath))
-                #logging.debug(root[-9:])
+                logging.info("Filepath: {0}".format(filepath))
+                #logging.info(root[-9:])
                 # try:
                 df = pd.read_csv(filepath, usecols=utilities.read_header(filepath), encoding="latin9") #, parse_dates=['Date'])
                 #df['File'] = file
                 df['Season'] = root[-9:]
 
                 if set(["HomeTeam", "AwayTeam"]).issubset(df.columns):
-                    # logging.debug(df[["HomeTeam", "AwayTeam"]].head())
+                    # logging.info(df[["HomeTeam", "AwayTeam"]].head())
                     try:
                         df["HomeTeam"] = df["HomeTeam"].apply(lambda x: x.decode('latin9').encode('utf-8'))
                         df["AwayTeam"] = df["AwayTeam"].apply(lambda x: x.decode('latin9').encode('utf-8'))
@@ -117,7 +118,7 @@ def format_results():
                         df["AwayTeam"] = np.nan
 
                 elif set(["HT", "AT"]).issubset(df.columns):
-                    # logging.debug(df[["HT", "AT"]].head())
+                    # logging.info(df[["HT", "AT"]].head())
                     try:
                         df["HomeTeam"] = df["HT"].apply(lambda x: x.decode('latin9').encode('utf-8'))
                         df["AwayTeam"] = df["AT"].apply(lambda x: x.decode('latin9').encode('utf-8'))
@@ -126,15 +127,15 @@ def format_results():
                         df["AwayTeam"] = np.nan
                 else:
                     raise
-                # logging.debug(df[["HomeTeam", "AwayTeam"]].head())
+                # logging.info(df[["HomeTeam", "AwayTeam"]].head())
 
                 #drop useless rows
                 df = df.dropna(subset=core_cols)
 
                 pieces.append(df)
                 # except:
-                #     logging.debug("read_csv FAILED: "+os.path.join(root, file))
-                #logging.debug(df.count())
+                #     logging.info("read_csv FAILED: "+os.path.join(root, file))
+                #logging.info(df.count())
     
     logging.info("Concatenate everything into a single DataFrame")
     dframe = pd.concat(pieces, ignore_index=True, sort=False)
@@ -144,65 +145,57 @@ def format_results():
     # dframe["Date"] = pd.to_datetime(dframe['Date'], format='%d/%m/%y')
     dframe.Date = pd.to_datetime(dframe.Date,dayfirst=True)
 
-    #logging.debug(dframe.describe(include="all"))
+    #logging.info(dframe.describe(include="all"))
     
-    # logging.debug(dframe[((dframe['HomeTeam']=="Middlesbrough")|(dframe['AwayTeam']=="Middlesbrough"))&(dframe['Season']=="2006-2007")][["Date", "HomeTeam", "AwayTeam"]])
-    utilities.save_master(dframe[use_cols], "results") #, enc="ascii")
+    # logging.info(dframe[((dframe['HomeTeam']=="Middlesbrough")|(dframe['AwayTeam']=="Middlesbrough"))&(dframe['Season']=="2006-2007")][["Date", "HomeTeam", "AwayTeam"]])
+    utilities.save_master(dframe[use_cols], "results", directory=directoryOut) #, enc="ascii")
     #return dframe[use_cols]
 
 
-def archive_results_files():
-    logging.info("Removing/zipping unzipped results files from {0}".format(config.RESULTS_SCRAPE["ftd"][1]))
-    for root, dirs, files in os.walk(config.RESULTS_SCRAPE["ftd"][1]):
+def archive_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
+    logging.info("Removing/zipping unzipped results files from {0}".format(directory))
+    for root, dirs, files in os.walk(directory):
         for file in files:
             if file.endswith(".csv"):
                 file_to_delete = os.path.join(root, file)
-                logging.debug("File to delete: {0}".format(file_to_delete))
+                logging.info("File to delete: {0}".format(file_to_delete))
                 os.remove(file_to_delete)
             elif file.endswith((".xls", ".xlsx")):
                 file_to_zip = os.path.join(root, file)
                 file_as_zip = os.path.splitext(file_to_zip)[0]+'.zip'
-                logging.debug("File to zip: {0}".format(file_to_zip))
+                logging.info("File to zip: {0}".format((file_to_zip, file_as_zip)))
                 with zipfile.ZipFile(file_as_zip, 'w') as myzip:
                     myzip.write(file_to_zip)
+                os.remove(file_to_zip)
 
 
-def results_analysis():
+def results_analysis(directory=config.MASTER_DIR, buckets=['Div','Season'], stats=('HS','AS','HST','AST','FTHG','FTAG'), 
+                        filteron='HomeTeam', values=['Barcelona'], aggfunc='mean'):
     logging.info("Results analysis")
 
-    dframe = utilities.get_master("results")
+    dframe = utilities.get_master("results", directory)
 
-    #dframe.info()
-    #logging.debug(dframe.describe(include="all"))
-    #logging.debug(dframe.groupby(['Div']).count())
-    #logging.debug(dframe.sort_values(by='FTHG', ascending=False)[:20])
-    #logging.debug(len(dframe['Country'].unique()))
-    #logging.debug(dframe.groupby('Season')['HS','AS','HST','AST','FTHG','FTAG'].agg(['mean']))
-    #logging.debug(dframe[dframe.Country.isin(['Germany'])].groupby(['Div','Season'])['HS','AS','HST','AST','FTHG','FTAG'].agg(['mean']))
+    # dframe.info()
+    # dframe.describe(include="all")
+    # print(dframe)
 
-    #gbase = dframe[dframe.Div.isin(['E0'])].groupby(['Season'])['HS','AS','HST','AST','FTHG','FTAG'].agg(['mean'])
-    #gbase = dframe[dframe.Div.isin(['D1','E0','F1','I1','SP1'])].groupby(['Season'])['HS','AS','HST','AST','FTHG','FTAG'].agg(['sum'])
-    #gbase.plot(kind='line')
+    # buckets = ['Div','Season']
+    # stats = 'HS','AS','HST','AST','FTHG','FTAG'
+    # filteron = 'HomeTeam'
+    # values = ['Barcelona']
+    # aggfunc = 'mean'
 
-    #values = dframe['FTHG'][:20]
-    #values.plot(kind='kde', style='k--')
-
-    #dframe[dframe.Div.isin(['E0'])].plot(kind='scatter',x='FTHG',y='HC')
-
-    #logging.debug(dframe[['FTHG','FTAG']])
-    buckets = ['Div','Season']
-    stats = 'HS','AS','HST','AST','FTHG','FTAG'
-    filteron = 'HomeTeam'
-    values = ['Barcelona']
-    aggfunc = 'mean'
     pseudocode = "SELECT "+aggfunc+" OF "+str(stats)+" WHERE "+filteron+" IS "+str(values)+" GROUPED BY "+str(buckets)
-    logging.debug("Analysis pseudocode: {0}".format(pseudocode))
-    #selected = dframe[['FTHG','FTAG','HST','AST']]
+    logging.info("Analysis pseudocode: {0}".format(pseudocode))
+    
     selected = dframe[dframe[filteron].isin(values)].groupby(buckets)[stats].agg([aggfunc])
 
-    print(selected.describe(include="all"))
+    # print(selected)
+    logging.info(selected.describe(include="all"))
     # pd.scatter_matrix(selected, diagonal='kde')
     #plt.show()
+
+    return selected
 
 
 def main():
