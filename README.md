@@ -14,7 +14,7 @@ This project comprises a wide variety of football data collected from various co
 * Clubs - team metrics (at the match level)
 * Players - individual player metrics (currently at the season/competition level)
 * Events [Coming soon!] - what exactly happened during a match and when did it happen
-* World Cup - some specific data collected on international competitions
+* International - some specific data collected on international competitions
 
 My data pipeline ingests all of the raw data; cleans, standardises and combines it together to produce some  feature-rich data for analysis.
 
