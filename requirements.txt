@@ -2,6 +2,7 @@ requests
 numpy
 scipy
 matplotlib
+seaborn
 pandas
 pytest
 beautifulsoup4
