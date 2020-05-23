@@ -6,4 +6,5 @@ seaborn
 pandas
 pytest
 beautifulsoup4
-scikit_learn
+scikit-learn
+jupyterlab

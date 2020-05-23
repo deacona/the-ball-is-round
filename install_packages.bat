@@ -12,11 +12,15 @@ conda create --name %projectName% python=3
 :: Switch to new virtual env
 conda activate %projectName%
 
+:: Add extra channels (lower priority)
+conda config --append channels anaconda
+conda config --append channels conda-forge
+
 :: One shot install - one fail, all fails
 conda install --yes --file requirements.txt
 
 :: Iterate over packages - Windows
-FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+REM FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
 :: Iterate over packages - Bash
 :: while read requirement; do conda install --yes $requirement || pip install $requirement; done < requirements.txt
 
