@@ -5,13 +5,14 @@
 
 # ## 0. Setup
 
-# In[6]:
+# In[4]:
 
 
 ## standard library
 import os
 import re
 import pickle
+import shutil
 
 
 # In[7]:
@@ -928,13 +929,34 @@ with open(ftn_file, "wb") as ftn_outfile:
     pickle.dump(feature_names, ftn_outfile)
 
 
-# In[97]:
+# In[ ]:
 
 
-get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to html boro_01_current_market_value.ipynb")
+## save notebook before running `nbconvert`
 
 
-# In[98]:
+# In[3]:
+
+
+imageFolder = './output'
+for filename in os.listdir(imageFolder):
+    file_path = os.path.join(imageFolder, filename)
+    try:
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+            os.unlink(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+    except Exception as e:
+        print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+
+# In[1]:
+
+
+get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb")
+
+
+# In[144]:
 
 
 get_ipython().system("jupyter nbconvert --output-dir='./output' --to python boro_01_current_market_value.ipynb")
