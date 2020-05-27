@@ -5,7 +5,7 @@
 
 # ## 0. Setup
 
-# In[4]:
+# In[1]:
 
 
 ## standard library
@@ -15,7 +15,7 @@ import pickle
 import shutil
 
 
-# In[7]:
+# In[2]:
 
 
 ## data wrangling
@@ -23,7 +23,7 @@ import numpy as np
 import pandas as pd
 
 
-# In[8]:
+# In[3]:
 
 
 ## visualisation
@@ -35,7 +35,7 @@ import seaborn as sns
 sns.set()
 
 
-# In[9]:
+# In[4]:
 
 
 ## machine learning
@@ -44,18 +44,22 @@ from sklearn.model_selection import validation_curve
 from sklearn.model_selection import learning_curve
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import KFold
 from sklearn.linear_model import LinearRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.utils import resample
+from sklearn.metrics import median_absolute_error
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
 
 
-# In[10]:
+# In[5]:
 
 
 ## project src
 
 
-# In[11]:
+# In[6]:
 
 
 ## global constants
@@ -84,7 +88,7 @@ RANDOM_STATE = 4
 
 # The first part of the data we'll look at is some general information on players, including their market value, as taken from Transfermarkt
 
-# In[12]:
+# In[7]:
 
 
 def extract_season(file_name):
@@ -104,13 +108,13 @@ def extract_season(file_name):
 # extract_season?
 
 
-# In[13]:
+# In[8]:
 
 
 extract_season("tmk_cnt_mbr_all_0910.csv")
 
 
-# In[14]:
+# In[9]:
 
 
 def clean_data(source_name):
@@ -136,6 +140,8 @@ def clean_data(source_name):
 
     tmk_df = pd.concat(data_list, axis=0, sort=False, ignore_index=True)
 
+    ## Name and Position are mis-aligned in the source files
+    
     tmk_df["Name"].fillna(method="bfill", inplace=True)
 
     tmk_df["Position"] = tmk_df.Name.shift(-1)
@@ -196,20 +202,20 @@ def clean_data(source_name):
 # clean_data?
 
 
-# In[15]:
+# In[10]:
 
 
 tmk_df = clean_data("tmk_cnt")
 # tmk_df.info()
 
 
-# In[16]:
+# In[11]:
 
 
 tmk_df.sample(8, random_state=RANDOM_STATE)
 
 
-# In[17]:
+# In[12]:
 
 
 tmk_df.describe(include="all")
@@ -217,7 +223,7 @@ tmk_df.describe(include="all")
 
 # **ANALYSIS** So the data is looking broadly in good shape, but there are a few missing values to consider...
 
-# In[18]:
+# In[13]:
 
 
 tmk_df.count() / tmk_df.shape[0]
@@ -225,72 +231,72 @@ tmk_df.count() / tmk_df.shape[0]
 
 # **ANALYSIS** Only `Joined` has large gaps. Let's look at it in more detail...
 
-# In[19]:
+# In[14]:
 
 
 tmk_df.loc[tmk_df.Name.isin(tmk_df[tmk_df.Joined.notna()].Name.values)
        & tmk_df.Name.isin(tmk_df[tmk_df.Joined.isna()].Name.values)].sort_values(by=["Name", "Season"])
 
 
-# **ANALYSIS** _Possibly_ we could back fill some missing `Joined` dates but this might have some downstream consequences because the date will be at the end of that season. We'll leave them as Nulls for now.
+# **ANALYSIS** _Possibly_ we could back fill some missing `Joined` dates but this might have some downstream consequences because the date _might_ exceed the end of that season. We'll leave them as Nulls for now.
 
 # Next we'll look at the distributions of single fields with bar charts for categorical variables and histograms for numeric and date variables
 
-# In[20]:
+# In[15]:
 
 
 tmk_df["Position group"].value_counts().plot(kind='bar')
 
 
-# In[21]:
+# In[16]:
 
 
 tmk_df.Foot.fillna("unknown").value_counts().plot(kind='bar')
 
 
-# In[22]:
+# In[17]:
 
 
 tmk_df.Season.value_counts().sort_index().plot(kind='bar')
 
 
-# In[23]:
+# In[18]:
 
 
 tmk_df["Shirt number"].hist(bins=42)
 
 
-# In[24]:
+# In[19]:
 
 
 tmk_df["Age"].hist(bins=25)
 
 
-# In[25]:
+# In[20]:
 
 
 tmk_df["Height"].hist()
 
 
-# In[26]:
+# In[21]:
 
 
 tmk_df["Date of birth"].hist()
 
 
-# In[27]:
+# In[22]:
 
 
 tmk_df["Joined"].hist()
 
 
-# In[28]:
+# In[23]:
 
 
 tmk_df["Contract expires"].hist()
 
 
-# In[29]:
+# In[24]:
 
 
 tmk_df["Market value"].hist()
@@ -298,29 +304,29 @@ tmk_df["Market value"].hist()
 
 # We can explore simple relationships between variables using pairplots and histogram facet grids
 
-# In[30]:
+# In[25]:
 
 
 sns.pairplot(tmk_df)
 
 
-# In[31]:
+# In[26]:
 
 
 sns.pairplot(tmk_df, hue="Position group")
 
 
-# In[32]:
+# In[27]:
 
 
 sns.pairplot(tmk_df, hue="Foot")
 
 
-# In[33]:
+# In[28]:
 
 
-grid = sns.FacetGrid(tmk_df, row="Position group", col="Foot", margin_titles=True)
-grid.map(plt.hist, "Market value", bins=20)
+facet_grid = sns.FacetGrid(tmk_df, row="Position group", col="Foot", margin_titles=True)
+facet_grid.map(plt.hist, "Market value", bins=20)
 
 
 # In[ ]:
@@ -337,14 +343,14 @@ grid.map(plt.hist, "Market value", bins=20)
 # * Integrate Data
 # * Format Data
 
-# In[34]:
+# In[29]:
 
 
 df = tmk_df.copy()
 df.shape
 
 
-# In[35]:
+# In[30]:
 
 
 df["Player key"] = df.Name + " (" + df.Season + ")"
@@ -355,7 +361,7 @@ df.info()
 
 # We can derive some new numeric features to express relationships between dates
 
-# In[36]:
+# In[31]:
 
 
 df["Age when joined"] = (df["Joined"] - df["Date of birth"])/ np.timedelta64(1, 'Y')
@@ -364,7 +370,7 @@ df["Age when joined"].hist()
 
 # **ANALYSIS** Most players join in their teens or mid-twenties.
 
-# In[37]:
+# In[32]:
 
 
 df["Years in team"] = (pd.to_datetime("1st July 20"+df.Season.str[-2:]) - df["Joined"])/ np.timedelta64(1, 'Y')
@@ -373,7 +379,7 @@ df["Years in team"].hist()
 
 # **ANALYSIS** I'm going to leave out `Shirt number`, `Position`, `Name`, `Date of birth`, `Joined`, `Season` and `Contract expires` from the model for now. `Contract expires` is populated in less than half of records. The others can be discarded for simplicity of model.
 
-# In[38]:
+# In[33]:
 
 
 df.drop(columns=["Shirt number", "Position", "Name", "Date of birth", "Joined", "Season", "Contract expires"], inplace=True)
@@ -382,7 +388,7 @@ df.shape
 
 # `Foot` and `Position group` will be one-hot encoded 
 
-# In[39]:
+# In[34]:
 
 
 for var in ["Foot", "Position group"]:
@@ -400,52 +406,25 @@ for var in ["Foot", "Position group"]:
 df.shape
 
 
-# In[40]:
+# In[35]:
 
 
 df.sample(5, random_state=RANDOM_STATE)
 
 
-# In[41]:
+# In[36]:
 
 
 df.describe()
 
 
-# In[42]:
-
-
-df[df.Height.isna() | df["Age when joined"].isna() | df["Years in team"].isna()].shape
-
-
-# ~~Discard a handful of rows which don't have `Height` and/or `Age when joined` and/or `Years in team`~~
-
-# In[43]:
-
-
-# df = df[df.Height.notna() & df["Age when joined"].notna() & df["Years in team"].notna()]
-# df.shape
-
-
-# In[44]:
-
-
-# df.describe()
-
-
-# In[111]:
-
-
-# pd.plotting.scatter_matrix(df[["Height", "Age", "Age when joined", "Years in team", "Market value"]], figsize=(15,15));
-
-
-# In[110]:
+# In[37]:
 
 
 sns.pairplot(df[["Height", "Age", "Age when joined", "Years in team", "Market value"]])
 
 
-# In[46]:
+# In[38]:
 
 
 df.columns
@@ -464,7 +443,7 @@ df.columns
 # * Build Model
 # * Assess Model
 
-# In[47]:
+# In[39]:
 
 
 feature_names = ['Height', 'Age', 'Age when joined', 'Years in team', 'Foot=both',
@@ -473,14 +452,14 @@ feature_names = ['Height', 'Age', 'Age when joined', 'Years in team', 'Foot=both
 feature_names
 
 
-# In[48]:
+# In[40]:
 
 
 drop_nulls = True
 drop_nulls
 
 
-# In[49]:
+# In[41]:
 
 
 if drop_nulls:
@@ -493,38 +472,35 @@ else:
 X.shape, y.shape
 
 
-# In[50]:
+# In[42]:
 
 
-X.shape[0] / (X.shape[1] ** 2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=RANDOM_STATE, train_size=0.9)
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
 
 
-# **ANALYSIS** 3 seems a good starting point for number of cross-validation folds
-
-# In[51]:
+# In[43]:
 
 
-number_of_folds = 3
+number_of_folds = 10
 number_of_folds
 
 
-# In[52]:
+# In[44]:
 
 
-X.columns
+kfold = KFold(n_splits=number_of_folds, shuffle=True, random_state=RANDOM_STATE)
+kfold
 
 
-# https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
-
-# In[53]:
+# In[45]:
 
 
-model = LinearRegression() #normalize=True)
-# model = LinearRegression(fit_intercept=False)
+model = LinearRegression()
 model
 
 
-# In[54]:
+# In[46]:
 
 
 param_grid = {"fit_intercept": [True, False],
@@ -532,53 +508,82 @@ param_grid = {"fit_intercept": [True, False],
 param_grid
 
 
-# In[55]:
+# In[47]:
 
 
-grid = GridSearchCV(model, param_grid, cv=number_of_folds)
+grid = GridSearchCV(model, param_grid, cv=kfold)
 grid
 
 
-# In[56]:
+# In[48]:
 
 
-grid.fit(X, y)
+grid.fit(X_train, y_train)
 
 
-# In[57]:
+# In[49]:
 
 
 grid.best_params_
 
 
-# In[58]:
+# In[50]:
 
 
-model = grid.best_estimator_
-model
+grid.score(X_train, y_train)
 
 
-# In[59]:
+# **ANALYSIS** 0.223 isn't great - especially just on the training data - but it's a baseline. The only way is up (I Hope!) :)
+
+# In[51]:
 
 
-for scoring in ['neg_mean_absolute_error', 'neg_mean_squared_error', 'r2']:
-    results = cross_val_score(model, X, y, cv=number_of_folds, scoring=scoring)
-    print("{0}: {1} ({2})".format(scoring, results.mean(), results.std()))
+final_model = grid.best_estimator_
+final_model
 
 
-# In[60]:
+# In[52]:
+
+
+final_model.fit(X_train, y_train)
+
+
+# In[53]:
+
+
+final_model.score(X_train, y_train)
+
+
+# **ANALYSIS** 
+
+# In[54]:
+
+
+median_absolute_error(y_train, final_model.predict(X_train))
+
+
+# In[55]:
+
+
+mean_squared_error(y_train, final_model.predict(X_train), squared=False)
+
+
+# In[56]:
+
+
+r2_score(y_train, final_model.predict(X_train))
+
+
+# **ANALYSIS** Baseline some other useful metrics
+
+# In[57]:
 
 
 # Create CV training and test scores for various training set sizes
-train_sizes, train_scores, test_scores = learning_curve(model, 
-                                                        X, 
-                                                        y,
-                                                        # Number of folds in cross-validation
-                                                        cv=number_of_folds,
-                                                        # Evaluation metric
-#                                                         scoring='accuracy',
-                                                        # Use all computer cores
-                                                        n_jobs=-1, 
+train_sizes, train_scores, test_scores = learning_curve(final_model, 
+                                                        X_train, 
+                                                        y_train,
+                                                        cv=kfold,
                                                         # 50 different sizes of the training set
                                                         train_sizes=np.linspace(0.1, 1.0, 50))
 
@@ -600,53 +605,12 @@ plt.fill_between(train_sizes, test_mean - test_std, test_mean + test_std, color=
 
 # Create plot
 plt.title("Learning Curve")
-plt.xlabel("Training Set Size"), plt.ylabel("R2 Score"), plt.legend(loc="best")
+plt.xlabel("Training Set Size"), plt.ylabel("Score"), plt.legend(loc="best")
 plt.tight_layout()
 plt.show()
 
 
-# **ANALYSIS** The model seems pretty weak in general but we can say that 120 training samples is enough to maximise the score.
-
-# In[61]:
-
-
-optimum_training_size = 120
-optimum_training_size
-
-
-# In[62]:
-
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=RANDOM_STATE, train_size=optimum_training_size)
-X_train.shape, X_test.shape, y_train.shape, y_test.shape
-
-
-# In[63]:
-
-
-model.fit(X_train, y_train)
-
-
-# In[64]:
-
-
-model.score(X_train, y_train)
-
-
-# **ANALYSIS** An R^2 score of 0.244 isn't great - especially just on the training data - but it's a baseline. The only way is up (I Hope!) :)
-
-# In[65]:
-
-
-# Model selection - LinearRegression, Lasso, ElasticNet, RidgeRegression, SVR(kernel="linear")
-# Learning curves 
-# Test/train split and Cross validation
-# Validation (Grid Search)
-# Pipeline
-# Feature scaling
-
-
-# https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression
+# **ANALYSIS** The model seems pretty weak in general but we can say the learning curves have largely converged so adding extra training samples is unlikely to improve the model.
 
 # In[ ]:
 
@@ -660,178 +624,57 @@ model.score(X_train, y_train)
 # * Review Process
 # * Determine Next Steps
 
-# In[66]:
+# In[58]:
 
 
-# MSE, RMSE
-# MAE
-# R squared
-# https://machinelearningmastery.com/metrics-evaluate-machine-learning-algorithms-python/
+final_model.score(X_test, y_test)
 
 
-# In[68]:
+# **ANALYSIS** As per the training score, the test data returns a pretty poor score of 0.01. Plenty to work on
+
+# In[59]:
 
 
-model.score(X_test, y_test)
+median_absolute_error(y_test, final_model.predict(X_test))
 
 
-# **ANALYSIS** As per the training score, the test data returns a pretty poor R^2 of 0.144. Plenty to work on
-
-# In[69]:
+# In[60]:
 
 
-# model.coef_
+mean_squared_error(y_test, final_model.predict(X_test), squared=False)
 
 
-# In[70]:
+# In[61]:
 
 
-# model.intercept_
+r2_score(y_test, final_model.predict(X_test))
 
 
-# In[71]:
+# **ANALYSIS** 
+
+# In[62]:
 
 
-sns.scatterplot(y_train, model.predict(X_train))
-sns.scatterplot(y_test, model.predict(X_test))
+sns.scatterplot(y_train, final_model.predict(X_train))
+sns.scatterplot(y_test, final_model.predict(X_test))
 
 
 # **ANALYSIS** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £4m even though some of the data exceeded £10m.
 
-# In[72]:
+# In[63]:
 
 
-params = pd.Series(model.coef_, index=X.columns)
+params = pd.Series(final_model.coef_, index=X.columns)
 # params
 
 np.random.seed(1)
-err = np.std([model.fit(*resample(X, y)).coef_ for i in range(1000)], 0)
+err = np.std([final_model.fit(*resample(X, y)).coef_ for i in range(1000)], 0)
 # err
 
 pd.DataFrame({"effect": params.round(2), "error": err.round(2)})
 
 
 # **ANALYSIS** The individual features which appear to have most effect are `Age`, `Age when joined`, `Years in team` and `Position group=G`. Perhaps the most we can say is old goalkeepers aren't worth much.
-
-# In[ ]:
-
-
-
-
-
-# https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html
-
-# In[73]:
-
-
-# def PolynomialRegression(degree=2, **kwargs):
-#     return make_pipeline(PolynomialFeatures(degree),
-#                         LinearRegression(**kwargs))
-
-
-# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.validation_curve.html?highlight=validation_curve#sklearn.model_selection.validation_curve
-
-# In[ ]:
-
-
-
-
-
-# In[74]:
-
-
-# degree = np.arange(0,10)
-# train_score, val_score = validation_curve(PolynomialRegression(), X, y,
-#                                          'polynomialfeatures__degree',
-#                                          degree, cv=5)
-
-# plt.plot(degree, np.median(train_score, 1), color="blue", label="training score")
-# plt.plot(degree, np.median(val_score, 1), color="red", label="validation score")
-# plt.legend(loc="best")
-# plt.ylim(0, 1)
-# plt.xlabel("degree")
-# plt.ylabel("score");
-
-
-# In[75]:
-
-
-# # Create range of values for parameter
-# param_range = np.arange(1, 250, 2)
-
-# # Calculate accuracy on training and test set using range of parameter values
-# train_scores, test_scores = validation_curve(RandomForestClassifier(), 
-#                                              X, 
-#                                              y, 
-#                                              param_name="n_estimators", 
-#                                              param_range=param_range,
-#                                              cv=3, 
-#                                              scoring="accuracy", 
-#                                              n_jobs=-1)
-
-
-# # Calculate mean and standard deviation for training set scores
-# train_mean = np.mean(train_scores, axis=1)
-# train_std = np.std(train_scores, axis=1)
-
-# # Calculate mean and standard deviation for test set scores
-# test_mean = np.mean(test_scores, axis=1)
-# test_std = np.std(test_scores, axis=1)
-
-# # Plot mean accuracy scores for training and test sets
-# plt.plot(param_range, train_mean, label="Training score", color="black")
-# plt.plot(param_range, test_mean, label="Cross-validation score", color="dimgrey")
-
-# # Plot accurancy bands for training and test sets
-# plt.fill_between(param_range, train_mean - train_std, train_mean + train_std, color="gray")
-# plt.fill_between(param_range, test_mean - test_std, test_mean + test_std, color="gainsboro")
-
-# # Create plot
-# plt.title("Validation Curve With Random Forest")
-# plt.xlabel("Number Of Trees")
-# plt.ylabel("Accuracy Score")
-# plt.tight_layout()
-# plt.legend(loc="best")
-# plt.show()
-
-
-# In[76]:
-
-
-# train_score
-
-
-# In[77]:
-
-
-# val_score
-
-
-# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learning_curve.html
-
-# In[78]:
-
-
-# fig, ax = plt.subplots(1, 2, figsize=(16, 6))
-# fig.subplots_adjust(left=0.0625, right=0.95, wspace=0.1)
-
-# for i, degree in enumerate([2, 4]):
-#     N, train_lc, val_lc = learning_curve(PolynomialRegression(degree),
-#                                          X, y, cv=5,
-#                                          train_sizes=np.linspace(0.3, 1, 25))
-
-#     ax[i].plot(N, np.mean(train_lc, 1), color='blue', label='training score')
-#     ax[i].plot(N, np.mean(val_lc, 1), color='red', label='validation score')
-#     ax[i].hlines(np.mean([train_lc[-1], val_lc[-1]]), N[0], N[-1],
-#                  color='gray', linestyle='dashed')
-
-#     ax[i].set_ylim(-0.1, 1.1)
-#     ax[i].set_xlim(N[0], N[-1])
-#     ax[i].set_xlabel('training size')
-#     ax[i].set_ylabel('score')
-#     ax[i].set_title('degree = {0}'.format(degree), size=14)
-#     ax[i].legend(loc='best')
-
 
 # In[ ]:
 
@@ -846,39 +689,32 @@ pd.DataFrame({"effect": params.round(2), "error": err.round(2)})
 # * Produce Final Report
 # * Review Project
 
-# In[79]:
-
-
-# Fill missing values
-# Any conclusions on predictions
-
-
-# In[114]:
+# In[64]:
 
 
 df_out = df.copy()
 df_out.shape
 
 
-# In[128]:
+# In[65]:
 
 
 if drop_nulls:
     df_out["Market value (prediction)"] = np.NaN
-    df_out.loc[df_out.notna()[feature_names].all(axis=1), "Market value (prediction)"] = model.predict(df_out[df_out.notna()[feature_names].all(axis=1)][feature_names])
+    df_out.loc[df_out.notna()[feature_names].all(axis=1), "Market value (prediction)"] = final_model.predict(df_out[df_out.notna()[feature_names].all(axis=1)][feature_names])
 else:
-    df_out["Market value (prediction)"] = model.predict(df_out[feature_names])
+    df_out["Market value (prediction)"] = final_model.predict(df_out[feature_names])
 
 df_out.shape
 
 
-# In[129]:
+# In[66]:
 
 
 df_out.describe()
 
 
-# In[131]:
+# In[67]:
 
 
 sns.pairplot(df_out[["Height", "Age", "Age when joined", "Years in team", "Market value", "Market value (prediction)"]])
@@ -886,20 +722,20 @@ sns.pairplot(df_out[["Height", "Age", "Age when joined", "Years in team", "Marke
 
 # **ANALYSIS** As we saw during data preperation there's no clear correlations with continuous features at work. Further our predictions don't even particularly correlate with the actual values.
 
-# In[132]:
+# In[68]:
 
 
 df_unseen = df_out[df_out["Market value"].isna()]
 df_unseen.shape
 
 
-# In[136]:
+# In[69]:
 
 
 df_unseen[df_unseen["Market value (prediction)"].notna()].describe()
 
 
-# In[135]:
+# In[70]:
 
 
 df_unseen[df_unseen["Market value (prediction)"].notna()]
@@ -907,21 +743,21 @@ df_unseen[df_unseen["Market value (prediction)"].notna()]
 
 # **ANALYSIS** The player's missing actual Market values are all young players (17-21). The predictions are typically quite small which is as expected at least. Poor Connor Ripley (11/12) gets a negative value!
 
-# In[140]:
+# In[71]:
 
 
 df_out.to_csv("../data/interim/boro_01_dataset.csv")
 
 
-# In[141]:
+# In[72]:
 
 
 clf_file = "../models/boro_01_model.pkl" 
 with open(clf_file, "wb") as clf_outfile:
-    pickle.dump(model, clf_outfile)
+    pickle.dump(final_model, clf_outfile)
 
 
-# In[142]:
+# In[73]:
 
 
 ftn_file = "../models/boro_01_feature_names.pkl" 
@@ -929,18 +765,18 @@ with open(ftn_file, "wb") as ftn_outfile:
     pickle.dump(feature_names, ftn_outfile)
 
 
-# In[ ]:
+# In[74]:
 
 
 ## save notebook before running `nbconvert`
 
 
-# In[3]:
+# In[75]:
 
 
-imageFolder = './output'
-for filename in os.listdir(imageFolder):
-    file_path = os.path.join(imageFolder, filename)
+outFolder = './output'
+for filename in os.listdir(outFolder):
+    file_path = os.path.join(outFolder, filename)
     try:
         if os.path.isfile(file_path) or os.path.islink(file_path):
             os.unlink(file_path)
@@ -950,14 +786,20 @@ for filename in os.listdir(imageFolder):
         print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-# In[1]:
+# In[76]:
 
 
 get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb")
 
 
-# In[144]:
+# In[199]:
 
 
 get_ipython().system("jupyter nbconvert --output-dir='./output' --to python boro_01_current_market_value.ipynb")
+
+
+# In[ ]:
+
+
+
 

@@ -1063,14 +1063,14 @@ The first part of the data we'll look at is some general information on players,
 
 
 
-**ANALYSIS** _Possibly_ we could back fill some missing `Joined` dates but this might have some downstream consequences because the date will be at the end of that season. We'll leave them as Nulls for now.
+**ANALYSIS** _Possibly_ we could back fill some missing `Joined` dates but this might have some downstream consequences because the date _might_ exceed the end of that season. We'll leave them as Nulls for now.
 
 Next we'll look at the distributions of single fields with bar charts for categorical variables and histograms for numeric and date variables
 
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d27d08e0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x18319b82dc0>
 
 
 
@@ -1081,7 +1081,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d2b425b0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x18319ede9a0>
 
 
 
@@ -1092,7 +1092,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d2bab5b0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x18319f44a60>
 
 
 
@@ -1103,7 +1103,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d2810fd0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x18319fbbc40>
 
 
 
@@ -1114,7 +1114,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d2cd8bb0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x18319f7ed30>
 
 
 
@@ -1125,7 +1125,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d2d63160>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1831a10aa00>
 
 
 
@@ -1136,7 +1136,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d2d6a1c0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1831a138250>
 
 
 
@@ -1147,7 +1147,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d2dd3610>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1831a1bd460>
 
 
 
@@ -1158,7 +1158,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207cd5b3e20>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1831a214be0>
 
 
 
@@ -1169,7 +1169,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d271ec40>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1831a2a76a0>
 
 
 
@@ -1182,7 +1182,7 @@ We can explore simple relationships between variables using pairplots and histog
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x207d2f44940>
+    <seaborn.axisgrid.PairGrid at 0x1831a31a220>
 
 
 
@@ -1193,7 +1193,7 @@ We can explore simple relationships between variables using pairplots and histog
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x207d36cca30>
+    <seaborn.axisgrid.PairGrid at 0x1831a974820>
 
 
 
@@ -1204,7 +1204,7 @@ We can explore simple relationships between variables using pairplots and histog
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x207d50d86d0>
+    <seaborn.axisgrid.PairGrid at 0x18319ed97f0>
 
 
 
@@ -1215,7 +1215,7 @@ We can explore simple relationships between variables using pairplots and histog
 
 
 
-    <seaborn.axisgrid.FacetGrid at 0x207d50c59a0>
+    <seaborn.axisgrid.FacetGrid at 0x1831a0d64c0>
 
 
 
@@ -1264,7 +1264,7 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d67f8400>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1831dcb8dc0>
 
 
 
@@ -1277,7 +1277,7 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d6bce7c0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1831df7a310>
 
 
 
@@ -1600,21 +1600,12 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-    (17, 12)
-
-
-
-~~Discard a handful of rows which don't have `Height` and/or `Age when joined` and/or `Years in team`~~
+    <seaborn.axisgrid.PairGrid at 0x1831dff8490>
 
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x207dd310a30>
-
-
-
-
-![png](boro_01_current_market_value_files/boro_01_current_market_value_58_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_53_1.png)
 
 
 
@@ -1668,30 +1659,23 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-    2.7107438016528924
-
-
-
-**ANALYSIS** 3 seems a good starting point for number of cross-validation folds
-
-
-
-
-    3
+    ((295, 11), (33, 11), (295,), (33,))
 
 
 
 
 
 
-    Index(['Height', 'Age', 'Age when joined', 'Years in team', 'Foot=both',
-           'Foot=left', 'Foot=right', 'Position group=D', 'Position group=F',
-           'Position group=G', 'Position group=M'],
-          dtype='object')
+    10
 
 
 
-https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
+
+
+
+    KFold(n_splits=10, random_state=4, shuffle=True)
+
+
 
 
 
@@ -1710,7 +1694,8 @@ https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
 
 
 
-    GridSearchCV(cv=3, error_score=nan,
+    GridSearchCV(cv=KFold(n_splits=10, random_state=4, shuffle=True),
+                 error_score=nan,
                  estimator=LinearRegression(copy_X=True, fit_intercept=True,
                                             n_jobs=None, normalize=False),
                  iid='deprecated', n_jobs=None,
@@ -1724,7 +1709,8 @@ https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
 
 
 
-    GridSearchCV(cv=3, error_score=nan,
+    GridSearchCV(cv=KFold(n_splits=10, random_state=4, shuffle=True),
+                 error_score=nan,
                  estimator=LinearRegression(copy_X=True, fit_intercept=True,
                                             n_jobs=None, normalize=False),
                  iid='deprecated', n_jobs=None,
@@ -1738,59 +1724,70 @@ https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
 
 
 
-    {'fit_intercept': True, 'normalize': True}
+    {'fit_intercept': True, 'normalize': False}
 
 
 
 
 
 
-    LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=True)
+    0.22316654965930327
 
 
 
-    neg_mean_absolute_error: -1.4180357603777949 (0.38218203534263856)
-    neg_mean_squared_error: -4.013017967454328 (2.706725893125332)
-    r2: -0.8341952236199814 (0.5940646886153885)
-    
-
-
-![png](boro_01_current_market_value_files/boro_01_current_market_value_77_0.png)
-
-
-**ANALYSIS** The model seems pretty weak in general but we can say that 120 training samples is enough to maximise the score.
+**ANALYSIS** 0.223 isn't great - especially just on the training data - but it's a baseline. The only way is up (I Hope!) :)
 
 
 
 
-    120
+    LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
 
 
 
 
 
 
-    ((120, 11), (208, 11), (120,), (208,))
+    LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
 
 
 
 
 
 
-    LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=True)
+    0.22316654965930327
+
+
+
+**ANALYSIS** 
+
+
+
+
+    0.8494754034468113
 
 
 
 
 
 
-    0.24416717797737317
+    1.6009173277884379
 
 
 
-**ANALYSIS** An R^2 score of 0.244 isn't great - especially just on the training data - but it's a baseline. The only way is up (I Hope!) :)
 
-https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression
+
+
+    0.22316654965930327
+
+
+
+**ANALYSIS** Baseline some other useful metrics
+
+
+![png](boro_01_current_market_value_files/boro_01_current_market_value_78_0.png)
+
+
+**ANALYSIS** The model seems pretty weak in general but we can say the learning curves have largely converged so adding extra training samples is unlikely to improve the model.
 
 ## 5. Evaluation
 
@@ -1801,21 +1798,44 @@ https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearReg
 
 
 
-    0.14475111674270003
+    0.010774658989811225
 
 
 
-**ANALYSIS** As per the training score, the test data returns a pretty poor R^2 of 0.144. Plenty to work on
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x207d87aaa90>
+**ANALYSIS** As per the training score, the test data returns a pretty poor score of 0.01. Plenty to work on
 
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_93_1.png)
+    0.9945309991577052
+
+
+
+
+
+
+    1.376076969839843
+
+
+
+
+
+
+    0.010774658989811225
+
+
+
+**ANALYSIS** 
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x1831fa89a30>
+
+
+
+
+![png](boro_01_current_market_value_files/boro_01_current_market_value_88_1.png)
 
 
 **ANALYSIS** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £4m even though some of the data exceeded £10m.
@@ -1848,58 +1868,58 @@ https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearReg
   <tbody>
     <tr>
       <th>Height</th>
-      <td>-0.01</td>
-      <td>2.000000e-02</td>
+      <td>0.01</td>
+      <td>0.02</td>
     </tr>
     <tr>
       <th>Age</th>
-      <td>1.56</td>
-      <td>2.100000e-01</td>
+      <td>1.11</td>
+      <td>0.21</td>
     </tr>
     <tr>
       <th>Age when joined</th>
-      <td>-1.53</td>
-      <td>2.100000e-01</td>
+      <td>-1.07</td>
+      <td>0.21</td>
     </tr>
     <tr>
       <th>Years in team</th>
-      <td>-1.60</td>
-      <td>2.100000e-01</td>
+      <td>-1.14</td>
+      <td>0.21</td>
     </tr>
     <tr>
       <th>Foot=both</th>
-      <td>0.71</td>
-      <td>5.800000e-01</td>
+      <td>0.01</td>
+      <td>0.58</td>
     </tr>
     <tr>
       <th>Foot=left</th>
-      <td>0.65</td>
-      <td>4.700000e-01</td>
+      <td>0.36</td>
+      <td>0.47</td>
     </tr>
     <tr>
       <th>Foot=right</th>
-      <td>0.78</td>
-      <td>4.800000e-01</td>
+      <td>0.42</td>
+      <td>0.48</td>
     </tr>
     <tr>
       <th>Position group=D</th>
-      <td>0.01</td>
-      <td>5.284582e+13</td>
+      <td>-0.07</td>
+      <td>0.13</td>
     </tr>
     <tr>
       <th>Position group=F</th>
-      <td>0.66</td>
-      <td>5.284582e+13</td>
+      <td>0.89</td>
+      <td>0.21</td>
     </tr>
     <tr>
       <th>Position group=G</th>
-      <td>-1.25</td>
-      <td>5.284582e+13</td>
+      <td>-1.17</td>
+      <td>0.19</td>
     </tr>
     <tr>
       <th>Position group=M</th>
-      <td>0.29</td>
-      <td>5.284582e+13</td>
+      <td>0.35</td>
+      <td>0.16</td>
     </tr>
   </tbody>
 </table>
@@ -1908,12 +1928,6 @@ https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearReg
 
 
 **ANALYSIS** The individual features which appear to have most effect are `Age`, `Age when joined`, `Years in team` and `Position group=G`. Perhaps the most we can say is old goalkeepers aren't worth much.
-
-https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html
-
-https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.validation_curve.html?highlight=validation_curve#sklearn.model_selection.validation_curve
-
-https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learning_curve.html
 
 ## 6. Deployment
 
@@ -1925,7 +1939,7 @@ https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learni
 
 
 
-    (364, 13)
+    (364, 12)
 
 
 
@@ -2110,12 +2124,12 @@ https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learni
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x207e3a6b8e0>
+    <seaborn.axisgrid.PairGrid at 0x1831e987520>
 
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_114_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_97_1.png)
 
 
 **ANALYSIS** As we saw during data preperation there's no clear correlations with continuous features at work. Further our predictions don't even particularly correlate with the actual values.
@@ -2663,9 +2677,6 @@ https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learni
 
 **ANALYSIS** The player's missing actual Market values are all young players (17-21). The predictions are typically quite small which is as expected at least. Poor Connor Ripley (11/12) gets a negative value!
 
-    Invalid switch - "boro_01_current_market_value_files".
-    
-
     [NbConvertApp] Converting notebook boro_01_current_market_value.ipynb to markdown
     [NbConvertApp] Support files will be in boro_01_current_market_value_files\
     [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
@@ -2688,9 +2699,9 @@ https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learni
     [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
     [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
     [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Writing 53024 bytes to ./output\boro_01_current_market_value.md
+    [NbConvertApp] Writing 54011 bytes to ./output\boro_01_current_market_value.md
     
 
     [NbConvertApp] Converting notebook boro_01_current_market_value.ipynb to python
-    [NbConvertApp] Writing 21579 bytes to ./output\boro_01_current_market_value.py
+    [NbConvertApp] Writing 17583 bytes to ./output\boro_01_current_market_value.py
     
