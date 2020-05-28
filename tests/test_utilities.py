@@ -24,6 +24,8 @@ class Test:
         self.testHeader = ["Dummy field 1", "Dummy field 2"]
         self.testRow = ["1", "2"]
         self.testFrame = pd.DataFrame(self.testRow, index=self.testHeader)
+        self.testFilename = "tmk_cnt_mbr_all_0910.csv"
+        self.testSeason = "09/10"
 
         if os.path.isfile(self.testHtml):
             os.remove(self.testHtml)
@@ -94,3 +96,13 @@ class Test:
     def test_save_master(self):
         '''test save dummy dataframe to dummy csv'''
         assert utilities.save_master(self.testFrame, "dummy", directory=self.testDir) == self.testMaster
+
+
+    def test_extract_season(self):
+        '''test extract season from filename'''
+        assert utilities.extract_season(self.testFilename) == self.testSeason
+
+
+    # def test_folder_loader(self):
+        # '''test loading source files in folder'''
+        # assert blah

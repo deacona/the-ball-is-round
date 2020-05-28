@@ -61,3 +61,42 @@ def save_master(dframe, stub, directory=config.MASTER_DIR, enc='utf-8'):
     # dframe.to_csv(master_path(stub), sep='|')
     # print "... saved to "+master_path(stub)
     return file
+
+def extract_season(file_name):
+    """
+    INPUT:
+        file_name - String containing name of the data source file
+        
+    OUTPUT:
+        season_out - String containing the formated label for the season
+    """
+    
+    season_part = file_name.split(".")[0].split("_")[-1]
+    season_out = season_part[:2] + "/" + season_part[-2:]
+    
+    return season_out
+
+
+def folder_loader(source_name, source_header):
+    """
+    INPUT:
+        source_name - String containing name of the data source
+        source_name - List of columns in source files
+        
+    OUTPUT:
+        df - Dataframe containing raw loaded data
+    """
+    
+    source_folder = os.path.join(config.SOURCE_DIR, source_name[:3], source_name)
+    data_list = []
+    for file in os.listdir(source_folder):
+        print(file)
+        filepath = os.path.join(source_folder, file)
+        tmp = pd.read_csv(filepath, encoding='latin-1', header=0, 
+                          names=source_header)
+        tmp["Season"] = extract_season(file)
+        data_list.append(tmp)
+
+    df = pd.concat(data_list, axis=0, sort=False, ignore_index=True)
+    
+    return df

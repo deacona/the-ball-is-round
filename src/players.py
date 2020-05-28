@@ -6,6 +6,7 @@ Created on Fri Aug 25 14:29:17 2017
 """
 
 import pandas as pd
+import numpy as np
 import math
 from scipy.spatial import distance
 import random
@@ -18,6 +19,89 @@ pd.set_option('display.expand_frame_repr', False)
 
 # master_file = config.MASTER_FILES["ftb_players"]
 # distance_columns = ["Age", "ChancesInvolved", "DefensiveActions", "FoulsCommited", "FoulsSuffered", "Height", "Minutes", "NPG+A", "Points", "Weight", "SuccessfulPasses"]
+
+def clean_data(source_name):
+    """
+    INPUT:
+        source_name - String containing name of the data source
+        
+    OUTPUT:
+        df - Dataframe containing the cleaned data
+    """
+
+    df = utilities.folder_loader(source_name, ["Shirt number", "Position", "Name", "Date of birth", "Nationality",
+                                "Height", "Foot", "Joined", "Signed from", "Contract expires",
+                                "Market value"])
+
+    ## Name and Position are mis-aligned in the source files
+    
+    df["Name"].fillna(method="bfill", inplace=True)
+
+    df["Position"] = df.Name.shift(-1)
+    df.loc[df.Position == df.Name, "Position"] = df.Name.shift(-2)
+
+    df.drop(axis=1, columns=["Nationality", "Signed from"], inplace=True)
+
+    df.dropna(subset=["Market value"], inplace=True)
+
+    df = df.replace('-', np.nan)
+
+    df["Shirt number"] = pd.to_numeric(df["Shirt number"], downcast='integer')
+
+    df["Position group"] = None
+    df.loc[(df.Position.str.upper().str.contains("KEEPER"))
+            | (df.Position.str.upper().str.contains("GOAL")), 
+           "Position group"] = "G"
+    df.loc[(df.Position.str.upper().str.contains("BACK"))
+            | (df.Position.str.upper().str.contains("DEF")), 
+           "Position group"] = "D"
+    df.loc[(df.Position.str.upper().str.contains("MID"))
+            | (df.Position.str.upper().str.contains("MIT"))
+            | (df.Position.str.upper().str.contains("WING")), 
+           "Position group"] = "M"
+    df.loc[(df.Position.str.upper().str.contains("STRIKER"))
+            | (df.Position.str.upper().str.contains("FORW")), 
+           "Position group"] = "F"
+
+    df["Age"] = df["Date of birth"].str.extract(r".*([0-9]{2})", expand=False).astype("int")
+
+    df["Date of birth"] = pd.to_datetime(
+        df["Date of birth"].str.extract(r"(.*) \([0-9]{2}\)", expand=False), 
+        format="%b %d, %Y")
+
+    df["Joined"] = pd.to_datetime(df.Joined, format="%b %d, %Y")
+
+    df["Contract expires"] = pd.to_datetime(df["Contract expires"], format="%d.%m.%Y")
+
+    df["Height"] = (df["Height"] \
+                              .str.strip() \
+                              .str.replace(' ', '') \
+                              .str.replace(',', '') \
+                              .str.replace('m', '') \
+                              .replace({'-':np.nan, '':np.nan}) \
+                              .astype(float))
+    df.loc[df.Name.isin(df[df.Height.notna()].Name.values)
+           & df.Name.isin(df[df.Height.isna()].Name.values), "Height"] = \
+    df.loc[df.Name.isin(df[df.Height.notna()].Name.values)
+           & df.Name.isin(df[df.Height.isna()].Name.values)] \
+        .sort_values(by=["Name", "Season"]).Height.fillna(method="bfill")
+    
+    df.loc[df.Name.isin(df[df.Foot.notna()].Name.values)
+           & df.Name.isin(df[df.Foot.isna()].Name.values), "Foot"] = \
+    df.loc[df.Name.isin(df[df.Foot.notna()].Name.values)
+           & df.Name.isin(df[df.Foot.isna()].Name.values)] \
+        .sort_values(by=["Name", "Season"]).Foot.fillna(method="bfill")
+
+    df["Market value"] = (df["Market value"] \
+                              .str.strip() \
+                              .replace({'-':np.nan}) \
+                              .replace(r'[£km]', '', regex=True) \
+                              .astype(float) * \
+                df["Market value"].str.extract(r'[\d\.]+([km]+)', expand=False)
+                    .fillna(1)
+                    .replace(['k','m'], [10**3, 10**6]).astype(int) / 10**6)
+
+    return df
 
 def df_info(dframe):
     dframe.info()

@@ -10,6 +10,7 @@
 
 ## standard library
 import os
+import sys
 import re
 import pickle
 import shutil
@@ -53,13 +54,22 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 
 
-# In[5]:
+# In[21]:
 
 
 ## project src
+sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('../src'))
+# sys.path
+
+get_ipython().run_line_magic('load_ext', 'autoreload')
+get_ipython().run_line_magic('autoreload', '2')
+
+# import utilities
+import players
 
 
-# In[6]:
+# In[13]:
 
 
 ## global constants
@@ -88,134 +98,20 @@ RANDOM_STATE = 4
 
 # The first part of the data we'll look at is some general information on players, including their market value, as taken from Transfermarkt
 
-# In[7]:
+# In[25]:
 
 
-def extract_season(file_name):
-    """
-    INPUT:
-        file_name - String containing name of the data source file
-        
-    OUTPUT:
-        season_out - String containing the formated label for the season
-    """
-    
-    season_part = file_name.split(".")[0].split("_")[-1]
-    season_out = season_part[:2] + "/" + season_part[-2:]
-    
-    return season_out
-
-# extract_season?
-
-
-# In[8]:
-
-
-extract_season("tmk_cnt_mbr_all_0910.csv")
-
-
-# In[9]:
-
-
-def clean_data(source_name):
-    """
-    INPUT:
-        source_name - String containing name of the data source
-        
-    OUTPUT:
-        tmk_df - Dataframe containing the cleaned data
-    """
-
-    dir_tmk_cnt = "../data/raw/tmk/tmk_cnt/"
-    data_list = []
-    for file in os.listdir(dir_tmk_cnt):
-        filepath = os.path.join(dir_tmk_cnt, file)
-        print(filepath)
-        tmp = pd.read_csv(filepath, encoding='latin-1', header=0, 
-                          names=["Shirt number", "Position", "Name", "Date of birth", "Nationality",
-                                "Height", "Foot", "Joined", "Signed from", "Contract expires",
-                                "Market value"])
-        tmp["Season"] = extract_season(file)
-        data_list.append(tmp)
-
-    tmk_df = pd.concat(data_list, axis=0, sort=False, ignore_index=True)
-
-    ## Name and Position are mis-aligned in the source files
-    
-    tmk_df["Name"].fillna(method="bfill", inplace=True)
-
-    tmk_df["Position"] = tmk_df.Name.shift(-1)
-    tmk_df.loc[tmk_df.Position == tmk_df.Name, "Position"] = tmk_df.Name.shift(-2)
-
-    tmk_df.drop(axis=1, columns=["Nationality", "Signed from"], inplace=True)
-
-    tmk_df.dropna(subset=["Market value"], inplace=True)
-
-    tmk_df = tmk_df.replace('-', np.nan)
-
-    tmk_df["Shirt number"] = pd.to_numeric(tmk_df["Shirt number"], downcast='integer')
-
-    tmk_df["Position group"] = None
-    tmk_df.loc[(tmk_df.Position.str.upper().str.contains("KEEPER"))
-            | (tmk_df.Position.str.upper().str.contains("GOAL")), 
-           "Position group"] = "G"
-    tmk_df.loc[(tmk_df.Position.str.upper().str.contains("BACK"))
-            | (tmk_df.Position.str.upper().str.contains("DEF")), 
-           "Position group"] = "D"
-    tmk_df.loc[(tmk_df.Position.str.upper().str.contains("MID"))
-            | (tmk_df.Position.str.upper().str.contains("MIT"))
-            | (tmk_df.Position.str.upper().str.contains("WING")), 
-           "Position group"] = "M"
-    tmk_df.loc[(tmk_df.Position.str.upper().str.contains("STRIKER"))
-            | (tmk_df.Position.str.upper().str.contains("FORW")), 
-           "Position group"] = "F"
-
-    tmk_df["Age"] = tmk_df["Date of birth"].str.extract(r".*([0-9]{2})", expand=False).astype("int")
-
-    tmk_df["Date of birth"] = pd.to_datetime(
-        tmk_df["Date of birth"].str.extract(r"(.*) \([0-9]{2}\)", expand=False), 
-        format="%b %d, %Y")
-
-    tmk_df["Joined"] = pd.to_datetime(tmk_df.Joined, format="%b %d, %Y")
-
-    tmk_df["Contract expires"] = pd.to_datetime(tmk_df["Contract expires"], format="%d.%m.%Y")
-
-    tmk_df["Height"] = (tmk_df["Height"]                               .str.strip()                               .str.replace(' ', '')                               .str.replace(',', '')                               .str.replace('m', '')                               .replace({'-':np.nan, '':np.nan})                               .astype(float))
-    tmk_df.loc[tmk_df.Name.isin(tmk_df[tmk_df.Height.notna()].Name.values)
-           & tmk_df.Name.isin(tmk_df[tmk_df.Height.isna()].Name.values), "Height"] = \
-    tmk_df.loc[tmk_df.Name.isin(tmk_df[tmk_df.Height.notna()].Name.values)
-           & tmk_df.Name.isin(tmk_df[tmk_df.Height.isna()].Name.values)] \
-        .sort_values(by=["Name", "Season"]).Height.fillna(method="bfill")
-    
-    tmk_df.loc[tmk_df.Name.isin(tmk_df[tmk_df.Foot.notna()].Name.values)
-           & tmk_df.Name.isin(tmk_df[tmk_df.Foot.isna()].Name.values), "Foot"] = \
-    tmk_df.loc[tmk_df.Name.isin(tmk_df[tmk_df.Foot.notna()].Name.values)
-           & tmk_df.Name.isin(tmk_df[tmk_df.Foot.isna()].Name.values)] \
-        .sort_values(by=["Name", "Season"]).Foot.fillna(method="bfill")
-
-    tmk_df["Market value"] = (tmk_df["Market value"]                               .str.strip()                               .replace({'-':np.nan})                               .replace(r'[£km]', '', regex=True)                               .astype(float) *                 tmk_df["Market value"].str.extract(r'[\d\.]+([km]+)', expand=False)
-                    .fillna(1)
-                    .replace(['k','m'], [10**3, 10**6]).astype(int) / 10**6)
-
-    return tmk_df
-
-# clean_data?
-
-
-# In[10]:
-
-
-tmk_df = clean_data("tmk_cnt")
+tmk_df = players.clean_data("tmk_cnt")
 # tmk_df.info()
 
 
-# In[11]:
+# In[23]:
 
 
 tmk_df.sample(8, random_state=RANDOM_STATE)
 
 
-# In[12]:
+# In[24]:
 
 
 tmk_df.describe(include="all")
@@ -792,7 +688,7 @@ for filename in os.listdir(outFolder):
 get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb")
 
 
-# In[199]:
+# In[77]:
 
 
 get_ipython().system("jupyter nbconvert --output-dir='./output' --to python boro_01_current_market_value.ipynb")
