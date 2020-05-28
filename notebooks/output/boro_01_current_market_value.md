@@ -24,24 +24,17 @@ We have player data from Transfermarkt, ESPN, WhoScored and Fly Me To The Moon (
 
 The first part of the data we'll look at is some general information on players, including their market value, as taken from Transfermarkt
 
-
-
-
-    '09/10'
-
-
-
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_0910.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1011.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1112.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1213.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1314.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1415.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1516.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1617.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1718.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1819.csv
-    ../data/raw/tmk/tmk_cnt/tmk_cnt_mbr_all_1920.csv
+    tmk_cnt_mbr_all_0910.csv
+    tmk_cnt_mbr_all_1011.csv
+    tmk_cnt_mbr_all_1112.csv
+    tmk_cnt_mbr_all_1213.csv
+    tmk_cnt_mbr_all_1314.csv
+    tmk_cnt_mbr_all_1415.csv
+    tmk_cnt_mbr_all_1516.csv
+    tmk_cnt_mbr_all_1617.csv
+    tmk_cnt_mbr_all_1718.csv
+    tmk_cnt_mbr_all_1819.csv
+    tmk_cnt_mbr_all_1920.csv
     
 
 
@@ -1075,7 +1068,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_24_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_21_1.png)
 
 
 
@@ -1086,7 +1079,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_25_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_22_1.png)
 
 
 
@@ -1097,7 +1090,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_26_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_23_1.png)
 
 
 
@@ -1108,7 +1101,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_27_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_24_1.png)
 
 
 
@@ -1119,7 +1112,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_28_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_25_1.png)
 
 
 
@@ -1130,7 +1123,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_29_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_26_1.png)
 
 
 
@@ -1141,7 +1134,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_30_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_27_1.png)
 
 
 
@@ -1152,7 +1145,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_31_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_28_1.png)
 
 
 
@@ -1163,7 +1156,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_32_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_29_1.png)
 
 
 
@@ -1174,7 +1167,7 @@ Next we'll look at the distributions of single fields with bar charts for catego
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_33_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_30_1.png)
 
 
 We can explore simple relationships between variables using pairplots and histogram facet grids
@@ -1187,7 +1180,7 @@ We can explore simple relationships between variables using pairplots and histog
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_35_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_32_1.png)
 
 
 
@@ -1198,7 +1191,7 @@ We can explore simple relationships between variables using pairplots and histog
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_36_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_33_1.png)
 
 
 
@@ -1209,7 +1202,7 @@ We can explore simple relationships between variables using pairplots and histog
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_37_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_34_1.png)
 
 
 
@@ -1220,7 +1213,7 @@ We can explore simple relationships between variables using pairplots and histog
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_38_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_35_1.png)
 
 
 ## 3. Data Preperation
@@ -1264,12 +1257,12 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1831dcb8dc0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x29d31292400>
 
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_44_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_41_1.png)
 
 
 **ANALYSIS** Most players join in their teens or mid-twenties.
@@ -1277,12 +1270,12 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1831df7a310>
+    <matplotlib.axes._subplots.AxesSubplot at 0x29d31465370>
 
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_46_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_43_1.png)
 
 
 **ANALYSIS** I'm going to leave out `Shirt number`, `Position`, `Name`, `Date of birth`, `Joined`, `Season` and `Contract expires` from the model for now. `Contract expires` is populated in less than half of records. The others can be discarded for simplicity of model.
@@ -1600,12 +1593,12 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x1831dff8490>
+    <seaborn.axisgrid.PairGrid at 0x29d315e0d00>
 
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_53_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_50_1.png)
 
 
 
@@ -1731,15 +1724,6 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-    0.22316654965930327
-
-
-
-**ANALYSIS** 0.223 isn't great - especially just on the training data - but it's a baseline. The only way is up (I Hope!) :)
-
-
-
-
     LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
 
 
@@ -1748,46 +1732,10 @@ We can derive some new numeric features to express relationships between dates
 
 
     LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
-
-
-
-
-
-
-    0.22316654965930327
 
 
 
 **ANALYSIS** 
-
-
-
-
-    0.8494754034468113
-
-
-
-
-
-
-    1.6009173277884379
-
-
-
-
-
-
-    0.22316654965930327
-
-
-
-**ANALYSIS** Baseline some other useful metrics
-
-
-![png](boro_01_current_market_value_files/boro_01_current_market_value_78_0.png)
-
-
-**ANALYSIS** The model seems pretty weak in general but we can say the learning curves have largely converged so adding extra training samples is unlikely to improve the model.
 
 ## 5. Evaluation
 
@@ -1798,44 +1746,67 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-    0.010774658989811225
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Train</th>
+      <th>Test</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>MedAE</th>
+      <td>0.849475</td>
+      <td>0.994531</td>
+    </tr>
+    <tr>
+      <th>RMSE</th>
+      <td>1.600917</td>
+      <td>1.376077</td>
+    </tr>
+    <tr>
+      <th>R^2</th>
+      <td>0.223167</td>
+      <td>0.010775</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
 
-**ANALYSIS** As per the training score, the test data returns a pretty poor score of 0.01. Plenty to work on
+**ANALYSIS** Metrics aren't great - even just on the training data - but it's a baseline. The only way is up (I Hope!) :)
+
+
+![png](boro_01_current_market_value_files/boro_01_current_market_value_73_0.png)
+
+
+**ANALYSIS** The model seems pretty weak in general but we can say the learning curves have largely converged so adding extra training samples is unlikely to improve the model.
 
 
 
 
-    0.9945309991577052
+    <matplotlib.axes._subplots.AxesSubplot at 0x29d31929550>
 
 
 
 
-
-
-    1.376076969839843
-
-
-
-
-
-
-    0.010774658989811225
-
-
-
-**ANALYSIS** 
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1831fa89a30>
-
-
-
-
-![png](boro_01_current_market_value_files/boro_01_current_market_value_88_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_75_1.png)
 
 
 **ANALYSIS** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £4m even though some of the data exceeded £10m.
@@ -2129,7 +2100,7 @@ We can derive some new numeric features to express relationships between dates
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_97_1.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_84_1.png)
 
 
 **ANALYSIS** As we saw during data preperation there's no clear correlations with continuous features at work. Further our predictions don't even particularly correlate with the actual values.
@@ -2699,9 +2670,9 @@ We can derive some new numeric features to express relationships between dates
     [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
     [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
     [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Writing 54011 bytes to ./output\boro_01_current_market_value.md
+    [NbConvertApp] Writing 53887 bytes to ./output\boro_01_current_market_value.md
     
 
     [NbConvertApp] Converting notebook boro_01_current_market_value.ipynb to python
-    [NbConvertApp] Writing 17583 bytes to ./output\boro_01_current_market_value.py
+    [NbConvertApp] Writing 12969 bytes to ./output\boro_01_current_market_value.py
     

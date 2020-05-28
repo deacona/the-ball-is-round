@@ -239,14 +239,14 @@ facet_grid.map(plt.hist, "Market value", bins=20)
 # * Integrate Data
 # * Format Data
 
-# In[29]:
+# In[30]:
 
 
 df = tmk_df.copy()
 df.shape
 
 
-# In[30]:
+# In[31]:
 
 
 df["Player key"] = df.Name + " (" + df.Season + ")"
@@ -257,7 +257,7 @@ df.info()
 
 # We can derive some new numeric features to express relationships between dates
 
-# In[31]:
+# In[32]:
 
 
 df["Age when joined"] = (df["Joined"] - df["Date of birth"])/ np.timedelta64(1, 'Y')
@@ -266,7 +266,7 @@ df["Age when joined"].hist()
 
 # **ANALYSIS** Most players join in their teens or mid-twenties.
 
-# In[32]:
+# In[33]:
 
 
 df["Years in team"] = (pd.to_datetime("1st July 20"+df.Season.str[-2:]) - df["Joined"])/ np.timedelta64(1, 'Y')
@@ -275,7 +275,7 @@ df["Years in team"].hist()
 
 # **ANALYSIS** I'm going to leave out `Shirt number`, `Position`, `Name`, `Date of birth`, `Joined`, `Season` and `Contract expires` from the model for now. `Contract expires` is populated in less than half of records. The others can be discarded for simplicity of model.
 
-# In[33]:
+# In[34]:
 
 
 df.drop(columns=["Shirt number", "Position", "Name", "Date of birth", "Joined", "Season", "Contract expires"], inplace=True)
@@ -284,7 +284,7 @@ df.shape
 
 # `Foot` and `Position group` will be one-hot encoded 
 
-# In[34]:
+# In[35]:
 
 
 for var in ["Foot", "Position group"]:
@@ -302,25 +302,25 @@ for var in ["Foot", "Position group"]:
 df.shape
 
 
-# In[35]:
+# In[36]:
 
 
 df.sample(5, random_state=RANDOM_STATE)
 
 
-# In[36]:
+# In[37]:
 
 
 df.describe()
 
 
-# In[37]:
+# In[38]:
 
 
 sns.pairplot(df[["Height", "Age", "Age when joined", "Years in team", "Market value"]])
 
 
-# In[38]:
+# In[39]:
 
 
 df.columns
@@ -339,7 +339,7 @@ df.columns
 # * Build Model
 # * Assess Model
 
-# In[39]:
+# In[40]:
 
 
 feature_names = ['Height', 'Age', 'Age when joined', 'Years in team', 'Foot=both',
@@ -348,14 +348,14 @@ feature_names = ['Height', 'Age', 'Age when joined', 'Years in team', 'Foot=both
 feature_names
 
 
-# In[40]:
+# In[41]:
 
 
 drop_nulls = True
 drop_nulls
 
 
-# In[41]:
+# In[42]:
 
 
 if drop_nulls:
@@ -368,35 +368,35 @@ else:
 X.shape, y.shape
 
 
-# In[42]:
+# In[43]:
 
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=RANDOM_STATE, train_size=0.9)
 X_train.shape, X_test.shape, y_train.shape, y_test.shape
 
 
-# In[43]:
+# In[44]:
 
 
 number_of_folds = 10
 number_of_folds
 
 
-# In[44]:
+# In[45]:
 
 
 kfold = KFold(n_splits=number_of_folds, shuffle=True, random_state=RANDOM_STATE)
 kfold
 
 
-# In[45]:
+# In[46]:
 
 
 model = LinearRegression()
 model
 
 
-# In[46]:
+# In[47]:
 
 
 param_grid = {"fit_intercept": [True, False],
@@ -404,81 +404,92 @@ param_grid = {"fit_intercept": [True, False],
 param_grid
 
 
-# In[47]:
+# In[48]:
 
 
 grid = GridSearchCV(model, param_grid, cv=kfold)
 grid
 
 
-# In[48]:
+# In[49]:
 
 
 grid.fit(X_train, y_train)
 
 
-# In[49]:
+# In[50]:
 
 
 grid.best_params_
 
 
-# In[50]:
-
-
-grid.score(X_train, y_train)
-
-
-# **ANALYSIS** 0.223 isn't great - especially just on the training data - but it's a baseline. The only way is up (I Hope!) :)
-
-# In[51]:
+# In[52]:
 
 
 final_model = grid.best_estimator_
 final_model
 
 
-# In[52]:
+# In[53]:
 
 
 final_model.fit(X_train, y_train)
 
 
-# In[53]:
-
-
-final_model.score(X_train, y_train)
-
-
 # **ANALYSIS** 
 
-# In[54]:
+# In[ ]:
 
 
-median_absolute_error(y_train, final_model.predict(X_train))
 
 
-# In[55]:
+
+# ## 5. Evaluation
+# 
+# * Evaluate Results
+# * Review Process
+# * Determine Next Steps
+
+# In[66]:
 
 
-mean_squared_error(y_train, final_model.predict(X_train), squared=False)
+def model_scores(y_act, y_pred):
+    """
+    INPUT:
+        y_act - Actual values from target vector
+        y_pred - Predicted values from target vector
+        
+    OUTPUT:
+        Dictionary containing multiple scoring metrics with nice labels as keys
+    """
+    
+    return {"MedAE": median_absolute_error(y_act, y_pred),
+            "RMSE": mean_squared_error(y_act, y_pred, squared=False),
+            "R^2": r2_score(y_act, y_pred),
+           }
+
+# model_scores?
 
 
-# In[56]:
+# In[65]:
 
 
-r2_score(y_train, final_model.predict(X_train))
+pd.DataFrame(
+    [model_scores(y_train, final_model.predict(X_train)), 
+    model_scores(y_test, final_model.predict(X_test))], 
+    index=["Train", "Test"]
+    ).T
 
 
-# **ANALYSIS** Baseline some other useful metrics
+# **ANALYSIS** Metrics aren't great - even just on the training data - but it's a baseline. The only way is up (I Hope!) :)
 
-# In[57]:
+# In[68]:
 
 
 # Create CV training and test scores for various training set sizes
 train_sizes, train_scores, test_scores = learning_curve(final_model, 
-                                                        X_train, 
-                                                        y_train,
+                                                        X, 
+                                                        y,
                                                         cv=kfold,
                                                         # 50 different sizes of the training set
                                                         train_sizes=np.linspace(0.1, 1.0, 50))
@@ -508,47 +519,7 @@ plt.show()
 
 # **ANALYSIS** The model seems pretty weak in general but we can say the learning curves have largely converged so adding extra training samples is unlikely to improve the model.
 
-# In[ ]:
-
-
-
-
-
-# ## 5. Evaluation
-# 
-# * Evaluate Results
-# * Review Process
-# * Determine Next Steps
-
-# In[58]:
-
-
-final_model.score(X_test, y_test)
-
-
-# **ANALYSIS** As per the training score, the test data returns a pretty poor score of 0.01. Plenty to work on
-
-# In[59]:
-
-
-median_absolute_error(y_test, final_model.predict(X_test))
-
-
-# In[60]:
-
-
-mean_squared_error(y_test, final_model.predict(X_test), squared=False)
-
-
-# In[61]:
-
-
-r2_score(y_test, final_model.predict(X_test))
-
-
-# **ANALYSIS** 
-
-# In[62]:
+# In[69]:
 
 
 sns.scatterplot(y_train, final_model.predict(X_train))
@@ -557,7 +528,7 @@ sns.scatterplot(y_test, final_model.predict(X_test))
 
 # **ANALYSIS** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £4m even though some of the data exceeded £10m.
 
-# In[63]:
+# In[70]:
 
 
 params = pd.Series(final_model.coef_, index=X.columns)
@@ -639,7 +610,7 @@ df_unseen[df_unseen["Market value (prediction)"].notna()]
 
 # **ANALYSIS** The player's missing actual Market values are all young players (17-21). The predictions are typically quite small which is as expected at least. Poor Connor Ripley (11/12) gets a negative value!
 
-# In[71]:
+# In[ ]:
 
 
 df_out.to_csv("../data/interim/boro_01_dataset.csv")
@@ -667,7 +638,7 @@ with open(ftn_file, "wb") as ftn_outfile:
 ## save notebook before running `nbconvert`
 
 
-# In[75]:
+# In[72]:
 
 
 outFolder = './output'
@@ -682,13 +653,13 @@ for filename in os.listdir(outFolder):
         print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-# In[76]:
+# In[73]:
 
 
 get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb")
 
 
-# In[77]:
+# In[26]:
 
 
 get_ipython().system("jupyter nbconvert --output-dir='./output' --to python boro_01_current_market_value.ipynb")
