@@ -452,25 +452,82 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 **ANALYSIS:** So the data is looking broadly in good shape, but there are a few missing values to consider...
 
-    % populated...
-    
 
 
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-    Shirt number         91.483516
-    Position            100.000000
-    Name                100.000000
-    Date of birth       100.000000
-    Height               97.802198
-    Foot                 89.010989
-    Joined               96.428571
-    Contract expires     46.428571
-    Market value         90.659341
-    Season              100.000000
-    Position group      100.000000
-    Age                 100.000000
-    dtype: float64
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>% populated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Shirt number</th>
+      <td>91.483516</td>
+    </tr>
+    <tr>
+      <th>Position</th>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>Date of birth</th>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>Height</th>
+      <td>97.802198</td>
+    </tr>
+    <tr>
+      <th>Foot</th>
+      <td>89.010989</td>
+    </tr>
+    <tr>
+      <th>Joined</th>
+      <td>96.428571</td>
+    </tr>
+    <tr>
+      <th>Contract expires</th>
+      <td>46.428571</td>
+    </tr>
+    <tr>
+      <th>Market value</th>
+      <td>90.659341</td>
+    </tr>
+    <tr>
+      <th>Season</th>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>Position group</th>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td>100.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
 
@@ -1056,16 +1113,24 @@ A number of key performance metrics will be investigated in turn, looking at how
 * Build Model
 * Assess Model
 
+    
+    
     Selected features are: ['Height', 'Age', 'Age when joined', 'Years in team', 'Foot=both', 'Foot=left', 'Foot=right', 'Position group=D', 'Position group=F', 'Position group=G', 'Position group=M']
     
 
+    
+    
     Dropping nulls during data preparation: True
     
 
+    
+    
     Train data has shape: (295, 11)
     Test data has shape: (33, 11)
     
 
+    
+    
     Full model grid-space to tune hyperparameters across...
     
 
@@ -1084,6 +1149,8 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 
 
+    
+    
     Final tuned model...
     
 

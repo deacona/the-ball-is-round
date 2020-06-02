@@ -21,6 +21,8 @@ import shutil
 import numpy as np
 import pandas as pd
 
+pd.set_option("display.latex.repr", True)
+
 
 # In[3]:
 
@@ -140,9 +142,9 @@ tmk_df.describe(include="all")
 # In[10]:
 
 
-print("% populated...")
+# print("% populated...")
 
-100 * tmk_df.count() / tmk_df.shape[0]
+pd.DataFrame(100 * tmk_df.count() / tmk_df.shape[0], columns=["% populated"])
 
 
 # **ANALYSIS:** Only `Joined` has large gaps. Let's look at it in more detail...
@@ -396,7 +398,7 @@ feature_names = ['Height', 'Age', 'Age when joined', 'Years in team', 'Foot=both
        'Foot=left', 'Foot=right', 'Position group=D', 'Position group=F',
        'Position group=G', 'Position group=M']
 
-
+print("\n")
 print("Selected features are: {0}".format(feature_names))
 
 
@@ -405,6 +407,7 @@ print("Selected features are: {0}".format(feature_names))
 
 drop_nulls = True
 
+print("\n")
 print("Dropping nulls during data preparation: {0}".format(drop_nulls))
 
 
@@ -427,6 +430,7 @@ else:
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=RANDOM_STATE, train_size=0.9)
 
 # X_train.shape, X_test.shape, y_train.shape, y_test.shape
+print("\n")
 print("Train data has shape: {0}".format(X_train.shape))
 print("Test data has shape: {0}".format(X_test.shape))
 
@@ -470,6 +474,7 @@ grid = GridSearchCV(model, param_grid, cv=kfold)
 # In[43]:
 
 
+print("\n")
 print("Full model grid-space to tune hyperparameters across...")
 grid.fit(X_train, y_train)
 
@@ -490,6 +495,7 @@ final_model = grid.best_estimator_
 # In[46]:
 
 
+print("\n")
 print("Final tuned model...")
 final_model.fit(X_train, y_train)
 
