@@ -113,7 +113,7 @@ RANDOM_STATE = 4
 # In[7]:
 
 
-print("Loading Transfermarkt player contract files...")
+print("Loading Transfermarkt general information...")
 
 tmk_df = players.clean_data("tmk_cnt")
 # tmk_df.info()
