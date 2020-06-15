@@ -1139,11 +1139,19 @@ A number of key performance metrics will be investigated in turn, looking at how
 
     GridSearchCV(cv=KFold(n_splits=10, random_state=4, shuffle=True),
                  error_score=nan,
-                 estimator=LinearRegression(copy_X=True, fit_intercept=True,
-                                            n_jobs=None, normalize=False),
+                 estimator=Pipeline(memory=None,
+                                    steps=[('scaler',
+                                            MinMaxScaler(copy=True,
+                                                         feature_range=(0, 1))),
+                                           ('estimator',
+                                            LinearRegression(copy_X=True,
+                                                             fit_intercept=True,
+                                                             n_jobs=None,
+                                                             normalize=False))],
+                                    verbose=False),
                  iid='deprecated', n_jobs=None,
-                 param_grid={'fit_intercept': [True, False],
-                             'normalize': [True, False]},
+                 param_grid={'estimator__fit_intercept': [True, False],
+                             'estimator__normalize': [True, False]},
                  pre_dispatch='2*n_jobs', refit=True, return_train_score=False,
                  scoring=None, verbose=0)
 
@@ -1157,7 +1165,12 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 
 
-    LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, normalize=False)
+    Pipeline(memory=None,
+             steps=[('scaler', MinMaxScaler(copy=True, feature_range=(0, 1))),
+                    ('estimator',
+                     LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,
+                                      normalize=False))],
+             verbose=False)
 
 
 
@@ -1262,58 +1275,58 @@ A number of key performance metrics will be investigated in turn, looking at how
   <tbody>
     <tr>
       <th>Height</th>
-      <td>0.01</td>
-      <td>0.02</td>
+      <td>0.26</td>
+      <td>6.200000e-01</td>
     </tr>
     <tr>
       <th>Age</th>
-      <td>1.11</td>
-      <td>0.21</td>
+      <td>24.41</td>
+      <td>4.440000e+00</td>
     </tr>
     <tr>
       <th>Age when joined</th>
-      <td>-1.07</td>
-      <td>0.21</td>
+      <td>-22.72</td>
+      <td>4.390000e+00</td>
     </tr>
     <tr>
       <th>Years in team</th>
-      <td>-1.14</td>
-      <td>0.21</td>
+      <td>-12.20</td>
+      <td>2.330000e+00</td>
     </tr>
     <tr>
       <th>Foot=both</th>
       <td>0.01</td>
-      <td>0.58</td>
+      <td>5.800000e-01</td>
     </tr>
     <tr>
       <th>Foot=left</th>
       <td>0.36</td>
-      <td>0.47</td>
+      <td>4.700000e-01</td>
     </tr>
     <tr>
       <th>Foot=right</th>
       <td>0.42</td>
-      <td>0.48</td>
+      <td>4.800000e-01</td>
     </tr>
     <tr>
       <th>Position group=D</th>
       <td>-0.07</td>
-      <td>0.13</td>
+      <td>7.054699e+13</td>
     </tr>
     <tr>
       <th>Position group=F</th>
       <td>0.89</td>
-      <td>0.21</td>
+      <td>7.054699e+13</td>
     </tr>
     <tr>
       <th>Position group=G</th>
       <td>-1.17</td>
-      <td>0.19</td>
+      <td>7.054699e+13</td>
     </tr>
     <tr>
       <th>Position group=M</th>
       <td>0.35</td>
-      <td>0.16</td>
+      <td>7.054699e+13</td>
     </tr>
   </tbody>
 </table>
@@ -1321,7 +1334,7 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 
 
-**ANALYSIS:** The individual features which appear to have most effect are `Age`, `Age when joined`, `Years in team` and `Position group=G`. Perhaps the most we can say is old goalkeepers aren't worth much.
+**ANALYSIS:** The individual features which appear to have most effect are `Age`, `Age when joined` and `Years in team`. Perhaps the most we can say is old players are cheap.
 
 ## 6. Deployment
 
@@ -1763,3 +1776,31 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 
 **ANALYSIS:** The player's missing actual Market values are all young players (17-21). The predictions are typically quite small which is as expected at least. Poor Connor Ripley (11/12) gets a negative value!
+
+    [NbConvertApp] Converting notebook boro_01_current_market_value.ipynb to markdown
+    [NbConvertApp] Support files will be in boro_01_current_market_value_files\
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
+    [NbConvertApp] Writing 36314 bytes to ./output\boro_01_current_market_value.md
+    
+
+    [NbConvertApp] Converting notebook boro_01_current_market_value.ipynb to python
+    [NbConvertApp] Writing 15334 bytes to ./output\boro_01_current_market_value.py
+    

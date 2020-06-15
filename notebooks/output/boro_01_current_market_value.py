@@ -51,6 +51,8 @@ from sklearn.utils import resample
 from sklearn.metrics import median_absolute_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.pipeline import Pipeline
 
 
 # In[5]:
@@ -452,15 +454,16 @@ kfold = KFold(n_splits=number_of_folds, shuffle=True, random_state=RANDOM_STATE)
 # In[40]:
 
 
-model = LinearRegression()
-# model
+model = Pipeline([("scaler", MinMaxScaler()),
+                  ("estimator", LinearRegression())
+                 ])
 
 
 # In[41]:
 
 
-param_grid = {"fit_intercept": [True, False],
-             "normalize": [True, False],}
+param_grid = {"estimator__fit_intercept": [True, False],
+             "estimator__normalize": [True, False],}
 # param_grid
 
 
@@ -599,18 +602,18 @@ plt.ylabel('Market value (predicted)');
 # In[51]:
 
 
-params = pd.Series(final_model.coef_, index=X.columns)
+params = pd.Series(final_model.named_steps["estimator"].coef_, index=X.columns)
 # params
 
 np.random.seed(1)
-err = np.std([final_model.fit(*resample(X, y)).coef_ for i in range(1000)], 0)
+err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(1000)], 0)
 # err
 
 print("Effect of each feature on the model")
 pd.DataFrame({"effect": params.round(2), "error": err.round(2)})
 
 
-# **ANALYSIS:** The individual features which appear to have most effect are `Age`, `Age when joined`, `Years in team` and `Position group=G`. Perhaps the most we can say is old goalkeepers aren't worth much.
+# **ANALYSIS:** The individual features which appear to have most effect are `Age`, `Age when joined` and `Years in team`. Perhaps the most we can say is old players are cheap.
 
 # In[ ]:
 
@@ -735,7 +738,7 @@ for filename in os.listdir(outFolder):
 get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb")
 
 
-# In[ ]:
+# In[65]:
 
 
 get_ipython().system("jupyter nbconvert --output-dir='./output' --to python boro_01_current_market_value.ipynb")
