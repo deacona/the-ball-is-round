@@ -800,7 +800,7 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 **ANALYSIS:** I'm going to leave out `Shirt number`, `Position`, `Name`, `Date of birth`, `Joined`, `Season` and `Contract expires` from the model for now. `Contract expires` is populated in less than half of records. The others can be discarded for simplicity of model.
 
-**ANALYSIS:** `Foot` and `Position group` will be one-hot encoded 
+<s>**ANALYSIS:** `Foot` and `Position group` will be one-hot encoded</s>
 
     Random sample of records...
     
@@ -827,25 +827,15 @@ A number of key performance metrics will be investigated in turn, looking at how
     <tr style="text-align: right;">
       <th></th>
       <th>Height</th>
+      <th>Foot</th>
       <th>Market value</th>
+      <th>Position group</th>
       <th>Age</th>
       <th>Age when joined</th>
       <th>Years in team</th>
-      <th>Foot=both</th>
-      <th>Foot=left</th>
-      <th>Foot=right</th>
-      <th>Position group=D</th>
-      <th>Position group=F</th>
-      <th>Position group=G</th>
-      <th>Position group=M</th>
     </tr>
     <tr>
       <th>Player key</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -859,77 +849,52 @@ A number of key performance metrics will be investigated in turn, looking at how
     <tr>
       <th>Bartholomew Ogbeche (11/12)</th>
       <td>178.0</td>
+      <td>both</td>
       <td>0.450</td>
+      <td>F</td>
       <td>26</td>
       <td>26.998501</td>
       <td>0.750187</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>Grant Leadbitter  (15/16)</th>
       <td>177.0</td>
+      <td>right</td>
       <td>1.500</td>
+      <td>M</td>
       <td>30</td>
       <td>26.481037</td>
       <td>4.000082</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
     </tr>
     <tr>
       <th>Tomás Mejías (17/18)</th>
       <td>195.0</td>
+      <td>right</td>
       <td>0.225</td>
+      <td>G</td>
       <td>29</td>
       <td>25.426942</td>
       <td>3.989131</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>Andrew Taylor (09/10)</th>
       <td>178.0</td>
+      <td>left</td>
       <td>1.880</td>
+      <td>D</td>
       <td>22</td>
       <td>18.916200</td>
       <td>4.999418</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>Justin Hoyte (12/13)</th>
       <td>180.0</td>
+      <td>right</td>
       <td>1.130</td>
+      <td>D</td>
       <td>27</td>
       <td>23.696585</td>
       <td>4.914543</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -962,139 +927,124 @@ A number of key performance metrics will be investigated in turn, looking at how
     <tr style="text-align: right;">
       <th></th>
       <th>Height</th>
+      <th>Foot</th>
       <th>Market value</th>
+      <th>Position group</th>
       <th>Age</th>
       <th>Age when joined</th>
       <th>Years in team</th>
-      <th>Foot=both</th>
-      <th>Foot=left</th>
-      <th>Foot=right</th>
-      <th>Position group=D</th>
-      <th>Position group=F</th>
-      <th>Position group=G</th>
-      <th>Position group=M</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>count</th>
       <td>356.000000</td>
+      <td>324</td>
       <td>330.000000</td>
+      <td>364</td>
       <td>364.000000</td>
       <td>351.000000</td>
       <td>351.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>NaN</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>NaN</td>
+      <td>right</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>NaN</td>
+      <td>201</td>
+      <td>NaN</td>
+      <td>134</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>mean</th>
       <td>183.286517</td>
+      <td>NaN</td>
       <td>1.696327</td>
+      <td>NaN</td>
       <td>24.826923</td>
       <td>23.871039</td>
       <td>2.447119</td>
-      <td>0.057692</td>
-      <td>0.280220</td>
-      <td>0.552198</td>
-      <td>0.335165</td>
-      <td>0.178571</td>
-      <td>0.118132</td>
-      <td>0.368132</td>
     </tr>
     <tr>
       <th>std</th>
       <td>6.028752</td>
+      <td>NaN</td>
       <td>1.776398</td>
+      <td>NaN</td>
       <td>4.696900</td>
       <td>4.733915</td>
       <td>2.005552</td>
-      <td>0.233482</td>
-      <td>0.449725</td>
-      <td>0.497952</td>
-      <td>0.472698</td>
-      <td>0.383520</td>
-      <td>0.323208</td>
-      <td>0.482961</td>
     </tr>
     <tr>
       <th>min</th>
       <td>167.000000</td>
+      <td>NaN</td>
       <td>0.038000</td>
+      <td>NaN</td>
       <td>16.000000</td>
       <td>16.356256</td>
       <td>0.265577</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>179.000000</td>
+      <td>NaN</td>
       <td>0.375000</td>
+      <td>NaN</td>
       <td>21.000000</td>
       <td>19.409023</td>
       <td>0.913092</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
     </tr>
     <tr>
       <th>50%</th>
       <td>183.000000</td>
+      <td>NaN</td>
       <td>1.130000</td>
+      <td>NaN</td>
       <td>25.000000</td>
       <td>23.907404</td>
       <td>1.960341</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
     </tr>
     <tr>
       <th>75%</th>
       <td>188.000000</td>
+      <td>NaN</td>
       <td>2.250000</td>
+      <td>NaN</td>
       <td>28.000000</td>
       <td>26.554960</td>
       <td>3.422384</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
     </tr>
     <tr>
       <th>max</th>
       <td>199.000000</td>
+      <td>NaN</td>
       <td>10.800000</td>
+      <td>NaN</td>
       <td>40.000000</td>
       <td>37.607891</td>
       <td>10.998172</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
     </tr>
   </tbody>
 </table>
@@ -1115,7 +1065,12 @@ A number of key performance metrics will be investigated in turn, looking at how
 
     
     
-    Selected features are: ['Height', 'Age', 'Age when joined', 'Years in team', 'Foot=both', 'Foot=left', 'Foot=right', 'Position group=D', 'Position group=F', 'Position group=G', 'Position group=M']
+    Selected numeric features are: ['Height', 'Age', 'Age when joined', 'Years in team']
+    
+
+    
+    
+    Selected categorical features are: ['Foot', 'Position group']
     
 
     
@@ -1125,8 +1080,8 @@ A number of key performance metrics will be investigated in turn, looking at how
 
     
     
-    Train data has shape: (295, 11)
-    Test data has shape: (33, 11)
+    Train data has shape: (270, 6)
+    Test data has shape: (30, 6)
     
 
     
@@ -1140,9 +1095,23 @@ A number of key performance metrics will be investigated in turn, looking at how
     GridSearchCV(cv=KFold(n_splits=10, random_state=4, shuffle=True),
                  error_score=nan,
                  estimator=Pipeline(memory=None,
-                                    steps=[('scaler',
-                                            MinMaxScaler(copy=True,
-                                                         feature_range=(0, 1))),
+                                    steps=[('preprocessor',
+                                            ColumnTransformer(n_jobs=None,
+                                                              remainder='drop',
+                                                              sparse_threshold=0.3,
+                                                              transformer_weights=None,
+                                                              transformers=[('num',
+                                                                             Pipeline(memory=None,
+                                                                                      steps=[('scaler',
+                                                                                              MinMaxScaler(copy=True,
+                                                                                                           feature_range=(0,
+                                                                                                                          1)))],
+                                                                                      verbose=False),
+                                                                             ['He...
+                                                                             ['Foot',
+                                                                              'Position '
+                                                                              'group'])],
+                                                              verbose=False)),
                                            ('estimator',
                                             LinearRegression(copy_X=True,
                                                              fit_intercept=True,
@@ -1166,10 +1135,34 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 
     Pipeline(memory=None,
-             steps=[('scaler', MinMaxScaler(copy=True, feature_range=(0, 1))),
+             steps=[('preprocessor',
+                     ColumnTransformer(n_jobs=None, remainder='drop',
+                                       sparse_threshold=0.3,
+                                       transformer_weights=None,
+                                       transformers=[('num',
+                                                      Pipeline(memory=None,
+                                                               steps=[('scaler',
+                                                                       MinMaxScaler(copy=True,
+                                                                                    feature_range=(0,
+                                                                                                   1)))],
+                                                               verbose=False),
+                                                      ['Height', 'Age',
+                                                       'Age when joined',
+                                                       'Years in team']),
+                                                     ('cat',
+                                                      Pipeline(memory=None,
+                                                               steps=[('onehot',
+                                                                       OneHotEncoder(categories='auto',
+                                                                                     drop=None,
+                                                                                     dtype=<class 'numpy.float64'>,
+                                                                                     handle_unknown='ignore',
+                                                                                     sparse=True))],
+                                                               verbose=False),
+                                                      ['Foot', 'Position group'])],
+                                       verbose=False)),
                     ('estimator',
                      LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None,
-                                      normalize=False))],
+                                      normalize=True))],
              verbose=False)
 
 
@@ -1211,18 +1204,18 @@ A number of key performance metrics will be investigated in turn, looking at how
   <tbody>
     <tr>
       <th>MedAE</th>
-      <td>0.849475</td>
-      <td>0.994531</td>
+      <td>0.854035</td>
+      <td>1.119165</td>
     </tr>
     <tr>
       <th>RMSE</th>
-      <td>1.600917</td>
-      <td>1.376077</td>
+      <td>1.450077</td>
+      <td>1.907297</td>
     </tr>
     <tr>
       <th>R^2</th>
-      <td>0.223167</td>
-      <td>0.010775</td>
+      <td>0.206937</td>
+      <td>0.072271</td>
     </tr>
   </tbody>
 </table>
@@ -1233,13 +1226,13 @@ A number of key performance metrics will be investigated in turn, looking at how
 **ANALYSIS:** The metrics aren't great - even just on the training data - but it's a baseline. The only way is up (I Hope!) :)
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_67_0.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_70_0.png)
 
 
 **ANALYSIS:** The model seems pretty weak in general but we can say the learning curves have largely converged so adding extra training samples is unlikely to improve the model.
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_69_0.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_72_0.png)
 
 
 **ANALYSIS:** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £4m even though some of the data exceeded £10m.
@@ -1275,58 +1268,58 @@ A number of key performance metrics will be investigated in turn, looking at how
   <tbody>
     <tr>
       <th>Height</th>
-      <td>0.26</td>
-      <td>6.200000e-01</td>
+      <td>0.80</td>
+      <td>5.300000e-01</td>
     </tr>
     <tr>
       <th>Age</th>
-      <td>24.41</td>
-      <td>4.440000e+00</td>
+      <td>20.95</td>
+      <td>4.250000e+00</td>
     </tr>
     <tr>
       <th>Age when joined</th>
-      <td>-22.72</td>
-      <td>4.390000e+00</td>
+      <td>-19.56</td>
+      <td>4.200000e+00</td>
     </tr>
     <tr>
       <th>Years in team</th>
-      <td>-12.20</td>
-      <td>2.330000e+00</td>
+      <td>-10.44</td>
+      <td>2.240000e+00</td>
     </tr>
     <tr>
-      <th>Foot=both</th>
-      <td>0.01</td>
-      <td>5.800000e-01</td>
+      <th>Foot_both</th>
+      <td>-0.26</td>
+      <td>7.791053e+13</td>
     </tr>
     <tr>
-      <th>Foot=left</th>
-      <td>0.36</td>
-      <td>4.700000e-01</td>
+      <th>Foot_left</th>
+      <td>-0.08</td>
+      <td>7.791053e+13</td>
     </tr>
     <tr>
-      <th>Foot=right</th>
-      <td>0.42</td>
-      <td>4.800000e-01</td>
+      <th>Foot_right</th>
+      <td>0.15</td>
+      <td>7.791053e+13</td>
     </tr>
     <tr>
-      <th>Position group=D</th>
-      <td>-0.07</td>
-      <td>7.054699e+13</td>
+      <th>Position group_D</th>
+      <td>-0.11</td>
+      <td>6.127557e+13</td>
     </tr>
     <tr>
-      <th>Position group=F</th>
-      <td>0.89</td>
-      <td>7.054699e+13</td>
+      <th>Position group_F</th>
+      <td>0.49</td>
+      <td>6.127557e+13</td>
     </tr>
     <tr>
-      <th>Position group=G</th>
-      <td>-1.17</td>
-      <td>7.054699e+13</td>
+      <th>Position group_G</th>
+      <td>-1.33</td>
+      <td>6.127557e+13</td>
     </tr>
     <tr>
-      <th>Position group=M</th>
-      <td>0.35</td>
-      <td>7.054699e+13</td>
+      <th>Position group_M</th>
+      <td>0.43</td>
+      <td>6.127557e+13</td>
     </tr>
   </tbody>
 </table>
@@ -1368,17 +1361,12 @@ A number of key performance metrics will be investigated in turn, looking at how
     <tr style="text-align: right;">
       <th></th>
       <th>Height</th>
+      <th>Foot</th>
       <th>Market value</th>
+      <th>Position group</th>
       <th>Age</th>
       <th>Age when joined</th>
       <th>Years in team</th>
-      <th>Foot=both</th>
-      <th>Foot=left</th>
-      <th>Foot=right</th>
-      <th>Position group=D</th>
-      <th>Position group=F</th>
-      <th>Position group=G</th>
-      <th>Position group=M</th>
       <th>Market value (prediction)</th>
     </tr>
   </thead>
@@ -1386,130 +1374,123 @@ A number of key performance metrics will be investigated in turn, looking at how
     <tr>
       <th>count</th>
       <td>356.000000</td>
+      <td>324</td>
       <td>330.000000</td>
+      <td>364</td>
       <td>364.000000</td>
       <td>351.000000</td>
       <td>351.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>364.000000</td>
-      <td>347.000000</td>
+      <td>314.000000</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>NaN</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>NaN</td>
+      <td>right</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>NaN</td>
+      <td>201</td>
+      <td>NaN</td>
+      <td>134</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>mean</th>
       <td>183.286517</td>
+      <td>NaN</td>
       <td>1.696327</td>
+      <td>NaN</td>
       <td>24.826923</td>
       <td>23.871039</td>
       <td>2.447119</td>
-      <td>0.057692</td>
-      <td>0.280220</td>
-      <td>0.552198</td>
-      <td>0.335165</td>
-      <td>0.178571</td>
-      <td>0.118132</td>
-      <td>0.368132</td>
-      <td>1.659529</td>
+      <td>1.805932</td>
     </tr>
     <tr>
       <th>std</th>
       <td>6.028752</td>
+      <td>NaN</td>
       <td>1.776398</td>
+      <td>NaN</td>
       <td>4.696900</td>
       <td>4.733915</td>
       <td>2.005552</td>
-      <td>0.233482</td>
-      <td>0.449725</td>
-      <td>0.497952</td>
-      <td>0.472698</td>
-      <td>0.383520</td>
-      <td>0.323208</td>
-      <td>0.482961</td>
-      <td>0.916826</td>
+      <td>0.702179</td>
     </tr>
     <tr>
       <th>min</th>
       <td>167.000000</td>
+      <td>NaN</td>
       <td>0.038000</td>
+      <td>NaN</td>
       <td>16.000000</td>
       <td>16.356256</td>
       <td>0.265577</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>-0.344257</td>
+      <td>-0.312500</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>179.000000</td>
+      <td>NaN</td>
       <td>0.375000</td>
+      <td>NaN</td>
       <td>21.000000</td>
       <td>19.409023</td>
       <td>0.913092</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.937653</td>
+      <td>1.312500</td>
     </tr>
     <tr>
       <th>50%</th>
       <td>183.000000</td>
+      <td>NaN</td>
       <td>1.130000</td>
+      <td>NaN</td>
       <td>25.000000</td>
       <td>23.907404</td>
       <td>1.960341</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.596059</td>
+      <td>1.875000</td>
     </tr>
     <tr>
       <th>75%</th>
       <td>188.000000</td>
+      <td>NaN</td>
       <td>2.250000</td>
+      <td>NaN</td>
       <td>28.000000</td>
       <td>26.554960</td>
       <td>3.422384</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>2.330483</td>
+      <td>2.359375</td>
     </tr>
     <tr>
       <th>max</th>
       <td>199.000000</td>
+      <td>NaN</td>
       <td>10.800000</td>
+      <td>NaN</td>
       <td>40.000000</td>
       <td>37.607891</td>
       <td>10.998172</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>4.218156</td>
+      <td>3.437500</td>
     </tr>
   </tbody>
 </table>
@@ -1518,7 +1499,7 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 
 
-![png](boro_01_current_market_value_files/boro_01_current_market_value_78_0.png)
+![png](boro_01_current_market_value_files/boro_01_current_market_value_81_0.png)
 
 
 **ANALYSIS:** As we saw during data preparation there's no clear correlations with continuous features at work. Further our predictions don't even particularly correlate with the actual values.
@@ -1548,157 +1529,142 @@ A number of key performance metrics will be investigated in turn, looking at how
     <tr style="text-align: right;">
       <th></th>
       <th>Height</th>
+      <th>Foot</th>
       <th>Market value</th>
+      <th>Position group</th>
       <th>Age</th>
       <th>Age when joined</th>
       <th>Years in team</th>
-      <th>Foot=both</th>
-      <th>Foot=left</th>
-      <th>Foot=right</th>
-      <th>Position group=D</th>
-      <th>Position group=F</th>
-      <th>Position group=G</th>
-      <th>Position group=M</th>
       <th>Market value (prediction)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>count</th>
-      <td>19.000000</td>
+      <td>14.000000</td>
+      <td>14</td>
       <td>0.0</td>
-      <td>19.000000</td>
-      <td>19.000000</td>
-      <td>19.000000</td>
-      <td>19.0</td>
-      <td>19.000000</td>
-      <td>19.000000</td>
-      <td>19.000000</td>
-      <td>19.000000</td>
-      <td>19.000000</td>
-      <td>19.000000</td>
-      <td>19.000000</td>
+      <td>14</td>
+      <td>14.000000</td>
+      <td>14.000000</td>
+      <td>14.000000</td>
+      <td>14.000000</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>NaN</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>NaN</td>
+      <td>left</td>
+      <td>NaN</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>NaN</td>
+      <td>8</td>
+      <td>NaN</td>
+      <td>7</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>182.578947</td>
+      <td>182.357143</td>
       <td>NaN</td>
-      <td>18.736842</td>
-      <td>18.809421</td>
-      <td>1.431925</td>
-      <td>0.0</td>
-      <td>0.421053</td>
-      <td>0.315789</td>
-      <td>0.315789</td>
-      <td>0.157895</td>
-      <td>0.052632</td>
-      <td>0.473684</td>
-      <td>1.305653</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>19.071429</td>
+      <td>19.023565</td>
+      <td>1.622210</td>
+      <td>1.566964</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>5.766915</td>
+      <td>6.159510</td>
       <td>NaN</td>
-      <td>1.284182</td>
-      <td>1.398387</td>
-      <td>0.980438</td>
-      <td>0.0</td>
-      <td>0.507257</td>
-      <td>0.477567</td>
-      <td>0.477567</td>
-      <td>0.374634</td>
-      <td>0.229416</td>
-      <td>0.512989</td>
-      <td>0.683406</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.268814</td>
+      <td>1.503815</td>
+      <td>1.080341</td>
+      <td>0.351392</td>
     </tr>
     <tr>
       <th>min</th>
       <td>172.000000</td>
       <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>17.000000</td>
-      <td>17.054423</td>
+      <td>17.456895</td>
       <td>0.334025</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>-0.037862</td>
+      <td>0.812500</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>180.000000</td>
       <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>18.000000</td>
-      <td>17.831988</td>
-      <td>0.915830</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.908761</td>
+      <td>18.063341</td>
+      <td>0.878184</td>
+      <td>1.437500</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>183.000000</td>
+      <td>184.000000</td>
       <td>NaN</td>
-      <td>18.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>19.000000</td>
       <td>18.404211</td>
-      <td>0.999336</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.325046</td>
+      <td>1.002074</td>
+      <td>1.562500</td>
     </tr>
     <tr>
       <th>75%</th>
       <td>185.000000</td>
       <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>20.000000</td>
-      <td>19.280341</td>
-      <td>2.000041</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>1.000000</td>
-      <td>1.467859</td>
+      <td>19.996304</td>
+      <td>2.001410</td>
+      <td>1.796875</td>
     </tr>
     <tr>
       <th>max</th>
       <td>196.000000</td>
       <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>21.000000</td>
       <td>21.881353</td>
       <td>4.000082</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-      <td>3.049585</td>
+      <td>2.062500</td>
     </tr>
   </tbody>
 </table>
 </div>
 
 
-
-    Predictions below zero
-    
 
 
 
@@ -1721,53 +1687,41 @@ A number of key performance metrics will be investigated in turn, looking at how
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Height</th>
-      <th>Market value</th>
-      <th>Age</th>
-      <th>Age when joined</th>
-      <th>Years in team</th>
-      <th>Foot=both</th>
-      <th>Foot=left</th>
-      <th>Foot=right</th>
-      <th>Position group=D</th>
-      <th>Position group=F</th>
-      <th>Position group=G</th>
-      <th>Position group=M</th>
-      <th>Market value (prediction)</th>
-    </tr>
-    <tr>
-      <th>Player key</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Connor Ripley (11/12)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Connor Ripley (11/12)</th>
-      <td>191.0</td>
+      <th>Height</th>
+      <td>191</td>
+    </tr>
+    <tr>
+      <th>Foot</th>
       <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Market value</th>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Position group</th>
+      <td>G</td>
+    </tr>
+    <tr>
+      <th>Age</th>
       <td>18</td>
-      <td>18.376832</td>
-      <td>1.002074</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>-0.037862</td>
+    </tr>
+    <tr>
+      <th>Age when joined</th>
+      <td>18.3768</td>
+    </tr>
+    <tr>
+      <th>Years in team</th>
+      <td>1.00207</td>
+    </tr>
+    <tr>
+      <th>Market value (prediction)</th>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
@@ -1775,32 +1729,4 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 
 
-**ANALYSIS:** The player's missing actual Market values are all young players (17-21). The predictions are typically quite small which is as expected at least. Poor Connor Ripley (11/12) gets a negative value!
-
-    [NbConvertApp] Converting notebook boro_01_current_market_value.ipynb to markdown
-    [NbConvertApp] Support files will be in boro_01_current_market_value_files\
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Making directory ./output\boro_01_current_market_value_files
-    [NbConvertApp] Writing 36314 bytes to ./output\boro_01_current_market_value.md
-    
-
-    [NbConvertApp] Converting notebook boro_01_current_market_value.ipynb to python
-    [NbConvertApp] Writing 15334 bytes to ./output\boro_01_current_market_value.py
-    
+**ANALYSIS:** The player's missing actual Market values are all young players (17-21). The predictions are typically quite small which is as expected at least. <s>Poor Connor Ripley (11/12) gets a negative value!</s>
