@@ -325,12 +325,12 @@ plt.xlabel('Years in team')
 plt.ylabel('Number of players');
 
 
-# **ANALYSIS:** I'm going to leave out `Shirt number`, `Position`, `Name`, `Date of birth`, `Joined`, `Season` and `Contract expires` from the model for now. `Contract expires` is populated in less than half of records. The others can be discarded for simplicity of model.
+# **ANALYSIS:** I'm going to leave out `Position`, `Name`, `Date of birth`, `Joined`, `Season` and `Contract expires` from the model for now. `Contract expires` is populated in less than half of records. The others (except `Name`) are encoded in derived features now.
 
 # In[28]:
 
 
-df.drop(columns=["Shirt number", "Position", "Name", "Date of birth", "Joined", "Season", "Contract expires"], inplace=True)
+df.drop(columns=["Position", "Name", "Date of birth", "Joined", "Season", "Contract expires"], inplace=True)
 # df.shape
 
 
@@ -373,8 +373,8 @@ df.describe(include="all")
 # In[32]:
 
 
-g = sns.pairplot(df[["Height", "Age", "Age when joined", "Years in team", "Market value"]])
-g.fig.suptitle("Pair plots of Height, Age, Age when joined, Years in team and Market value", y=1.08);
+g = sns.pairplot(df[["Shirt number", "Height", "Age", "Age when joined", "Years in team", "Market value"]])
+g.fig.suptitle("Pair plots of Shirt number, Height, Age, Age when joined, Years in team and Market value", y=1.08);
 
 
 # In[33]:
@@ -399,7 +399,7 @@ g.fig.suptitle("Pair plots of Height, Age, Age when joined, Years in team and Ma
 # In[34]:
 
 
-numeric_features = ['Height', 'Age', 'Age when joined', 'Years in team']
+numeric_features = ['Shirt number', 'Height', 'Age', 'Age when joined', 'Years in team']
 
 print("\n")
 print("Selected numeric features are: {0}".format(numeric_features))
@@ -700,8 +700,8 @@ df_out.describe(include="all")
 # In[57]:
 
 
-g = sns.pairplot(df_out[["Height", "Age", "Age when joined", "Years in team", "Market value", "Market value (prediction)"]])
-g.fig.suptitle("Pair plots of Height, Age, Age when joined, Years in team, Market value and Market value (prediction)", y=1.08);
+g = sns.pairplot(df_out[["Shirt number", "Height", "Age", "Age when joined", "Years in team", "Market value", "Market value (prediction)"]])
+g.fig.suptitle("Pair plots of Shirt number, Height, Age, Age when joined, Years in team, Market value and Market value (prediction)", y=1.08);
 
 
 # **ANALYSIS:** As we saw during data preparation there's no clear correlations with continuous features at work. Further our predictions don't even particularly correlate with the actual values. We're also seeing some particular poor (negative) estimates for some young players.
