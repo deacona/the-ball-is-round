@@ -55,6 +55,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
 
 
 # In[5]:
@@ -425,7 +426,7 @@ feature_names = numeric_features + categorical_features
 # In[37]:
 
 
-drop_nulls = True
+drop_nulls = False
 
 print("\n")
 print("Dropping nulls during data preparation: {0}".format(drop_nulls))
@@ -438,8 +439,8 @@ if drop_nulls:
     X = df[df.notna().all(axis=1)][feature_names]
     y = df[df.notna().all(axis=1)]["Market value"]
 else:
-    X = df[feature_names]
-    y = df["Market value"]
+    X = df[df["Market value"].notna()][feature_names]
+    y = df[df["Market value"].notna()]["Market value"]
     
 # X.shape, y.shape
 
@@ -469,24 +470,21 @@ kfold = KFold(n_splits=number_of_folds, shuffle=True, random_state=RANDOM_STATE)
 # kfold
 
 
+# In[ ]:
+
+
+
+
+
 # In[42]:
 
 
-model = Pipeline([("ohe", OneHotEncoder(sparse=False, handle_unknown="ignore")),
-                  ("scaler", MinMaxScaler()),
-                  ("estimator", LinearRegression())
-                 ])
-
-
-# In[43]:
-
-
 numeric_transformer = Pipeline(steps=[
-#     ('imputer', SimpleImputer(strategy='median')),
+    ('imputer', SimpleImputer(strategy='median')),
     ('scaler', MinMaxScaler())])
 
 categorical_transformer = Pipeline(steps=[
-#     ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+    ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
     ('onehot', OneHotEncoder(handle_unknown='ignore'))])
 
 preprocessor = ColumnTransformer(
@@ -500,7 +498,7 @@ model = Pipeline(steps=[('preprocessor', preprocessor),
                       ('estimator', LinearRegression())])
 
 
-# In[44]:
+# In[43]:
 
 
 param_grid = {"estimator__fit_intercept": [True, False],
@@ -508,14 +506,14 @@ param_grid = {"estimator__fit_intercept": [True, False],
 # param_grid
 
 
-# In[45]:
+# In[44]:
 
 
 grid = GridSearchCV(model, param_grid, cv=kfold)
 # grid
 
 
-# In[46]:
+# In[45]:
 
 
 print("\n")
@@ -523,20 +521,20 @@ print("Full model grid-space to tune hyperparameters across...")
 grid.fit(X_train, y_train)
 
 
-# In[47]:
+# In[46]:
 
 
 # grid.best_params_
 
 
-# In[48]:
+# In[47]:
 
 
 final_model = grid.best_estimator_
 # final_model
 
 
-# In[49]:
+# In[48]:
 
 
 print("\n")
@@ -556,7 +554,7 @@ final_model.fit(X_train, y_train)
 # * Review Process
 # * Determine Next Steps
 
-# In[50]:
+# In[49]:
 
 
 def model_scores(y_act, y_pred):
@@ -577,7 +575,7 @@ def model_scores(y_act, y_pred):
 # model_scores?
 
 
-# In[51]:
+# In[50]:
 
 
 print("Model scores")
@@ -589,9 +587,9 @@ pd.DataFrame(
     ).T
 
 
-# **ANALYSIS:** The metrics aren't great - even just on the training data - but it's a baseline. The only way is up (I Hope!) :)
+# **ANALYSIS:** The metrics aren't great - but as we have added more preprocessing (missing value imputer, scaling and OHE) the training and test scores have balanced out much more so hopefully the model is more generalised now.
 
-# In[52]:
+# In[51]:
 
 
 # Create CV training and test scores for various training set sizes
@@ -627,7 +625,7 @@ plt.show()
 
 # **ANALYSIS:** The model seems pretty weak in general but we can say the learning curves have largely converged so adding extra training samples is unlikely to improve the model.
 
-# In[53]:
+# In[52]:
 
 
 sns.scatterplot(y_train, final_model.predict(X_train))
@@ -638,9 +636,9 @@ plt.xlabel('Market value (actual)')
 plt.ylabel('Market value (predicted)');
 
 
-# **ANALYSIS:** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £4m even though some of the data exceeded £10m.
+# **ANALYSIS:** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £3m even though some of the data exceeded £10m.
 
-# In[54]:
+# In[53]:
 
 
 transformed_features = list(numeric_features)     + final_model['preprocessor'].transformers_[1][1]['onehot']                         .get_feature_names(categorical_features).tolist()
@@ -672,14 +670,14 @@ pd.DataFrame({"effect": params.round(2), "error": err.round(2)})
 # * Produce Final Report
 # * Review Project
 
-# In[55]:
+# In[54]:
 
 
 df_out = df.copy()
 # df_out.shape
 
 
-# In[56]:
+# In[55]:
 
 
 if drop_nulls:
@@ -691,7 +689,7 @@ else:
 # df_out.shape
 
 
-# In[57]:
+# In[56]:
 
 
 print("Summary of whole dataset (with predictions)...")
@@ -699,23 +697,23 @@ print("Summary of whole dataset (with predictions)...")
 df_out.describe(include="all")
 
 
-# In[58]:
+# In[57]:
 
 
 g = sns.pairplot(df_out[["Height", "Age", "Age when joined", "Years in team", "Market value", "Market value (prediction)"]])
 g.fig.suptitle("Pair plots of Height, Age, Age when joined, Years in team, Market value and Market value (prediction)", y=1.08);
 
 
-# **ANALYSIS:** As we saw during data preparation there's no clear correlations with continuous features at work. Further our predictions don't even particularly correlate with the actual values.
+# **ANALYSIS:** As we saw during data preparation there's no clear correlations with continuous features at work. Further our predictions don't even particularly correlate with the actual values. We're also seeing some particular poor (negative) estimates for some young players.
 
-# In[59]:
+# In[58]:
 
 
 df_unseen = df_out[df_out["Market value"].isna()]
 # df_unseen.shape
 
 
-# In[60]:
+# In[59]:
 
 
 print("Summary of unseen records in dataset (no labels)...")
@@ -723,24 +721,26 @@ print("Summary of unseen records in dataset (no labels)...")
 df_unseen[df_unseen["Market value (prediction)"].notna()].describe(include="all")
 
 
+# **ANALYSIS:** The player's missing actual Market values are all young players (16-21). The predictions are typically quite small which is as expected at least... but some are negative!
+
+# In[60]:
+
+
+print("Predictions below zero")
+
+df_unseen[df_unseen["Market value (prediction)"] < 0.0]
+# pd.DataFrame(df_unseen.loc['Connor Ripley (11/12)'])
+
+
+# **ANALYSIS:** The model seems to particularly struggle with young players who we don't have much information about.
+
 # In[61]:
-
-
-# print("Predictions below zero")
-
-# df_unseen[df_unseen["Market value (prediction)"] < 0.0]
-pd.DataFrame(df_unseen.loc['Connor Ripley (11/12)'])
-
-
-# **ANALYSIS:** The player's missing actual Market values are all young players (17-21). The predictions are typically quite small which is as expected at least. <s>Poor Connor Ripley (11/12) gets a negative value!</s>
-
-# In[62]:
 
 
 df_out.to_csv("../data/interim/boro_01_dataset.csv")
 
 
-# In[63]:
+# In[62]:
 
 
 clf_file = "../models/boro_01_model.pkl" 
@@ -748,7 +748,7 @@ with open(clf_file, "wb") as clf_outfile:
     pickle.dump(final_model, clf_outfile)
 
 
-# In[64]:
+# In[63]:
 
 
 ftn_file = "../models/boro_01_feature_names.pkl" 
@@ -756,13 +756,13 @@ with open(ftn_file, "wb") as ftn_outfile:
     pickle.dump(feature_names, ftn_outfile)
 
 
-# In[65]:
+# In[64]:
 
 
 ## save notebook before running `nbconvert`
 
 
-# In[66]:
+# In[65]:
 
 
 outFolder = './output'
@@ -777,7 +777,7 @@ for filename in os.listdir(outFolder):
         print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-# In[67]:
+# In[66]:
 
 
 get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb")
