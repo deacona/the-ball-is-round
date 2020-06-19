@@ -28,10 +28,23 @@ def clean_data(source_name):
     OUTPUT:
         df - Dataframe containing the cleaned data
     """
-
-    df = utilities.folder_loader(source_name, ["Shirt number", "Position", "Name", "Date of birth", "Nationality",
+    
+    if source_name == "tmk_cnt":
+        source_header = ["Shirt number", "Position", "Name", "Date of birth", "Nationality",
                                 "Height", "Foot", "Joined", "Signed from", "Contract expires",
-                                "Market value"])
+                                "Market value"]
+        drop_cols = ["Nationality", "Signed from", "Competition"]
+        notna_cols = ["Market value"]
+        
+    elif source_name == "tmk_psm":
+        source_header = ["Shirt number", "Position", "Name", "Age", "Nationality",
+                                "In squad", "Appearances", "Goals", "Assists", 
+                                    "Yellow cards", "Second yellow cards", "Red cards",
+                                   "Substitutions on", "Substitutions off", "PPG", "Minutes played"]
+        drop_cols = ["Nationality"]
+        notna_cols = ["In squad"]
+
+    df = utilities.folder_loader(source_name, source_header)
 
     ## Name and Position are mis-aligned in the source files
     
@@ -40,11 +53,14 @@ def clean_data(source_name):
     df["Position"] = df.Name.shift(-1)
     df.loc[df.Position == df.Name, "Position"] = df.Name.shift(-2)
 
-    df.drop(axis=1, columns=["Nationality", "Signed from"], inplace=True)
+    df.drop(axis=1, columns=drop_cols, inplace=True)
 
-    df.dropna(subset=["Market value"], inplace=True)
+    df.dropna(subset=notna_cols, inplace=True)
 
     df = df.replace('-', np.nan)
+    df = df.replace('Was not used during this season', np.nan)
+    df = df.replace('Not in squad during this season', np.nan)
+    df = df.replace('Not used during this season', np.nan)
 
     df["Shirt number"] = pd.to_numeric(df["Shirt number"], downcast='integer')
 
@@ -62,44 +78,63 @@ def clean_data(source_name):
     df.loc[(df.Position.str.upper().str.contains("STRIKER"))
             | (df.Position.str.upper().str.contains("FORW")), 
            "Position group"] = "F"
-
-    df["Age"] = df["Date of birth"].str.extract(r".*([0-9]{2})", expand=False).astype("int")
-
-    df["Date of birth"] = pd.to_datetime(
-        df["Date of birth"].str.extract(r"(.*) \([0-9]{2}\)", expand=False), 
-        format="%b %d, %Y")
-
-    df["Joined"] = pd.to_datetime(df.Joined, format="%b %d, %Y")
-
-    df["Contract expires"] = pd.to_datetime(df["Contract expires"], format="%d.%m.%Y")
-
-    df["Height"] = (df["Height"] \
-                              .str.strip() \
-                              .str.replace(' ', '') \
-                              .str.replace(',', '') \
-                              .str.replace('m', '') \
-                              .replace({'-':np.nan, '':np.nan}) \
-                              .astype(float))
-    df.loc[df.Name.isin(df[df.Height.notna()].Name.values)
-           & df.Name.isin(df[df.Height.isna()].Name.values), "Height"] = \
-    df.loc[df.Name.isin(df[df.Height.notna()].Name.values)
-           & df.Name.isin(df[df.Height.isna()].Name.values)] \
-        .sort_values(by=["Name", "Season"]).Height.fillna(method="bfill")
     
-    df.loc[df.Name.isin(df[df.Foot.notna()].Name.values)
-           & df.Name.isin(df[df.Foot.isna()].Name.values), "Foot"] = \
-    df.loc[df.Name.isin(df[df.Foot.notna()].Name.values)
-           & df.Name.isin(df[df.Foot.isna()].Name.values)] \
-        .sort_values(by=["Name", "Season"]).Foot.fillna(method="bfill")
+    if source_name == "tmk_cnt":
+        df["Age"] = df["Date of birth"].str.extract(r".*([0-9]{2})", expand=False).astype("int")
 
-    df["Market value"] = (df["Market value"] \
-                              .str.strip() \
-                              .replace({'-':np.nan}) \
-                              .replace(r'[£km]', '', regex=True) \
-                              .astype(float) * \
-                df["Market value"].str.extract(r'[\d\.]+([km]+)', expand=False)
-                    .fillna(1)
-                    .replace(['k','m'], [10**3, 10**6]).astype(int) / 10**6)
+        df["Date of birth"] = pd.to_datetime(
+            df["Date of birth"].str.extract(r"(.*) \([0-9]{2}\)", expand=False), 
+            format="%b %d, %Y")
+
+        df["Joined"] = pd.to_datetime(df.Joined, format="%b %d, %Y")
+
+        df["Contract expires"] = pd.to_datetime(df["Contract expires"], format="%d.%m.%Y")
+
+        df["Height"] = (df["Height"] \
+                                  .str.strip() \
+                                  .str.replace(' ', '') \
+                                  .str.replace(',', '') \
+                                  .str.replace('m', '') \
+                                  .replace({'-':np.nan, '':np.nan}) \
+                                  .astype(float))
+        df.loc[df.Name.isin(df[df.Height.notna()].Name.values)
+               & df.Name.isin(df[df.Height.isna()].Name.values), "Height"] = \
+        df.loc[df.Name.isin(df[df.Height.notna()].Name.values)
+               & df.Name.isin(df[df.Height.isna()].Name.values)] \
+            .sort_values(by=["Name", "Season"]).Height.fillna(method="bfill")
+
+        df.loc[df.Name.isin(df[df.Foot.notna()].Name.values)
+               & df.Name.isin(df[df.Foot.isna()].Name.values), "Foot"] = \
+        df.loc[df.Name.isin(df[df.Foot.notna()].Name.values)
+               & df.Name.isin(df[df.Foot.isna()].Name.values)] \
+            .sort_values(by=["Name", "Season"]).Foot.fillna(method="bfill")
+
+        df["Market value"] = (df["Market value"] \
+                                  .str.strip() \
+                                  .replace({'-':np.nan}) \
+                                  .replace(r'[£km]', '', regex=True) \
+                                  .astype(float) * \
+                    df["Market value"].str.extract(r'[\d\.]+([km]+)', expand=False)
+                        .fillna(1)
+                        .replace(['k','m'], [10**3, 10**6]).astype(int) / 10**6)
+        
+    elif source_name == "tmk_psm":
+        df["PPG"] = df["PPG"].str.strip().replace(r'[,]', '.', regex=True).astype(float)
+        df["Minutes played"] = df["Minutes played"].str.strip().replace(r'[.\']', '', regex=True).astype(float)
+        
+        df[["In squad", "Appearances", "Goals", "Assists", 
+            "Yellow cards", "Second yellow cards", "Red cards",
+            "Substitutions on", "Substitutions off", "PPG", "Minutes played"]] = \
+            df[["In squad", "Appearances", "Goals", "Assists", 
+                "Yellow cards", "Second yellow cards", "Red cards",
+                "Substitutions on", "Substitutions off", "PPG", "Minutes played"]].fillna(0)
+        
+        df[["In squad", "Appearances", "Goals", "Assists", 
+            "Yellow cards", "Second yellow cards", "Red cards",
+            "Substitutions on", "Substitutions off", "PPG", "Minutes played"]] = \
+            df[["In squad", "Appearances", "Goals", "Assists", 
+                "Yellow cards", "Second yellow cards", "Red cards",
+                "Substitutions on", "Substitutions off", "PPG", "Minutes played"]].astype(float)
 
     return df
 

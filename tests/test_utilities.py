@@ -26,6 +26,7 @@ class Test:
         self.testFrame = pd.DataFrame(self.testRow, index=self.testHeader)
         self.testFilename = "tmk_cnt_mbr_all_0910.csv"
         self.testSeason = "09/10"
+        self.testCompetition = "all"
 
         if os.path.isfile(self.testHtml):
             os.remove(self.testHtml)
@@ -101,6 +102,12 @@ class Test:
     def test_extract_season(self):
         '''test extract season from filename'''
         assert utilities.extract_season(self.testFilename) == self.testSeason
+
+
+    def test_extract_competition(self):
+        '''test extract competition from filename'''
+        assert utilities.extract_competition(self.testFilename) == self.testCompetition
+
 
 
     # def test_folder_loader(self):

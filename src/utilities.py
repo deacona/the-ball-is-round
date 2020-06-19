@@ -77,6 +77,33 @@ def extract_season(file_name):
     return season_out
 
 
+def extract_competition(file_name):
+    """
+    INPUT:
+        file_name - String containing name of the data source file
+        
+    OUTPUT:
+        competition_out - String containing the formated label for the competition
+    """
+    
+    competition_part = file_name.split("_")[3]
+    
+    competition_dict = {
+        "all": "N/A",
+        "chm": "Championship",
+        "chp": "Championship Playoffs",
+        "cpo": "Championship & Playoffs",
+        "fac": "FA Cup",
+        "lec": "League Cup",
+        "prm": "Premier League",
+        "all": "all",
+    }
+    
+    competition_out = competition_dict[competition_part]
+    
+    return competition_out
+
+
 def folder_loader(source_name, source_header):
     """
     INPUT:
@@ -90,11 +117,14 @@ def folder_loader(source_name, source_header):
     source_folder = os.path.join(config.SOURCE_DIR, source_name[:3], source_name)
     data_list = []
     for file in os.listdir(source_folder):
+        if not file.endswith(".csv"):
+            continue
         print(file)
         filepath = os.path.join(source_folder, file)
         tmp = pd.read_csv(filepath, encoding='latin-1', header=0, 
                           names=source_header)
         tmp["Season"] = extract_season(file)
+        tmp["Competition"] = extract_competition(file)
         data_list.append(tmp)
 
     df = pd.concat(data_list, axis=0, sort=False, ignore_index=True)
