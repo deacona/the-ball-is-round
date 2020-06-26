@@ -54,6 +54,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
@@ -719,13 +720,16 @@ preprocessor = ColumnTransformer(
 # Append classifier to preprocessing pipeline.
 # Now we have a full prediction pipeline.
 model = Pipeline(steps=[('preprocessor', preprocessor),
+                        ('basis', PolynomialFeatures()),
                       ('estimator', Ridge())])
 
 
 # In[60]:
 
 
-param_grid = {"estimator__fit_intercept": [True, False],
+param_grid = {"basis__degree": [1, 2, 3],
+              "basis__include_bias": [True, False],
+             "estimator__fit_intercept": [True, False],
              "estimator__normalize": [True, False],
              "estimator__alpha": [0.1, 1.0, 10.0, 100.0],
               "estimator__random_state": [RANDOM_STATE],
@@ -814,7 +818,7 @@ pd.DataFrame(
     ).T
 
 
-# **ANALYSIS:** After we added more preprocessing (missing value imputer, scaling and OHE) the training and test scores  balanced out, whereas adding additional features improved the training score but worsened the test score. Using regularization has started to bring them back into balance... but still a long way from a _good_ score.
+# **ANALYSIS:** After we added more preprocessing (missing value imputer, scaling and OHE) the training and test scores  balanced out, whereas adding additional features and using a polynomial basic function improved the training score but worsened the test score. Using regularization has started to bring them back into balance... but still a long way from a _good_ score.
 
 # In[68]:
 
@@ -879,7 +883,7 @@ plt.ylabel('Market value (predicted)');
 # # params
 
 # np.random.seed(1)
-# err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(2)], 0)
+# err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(1000)], 0)
 # # err
 
 # print("Effect of each feature on the model")

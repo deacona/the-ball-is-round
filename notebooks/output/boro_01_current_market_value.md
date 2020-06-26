@@ -2244,13 +2244,12 @@ A number of key performance metrics will be investigated in turn, looking at how
                                                                                                             copy=True,
                                                                                                             fill_value=None,
                                                                                                             miss...
-                                                  fit_intercept=True, max_iter=None,
-                                                  normalize=False,
-                                                  random_state=None, solver='auto',
                                                   tol=0.001))],
                                     verbose=False),
                  iid='deprecated', n_jobs=None,
-                 param_grid={'estimator__alpha': [0.1, 1.0, 10.0, 100.0],
+                 param_grid={'basis__degree': [1, 2, 3],
+                             'basis__include_bias': [True, False],
+                             'estimator__alpha': [0.1, 1.0, 10.0, 100.0],
                              'estimator__fit_intercept': [True, False],
                              'estimator__normalize': [True, False],
                              'estimator__random_state': [4]},
@@ -2284,10 +2283,6 @@ A number of key performance metrics will be investigated in turn, looking at how
                                                                       ('scaler',
                                                                        MinMaxScaler(copy=True,
                                                                                     feature_ran...
-                                                                                     verbose=0)),
-                                                                      ('onehot',
-                                                                       OneHotEncoder(categories='auto',
-                                                                                     drop=None,
                                                                                      dtype=<class 'numpy.float64'>,
                                                                                      handle_unknown='ignore',
                                                                                      sparse=True))],
@@ -2295,8 +2290,11 @@ A number of key performance metrics will be investigated in turn, looking at how
                                                       ['Foot', 'Position group',
                                                        'Competition'])],
                                        verbose=False)),
+                    ('basis',
+                     PolynomialFeatures(degree=3, include_bias=True,
+                                        interaction_only=False, order='C')),
                     ('estimator',
-                     Ridge(alpha=10.0, copy_X=True, fit_intercept=False,
+                     Ridge(alpha=100.0, copy_X=True, fit_intercept=False,
                            max_iter=None, normalize=True, random_state=4,
                            solver='auto', tol=0.001))],
              verbose=False)
@@ -2340,18 +2338,18 @@ A number of key performance metrics will be investigated in turn, looking at how
   <tbody>
     <tr>
       <th>MedAE</th>
-      <td>0.703314</td>
-      <td>0.942753</td>
+      <td>0.595677</td>
+      <td>1.032976</td>
     </tr>
     <tr>
       <th>RMSE</th>
-      <td>1.430554</td>
-      <td>1.788810</td>
+      <td>1.250324</td>
+      <td>1.875757</td>
     </tr>
     <tr>
       <th>R^2</th>
-      <td>0.328165</td>
-      <td>0.193005</td>
+      <td>0.486785</td>
+      <td>0.112649</td>
     </tr>
   </tbody>
 </table>
@@ -2359,7 +2357,7 @@ A number of key performance metrics will be investigated in turn, looking at how
 
 
 
-**ANALYSIS:** After we added more preprocessing (missing value imputer, scaling and OHE) the training and test scores  balanced out, whereas adding additional features improved the training score but worsened the test score. Using regularization has started to bring them back into balance... but still a long way from a _good_ score.
+**ANALYSIS:** After we added more preprocessing (missing value imputer, scaling and OHE) the training and test scores  balanced out, whereas adding additional features and using a polynomial basic function improved the training score but worsened the test score. Using regularization has started to bring them back into balance... but still a long way from a _good_ score.
 
 
 ![png](boro_01_current_market_value_files/boro_01_current_market_value_92_0.png)
@@ -2574,7 +2572,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>2.447119</td>
       <td>2.011287</td>
       <td>0.104350</td>
-      <td>1.498627</td>
+      <td>1.427046</td>
     </tr>
     <tr>
       <th>std</th>
@@ -2602,7 +2600,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>2.005552</td>
       <td>2.957062</td>
       <td>0.162198</td>
-      <td>0.809928</td>
+      <td>0.909861</td>
     </tr>
     <tr>
       <th>min</th>
@@ -2630,7 +2628,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.265577</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>-0.253305</td>
+      <td>-0.094948</td>
     </tr>
     <tr>
       <th>25%</th>
@@ -2658,7 +2656,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.913092</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.921922</td>
+      <td>0.771720</td>
     </tr>
     <tr>
       <th>50%</th>
@@ -2686,7 +2684,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>1.960341</td>
       <td>1.000000</td>
       <td>0.025568</td>
-      <td>1.364868</td>
+      <td>1.249295</td>
     </tr>
     <tr>
       <th>75%</th>
@@ -2714,7 +2712,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>3.422384</td>
       <td>3.000000</td>
       <td>0.173961</td>
-      <td>2.031820</td>
+      <td>1.955151</td>
     </tr>
     <tr>
       <th>max</th>
@@ -2742,7 +2740,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>10.998172</td>
       <td>13.000000</td>
       <td>1.800000</td>
-      <td>4.132107</td>
+      <td>5.611437</td>
     </tr>
   </tbody>
 </table>
@@ -2946,7 +2944,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>1.486032</td>
       <td>0.504425</td>
       <td>0.041544</td>
-      <td>1.057937</td>
+      <td>0.829329</td>
     </tr>
     <tr>
       <th>std</th>
@@ -2974,7 +2972,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.997234</td>
       <td>1.303319</td>
       <td>0.097388</td>
-      <td>0.547206</td>
+      <td>0.545400</td>
     </tr>
     <tr>
       <th>min</th>
@@ -3002,7 +3000,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.334025</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>-0.180407</td>
+      <td>-0.003610</td>
     </tr>
     <tr>
       <th>25%</th>
@@ -3030,7 +3028,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.991122</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.674358</td>
+      <td>0.446175</td>
     </tr>
     <tr>
       <th>50%</th>
@@ -3058,7 +3056,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.999336</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>1.011023</td>
+      <td>0.707518</td>
     </tr>
     <tr>
       <th>75%</th>
@@ -3086,7 +3084,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>2.001410</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>1.343487</td>
+      <td>1.035994</td>
     </tr>
     <tr>
       <th>max</th>
@@ -3114,7 +3112,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>4.000082</td>
       <td>7.000000</td>
       <td>0.500000</td>
-      <td>2.587355</td>
+      <td>2.901993</td>
     </tr>
   </tbody>
 </table>
@@ -3178,31 +3176,31 @@ Too few samples of some features currently to look at their effect/error.
   <tbody>
     <tr>
       <th>count</th>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>2.00000</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2.000000</td>
-      <td>2.0</td>
-      <td>2.0</td>
       <td>1.0</td>
-      <td>2.000000</td>
-      <td>0.0</td>
-      <td>2.000000</td>
-      <td>2.000000</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.000000</td>
       <td>1.000000</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.000000</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.000000</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.00000</td>
     </tr>
     <tr>
       <th>unique</th>
@@ -3267,7 +3265,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>2</td>
+      <td>1</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -3277,7 +3275,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>2</td>
+      <td>1</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -3290,199 +3288,199 @@ Too few samples of some features currently to look at their effect/error.
     </tr>
     <tr>
       <th>mean</th>
-      <td>17.000000</td>
+      <td>18.0</td>
       <td>18.376832</td>
-      <td>1.50000</td>
+      <td>3.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>1.000000</td>
+      <td>2.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>191.0</td>
-      <td>4.500000</td>
+      <td>9.0</td>
       <td>NaN</td>
-      <td>50.000000</td>
-      <td>0.333333</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.500000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.179423</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>1.414214</td>
-      <td>NaN</td>
-      <td>2.12132</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.414214</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>6.363961</td>
-      <td>NaN</td>
-      <td>70.710678</td>
-      <td>0.471405</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.707107</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.001391</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>16.000000</td>
-      <td>18.376832</td>
-      <td>0.00000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.180407</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>16.500000</td>
-      <td>18.376832</td>
-      <td>0.75000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.500000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>2.250000</td>
-      <td>NaN</td>
-      <td>25.000000</td>
-      <td>0.166667</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.250000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.179915</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>17.000000</td>
-      <td>18.376832</td>
-      <td>1.50000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>4.500000</td>
-      <td>NaN</td>
-      <td>50.000000</td>
-      <td>0.333333</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.500000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.179423</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>17.500000</td>
-      <td>18.376832</td>
-      <td>2.25000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.500000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>6.750000</td>
-      <td>NaN</td>
-      <td>75.000000</td>
-      <td>0.500000</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.750000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.178931</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>18.000000</td>
-      <td>18.376832</td>
-      <td>3.00000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>9.000000</td>
-      <td>NaN</td>
-      <td>100.000000</td>
+      <td>100.0</td>
       <td>0.666667</td>
       <td>NaN</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>1.000000</td>
+      <td>1.0</td>
       <td>1.002074</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>-0.178439</td>
+      <td>-0.00361</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>18.0</td>
+      <td>18.376832</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>191.0</td>
+      <td>9.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>0.666667</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.002074</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.00361</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>18.0</td>
+      <td>18.376832</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>191.0</td>
+      <td>9.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>0.666667</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.002074</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.00361</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>18.0</td>
+      <td>18.376832</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>191.0</td>
+      <td>9.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>0.666667</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.002074</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.00361</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>18.0</td>
+      <td>18.376832</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>191.0</td>
+      <td>9.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>0.666667</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.002074</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.00361</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>18.0</td>
+      <td>18.376832</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>191.0</td>
+      <td>9.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
+      <td>0.666667</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.002074</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.00361</td>
     </tr>
   </tbody>
 </table>
