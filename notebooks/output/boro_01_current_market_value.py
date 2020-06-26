@@ -152,8 +152,6 @@ tmk_df.describe(include="all")
 pd.DataFrame(100 * tmk_df.count() / tmk_df.shape[0], columns=["% populated"])
 
 
-# **ANALYSIS:** Only `Joined` has large gaps. Let's look at it in more detail...
-
 # In[11]:
 
 
@@ -163,9 +161,18 @@ tmk_df.loc[tmk_df.Name.isin(tmk_df[tmk_df.Joined.notna()].Name.values)
        & tmk_df.Name.isin(tmk_df[tmk_df.Joined.isna()].Name.values)].sort_values(by=["Name", "Season"])[["Name", "Season", "Joined"]].T
 
 
-# **ANALYSIS:** _Possibly_ we could back fill some missing `Joined` dates but this might have some downstream consequences because the date _might_ exceed the end of that season. We'll leave them as Nulls for now.
-
 # In[12]:
+
+
+print("Players with missing Contract expires dates...")
+
+tmk_df.loc[tmk_df.Name.isin(tmk_df[tmk_df["Contract expires"].notna()].Name.values)
+       & tmk_df.Name.isin(tmk_df[tmk_df["Contract expires"].isna()].Name.values)].sort_values(by=["Name", "Season"])[["Name", "Season", "Contract expires"]].T
+
+
+# **ANALYSIS:** _Possibly_ we could back fill some missing `Joined` and `Contract expires` dates but this might have some undesired consequences because the date _might_ not be valid for that particular season. We'll leave them as Nulls for now.
+
+# In[13]:
 
 
 tmk_df["Position group"].value_counts().plot(kind='bar')
@@ -174,7 +181,7 @@ plt.xlabel('Position group')
 plt.ylabel('Number of players');
 
 
-# In[13]:
+# In[14]:
 
 
 tmk_df.Foot.fillna("unknown").value_counts().plot(kind='bar')
@@ -183,7 +190,7 @@ plt.xlabel('Foot')
 plt.ylabel('Number of players');
 
 
-# In[14]:
+# In[15]:
 
 
 tmk_df.Season.value_counts().sort_index().plot(kind='bar')
@@ -192,7 +199,7 @@ plt.xlabel('Season')
 plt.ylabel('Number of players');
 
 
-# In[15]:
+# In[16]:
 
 
 tmk_df["Shirt number"].hist(bins=42)
@@ -201,7 +208,7 @@ plt.xlabel('Shirt number')
 plt.ylabel('Number of players');
 
 
-# In[16]:
+# In[17]:
 
 
 tmk_df["Age"].hist(bins=25)
@@ -210,7 +217,7 @@ plt.xlabel('Age')
 plt.ylabel('Number of players');
 
 
-# In[17]:
+# In[18]:
 
 
 tmk_df["Height"].hist()
@@ -219,7 +226,7 @@ plt.xlabel('Height')
 plt.ylabel('Number of players');
 
 
-# In[18]:
+# In[19]:
 
 
 tmk_df["Date of birth"].hist()
@@ -228,7 +235,7 @@ plt.xlabel('Date of birth')
 plt.ylabel('Number of players');
 
 
-# In[19]:
+# In[20]:
 
 
 tmk_df["Joined"].hist()
@@ -237,7 +244,7 @@ plt.xlabel('Joined date')
 plt.ylabel('Number of players');
 
 
-# In[20]:
+# In[21]:
 
 
 tmk_df["Contract expires"].hist()
@@ -246,7 +253,7 @@ plt.xlabel('Contract expires')
 plt.ylabel('Number of players');
 
 
-# In[21]:
+# In[22]:
 
 
 tmk_df["Market value"].hist()
@@ -255,21 +262,21 @@ plt.xlabel('Market value')
 plt.ylabel('Number of players');
 
 
-# In[22]:
+# In[23]:
 
 
 g = sns.pairplot(tmk_df)
 g.fig.suptitle("Pair plots of Shirt number, Height, Market value and Age", y=1.08);
 
 
-# In[23]:
+# In[24]:
 
 
 g = sns.pairplot(tmk_df, hue="Position group")
 g.fig.suptitle("Pair plots of Shirt number, Height, Market value and Age grouped by Position group", y=1.08);
 
 
-# In[24]:
+# In[25]:
 
 
 g = sns.pairplot(tmk_df, hue="Foot")
@@ -294,7 +301,7 @@ g.fig.suptitle("Pair plots of Shirt number, Height, Market value and Age grouped
 
 
 
-# In[25]:
+# In[26]:
 
 
 print("Loading Transfermarkt performance summary...")
@@ -309,7 +316,7 @@ psm_df = players.clean_data("tmk_psm")
 # psm_df.info()
 
 
-# In[26]:
+# In[27]:
 
 
 print("Random sample of records...")
@@ -317,7 +324,7 @@ print("Random sample of records...")
 psm_df.sample(8, random_state=RANDOM_STATE)
 
 
-# In[27]:
+# In[28]:
 
 
 print("Summary of whole data source...")
@@ -327,7 +334,7 @@ psm_df.describe(include="all")
 
 # **ANALYSIS:** So the data is looking broadly in good shape
 
-# In[28]:
+# In[29]:
 
 
 psm_df["Position group"].value_counts().plot(kind='bar')
@@ -336,7 +343,7 @@ plt.xlabel('Position group')
 plt.ylabel('Number of players');
 
 
-# In[29]:
+# In[30]:
 
 
 psm_df.Competition.value_counts().plot(kind='bar')
@@ -345,7 +352,7 @@ plt.xlabel('Competition')
 plt.ylabel('Number of players');
 
 
-# In[30]:
+# In[31]:
 
 
 psm_df.Season.value_counts().sort_index().plot(kind='bar')
@@ -354,7 +361,7 @@ plt.xlabel('Season')
 plt.ylabel('Number of players');
 
 
-# In[31]:
+# In[32]:
 
 
 psm_df["Shirt number"].hist(bins=42)
@@ -363,7 +370,7 @@ plt.xlabel('Shirt number')
 plt.ylabel('Number of players');
 
 
-# In[32]:
+# In[33]:
 
 
 psm_df["Age"].hist(bins=25)
@@ -372,30 +379,30 @@ plt.xlabel('Age')
 plt.ylabel('Number of players');
 
 
-# In[33]:
-
-
-g = sns.pairplot(psm_df[["In squad", "Appearances", "Goals", "Assists", 
-            "Yellow cards", #"Second yellow cards", "Red cards",
-            "Substitutions on", "Substitutions off", "PPG", "Minutes played"]])
-g.fig.suptitle("Pair plots of usage, goals, assists, yellow cards, PPG", y=1.08);
-
-
 # In[34]:
 
 
-g = sns.pairplot(psm_df[["In squad", "Appearances", "Goals", "Assists", 
-            "Yellow cards", "Substitutions on", "Substitutions off", "PPG", "Minutes played",
-            "Position group"]], hue="Position group")
-g.fig.suptitle("Pair plots of usage, goals, assists, yellow cards, PPG by Position group", y=1.08);
+g = sns.pairplot(psm_df[["In squad", "Goals", "Assists", 
+            "Yellow cards", #"Second yellow cards", "Red cards",
+            "PPG", "Minutes played"]])
+g.fig.suptitle("Pair plots of usage, goals, assists, yellow cards, PPG", y=1.08);
 
 
 # In[35]:
 
 
-g = sns.pairplot(psm_df[["In squad", "Appearances", "Goals", "Assists", 
-            "Yellow cards", "Substitutions on", "Substitutions off", "PPG", "Minutes played",
-            "Competition"]], hue="Competition")
+g = sns.pairplot(psm_df[["In squad", "Goals", "Assists", 
+            "Yellow cards", #"Second yellow cards", "Red cards",
+            "PPG", "Minutes played", "Position group"]], hue="Position group")
+g.fig.suptitle("Pair plots of usage, goals, assists, yellow cards, PPG by Position group", y=1.08);
+
+
+# In[36]:
+
+
+g = sns.pairplot(psm_df[["In squad", "Goals", "Assists", 
+            "Yellow cards", #"Second yellow cards", "Red cards",
+            "PPG", "Minutes played", "Competition"]], hue="Competition")
 g.fig.suptitle("Pair plots of usage, goals, assists, yellow cards, PPG by Competition", y=1.08);
 
 
@@ -419,7 +426,7 @@ g.fig.suptitle("Pair plots of usage, goals, assists, yellow cards, PPG by Compet
 # * Integrate Data
 # * Format Data
 
-# In[36]:
+# In[37]:
 
 
 df = tmk_df.copy()
@@ -432,7 +439,7 @@ df.drop(columns=["Player key"], inplace=True)
 print("Final dataset created with index from {0} to {1}.".format(df.index[0], df.index[-1]))
 
 
-# In[37]:
+# In[38]:
 
 
 df["Age when joined"] = (df["Joined"] - df["Date of birth"])/ np.timedelta64(1, 'Y')
@@ -444,7 +451,7 @@ plt.ylabel('Number of players');
 
 # **ANALYSIS:** Most players join in their teens or mid-twenties.
 
-# In[38]:
+# In[39]:
 
 
 df["Years in team"] = (pd.to_datetime("1st July 20"+df.Season.str[-2:]) - df["Joined"])/ np.timedelta64(1, 'Y')
@@ -456,7 +463,7 @@ plt.ylabel('Number of players');
 
 # **ANALYSIS:** I'm going to leave out `Position`, `Date of birth`, `Joined`, and `Contract expires` from the model for now. `Contract expires` is populated in less than half of records. The others are encoded in derived features now.
 
-# In[39]:
+# In[40]:
 
 
 df.drop(columns=["Position", "Name", "Date of birth", "Joined", "Season", "Contract expires"], inplace=True)
@@ -465,7 +472,7 @@ df.drop(columns=["Position", "Name", "Date of birth", "Joined", "Season", "Contr
 
 # <s>**ANALYSIS:** `Foot` and `Position group` will be one-hot encoded</s>
 
-# In[40]:
+# In[41]:
 
 
 # for var in ["Foot", "Position group"]:
@@ -483,13 +490,13 @@ df.drop(columns=["Position", "Name", "Date of birth", "Joined", "Season", "Contr
 # df.shape
 
 
-# In[41]:
+# In[42]:
 
 
 psm_df.columns
 
 
-# In[42]:
+# In[43]:
 
 
 def psm_agg(x):
@@ -499,8 +506,10 @@ def psm_agg(x):
     d["Age"] = x["Age"].max()
     d["Position group"] = x["Position group"].max()
     
+    d["Competition"] = x["Competition"].agg(lambda a: ', '.join(a.sort_values()))
+    
     d["In squad"] = x["In squad"].sum()
-    d["Appearances"] = x["Appearances"].sum()
+    d["Games started"] = x["Games started"].sum()
     d["Goals"] = x["Goals"].sum()
     d["Assists"] = x["Assists"].sum()
     d["Yellow cards"] = x["Yellow cards"].sum()
@@ -510,14 +519,18 @@ def psm_agg(x):
     d["Substitutions off"] = x["Substitutions off"].sum()
     d["Minutes played"] = x["Minutes played"].sum()
     
+    x["Appearances"] = x["Games started"] + x["Substitutions on"]
+    d["Appearances"] = x["Appearances"].sum()
+    
     d["PPG"] = ((x["PPG"] * x["Appearances"]).sum() / x["Appearances"].sum())
     
     d["Goals p90"] = x["Goals"].sum() * 90 / x["Minutes played"].sum()
     d["Assists p90"] = x["Assists"].sum() * 90 / x["Minutes played"].sum()
     d["Yellow cards p90"] = x["Yellow cards"].sum() * 90 / x["Minutes played"].sum()
     
-    return pd.Series(d, index=["Shirt number", "Age", "Position group",
-                                "In squad", "Appearances", "Goals", "Assists", 
+    return pd.Series(d, index=["Shirt number", "Age", "Position group", "Competition",
+                                "In squad", "Appearances", "Games started", 
+                               "Goals", "Assists", 
                                     "Yellow cards", "Second yellow cards", "Red cards",
                                    "Substitutions on", "Substitutions off", "PPG", "Minutes played",
                               "Goals p90", "Assists p90", "Yellow cards p90"])
@@ -525,7 +538,7 @@ def psm_agg(x):
 get_ipython().run_line_magic('pinfo', 'psm_agg')
 
 
-# In[43]:
+# In[44]:
 
 
 df2 = psm_df.groupby(["Name", "Season"]).apply(psm_agg).fillna(0)
@@ -544,7 +557,7 @@ df = df.combine_first(df2)
 
 
 
-# In[44]:
+# In[45]:
 
 
 print("Random sample of records...")
@@ -552,7 +565,7 @@ print("Random sample of records...")
 df.sample(5, random_state=RANDOM_STATE)
 
 
-# In[45]:
+# In[46]:
 
 
 print("Summary of whole dataset...")
@@ -560,20 +573,29 @@ print("Summary of whole dataset...")
 df.describe(include="all")
 
 
-# In[46]:
+# In[47]:
+
+
+df.Competition.value_counts().plot(kind="bar")
+plt.title("Players' Competitions involved in")
+plt.xlabel('Competitions involved in')
+plt.ylabel('Number of players');
+
+
+# In[48]:
 
 
 g = sns.pairplot(df[["Shirt number", "Height", "Age", "Age when joined", "Years in team", "Market value"]])
 g.fig.suptitle("Pair plots of Shirt number, Height, Age, Age when joined, Years in team and Market value", y=1.08);
 
 
-# In[47]:
+# In[49]:
 
 
 df.columns
 
 
-# In[48]:
+# In[50]:
 
 
 df.shape
@@ -592,28 +614,30 @@ df.shape
 # * Build Model
 # * Assess Model
 
-# In[49]:
+# In[51]:
 
 
 numeric_features = ['Shirt number', 'Height', 'Age', 'Age when joined', 'Years in team', 
-                    'In squad', 'Appearances', 'Goals', 'Assists', 'Yellow cards', 'Second yellow cards', 
-                    'Red cards', 'Substitutions on', 'Substitutions off', 'PPG', 'Minutes played',
+                    'In squad', 'Appearances', 'Games started', 'Substitutions on', 'Substitutions off', 
+                    'Goals', 'Assists', 
+                    'Yellow cards', 'Second yellow cards', 'Red cards', 
+                    'PPG', 'Minutes played',
                    'Goals p90', 'Assists p90', 'Yellow cards p90']
 
 print("\n")
 print("Selected numeric features are: {0}".format(numeric_features))
 
 
-# In[50]:
+# In[52]:
 
 
-categorical_features = ['Foot', 'Position group']
+categorical_features = ['Foot', 'Position group', 'Competition']
 
 print("\n")
 print("Selected categorical features are: {0}".format(categorical_features))
 
 
-# In[51]:
+# In[53]:
 
 
 feature_names = numeric_features + categorical_features
@@ -622,7 +646,7 @@ feature_names = numeric_features + categorical_features
 # print("Selected features are: {0}".format(feature_names))
 
 
-# In[52]:
+# In[54]:
 
 
 drop_nulls = False
@@ -631,7 +655,7 @@ print("\n")
 print("Dropping nulls during data preparation: {0}".format(drop_nulls))
 
 
-# In[53]:
+# In[55]:
 
 
 if drop_nulls:
@@ -644,7 +668,7 @@ else:
 # X.shape, y.shape
 
 
-# In[54]:
+# In[56]:
 
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=RANDOM_STATE, train_size=0.9)
@@ -655,14 +679,14 @@ print("Train data has shape: {0}".format(X_train.shape))
 print("Test data has shape: {0}".format(X_test.shape))
 
 
-# In[55]:
+# In[57]:
 
 
 number_of_folds = 10
 # number_of_folds
 
 
-# In[56]:
+# In[58]:
 
 
 kfold = KFold(n_splits=number_of_folds, shuffle=True, random_state=RANDOM_STATE)
@@ -675,7 +699,7 @@ kfold = KFold(n_splits=number_of_folds, shuffle=True, random_state=RANDOM_STATE)
 
 
 
-# In[57]:
+# In[59]:
 
 
 numeric_transformer = Pipeline(steps=[
@@ -697,7 +721,7 @@ model = Pipeline(steps=[('preprocessor', preprocessor),
                       ('estimator', LinearRegression())])
 
 
-# In[58]:
+# In[60]:
 
 
 param_grid = {"estimator__fit_intercept": [True, False],
@@ -705,14 +729,14 @@ param_grid = {"estimator__fit_intercept": [True, False],
 # param_grid
 
 
-# In[59]:
+# In[61]:
 
 
 grid = GridSearchCV(model, param_grid, cv=kfold)
 # grid
 
 
-# In[60]:
+# In[62]:
 
 
 print("\n")
@@ -720,20 +744,20 @@ print("Full model grid-space to tune hyperparameters across...")
 grid.fit(X_train, y_train)
 
 
-# In[61]:
+# In[63]:
 
 
 # grid.best_params_
 
 
-# In[62]:
+# In[64]:
 
 
 final_model = grid.best_estimator_
 # final_model
 
 
-# In[63]:
+# In[65]:
 
 
 print("\n")
@@ -753,7 +777,7 @@ final_model.fit(X_train, y_train)
 # * Review Process
 # * Determine Next Steps
 
-# In[64]:
+# In[66]:
 
 
 def model_scores(y_act, y_pred):
@@ -774,7 +798,7 @@ def model_scores(y_act, y_pred):
 # model_scores?
 
 
-# In[65]:
+# In[67]:
 
 
 print("Model scores")
@@ -788,7 +812,7 @@ pd.DataFrame(
 
 # **ANALYSIS:** After we added more preprocessing (missing value imputer, scaling and OHE) the training and test scores  balanced out but now - after adding additional features - the training score has got much better whilst the test score has dropped off so we are quite possibly overfitting.
 
-# In[66]:
+# In[68]:
 
 
 # Create CV training and test scores for various training set sizes
@@ -824,7 +848,7 @@ plt.show()
 
 # **ANALYSIS:** The model seems pretty weak in general but we can say the learning curves have largely converged so adding extra training samples is unlikely to improve the model.
 
-# In[67]:
+# In[69]:
 
 
 sns.scatterplot(y_train, final_model.predict(X_train))
@@ -835,26 +859,31 @@ plt.xlabel('Market value (actual)')
 plt.ylabel('Market value (predicted)');
 
 
-# **ANALYSIS:** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £4m even though some of the data exceeded £10m.
+# **ANALYSIS:** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £5m even though some of the data exceeded £10m.
 
-# In[68]:
-
-
-transformed_features = list(numeric_features)     + final_model['preprocessor'].transformers_[1][1]['onehot']                         .get_feature_names(categorical_features).tolist()
-# transformed_features
-
-params = pd.Series(final_model.named_steps["estimator"].coef_, index=transformed_features)
-# params
-
-np.random.seed(1)
-err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(1000)], 0)
-# err
-
-print("Effect of each feature on the model")
-pd.DataFrame({"effect": params.round(2), "error": err.round(2)})
+# In[70]:
 
 
-# **ANALYSIS:** The individual features which appear to have most effect are `Age`, `Age when joined` and `Years in team`. Perhaps the most we can say is old players are cheap. `Appearances` and `Goals p90` are starting to show some effect - which is as expected.
+# transformed_features = list(numeric_features) \
+#     + final_model['preprocessor'].transformers_[1][1]['onehot']\
+#                          .get_feature_names(categorical_features).tolist()
+# # transformed_features
+
+# params = pd.Series(final_model.named_steps["estimator"].coef_, index=transformed_features)
+# # params
+
+# np.random.seed(1)
+# err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(1000)], 0)
+# # err
+
+# print("Effect of each feature on the model")
+# effect_error = pd.DataFrame({"effect": params.round(2), "error": err.round(2)})
+# effect_error.reindex(effect_error.effect.abs().sort_values(ascending=False).index)
+
+
+# ~~**ANALYSIS:** The individual features which appear to have most effect are `Games started`, `Appearances`, `Age` and `Age when joined`. Perhaps the most we can say is old players who don't play much are likely to be cheap! :)~~
+# 
+# Too few samples of some features currently to look at their effect/error.
 
 # In[ ]:
 
@@ -869,14 +898,14 @@ pd.DataFrame({"effect": params.round(2), "error": err.round(2)})
 # * Produce Final Report
 # * Review Project
 
-# In[69]:
+# In[71]:
 
 
 df_out = df.copy()
 # df_out.shape
 
 
-# In[70]:
+# In[72]:
 
 
 if drop_nulls:
@@ -888,7 +917,7 @@ else:
 # df_out.shape
 
 
-# In[71]:
+# In[73]:
 
 
 print("Summary of whole dataset (with predictions)...")
@@ -896,7 +925,7 @@ print("Summary of whole dataset (with predictions)...")
 df_out.describe(include="all")
 
 
-# In[72]:
+# In[74]:
 
 
 g = sns.pairplot(df_out[["Shirt number", "Height", "Age", "Age when joined", "Years in team", "Market value", "Market value (prediction)"]])
@@ -905,14 +934,14 @@ g.fig.suptitle("Pair plots of Shirt number, Height, Age, Age when joined, Years 
 
 # **ANALYSIS:** As we saw during data preparation there's no clear correlations with continuous features at work. Further our predictions don't even particularly correlate with the actual values. We're also seeing some particular poor (negative) estimates for some young players.
 
-# In[73]:
+# In[75]:
 
 
 df_unseen = df_out[df_out["Market value"].isna()]
 # df_unseen.shape
 
 
-# In[74]:
+# In[76]:
 
 
 print("Summary of unseen records in dataset (no labels)...")
@@ -920,9 +949,9 @@ print("Summary of unseen records in dataset (no labels)...")
 df_unseen[df_unseen["Market value (prediction)"].notna()].describe(include="all")
 
 
-# **ANALYSIS:** The player's missing actual Market values are mostly young players. THere's now a broad range of predictions from £8m all the way down to -£8m!
+# **ANALYSIS:** The player's missing actual Market values are mostly young players. There's now a broad range of predictions from £5m all the way down to -£4m!
 
-# In[75]:
+# In[77]:
 
 
 print("Predictions below zero")
@@ -933,13 +962,13 @@ df_unseen[df_unseen["Market value (prediction)"] < 0.0].describe(include="all")
 
 # **ANALYSIS:** The model seems to particularly struggle with young players who we don't have much information about.
 
-# In[76]:
+# In[78]:
 
 
 df_out.to_csv("../data/interim/boro_01_dataset.csv")
 
 
-# In[77]:
+# In[79]:
 
 
 clf_file = "../models/boro_01_model.pkl" 
@@ -947,7 +976,7 @@ with open(clf_file, "wb") as clf_outfile:
     pickle.dump(final_model, clf_outfile)
 
 
-# In[78]:
+# In[80]:
 
 
 ftn_file = "../models/boro_01_feature_names.pkl" 
@@ -955,13 +984,13 @@ with open(ftn_file, "wb") as ftn_outfile:
     pickle.dump(feature_names, ftn_outfile)
 
 
-# In[79]:
+# In[81]:
 
 
 ## save notebook before running `nbconvert`
 
 
-# In[80]:
+# In[82]:
 
 
 outFolder = './output'
@@ -976,7 +1005,7 @@ for filename in os.listdir(outFolder):
         print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-# In[81]:
+# In[83]:
 
 
 get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb")

@@ -91,8 +91,8 @@ def extract_competition(file_name):
     competition_dict = {
         "all": "N/A",
         "chm": "Championship",
-        "chp": "Championship Playoffs",
-        "cpo": "Championship & Playoffs",
+        "cpo": "Championship Playoffs",
+        "chp": "Championship & Playoffs",
         "fac": "FA Cup",
         "lec": "League Cup",
         "prm": "Premier League",

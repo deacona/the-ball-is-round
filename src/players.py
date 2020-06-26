@@ -38,7 +38,7 @@ def clean_data(source_name):
         
     elif source_name == "tmk_psm":
         source_header = ["Shirt number", "Position", "Name", "Age", "Nationality",
-                                "In squad", "Appearances", "Goals", "Assists", 
+                                "In squad", "Games started", "Goals", "Assists", 
                                     "Yellow cards", "Second yellow cards", "Red cards",
                                    "Substitutions on", "Substitutions off", "PPG", "Minutes played"]
         drop_cols = ["Nationality"]
@@ -57,6 +57,7 @@ def clean_data(source_name):
 
     df.dropna(subset=notna_cols, inplace=True)
 
+    df = df.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
     df = df.replace('-', np.nan)
     df = df.replace('Was not used during this season', np.nan)
     df = df.replace('Not in squad during this season', np.nan)
@@ -122,17 +123,17 @@ def clean_data(source_name):
         df["PPG"] = df["PPG"].str.strip().replace(r'[,]', '.', regex=True).astype(float)
         df["Minutes played"] = df["Minutes played"].str.strip().replace(r'[.\']', '', regex=True).astype(float)
         
-        df[["In squad", "Appearances", "Goals", "Assists", 
+        df[["In squad", "Games started", "Goals", "Assists", 
             "Yellow cards", "Second yellow cards", "Red cards",
             "Substitutions on", "Substitutions off", "PPG", "Minutes played"]] = \
-            df[["In squad", "Appearances", "Goals", "Assists", 
+            df[["In squad", "Games started", "Goals", "Assists", 
                 "Yellow cards", "Second yellow cards", "Red cards",
                 "Substitutions on", "Substitutions off", "PPG", "Minutes played"]].fillna(0)
         
-        df[["In squad", "Appearances", "Goals", "Assists", 
+        df[["In squad", "Games started", "Goals", "Assists", 
             "Yellow cards", "Second yellow cards", "Red cards",
             "Substitutions on", "Substitutions off", "PPG", "Minutes played"]] = \
-            df[["In squad", "Appearances", "Goals", "Assists", 
+            df[["In squad", "Games started", "Goals", "Assists", 
                 "Yellow cards", "Second yellow cards", "Red cards",
                 "Substitutions on", "Substitutions off", "PPG", "Minutes played"]].astype(float)
 
