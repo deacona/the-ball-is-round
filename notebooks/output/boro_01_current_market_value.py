@@ -47,8 +47,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
 # from sklearn.linear_model import LinearRegression
-# from sklearn.linear_model import Ridge
-from sklearn.linear_model import Lasso
+from sklearn.linear_model import Ridge
 from sklearn.utils import resample
 from sklearn.metrics import median_absolute_error
 from sklearn.metrics import mean_squared_error
@@ -720,7 +719,7 @@ preprocessor = ColumnTransformer(
 # Append classifier to preprocessing pipeline.
 # Now we have a full prediction pipeline.
 model = Pipeline(steps=[('preprocessor', preprocessor),
-                      ('estimator', Lasso())])
+                      ('estimator', Ridge())])
 
 
 # In[60]:
@@ -728,9 +727,7 @@ model = Pipeline(steps=[('preprocessor', preprocessor),
 
 param_grid = {"estimator__fit_intercept": [True, False],
              "estimator__normalize": [True, False],
-             "estimator__positive": [True, False],
              "estimator__alpha": [0.1, 1.0, 10.0, 100.0],
-#              "estimator__alpha": ["cyclic", "random"],
               "estimator__random_state": [RANDOM_STATE],
              }
 # param_grid
@@ -882,7 +879,7 @@ plt.ylabel('Market value (predicted)');
 # # params
 
 # np.random.seed(1)
-# err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(1000)], 0)
+# err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(2)], 0)
 # # err
 
 # print("Effect of each feature on the model")
@@ -958,15 +955,15 @@ print("Summary of unseen records in dataset (no labels)...")
 df_unseen[df_unseen["Market value (prediction)"].notna()].describe(include="all")
 
 
-# **ANALYSIS:** The player's missing actual Market values are mostly young players.
+# **ANALYSIS:** The player's missing actual Market values are mostly young players. There's now a broad range of predictions but some are negative.
 
 # In[77]:
 
 
-# print("Predictions below zero")
+print("Predictions below zero")
 
-# df_unseen[df_unseen["Market value (prediction)"] < 0.0].describe(include="all")
-# # pd.DataFrame(df_unseen.loc['Connor Ripley (11/12)'])
+df_unseen[df_unseen["Market value (prediction)"] < 0.0].describe(include="all")
+# pd.DataFrame(df_unseen.loc['Connor Ripley (11/12)'])
 
 
 # **ANALYSIS:** The model seems to particularly struggle with young players who we don't have much information about.
