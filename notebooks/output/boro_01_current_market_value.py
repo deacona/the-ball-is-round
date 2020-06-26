@@ -46,7 +46,8 @@ from sklearn.model_selection import learning_curve
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
-from sklearn.linear_model import LinearRegression
+# from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
 from sklearn.utils import resample
 from sklearn.metrics import median_absolute_error
 from sklearn.metrics import mean_squared_error
@@ -718,14 +719,17 @@ preprocessor = ColumnTransformer(
 # Append classifier to preprocessing pipeline.
 # Now we have a full prediction pipeline.
 model = Pipeline(steps=[('preprocessor', preprocessor),
-                      ('estimator', LinearRegression())])
+                      ('estimator', Ridge())])
 
 
 # In[60]:
 
 
 param_grid = {"estimator__fit_intercept": [True, False],
-             "estimator__normalize": [True, False],}
+             "estimator__normalize": [True, False],
+             "estimator__alpha": [0.1, 1.0, 10.0, 100.0],
+              "estimator__random_state": [RANDOM_STATE],
+             }
 # param_grid
 
 
@@ -810,7 +814,7 @@ pd.DataFrame(
     ).T
 
 
-# **ANALYSIS:** After we added more preprocessing (missing value imputer, scaling and OHE) the training and test scores  balanced out but now - after adding additional features - the training score has got much better whilst the test score has dropped off so we are quite possibly overfitting.
+# **ANALYSIS:** After we added more preprocessing (missing value imputer, scaling and OHE) the training and test scores  balanced out, whereas adding additional features improved the training score but worsened the test score. Using regularization has started to bring them back into balance... but still a long way from a _good_ score.
 
 # In[68]:
 
@@ -854,12 +858,14 @@ plt.show()
 sns.scatterplot(y_train, final_model.predict(X_train))
 sns.scatterplot(y_test, final_model.predict(X_test))
 
+mv_range = [y.min(), y.max()]
+plt.plot(mv_range, mv_range, '--r')
 plt.title('Actual vs Predicted Market value')
 plt.xlabel('Market value (actual)')
 plt.ylabel('Market value (predicted)');
 
 
-# **ANALYSIS:** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £5m even though some of the data exceeded £10m.
+# **ANALYSIS:** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £4m even though some of the data exceeded £10m.
 
 # In[70]:
 
@@ -873,7 +879,7 @@ plt.ylabel('Market value (predicted)');
 # # params
 
 # np.random.seed(1)
-# err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(1000)], 0)
+# err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(2)], 0)
 # # err
 
 # print("Effect of each feature on the model")
@@ -949,7 +955,7 @@ print("Summary of unseen records in dataset (no labels)...")
 df_unseen[df_unseen["Market value (prediction)"].notna()].describe(include="all")
 
 
-# **ANALYSIS:** The player's missing actual Market values are mostly young players. There's now a broad range of predictions from £5m all the way down to -£4m!
+# **ANALYSIS:** The player's missing actual Market values are mostly young players. There's now a broad range of predictions but some are negative.
 
 # In[77]:
 
