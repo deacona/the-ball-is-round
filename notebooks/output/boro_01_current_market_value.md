@@ -2244,15 +2244,14 @@ A number of key performance metrics will be investigated in turn, looking at how
                                                                                                             copy=True,
                                                                                                             fill_value=None,
                                                                                                             miss...
-                                                  fit_intercept=True, max_iter=None,
-                                                  normalize=False,
-                                                  random_state=None, solver='auto',
-                                                  tol=0.001))],
+                                                  selection='cyclic', tol=0.0001,
+                                                  warm_start=False))],
                                     verbose=False),
                  iid='deprecated', n_jobs=None,
                  param_grid={'estimator__alpha': [0.1, 1.0, 10.0, 100.0],
                              'estimator__fit_intercept': [True, False],
                              'estimator__normalize': [True, False],
+                             'estimator__positive': [True, False],
                              'estimator__random_state': [4]},
                  pre_dispatch='2*n_jobs', refit=True, return_train_score=False,
                  scoring=None, verbose=0)
@@ -2284,9 +2283,6 @@ A number of key performance metrics will be investigated in turn, looking at how
                                                                       ('scaler',
                                                                        MinMaxScaler(copy=True,
                                                                                     feature_ran...
-                                                                                     verbose=0)),
-                                                                      ('onehot',
-                                                                       OneHotEncoder(categories='auto',
                                                                                      drop=None,
                                                                                      dtype=<class 'numpy.float64'>,
                                                                                      handle_unknown='ignore',
@@ -2296,9 +2292,10 @@ A number of key performance metrics will be investigated in turn, looking at how
                                                        'Competition'])],
                                        verbose=False)),
                     ('estimator',
-                     Ridge(alpha=10.0, copy_X=True, fit_intercept=False,
-                           max_iter=None, normalize=True, random_state=4,
-                           solver='auto', tol=0.001))],
+                     Lasso(alpha=0.1, copy_X=True, fit_intercept=False,
+                           max_iter=1000, normalize=True, positive=False,
+                           precompute=False, random_state=4, selection='cyclic',
+                           tol=0.0001, warm_start=False))],
              verbose=False)
 
 
@@ -2340,18 +2337,18 @@ A number of key performance metrics will be investigated in turn, looking at how
   <tbody>
     <tr>
       <th>MedAE</th>
-      <td>0.703314</td>
-      <td>0.942753</td>
+      <td>0.724203</td>
+      <td>0.767390</td>
     </tr>
     <tr>
       <th>RMSE</th>
-      <td>1.430554</td>
-      <td>1.788810</td>
+      <td>1.592299</td>
+      <td>1.901055</td>
     </tr>
     <tr>
       <th>R^2</th>
-      <td>0.328165</td>
-      <td>0.193005</td>
+      <td>0.167655</td>
+      <td>0.088553</td>
     </tr>
   </tbody>
 </table>
@@ -2574,7 +2571,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>2.447119</td>
       <td>2.011287</td>
       <td>0.104350</td>
-      <td>1.498627</td>
+      <td>1.319006</td>
     </tr>
     <tr>
       <th>std</th>
@@ -2602,7 +2599,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>2.005552</td>
       <td>2.957062</td>
       <td>0.162198</td>
-      <td>0.809928</td>
+      <td>0.631304</td>
     </tr>
     <tr>
       <th>min</th>
@@ -2630,7 +2627,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.265577</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>-0.253305</td>
+      <td>0.187820</td>
     </tr>
     <tr>
       <th>25%</th>
@@ -2658,7 +2655,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.913092</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.921922</td>
+      <td>0.785690</td>
     </tr>
     <tr>
       <th>50%</th>
@@ -2686,7 +2683,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>1.960341</td>
       <td>1.000000</td>
       <td>0.025568</td>
-      <td>1.364868</td>
+      <td>1.229102</td>
     </tr>
     <tr>
       <th>75%</th>
@@ -2714,7 +2711,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>3.422384</td>
       <td>3.000000</td>
       <td>0.173961</td>
-      <td>2.031820</td>
+      <td>1.776286</td>
     </tr>
     <tr>
       <th>max</th>
@@ -2742,7 +2739,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>10.998172</td>
       <td>13.000000</td>
       <td>1.800000</td>
-      <td>4.132107</td>
+      <td>3.074114</td>
     </tr>
   </tbody>
 </table>
@@ -2946,7 +2943,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>1.486032</td>
       <td>0.504425</td>
       <td>0.041544</td>
-      <td>1.057937</td>
+      <td>0.836937</td>
     </tr>
     <tr>
       <th>std</th>
@@ -2974,7 +2971,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.997234</td>
       <td>1.303319</td>
       <td>0.097388</td>
-      <td>0.547206</td>
+      <td>0.386480</td>
     </tr>
     <tr>
       <th>min</th>
@@ -3002,7 +2999,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.334025</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>-0.180407</td>
+      <td>0.286404</td>
     </tr>
     <tr>
       <th>25%</th>
@@ -3030,7 +3027,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.991122</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.674358</td>
+      <td>0.576878</td>
     </tr>
     <tr>
       <th>50%</th>
@@ -3058,7 +3055,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>0.999336</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>1.011023</td>
+      <td>0.755940</td>
     </tr>
     <tr>
       <th>75%</th>
@@ -3086,7 +3083,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>2.001410</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>1.343487</td>
+      <td>1.126145</td>
     </tr>
     <tr>
       <th>max</th>
@@ -3114,7 +3111,7 @@ Too few samples of some features currently to look at their effect/error.
       <td>4.000082</td>
       <td>7.000000</td>
       <td>0.500000</td>
-      <td>2.587355</td>
+      <td>1.931802</td>
     </tr>
   </tbody>
 </table>
@@ -3122,372 +3119,6 @@ Too few samples of some features currently to look at their effect/error.
 
 
 
-**ANALYSIS:** The player's missing actual Market values are mostly young players. There's now a broad range of predictions but some are negative.
-
-    Predictions below zero
-    
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Age</th>
-      <th>Age when joined</th>
-      <th>Appearances</th>
-      <th>Assists</th>
-      <th>Assists p90</th>
-      <th>Competition</th>
-      <th>Foot</th>
-      <th>Games started</th>
-      <th>Goals</th>
-      <th>Goals p90</th>
-      <th>Height</th>
-      <th>In squad</th>
-      <th>Market value</th>
-      <th>Minutes played</th>
-      <th>PPG</th>
-      <th>Position group</th>
-      <th>Red cards</th>
-      <th>Second yellow cards</th>
-      <th>Shirt number</th>
-      <th>Substitutions off</th>
-      <th>Substitutions on</th>
-      <th>Years in team</th>
-      <th>Yellow cards</th>
-      <th>Yellow cards p90</th>
-      <th>Market value (prediction)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>2.00000</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2.000000</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>1.0</td>
-      <td>2.000000</td>
-      <td>0.0</td>
-      <td>2.000000</td>
-      <td>2.000000</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-      <td>1.000000</td>
-      <td>2.0</td>
-      <td>2.0</td>
-      <td>2.000000</td>
-    </tr>
-    <tr>
-      <th>unique</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>top</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>Championship, FA Cup, League Cup</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>G</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>freq</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>17.000000</td>
-      <td>18.376832</td>
-      <td>1.50000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>4.500000</td>
-      <td>NaN</td>
-      <td>50.000000</td>
-      <td>0.333333</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.500000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.179423</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>1.414214</td>
-      <td>NaN</td>
-      <td>2.12132</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.414214</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>6.363961</td>
-      <td>NaN</td>
-      <td>70.710678</td>
-      <td>0.471405</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.707107</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.001391</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>16.000000</td>
-      <td>18.376832</td>
-      <td>0.00000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.180407</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>16.500000</td>
-      <td>18.376832</td>
-      <td>0.75000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.500000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>2.250000</td>
-      <td>NaN</td>
-      <td>25.000000</td>
-      <td>0.166667</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.250000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.179915</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>17.000000</td>
-      <td>18.376832</td>
-      <td>1.50000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>4.500000</td>
-      <td>NaN</td>
-      <td>50.000000</td>
-      <td>0.333333</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.500000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.179423</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>17.500000</td>
-      <td>18.376832</td>
-      <td>2.25000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1.500000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>6.750000</td>
-      <td>NaN</td>
-      <td>75.000000</td>
-      <td>0.500000</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.750000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.178931</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>18.000000</td>
-      <td>18.376832</td>
-      <td>3.00000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>191.0</td>
-      <td>9.000000</td>
-      <td>NaN</td>
-      <td>100.000000</td>
-      <td>0.666667</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.000000</td>
-      <td>1.002074</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>-0.178439</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
+**ANALYSIS:** The player's missing actual Market values are mostly young players.
 
 **ANALYSIS:** The model seems to particularly struggle with young players who we don't have much information about.
