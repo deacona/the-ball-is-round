@@ -47,7 +47,9 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
 # from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import Ridge
+# from sklearn.linear_model import Lasso
+# from sklearn.linear_model import Ridge
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.utils import resample
 from sklearn.metrics import median_absolute_error
 from sklearn.metrics import mean_squared_error
@@ -58,6 +60,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
+from sklearn.inspection import permutation_importance
 
 
 # In[5]:
@@ -587,9 +590,17 @@ plt.ylabel('Number of players');
 # In[48]:
 
 
-g = sns.pairplot(df[["Shirt number", "Height", "Age", "Age when joined", "Years in team", "Market value"]])
-g.fig.suptitle("Pair plots of Shirt number, Height, Age, Age when joined, Years in team and Market value", y=1.08);
+# g = sns.pairplot(df[["Shirt number", "Height", "Age", "Age when joined", "Years in team", "Market value"]])
+# g.fig.suptitle("Pair plots of Shirt number, Height, Age, Age when joined, Years in team and Market value", y=1.08);
 
+df.corr().style.background_gradient(cmap='coolwarm')
+
+# sns.heatmap(df.corr(), 
+#             xticklabels=df.columns.values,
+#             yticklabels=df.columns.values)
+
+
+# **ANALYSIS**: I'll remove `Games started` and `Age when joined` as they are closely correlated with other features.
 
 # In[49]:
 
@@ -619,8 +630,10 @@ df.shape
 # In[51]:
 
 
-numeric_features = ['Shirt number', 'Height', 'Age', 'Age when joined', 'Years in team', 
-                    'In squad', 'Appearances', 'Games started', 'Substitutions on', 'Substitutions off', 
+numeric_features = ['Shirt number', 'Height', 'Age', #'Age when joined', 
+                    'Years in team', 
+                    'In squad', 'Appearances', #'Games started', 
+                    'Substitutions on', 'Substitutions off', 
                     'Goals', 'Assists', 
                     'Yellow cards', 'Second yellow cards', 'Red cards', 
                     'PPG', 'Minutes played',
@@ -717,21 +730,17 @@ preprocessor = ColumnTransformer(
         ('num', numeric_transformer, numeric_features),
         ('cat', categorical_transformer, categorical_features)])
 
-# Append classifier to preprocessing pipeline.
-# Now we have a full prediction pipeline.
 model = Pipeline(steps=[('preprocessor', preprocessor),
-                        ('basis', PolynomialFeatures()),
-                      ('estimator', Ridge())])
+#                         ('basis', PolynomialFeatures()),
+                      ('estimator', RandomForestRegressor())])
 
 
 # In[60]:
 
 
-param_grid = {"basis__degree": [1, 2, 3],
-              "basis__include_bias": [True, False],
-             "estimator__fit_intercept": [True, False],
-             "estimator__normalize": [True, False],
-             "estimator__alpha": [0.1, 1.0, 10.0, 100.0],
+param_grid = {"estimator__n_estimators": [10, 20, 30],
+             "estimator__max_depth": [2, 4, 6],
+             "estimator__min_samples_split": [2, 4, 6],
               "estimator__random_state": [RANDOM_STATE],
              }
 # param_grid
@@ -818,7 +827,7 @@ pd.DataFrame(
     ).T
 
 
-# **ANALYSIS:** After we added more preprocessing (missing value imputer, scaling and OHE) the training and test scores  balanced out, whereas adding additional features and using a polynomial basic function improved the training score but worsened the test score. Using regularization has started to bring them back into balance... but still a long way from a _good_ score.
+# **ANALYSIS:** Switching from linear regression models to a random forest ensemble has massively improved the training scores... and also caused a smaller uptick in test scores. Seems like I'm heading in the right direction...
 
 # In[68]:
 
@@ -854,7 +863,7 @@ plt.tight_layout()
 plt.show()
 
 
-# **ANALYSIS:** The model seems pretty weak in general but we can say the learning curves have largely converged so adding extra training samples is unlikely to improve the model.
+# **ANALYSIS:** Scores are converging slowly now so more data could well help.
 
 # In[69]:
 
@@ -869,31 +878,43 @@ plt.xlabel('Market value (actual)')
 plt.ylabel('Market value (predicted)');
 
 
-# **ANALYSIS:** Confirming our scoring visually, it looks pretty weak correlation between actual and predicted values. Note also the model is not able to predict anything much above £4m even though some of the data exceeded £10m.
+# **ANALYSIS:** Out predictions are still undershooting in general but we're getting closer all the time!
 
 # In[70]:
 
 
-# transformed_features = list(numeric_features) \
-#     + final_model['preprocessor'].transformers_[1][1]['onehot']\
-#                          .get_feature_names(categorical_features).tolist()
-# # transformed_features
-
-# params = pd.Series(final_model.named_steps["estimator"].coef_, index=transformed_features)
-# # params
-
-# np.random.seed(1)
-# err = np.std([final_model.fit(*resample(X, y)).named_steps["estimator"].coef_ for i in range(1000)], 0)
-# # err
-
-# print("Effect of each feature on the model")
-# effect_error = pd.DataFrame({"effect": params.round(2), "error": err.round(2)})
-# effect_error.reindex(effect_error.effect.abs().sort_values(ascending=False).index)
+transformed_features = list(numeric_features)     + final_model['preprocessor'].transformers_[1][1]['onehot']                         .get_feature_names(categorical_features).tolist()
+# transformed_features
 
 
-# ~~**ANALYSIS:** The individual features which appear to have most effect are `Games started`, `Appearances`, `Age` and `Age when joined`. Perhaps the most we can say is old players who don't play much are likely to be cheap! :)~~
-# 
-# Too few samples of some features currently to look at their effect/error.
+# In[71]:
+
+
+def show_significant_features(features, labels):
+    r = permutation_importance(final_model, features, labels,
+                            n_repeats=30,
+                            random_state=RANDOM_STATE)
+
+    for i in r.importances_mean.argsort()[::-1]:
+        if r.importances_mean[i] - 2 * r.importances_std[i] > 0:
+            print("{0} {1:.3f} +/- {2:.3f}".format(transformed_features[i].ljust(20), 
+                                                    r.importances_mean[i],
+                                                    r.importances_std[i]))
+
+get_ipython().run_line_magic('pinfo', 'show_significant_features')
+
+
+# In[72]:
+
+
+print("\nSignificant training features:")
+show_significant_features(X_train, y_train)
+
+print("\nSignificant testing features:")
+show_significant_features(X_test, y_test)
+
+
+# **ANALYSIS:** `Minutes played`, `Shirt number` (!), `Appearances` and `Goals` are particularly influencing the model... but only `Appearances` is generalising to new predictions.
 
 # In[ ]:
 
@@ -908,14 +929,14 @@ plt.ylabel('Market value (predicted)');
 # * Produce Final Report
 # * Review Project
 
-# In[71]:
+# In[73]:
 
 
 df_out = df.copy()
 # df_out.shape
 
 
-# In[72]:
+# In[74]:
 
 
 if drop_nulls:
@@ -927,7 +948,7 @@ else:
 # df_out.shape
 
 
-# In[73]:
+# In[75]:
 
 
 print("Summary of whole dataset (with predictions)...")
@@ -935,23 +956,14 @@ print("Summary of whole dataset (with predictions)...")
 df_out.describe(include="all")
 
 
-# In[74]:
-
-
-g = sns.pairplot(df_out[["Shirt number", "Height", "Age", "Age when joined", "Years in team", "Market value", "Market value (prediction)"]])
-g.fig.suptitle("Pair plots of Shirt number, Height, Age, Age when joined, Years in team, Market value and Market value (prediction)", y=1.08);
-
-
-# **ANALYSIS:** As we saw during data preparation there's no clear correlations with continuous features at work. Further our predictions don't even particularly correlate with the actual values. We're also seeing some particular poor (negative) estimates for some young players.
-
-# In[75]:
+# In[76]:
 
 
 df_unseen = df_out[df_out["Market value"].isna()]
 # df_unseen.shape
 
 
-# In[76]:
+# In[77]:
 
 
 print("Summary of unseen records in dataset (no labels)...")
@@ -959,26 +971,26 @@ print("Summary of unseen records in dataset (no labels)...")
 df_unseen[df_unseen["Market value (prediction)"].notna()].describe(include="all")
 
 
-# **ANALYSIS:** The player's missing actual Market values are mostly young players. There's now a broad range of predictions but some are negative.
+# **ANALYSIS:** The player's missing actual Market values are mostly young players.
 
-# In[77]:
+# In[78]:
 
 
-print("Predictions below zero")
+# print("Predictions below zero")
 
-df_unseen[df_unseen["Market value (prediction)"] < 0.0].describe(include="all")
+# df_unseen[df_unseen["Market value (prediction)"] < 0.0].describe(include="all")
 # pd.DataFrame(df_unseen.loc['Connor Ripley (11/12)'])
 
 
-# **ANALYSIS:** The model seems to particularly struggle with young players who we don't have much information about.
+# ~~**ANALYSIS:** The model seems to particularly struggle with young players who we don't have much information about.~~
 
-# In[78]:
+# In[79]:
 
 
 df_out.to_csv("../data/interim/boro_01_dataset.csv")
 
 
-# In[79]:
+# In[80]:
 
 
 clf_file = "../models/boro_01_model.pkl" 
@@ -986,7 +998,7 @@ with open(clf_file, "wb") as clf_outfile:
     pickle.dump(final_model, clf_outfile)
 
 
-# In[80]:
+# In[81]:
 
 
 ftn_file = "../models/boro_01_feature_names.pkl" 
@@ -994,13 +1006,13 @@ with open(ftn_file, "wb") as ftn_outfile:
     pickle.dump(feature_names, ftn_outfile)
 
 
-# In[81]:
+# In[82]:
 
 
 ## save notebook before running `nbconvert`
 
 
-# In[82]:
+# In[83]:
 
 
 outFolder = './output'
@@ -1015,7 +1027,7 @@ for filename in os.listdir(outFolder):
         print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-# In[83]:
+# In[84]:
 
 
 get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb")
