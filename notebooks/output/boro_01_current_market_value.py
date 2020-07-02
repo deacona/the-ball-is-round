@@ -738,9 +738,10 @@ model = Pipeline(steps=[('preprocessor', preprocessor),
 # In[60]:
 
 
-param_grid = {"estimator__n_estimators": [10, 20, 30],
-             "estimator__max_depth": [2, 4, 6],
-             "estimator__min_samples_split": [2, 4, 6],
+param_grid = {"estimator__n_estimators": [10, 100, 200],
+             "estimator__max_depth": [5, 10, 20, 30],
+#              "estimator__min_samples_split": [0.1, 0.2, 0.3],
+#               "estimator__max_features": ["auto", "sqrt", "log2"],
               "estimator__random_state": [RANDOM_STATE],
              }
 # param_grid
@@ -914,7 +915,7 @@ print("\nSignificant testing features:")
 show_significant_features(X_test, y_test)
 
 
-# **ANALYSIS:** `Minutes played`, `Shirt number` (!), `Appearances` and `Goals` are particularly influencing the model... but only `Appearances` is generalising to new predictions.
+# **ANALYSIS:** `Minutes played`, `Shirt number`(!), `In squad`, `Goals` and `Age` are particularly influencing the model. Of those, only `Appearances` - along with `Yellow cards` and `Assists` - are generalising to new predictions.
 
 # In[ ]:
 
