@@ -22,6 +22,7 @@ import numpy as np
 import pandas as pd
 
 pd.set_option("display.latex.repr", True)
+pd.set_option('precision', 3)
 
 
 # In[3]:
@@ -46,11 +47,12 @@ from sklearn.model_selection import learning_curve
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
+# from sklearn.feature_selection import SelectKBest, f_regression
 # from sklearn.linear_model import LinearRegression
 # from sklearn.linear_model import Lasso
 # from sklearn.linear_model import Ridge
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.utils import resample
+# from sklearn.utils import resample
 from sklearn.metrics import median_absolute_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
@@ -630,7 +632,8 @@ df.shape
 # In[51]:
 
 
-numeric_features = ['Shirt number', 'Height', 'Age', #'Age when joined', 
+numeric_features = ['Shirt number', 
+                'Height', 'Age', #'Age when joined', 
                     'Years in team', 
                     'In squad', 'Appearances', #'Games started', 
                     'Substitutions on', 'Substitutions off', 
@@ -732,13 +735,16 @@ preprocessor = ColumnTransformer(
 
 model = Pipeline(steps=[('preprocessor', preprocessor),
 #                         ('basis', PolynomialFeatures()),
+#                         ('reduction', SelectKBest(f_regression)),
                       ('estimator', RandomForestRegressor())])
 
 
 # In[60]:
 
 
-param_grid = {"estimator__n_estimators": [10, 100, 200],
+param_grid = {
+#             "reduction__k": [5, 10, 15],
+            "estimator__n_estimators": [10, 100, 200],
              "estimator__max_depth": [5, 10, 20, 30],
 #              "estimator__min_samples_split": [0.1, 0.2, 0.3],
 #               "estimator__max_features": ["auto", "sqrt", "log2"],
@@ -879,12 +885,14 @@ plt.xlabel('Market value (actual)')
 plt.ylabel('Market value (predicted)');
 
 
-# **ANALYSIS:** Out predictions are still undershooting in general but we're getting closer all the time!
+# **ANALYSIS:** Our predictions are still undershooting in general but we're getting closer all the time!
 
 # In[70]:
 
 
-transformed_features = list(numeric_features)     + final_model['preprocessor'].transformers_[1][1]['onehot']                         .get_feature_names(categorical_features).tolist()
+# transformed_features = list(numeric_features) \
+#     + final_model['preprocessor'].transformers_[1][1]['onehot']\
+#                          .get_feature_names(categorical_features).tolist()
 # transformed_features
 
 
@@ -898,7 +906,8 @@ def show_significant_features(features, labels):
 
     for i in r.importances_mean.argsort()[::-1]:
         if r.importances_mean[i] - 2 * r.importances_std[i] > 0:
-            print("{0} {1:.3f} +/- {2:.3f}".format(transformed_features[i].ljust(20), 
+            print("{0} {1:.3f} +/- {2:.3f}".format(feature_names[i].ljust(20), 
+#                                                 transformed_features[i].ljust(20), 
                                                     r.importances_mean[i],
                                                     r.importances_std[i]))
 
@@ -915,7 +924,7 @@ print("\nSignificant testing features:")
 show_significant_features(X_test, y_test)
 
 
-# **ANALYSIS:** `Minutes played`, `Shirt number`(!), `In squad`, `Goals` and `Age` are particularly influencing the model. Of those, only `Appearances` - along with `Yellow cards` and `Assists` - are generalising to new predictions.
+# **ANALYSIS:** `Minutes played`, `Shirt number`(!?), `In squad`, `Goals` and `Age` are particularly influencing the model. Of those, only `Minutes played` - along with `Yellow cards` and `Assists` - are generalising to new predictions.
 
 # In[ ]:
 
@@ -972,7 +981,7 @@ print("Summary of unseen records in dataset (no labels)...")
 df_unseen[df_unseen["Market value (prediction)"].notna()].describe(include="all")
 
 
-# **ANALYSIS:** The player's missing actual Market values are mostly young players.
+# **ANALYSIS:** The player's missing actual Market values are mostly young players who haven't been used much.
 
 # In[78]:
 
