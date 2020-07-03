@@ -51,7 +51,9 @@ from sklearn.model_selection import KFold
 # from sklearn.linear_model import LinearRegression
 # from sklearn.linear_model import Lasso
 # from sklearn.linear_model import Ridge
-from sklearn.ensemble import RandomForestRegressor
+# from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import GradientBoostingRegressor
+# from sklearn.svm import SVR
 # from sklearn.utils import resample
 from sklearn.metrics import median_absolute_error
 from sklearn.metrics import mean_squared_error
@@ -736,7 +738,7 @@ preprocessor = ColumnTransformer(
 model = Pipeline(steps=[('preprocessor', preprocessor),
 #                         ('basis', PolynomialFeatures()),
 #                         ('reduction', SelectKBest(f_regression)),
-                      ('estimator', RandomForestRegressor())])
+                      ('estimator', GradientBoostingRegressor())])
 
 
 # In[60]:
@@ -744,11 +746,13 @@ model = Pipeline(steps=[('preprocessor', preprocessor),
 
 param_grid = {
 #             "reduction__k": [5, 10, 15],
-            "estimator__n_estimators": [10, 100, 200],
-             "estimator__max_depth": [5, 10, 20, 30],
+#             "estimator__n_estimators": [10, 20, 30],
+#              "estimator__max_depth": [1, 3, 5],
 #              "estimator__min_samples_split": [0.1, 0.2, 0.3],
 #               "estimator__max_features": ["auto", "sqrt", "log2"],
               "estimator__random_state": [RANDOM_STATE],
+#             "estimator__kernel": ['linear'] #, 'poly', 'rbf', 'sigmoid', 'precomputed']
+#             "estimator__gamma": ["scale", "auto"]
              }
 # param_grid
 
@@ -834,7 +838,7 @@ pd.DataFrame(
     ).T
 
 
-# **ANALYSIS:** Switching from linear regression models to a random forest ensemble has massively improved the training scores... and also caused a smaller uptick in test scores. Seems like I'm heading in the right direction...
+# **ANALYSIS:** Switching from random forest to gradient boost has improved the training scores further... but the test scores are (arguably) slightly worse.
 
 # In[68]:
 
@@ -885,7 +889,7 @@ plt.xlabel('Market value (actual)')
 plt.ylabel('Market value (predicted)');
 
 
-# **ANALYSIS:** Our predictions are still undershooting in general but we're getting closer all the time!
+# **ANALYSIS:** Our predictions are still undershooting in general but the training data is getting very close (overfitting?)
 
 # In[70]:
 
@@ -924,7 +928,7 @@ print("\nSignificant testing features:")
 show_significant_features(X_test, y_test)
 
 
-# **ANALYSIS:** `Minutes played`, `Shirt number`(!?), `In squad`, `Goals` and `Age` are particularly influencing the model. Of those, only `Minutes played` - along with `Yellow cards` and `Assists` - are generalising to new predictions.
+# **ANALYSIS:** `Minutes played`, `Goals`, `Appearances`, `Age`, `Position group` and `In squad` are particularly influencing the model. Of those, only `In squad` - along with `Yellow cards` and `Assists` - are generalising to new predictions.
 
 # In[ ]:
 
@@ -986,13 +990,13 @@ df_unseen[df_unseen["Market value (prediction)"].notna()].describe(include="all"
 # In[78]:
 
 
-# print("Predictions below zero")
+print("Predictions below zero")
 
-# df_unseen[df_unseen["Market value (prediction)"] < 0.0].describe(include="all")
+df_unseen[df_unseen["Market value (prediction)"] < 0.0].describe(include="all")
 # pd.DataFrame(df_unseen.loc['Connor Ripley (11/12)'])
 
 
-# ~~**ANALYSIS:** The model seems to particularly struggle with young players who we don't have much information about.~~
+# **ANALYSIS:** The model seems to particularly struggle with young players who we don't have much information about.
 
 # In[79]:
 
