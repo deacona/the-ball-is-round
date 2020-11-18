@@ -4,7 +4,10 @@ scipy
 matplotlib
 seaborn
 pandas
+xlrd
+flake8
 pytest
+coverage
 beautifulsoup4
 scikit-learn
 jupyterlab
