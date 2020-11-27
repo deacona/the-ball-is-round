@@ -7,25 +7,36 @@
 SET /p projectName="Enter projectName: "
 
 :: Create virtual env
-conda create --name %projectName% python=3
+CALL conda create -n %projectName% python=3
+CALL conda env list
 
 :: Switch to new virtual env
-conda activate %projectName%
+CALL conda activate %projectName%
+CALL conda env list
 
-:: Add extra channels (lower priority)
-conda config --append channels anaconda
-conda config --append channels conda-forge
+:: Install libraries
+@REM pip install -r requirements.txt
+FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+CALL pip install .
+CALL conda list
 
-:: One shot install - one fail, all fails
-conda install --yes --file requirements.txt
+:: Test suite
+CALL flake8 --statistics
+CALL pytest --verbose .
+CALL coverage run --source src -m py.test
+CALL coverage report --fail-under=100
 
-:: Iterate over packages - Windows
-REM FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
-:: Iterate over packages - Bash
-:: while read requirement; do conda install --yes $requirement || pip install $requirement; done < requirements.txt
+:: Load data
+CALL python managers.py
+CALL python stadiums.py
+CALL python results.py
+CALL python clubs.py
 
-:: List installed packages
-conda list
+:: Launch applications
+REM Data quality dashboard?
+CALL jupyter lab
 
 :: Remove virtual env when done
 :: conda env remove -n %projectName%
+
+@pause

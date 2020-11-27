@@ -5,27 +5,23 @@ Having some fun with football stats and data science
 
 
 
-## Dataset
-
-This project comprises a wide variety of football data collected from various corners of the internet. Broadly it can be split into the following classes...
-* Results - what happened in a match (goals, shots, cards, etc)
-* Stadiums - where the teams play
-* Managers - who was managing the team
-* Clubs - team metrics (at the match level)
-* Players - individual player metrics (currently at the season/competition level)
-* Events [Coming soon!] - what exactly happened during a match and when did it happen
-* International - some specific data collected on international competitions
-
-My data pipeline ingests all of the raw data; cleans, standardises and combines it together to produce some  feature-rich data for analysis.
-
-
-
 ## Setup
 
 The project is written (mostly) in Python (3.7). All the package dependencies are listed in `requirements.txt`. I am running 
 the Anaconda distribution on Windows so have included `install_packages.bat` to create a virtual environment and install all of the packages.
 
+My data pipeline ingests all of the raw data; cleans, standardises and combines it together to produce some  feature-rich data for analysis.
+
 _A simple workflow process_ [Coming soon!]
+
+
+
+## Analysis
+
+* World Cup 2018 predictions [notebook] [report]
+* Analysis of goals in European leagues [notebook] [report]
+* Predicting market value of Middlesbrough FC players [notebook] [report]
+* 
 
 
 
