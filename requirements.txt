@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: win-64
@@ -136,3 +137,18 @@ zeromq=4.3.2=ha925a31_3
 zipp=3.4.0=pyhd3eb1b0_0
 zlib=1.2.11=vc14h1cdd9ab_1
 zstd=1.4.5=h04227a9_0
+=======
+requests
+numpy
+scipy
+matplotlib
+seaborn
+pandas
+xlrd
+flake8
+pytest
+coverage
+beautifulsoup4
+scikit-learn
+jupyterlab
+>>>>>>> parent of a314bff... Update requirements.txt
