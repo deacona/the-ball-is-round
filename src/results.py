@@ -42,7 +42,7 @@ def download_results():
     
             utilities.ensure_dir(localfile)
             
-            testfile = urllib.URLopener()
+            testfile = urllib.request.URLopener()
             testfile.retrieve(remotefile, localfile)
             logging.info("Retrieve OK: "+str([remotefile, localfile]))
 
