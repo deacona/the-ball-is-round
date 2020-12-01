@@ -17,8 +17,13 @@ CALL conda env list
 
 :: Install packages
 :: conda list -e > requirements.txt
+@CLS
 FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+@PAUSE
+@CLS
 CALL pip install .
+@PAUSE
+@CLS
 CALL conda list
 @PAUSE
 
