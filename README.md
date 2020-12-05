@@ -5,99 +5,47 @@ Having some fun with football stats and data science
 
 
 
-## Setup
+## 1. Instructions
 
-The project is written (mostly) in Python (3.7). All the package dependencies are listed in `requirements.txt`. I am running 
-the Anaconda distribution on Windows so have included `install_packages.bat` to create a virtual environment and install all of the packages.
-
-My data pipeline ingests all of the raw data; cleans, standardises and combines it together to produce some  feature-rich data for analysis.
-
-_A simple workflow process_ [Coming soon!]
+This project is written mostly in Python using the Anaconda distribution for Windows. To this end, I have written a [script](build_automation.bat) to automate the build - setting up environment, running tests, processing data and launching applications.
 
 
 
-## Analysis
+## 2. Results
 
-* World Cup 2018 predictions [notebook] [report]
-* Analysis of goals in European leagues [notebook] [report]
-* Predicting market value of Middlesbrough FC players [notebook] [report]
-* 
-
-
-
-## World Cup predictions
-
-In the Summer of 2018 my company held a World Cup prediction competition. I decided to tackle this scientifically!
-
-__The challenge__
-- Predict the scores for all group games
-- 3 points for correct score, 2 points for correct goal difference, 1 point for correct result per game
-- 50% of people will make it through to the next round (those with the highest points after the group games) where you will then go on to predict the scores for the remaining games
-
-__My method__
-1. Team ELO ratings were used to calculate a "Win expantancy" for each match
-2. This was then weighted to give a likely result
-3. To convert into a score further weights were applied based on whether the teams were involved in (relatively) high-scoring matches in qualifying
-4. The predicted scores were then compared to historical data and the weights tuned against these historic expectations
-
-The model can be [viewed here](
-https://github.com/deacona/the-ball-is-round/blob/master/models/World%20cup%202018%20CALC.xlsx)
-[Disclaimer - the model was built in Excel. I am planning to port it to Python before the next competition!]
-
-__Results__
-
-I finished in 2nd place, making it through each knockout round and to the final, only losing out there on goal difference! :-)
-
-After all 64 matches here's how my model performed...
-
-|Test|Count|% of total|
-|-----|-----:|-----:|
-|Correct result|34|53%|
-|Correct goal difference|21|33%|
-|Correct score|5|8%|
-|Points scored|60|31%|
-    
-Generally I found that my model under-predicted the number of goals and wins.
-
-||Goals per game|% games won|
-|-----|-----:|-----:|
-|Historic (1974-2014)|2.5|78%|
-|Prediction (2018)|2.1|66%|
-|Actual (2018)|2.6|78%|
-
-
-Overall I was really pleased with how the model perfomed but there's still lots of room for improvement before next time!
+* World Cup 2018 predictions [notebook](notebooks/intl_01_world_cup_2018.ipynb) [report](reports/intl_01_world_cup_2018.md)
+* Analysis of goals in European leagues [notebook](notebooks/club_01_goals_galore.ipynb) <!-- [report] -->
+* Predicting market value of Middlesbrough FC players [notebook](notebooks/boro_01_current_market_value.ipynb) <!-- [report] -->
+<!-- * [TBC] Analysis of Lionel Messi at Barcelona [notebook] [report]
+* [TBC] Which Boro players are most like Messi [notebook] [report]
+* [TBC] World Cup 2022 predictions [notebook] [report]
+* [TBC] Can Messi do it on a cold midweek night in Stoke [notebook] [report]
+* [TBC] Boro player retention [notebook] [report] -->
 
 
 
-Project Organization
-------------
+## 3. Project Organisation
 
-    ├── LICENSE
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    └── src                <- Source code for use in this project.
+|File/directory|Description|
+|-----|-----|
+|[data/external/]()|Data from third party sources|
+|[data/interim/]()|Intermediate data that has been transformed|
+|[data/processed/]()|The final, canonical data sets for modeling|
+|[data/raw/]()|The original, immutable data dump|
+|[models/]()|Trained and serialized models, model predictions, or model summaries|
+|[notebooks/]()|Jupyter notebooks. Naming convention is a project area, a number (for ordering), and a short description|
+|[references/]()|Data dictionaries, manuals, and all other explanatory materials|
+|[reports/]()|Generated analysis as HTML, PDF, LaTeX, etc|
+|[reports/figures/]()|Generated graphics and figures to be used in reporting|
+|[src/]()|Source code for use in this project|
+|[build_automation.bat]()|Script to automate enviroment setup, testing, data processing and application startups|
+|[LICENSE]()|Project license|
+|[README.md]()|This page :)|
+|[requirements.txt]()|Standard Python dependencies file|
+|[setup.py]()|Standard Python packaging script|
 
 
---------
+
+## 4. Licensing, Authors, Acknowledgements, etc.
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
