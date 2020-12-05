@@ -28,21 +28,21 @@ This project is written mostly in Python using the Anaconda distribution for Win
 
 |File/directory|Description|
 |-----|-----|
-|[data/external/]()|Data from third party sources|
-|[data/interim/]()|Intermediate data that has been transformed|
-|[data/processed/]()|The final, canonical data sets for modeling|
-|[data/raw/]()|The original, immutable data dump|
-|[models/]()|Trained and serialized models, model predictions, or model summaries|
-|[notebooks/]()|Jupyter notebooks. Naming convention is a project area, a number (for ordering), and a short description|
-|[references/]()|Data dictionaries, manuals, and all other explanatory materials|
-|[reports/]()|Generated analysis as HTML, PDF, LaTeX, etc|
-|[reports/figures/]()|Generated graphics and figures to be used in reporting|
-|[src/]()|Source code for use in this project|
-|[build_automation.bat]()|Script to automate enviroment setup, testing, data processing and application startups|
-|[LICENSE]()|Project license|
-|[README.md]()|This page :)|
-|[requirements.txt]()|Standard Python dependencies file|
-|[setup.py]()|Standard Python packaging script|
+|[data/external/](data/external/)|Data from third party sources|
+|[data/interim/](data/interim/)|Intermediate data that has been transformed|
+|[data/processed/](data/processed/)|The final, canonical data sets for modeling|
+|[data/raw/](data/raw/)|The original, immutable data dump|
+|[models/](models/)|Trained and serialized models, model predictions, or model summaries|
+|[notebooks/](notebooks/)|Jupyter notebooks. Naming convention is a project area, a number (for ordering), and a short description|
+|[references/](references/)|Data dictionaries, manuals, and all other explanatory materials|
+|[reports/](reports/)|Generated analysis as HTML, PDF, LaTeX, etc|
+|[reports/figures/](reports/figures/)|Generated graphics and figures to be used in reporting|
+|[src/](src/)|Source code for use in this project|
+|[build_automation.bat](build_automation.bat)|Script to automate enviroment setup, testing, data processing and application startups|
+|[LICENSE](LICENSE)|Project license|
+|[README.md](README.md)|This page :)|
+|[requirements.txt](requirements.txt)|Standard Python dependencies file|
+|[setup.py](setup.py)|Standard Python packaging script|
 
 
 
