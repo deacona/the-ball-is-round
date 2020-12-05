@@ -113,11 +113,11 @@ def clean_data(source_name):
         df["Market value"] = (df["Market value"] \
                                   .str.strip() \
                                   .replace({'-':np.nan}) \
-                                  .replace(r'[£km]', '', regex=True) \
+                                  .replace(r'[£kmTh\.]', '', regex=True) \
                                   .astype(float) * \
-                    df["Market value"].str.extract(r'[\d\.]+([km]+)', expand=False)
+                    df["Market value"].str.extract(r'[\d\.]+([kmTh\.]+)', expand=False)
                         .fillna(1)
-                        .replace(['k','m'], [10**3, 10**6]).astype(int) / 10**6)
+                        .replace(['k','Th.','m'], [10**3, 10**3, 10**6]).astype(int) / 10**6)
         
     elif source_name == "tmk_psm":
         df["PPG"] = df["PPG"].str.strip().replace(r'[,]', '.', regex=True).astype(float)

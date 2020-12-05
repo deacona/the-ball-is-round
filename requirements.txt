@@ -5,9 +5,11 @@ matplotlib
 seaborn
 pandas
 xlrd
+openpyxl
 flake8
 pytest
 coverage
 beautifulsoup4
+lxml
 scikit-learn
 jupyterlab

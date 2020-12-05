@@ -42,7 +42,7 @@ def download_results():
     
             utilities.ensure_dir(localfile)
             
-            testfile = urllib.URLopener()
+            testfile = urllib.request.URLopener()
             testfile.retrieve(remotefile, localfile)
             logging.info("Retrieve OK: "+str([remotefile, localfile]))
 
@@ -58,7 +58,7 @@ def unzip_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
                 file_to_unzip = os.path.join(root, file)
                 logging.info("File to unzip: {0}".format(file_to_unzip))
                 with zipfile.ZipFile(file_to_unzip,"r") as zip_ref:
-                    zip_ref.extractall()
+                    zip_ref.extractall(root)
                 os.remove(file_to_unzip)
 
 
@@ -104,15 +104,16 @@ def format_results(directoryIn=config.RESULTS_SCRAPE["ftd"][1], directoryOut=con
                 logging.info("Filepath: {0}".format(filepath))
                 #logging.info(root[-9:])
                 # try:
-                df = pd.read_csv(filepath, usecols=utilities.read_header(filepath), encoding="latin9") #, parse_dates=['Date'])
+                df = pd.read_csv(filepath, error_bad_lines=False, warn_bad_lines=False, encoding="latin9") #, parse_dates=['Date'])
+                logging.debug("Input columns: {0}".format(df.columns))
                 #df['File'] = file
                 df['Season'] = root[-9:]
 
                 if set(["HomeTeam", "AwayTeam"]).issubset(df.columns):
                     # logging.info(df[["HomeTeam", "AwayTeam"]].head())
                     try:
-                        df["HomeTeam"] = df["HomeTeam"].apply(lambda x: x.decode('latin9').encode('utf-8'))
-                        df["AwayTeam"] = df["AwayTeam"].apply(lambda x: x.decode('latin9').encode('utf-8'))
+                        df["HomeTeam"] = df["HomeTeam"] #.apply(lambda x: x.decode('latin9').encode('utf-8'))
+                        df["AwayTeam"] = df["AwayTeam"] #.apply(lambda x: x.decode('latin9').encode('utf-8'))
                     except:
                         df["HomeTeam"] = np.nan
                         df["AwayTeam"] = np.nan
@@ -120,8 +121,8 @@ def format_results(directoryIn=config.RESULTS_SCRAPE["ftd"][1], directoryOut=con
                 elif set(["HT", "AT"]).issubset(df.columns):
                     # logging.info(df[["HT", "AT"]].head())
                     try:
-                        df["HomeTeam"] = df["HT"].apply(lambda x: x.decode('latin9').encode('utf-8'))
-                        df["AwayTeam"] = df["AT"].apply(lambda x: x.decode('latin9').encode('utf-8'))
+                        df["HomeTeam"] = df["HT"] #.apply(lambda x: x.decode('latin9').encode('utf-8'))
+                        df["AwayTeam"] = df["AT"] #.apply(lambda x: x.decode('latin9').encode('utf-8'))
                     except:
                         df["HomeTeam"] = np.nan
                         df["AwayTeam"] = np.nan
@@ -131,6 +132,7 @@ def format_results(directoryIn=config.RESULTS_SCRAPE["ftd"][1], directoryOut=con
 
                 #drop useless rows
                 df = df.dropna(subset=core_cols)
+                logging.debug("Output columns: {0}".format(df.columns))
 
                 pieces.append(df)
                 # except:
@@ -144,9 +146,8 @@ def format_results(directoryIn=config.RESULTS_SCRAPE["ftd"][1], directoryOut=con
 
     # dframe["Date"] = pd.to_datetime(dframe['Date'], format='%d/%m/%y')
     dframe.Date = pd.to_datetime(dframe.Date,dayfirst=True)
+    logging.info(dframe[use_cols].info())
 
-    #logging.info(dframe.describe(include="all"))
-    
     # logging.info(dframe[((dframe['HomeTeam']=="Middlesbrough")|(dframe['AwayTeam']=="Middlesbrough"))&(dframe['Season']=="2006-2007")][["Date", "HomeTeam", "AwayTeam"]])
     utilities.save_master(dframe[use_cols], "results", directory=directoryOut) #, enc="ascii")
     #return dframe[use_cols]
@@ -165,7 +166,7 @@ def archive_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
                 file_as_zip = os.path.splitext(file_to_zip)[0]+'.zip'
                 logging.info("File to zip: {0}".format((file_to_zip, file_as_zip)))
                 with zipfile.ZipFile(file_as_zip, 'w') as myzip:
-                    myzip.write(file_to_zip)
+                    myzip.write(file_to_zip, file)
                 os.remove(file_to_zip)
 
 
