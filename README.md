@@ -7,7 +7,7 @@ Having some fun with football stats and data science
 
 ## 1. Instructions
 
-This project is written mostly in Python using the Anaconda distribution for Windows. To this end, I have written a [script](build_automation.bat) to automate the build - setting up environment, running tests, processing data and launching applications.
+This project is written mostly in Python using the Anaconda distribution for Windows. To this end, I have a [script](build_automation.bat) to automate the build - setting up environment, running tests, processing data and launching applications. Before running this you'll need to add a config.ini file as per the [template](references/config.md).
 
 
 
@@ -26,7 +26,7 @@ This project is written mostly in Python using the Anaconda distribution for Win
 
 ## 3. Project Organisation
 
-|File/directory|Description|
+|Directory/File|Description|
 |-----|-----|
 |[data/external/](data/external/)|Data from third party sources|
 |[data/interim/](data/interim/)|Intermediate data that has been transformed|
@@ -38,6 +38,7 @@ This project is written mostly in Python using the Anaconda distribution for Win
 |[reports/](reports/)|Generated analysis as HTML, PDF, LaTeX, etc|
 |[reports/figures/](reports/figures/)|Generated graphics and figures to be used in reporting|
 |[src/](src/)|Source code for use in this project|
+|[tests/](tests/)|Test scripts|
 |[build_automation.bat](build_automation.bat)|Script to automate enviroment setup, testing, data processing and application startups|
 |[LICENSE](LICENSE)|Project license|
 |[README.md](README.md)|This page :)|
