@@ -14,7 +14,7 @@ This project is written mostly in Python using the Anaconda distribution for Win
 ## 2. Results
 
 * World Cup 2018 predictions [notebook](notebooks/intl_01_world_cup_2018.ipynb) [report](reports/intl_01_world_cup_2018.md)
-* Analysis of goals in European leagues [notebook](notebooks/club_01_goals_galore.ipynb) <!-- [report] -->
+* Analysis of goals in European leagues [notebook](notebooks/club_01_goals_around_europe.ipynb) <!-- [report] -->
 * Predicting market value of Middlesbrough FC players [notebook](notebooks/boro_01_current_market_value.ipynb) <!-- [report] -->
 <!-- * [TBC] Analysis of Lionel Messi at Barcelona [notebook] [report]
 * [TBC] Which Boro players are most like Messi [notebook] [report]
