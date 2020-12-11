@@ -1,3 +1,5 @@
-; Generate new src/config.ini using references/config.md and setting values
+```
+; Generate new src/config.ini using this template
 [PROJECT]
 HOMEDIR=
+```
