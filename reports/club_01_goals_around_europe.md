@@ -10,7 +10,7 @@ What patterns can we see in the goals scored around European club football?
 
 We have compiled 28 seasons of data on matches played in domestic club competitions.
 
-![Data summary](/figures/club_01_summary.JPG?raw=true ("Data Summary")
+![Data summary](/figures/club_01_summary.JPG?raw=true)
 
 
 ## Analysis
