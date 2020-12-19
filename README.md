@@ -14,8 +14,8 @@ This project is written mostly in Python using the Anaconda distribution for Win
 ## 2. Results
 
 * World Cup 2018 predictions [notebook](notebooks/intl_01_world_cup_2018.ipynb) [report](reports/intl_01_world_cup_2018.md)
-* Analysis of goals in European leagues [notebook](notebooks/club_01_goals_around_europe.ipynb) <!-- [report] -->
-* Predicting market value of Middlesbrough FC players [notebook](notebooks/boro_01_current_market_value.ipynb) <!-- [report] -->
+* Analysis of goals in European leagues [notebook](notebooks/club_01_goals_around_europe.ipynb) [report](reports/club_01_goals_around_europe.md)
+* Predicting market value of Middlesbrough FC players [notebook](notebooks/boro_01_current_market_value.ipynb) <!--[report](reports/boro_01_market_value.md)-->
 <!-- * [TBC] Analysis of Lionel Messi at Barcelona [notebook] [report]
 * [TBC] Which Boro players are most like Messi [notebook] [report]
 * [TBC] World Cup 2022 predictions [notebook] [report]
@@ -48,5 +48,9 @@ This project is written mostly in Python using the Anaconda distribution for Win
 
 
 ## 4. Licensing, Authors, Acknowledgements, etc.
+
+Shoutouts to all the creators and maintainers of libraries that made this work possible.
+
+Also, kudos to the data sources for publishing so much varied and interesting footdall data.
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
