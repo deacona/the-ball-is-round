@@ -6,62 +6,49 @@
 SET /p projectName="Enter projectName: "
 
 :: Create virtual env
-CALL conda create -n %projectName% python=3
-CALL conda env list
-@PAUSE
+@REM CALL conda create -n %projectName% python=3
+@REM CALL conda env list
+@REM @PAUSE && @CLS
 
 :: Switch to new virtual env
 CALL conda activate %projectName%
 CALL conda env list
-@PAUSE
+@PAUSE && @CLS
 
 :: Install packages
 :: conda list -e > requirements.txt
-@CLS
-FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
-@PAUSE
-@CLS
+@REM FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+@REM @PAUSE && @CLS
 CALL pip install .
-@PAUSE
-@CLS
+@PAUSE && @CLS
 CALL conda list
-@PAUSE
+@PAUSE && @CLS
 
 :: Test suite
-@CLS
-CALL flake8 --statistics
-@PAUSE
-@CLS
+CALL flake8 --statistics --exclude=notebooks,checkpoints
+@PAUSE && @CLS
 CALL pytest --verbose .
-@PAUSE
-@CLS
+@PAUSE && @CLS
 CALL coverage run --source src -m py.test
-@PAUSE
-@CLS
 CALL coverage report --fail-under=100
-@PAUSE
+@PAUSE && @CLS
 
 :: Data pipeline
-@CLS
-CALL python src/managers.py
-@PAUSE
-@CLS
-CALL python src/stadiums.py
-@PAUSE
-@CLS
-CALL python src/results.py
-@PAUSE
-@CLS
-CALL python src/clubs.py
-@PAUSE
+@REM CALL python src/managers.py
+@REM @PAUSE && @CLS
+@REM CALL python src/stadiums.py
+@REM @PAUSE && @CLS
+@REM CALL python src/results.py
+@REM @PAUSE && @CLS
+@REM CALL python src/clubs.py
+@REM @PAUSE && @CLS
 
 :: Launch applications
 :: TBC - Data quality dashboard?
-@CLS
 CALL jupyter lab
-@PAUSE
+@PAUSE && @CLS
 
 :: Remove virtual env when done
 :: conda env remove -n %projectName%
 :: CALL conda env list
-:: @PAUSE
+:: @PAUSE && @CLS
