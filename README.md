@@ -7,15 +7,15 @@ Having some fun with football stats and data science
 
 ## 1. Instructions
 
-This project is written mostly in Python using the Anaconda distribution for Windows. To this end, I have a [script](build_automation.bat) to automate the build - setting up environment, running tests, processing data and launching applications. Before running this you'll need to add a config.ini file as per the [template](references/config.md).
+This project is written mostly in Python using the Miniconda distribution for Windows. To this end, I have a [script](build_automation.bat) to automate the build - setting up environment, running tests, processing data and launching applications. Before running this you'll need to add a config.ini file as per the [template](references/config.md).
 
 
 
 ## 2. Results
 
 * World Cup 2018 predictions [notebook](notebooks/intl_01_world_cup_2018.ipynb) [report](reports/intl_01_world_cup_2018.md)
-* Analysis of goals in European leagues [notebook](notebooks/club_01_goals_around_europe.ipynb) <!-- [report] -->
-* Predicting market value of Middlesbrough FC players [notebook](notebooks/boro_01_current_market_value.ipynb) <!-- [report] -->
+* Analysis of goals in European leagues [notebook](notebooks/club_01_goals_around_europe.ipynb) [report](reports/club_01_goals_around_europe.md)
+* Predicting market value of Middlesbrough FC players [notebook](notebooks/boro_01_current_market_value.ipynb) <!--[report](reports/boro_01_market_value.md)-->
 <!-- * [TBC] Analysis of Lionel Messi at Barcelona [notebook] [report]
 * [TBC] Which Boro players are most like Messi [notebook] [report]
 * [TBC] World Cup 2022 predictions [notebook] [report]
@@ -28,15 +28,11 @@ This project is written mostly in Python using the Anaconda distribution for Win
 
 |Directory/File|Description|
 |-----|-----|
-|[data/external/](data/external/)|Data from third party sources|
-|[data/interim/](data/interim/)|Intermediate data that has been transformed|
-|[data/processed/](data/processed/)|The final, canonical data sets for modeling|
-|[data/raw/](data/raw/)|The original, immutable data dump|
+|[data/](data/)|All the data, from the original [raw](data/raw/) data dump through to the final [processed](data/processed/) data|
 |[models/](models/)|Trained and serialized models, model predictions, or model summaries|
 |[notebooks/](notebooks/)|Jupyter notebooks. Naming convention is a project area, a number (for ordering), and a short description|
 |[references/](references/)|Data dictionaries, manuals, and all other explanatory materials|
-|[reports/](reports/)|Generated analysis as HTML, PDF, LaTeX, etc|
-|[reports/figures/](reports/figures/)|Generated graphics and figures to be used in reporting|
+|[reports/](reports/)|Writen reports, with [figures](reports/figures)|
 |[src/](src/)|Source code for use in this project|
 |[tests/](tests/)|Test scripts|
 |[build_automation.bat](build_automation.bat)|Script to automate enviroment setup, testing, data processing and application startups|
@@ -48,5 +44,9 @@ This project is written mostly in Python using the Anaconda distribution for Win
 
 
 ## 4. Licensing, Authors, Acknowledgements, etc.
+
+Shoutouts to all the creators and maintainers of libraries that made this work possible.
+
+Also, kudos to the data sources for publishing so much varied and interesting footdall data.
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
