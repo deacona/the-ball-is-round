@@ -6,9 +6,8 @@
 SET /p projectName="Enter projectName: "
 
 :: Create virtual env
-CALL conda create -n %projectName% python=3
-CALL conda env list
-@PAUSE && @CLS
+@REM CALL conda create -n %projectName% python=3
+@REM @PAUSE && @CLS
 
 :: Switch to new virtual env
 CALL conda activate %projectName%
@@ -17,7 +16,9 @@ CALL conda env list
 
 :: Install packages
 :: conda list -e > requirements.txt
-FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+@REM FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+@REM @PAUSE && @CLS
+CALL pip install ../statsbombpy
 @PAUSE && @CLS
 CALL pip install .
 @PAUSE && @CLS
@@ -34,14 +35,14 @@ CALL coverage report --fail-under=100
 @PAUSE && @CLS
 
 :: Data pipeline
-CALL python src/managers.py
-@PAUSE && @CLS
-CALL python src/stadiums.py
-@PAUSE && @CLS
-CALL python src/results.py
-@PAUSE && @CLS
-CALL python src/clubs.py
-@PAUSE && @CLS
+@REM CALL python src/managers.py
+@REM @PAUSE && @CLS
+@REM CALL python src/stadiums.py
+@REM @PAUSE && @CLS
+@REM CALL python src/results.py
+@REM @PAUSE && @CLS
+@REM CALL python src/clubs.py
+@REM @PAUSE && @CLS
 
 :: Launch applications
 :: TBC - Data quality dashboard?
