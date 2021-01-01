@@ -18,8 +18,6 @@ CALL conda env list
 :: conda list -e > requirements.txt
 @REM FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
 @REM @PAUSE && @CLS
-CALL pip install ../statsbombpy
-@PAUSE && @CLS
 CALL pip install .
 @PAUSE && @CLS
 CALL conda list
