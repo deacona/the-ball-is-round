@@ -13,3 +13,5 @@ beautifulsoup4
 lxml
 scikit-learn
 jupyterlab
+proj
+basemap
