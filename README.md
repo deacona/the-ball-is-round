@@ -16,7 +16,7 @@ This project is written mostly in Python using the Miniconda distribution for Wi
 * World Cup 2018 predictions [notebook](notebooks/intl_01_world_cup_2018.ipynb) [report](reports/intl_01_world_cup_2018.md)
 * Analysis of goals in European leagues [notebook](notebooks/club_01_goals_around_europe.ipynb) [report](reports/club_01_goals_around_europe.md)
 * Predicting market value of Middlesbrough FC players [notebook](notebooks/boro_01_current_market_value.ipynb) [report](reports/boro_01_market_value.md)
-* [TBC] Shots analysis of Lionel Messi at Barcelona [notebook](notebooks/messi_01_finding_leo.ipynb) [report](reports/messi_01_finding_leo.md)
+* Shots analysis of Lionel Messi at Barcelona [notebook](notebooks/messi_01_finding_leo.ipynb) [report](reports/messi_01_finding_leo.md)
 <!-- * [TBC] Which Boro players are most like Messi [notebook] [report]
 * [TBC] World Cup 2022 predictions [notebook] [report]
 * [TBC] Can Messi do it on a cold midweek night in Stoke [notebook] [report]
