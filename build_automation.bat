@@ -41,6 +41,8 @@ CALL coverage report --fail-under=100
 @REM @PAUSE && @CLS
 @REM CALL python src/clubs.py
 @REM @PAUSE && @CLS
+CALL python src/events.py
+@PAUSE && @CLS
 
 :: Launch applications
 :: TBC - Data quality dashboard?
