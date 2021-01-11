@@ -64,15 +64,18 @@ def download_events(competition_id, event_type):
     """
     logging.info("Downloading events")
 
+    logging.debug(competition_id, event_type)
     comps = pd.read_csv(os.path.join(config.SOURCE_DIR, "stb", "competitions", "competitions_None.csv"))
     season_ids = comps[comps.competition_id == competition_id].season_id.values
 
     for season_id in season_ids:
+        logging.debug(season_id)
         mats = pd.read_csv(os.path.join(config.SOURCE_DIR, "stb", "matches", "matches_{0}_{1}.csv".format(competition_id, season_id)))
         match_ids = mats.match_id.values
 
         os.chdir(os.path.join(config.SOURCE_DIR, "stb", "events"))
         for match_id in match_ids:
+            logging.debug(match_id)
             sb.Events(event_id=str(match_id)).save_data(event_type=event_type)
 
     return
@@ -99,10 +102,10 @@ def build_event_data(competition_id, event_type, directory=config.MASTER_DIR):
 
     data = comps.loc[comps.competition_id == competition_id, ["season_id","country_name","competition_name","season_name"]]\
         .merge(matches.loc[matches.competition == competition_id, ["match_id","match_date","kick_off","season"]], 
-            how="outer", left_on="season_id", right_on="season")\
+            how="inner", left_on="season_id", right_on="season")\
         .merge(events.loc[:, ["event_type","period","minute","team","player","statsbomb_xg","type","outcome",
             "start_location_x","start_location_y","end_location_x","end_location_y","end_location_z","match_id"]],
-            how="outer", on="match_id")
+            how="inner", on="match_id")
     print(data.info())        
 
     utilities.save_master(data, "events_{0}".format(event_type), directory=directory)
