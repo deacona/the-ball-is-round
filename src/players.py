@@ -44,7 +44,7 @@ def clean_data(source_name):
         drop_cols = ["Nationality"]
         notna_cols = ["In squad"]
 
-    df = utilities.folder_loader(source_name, source_header)
+    df = utilities.folder_loader(source_name[:3], source_name, "comp_season", source_header=source_header)
 
     ## Name and Position are mis-aligned in the source files
     

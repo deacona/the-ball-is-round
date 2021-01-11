@@ -78,6 +78,38 @@ def download_events(competition_id, event_type):
     return
 
 
+def build_event_data(competition_id, event_type, directory=config.MASTER_DIR):
+    """Building event data
+
+    Args:
+        event_type: String value of event type
+        directory: Folder for processed data
+
+    Returns:
+        None
+    """
+    logging.info("Building event data")
+
+    comps = utilities.folder_loader("stb", "competitions")
+    print(comps.info())
+    matches = utilities.folder_loader("stb", "matches")
+    print(matches.info())
+    events = utilities.folder_loader("stb", "events", "match_event")
+    print(events.info())
+
+    data = comps.loc[comps.competition_id == competition_id, ["season_id","country_name","competition_name","season_name"]]\
+        .merge(matches.loc[matches.competition == competition_id, ["match_id","match_date","kick_off","season"]], 
+            how="outer", left_on="season_id", right_on="season")\
+        .merge(events.loc[:, ["event_type","period","minute","team","player","statsbomb_xg","type","outcome",
+            "start_location_x","start_location_y","end_location_x","end_location_y","end_location_z","match_id"]],
+            how="outer", on="match_id")
+    print(data.info())        
+
+    utilities.save_master(data, "events_{0}".format(event_type), directory=directory)
+
+    return data
+
+
 def main():
     """Sequence functions for use in data pipeline
 
@@ -91,6 +123,7 @@ def main():
     download_competitions()
     download_matches(competition_id=11)
     download_events(competition_id=11, event_type="shot")
+    build_event_data(competition_id=11, event_type="shot")
 
 
 if __name__ == '__main__':

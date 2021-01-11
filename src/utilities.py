@@ -104,17 +104,33 @@ def extract_competition(file_name):
     return competition_out
 
 
-def folder_loader(source_name, source_header):
+def extract_match_id(file_name):
     """
     INPUT:
-        source_name - String containing name of the data source
-        source_name - List of columns in source files
+        file_name - String containing name of the data source file
+        
+    OUTPUT:
+        match_id - String extracted match_id
+    """
+    
+    match_id = int(file_name.split("_")[1])
+    
+    return match_id
+
+
+def folder_loader(source_level1, source_level2, file_info=None, source_header=None):
+    """
+    INPUT:
+        source_level1 - Parent folder of data source
+        source_level2 - Folder for data source
+        file_info - Code for info to extract ffrom filename
+        source_header - List of columns in source files
         
     OUTPUT:
         df - Dataframe containing raw loaded data
     """
     
-    source_folder = os.path.join(config.SOURCE_DIR, source_name[:3], source_name)
+    source_folder = os.path.join(config.SOURCE_DIR, source_level1, source_level2)
     data_list = []
     for file in os.listdir(source_folder):
         if not file.endswith(".csv"):
@@ -123,8 +139,11 @@ def folder_loader(source_name, source_header):
         filepath = os.path.join(source_folder, file)
         tmp = pd.read_csv(filepath, encoding='latin-1', header=0, 
                           names=source_header)
-        tmp["Season"] = extract_season(file)
-        tmp["Competition"] = extract_competition(file)
+        if file_info == "comp_season":
+            tmp["Season"] = extract_season(file)
+            tmp["Competition"] = extract_competition(file)
+        elif file_info == "match_event":
+            tmp["match_id"] = extract_match_id(file)
         data_list.append(tmp)
 
     df = pd.concat(data_list, axis=0, sort=False, ignore_index=True)

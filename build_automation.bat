@@ -20,8 +20,8 @@ CALL conda env list
 @REM @PAUSE && @CLS
 CALL pip install .
 @PAUSE && @CLS
-CALL conda list
-@PAUSE && @CLS
+@REM CALL conda list
+@REM @PAUSE && @CLS
 
 :: Test suite
 CALL flake8 --statistics --exclude=notebooks,checkpoints

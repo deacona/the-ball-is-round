@@ -79,3 +79,14 @@ class Test(object):
         assert self.events.shape[0] == 25
         assert self.events.shape[1] == 33
 
+
+# def test_build_event_data(self):
+#         """test events.build_event_data
+
+#         Args:
+#             self
+
+#         Returns:
+#             None
+#         """
+
