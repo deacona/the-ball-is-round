@@ -24,13 +24,13 @@ CALL pip install .
 @REM @PAUSE && @CLS
 
 :: Test suite
-CALL flake8 --statistics --exclude=notebooks,checkpoints
-@PAUSE && @CLS
-CALL pytest --verbose .
-@PAUSE && @CLS
-CALL coverage run --source src -m py.test
-CALL coverage report --fail-under=100
-@PAUSE && @CLS
+@REM CALL flake8 --statistics --exclude=notebooks,checkpoints
+@REM @PAUSE && @CLS
+@REM CALL pytest --verbose .
+@REM @PAUSE && @CLS
+@REM CALL coverage run --source src -m py.test
+@REM CALL coverage report --fail-under=100
+@REM @PAUSE && @CLS
 
 :: Data pipeline
 @REM CALL python src/managers.py
