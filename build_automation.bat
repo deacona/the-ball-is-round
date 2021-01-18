@@ -28,9 +28,9 @@ CALL pip install .
 @REM @PAUSE && @CLS
 @REM CALL pytest --verbose .
 @REM @PAUSE && @CLS
-@REM CALL coverage run --source src -m py.test
-@REM CALL coverage report --fail-under=100
-@REM @PAUSE && @CLS
+CALL coverage run --source src -m py.test
+CALL coverage report --fail-under=100
+@PAUSE && @CLS
 
 :: Data pipeline
 @REM CALL python src/managers.py

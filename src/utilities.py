@@ -11,6 +11,9 @@ import src.config as config
 import requests
 from bs4 import BeautifulSoup
 import csv
+import matplotlib.pyplot as plt
+from matplotlib.patches import Arc #, Rectangle, ConnectionPatch
+# from matplotlib.offsetbox import  OffsetImage
 
 
 def read_header(filepath):
@@ -149,3 +152,55 @@ def folder_loader(source_level1, source_level2, file_info=None, source_header=No
     df = pd.concat(data_list, axis=0, sort=False, ignore_index=True)
     
     return df
+
+
+def draw_pen_box(ax):
+    """
+    INPUT:
+        ax: Existing plot axes
+        
+    OUTPUT:
+        None
+    """
+    # size of the pitch is 120, 80
+
+    #Penalty Area
+    plt.plot([57.8,57.8],[120,105.4],color="black")
+    plt.plot([57.8,22.5],[105.4,105.4],color="black")
+    plt.plot([22.5,22.5],[120, 105.4],color="black")
+
+    #6-yard Box
+    plt.plot([48,48],[120,115.1],color="black")
+    plt.plot([48,32],[115.1,115.1],color="black")
+    plt.plot([32,32],[120,115.1],color="black")
+
+    #Penalty spot and the "D"
+    topPenSpot = plt.Circle((40,110.3),0.71,color="black")
+    ax.add_patch(topPenSpot)
+    topDArc = Arc((40,110.3),height=16.2,width=16.2,angle=0,theta1=220,theta2=320,color="black")
+    ax.add_patch(topDArc)
+    
+    #Goal line
+    ax.axhline(y=120,color="black")
+
+
+def draw_posts(ax):
+    """
+    INPUT:
+        ax: Existing plot axes
+        
+    OUTPUT:
+        None
+    """
+    
+    ## 24ft x 8ft
+    x1 = 36.
+    x2 = 44.
+    y1 = 0.
+    y2 = (x2 - x1) * 8. / 24.
+    
+    x=[x1, x1, x2, x2]
+    y=[y1, y2, y2, y1]
+    
+    plt.plot(x, y, color="black")
+    ax.axhline(y=0, color="black")
