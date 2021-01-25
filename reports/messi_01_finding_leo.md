@@ -26,7 +26,7 @@ I have performed some simple binning of the data and calculated metrics for shot
 
 ## Analysis
 
-## Messi versus the rest
+### Messi versus the rest
 
 <p>
 <table border="1" class="dataframe">
@@ -81,7 +81,7 @@ Immediately we can see that Messi takes 18% of all shots in these matches and sc
 ![png](figures/messi_01_finding_leo_14_1.png)
 ![png](figures/messi_01_finding_leo_14_2.png)
 
-We can see a consistent increase in shots and goals through Messi's early career before levelling out to fairly consistent values from 2009/2010 onwards. There isn't a mass of variation between calendar months. There's something of a peak in August but also the summer months will be based on a amuch smaller sample. Theer are dips in April and November. Interestingly, Messi appears (on average) to take more shots and score more goals as a match progresses.
+We can see a consistent increase in shots and goals through Messi's early career before levelling out to fairly consistent values from 2009/2010 onwards. There isn't a mass of variation between calendar months. There's something of a peak in August but also the summer months will be based on a much smaller sample. There are dips in April and November. Interestingly, Messi appears (on average) to take more shots and score more goals as a match progresses.
 
 
 ### Where does he shoot from?
@@ -115,4 +115,4 @@ Similar, to open play, Messi likes to shoot his penalties low and to the corners
 
 ## Conclusions
 
-Messi is obviously an exceptional player and this is reflected in his shots data. Whether it's instinctive or deliberate, he does appear to shoot from and to locations which are most likely to result in goals. He combines volume, efficiency and skill in one very productive package.
+Messi is obviously an exceptional player and this is reflected in his shots data. Whether it's instinctive or deliberate, he does appear to shoot from and to locations which are most likely to result in goals. He combines volume, efficiency and skill in one very productive package!
