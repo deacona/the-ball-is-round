@@ -25,7 +25,7 @@ CALL pip install .
 @REM @PAUSE && @CLS
 
 :: Test suite
-CALL flake8 --statistics --exclude=notebooks,checkpoints
+CALL flake8 --max-complexity 10 --statistics --exclude=notebooks,checkpoints
 @PAUSE && @CLS
 CALL pytest --verbose .
 @PAUSE && @CLS
