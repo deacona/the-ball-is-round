@@ -29,6 +29,8 @@ class Test:
         self.testCompetition = "all"
         self.testFilename2 = "events_10_test.csv"
         self.testMatchId = 10
+        self.testOutDir = os.path.join(self.testHome, "temp_out")
+        self.testOutFile = os.path.join(self.testOutDir, "dummy.md")
 
         if os.path.isfile(self.testHtml):
             os.remove(self.testHtml)
@@ -51,6 +53,18 @@ class Test:
         with open(self.testCsv, 'a') as f:
             f.write(",".join(self.testHeader)+"\n")
             f.write(",".join(self.testRow)+"\n")
+            f.close()
+
+        if os.path.isfile(self.testOutFile):
+            os.remove(self.testOutFile)
+
+        if os.path.isdir(self.testOutDir):
+            os.rmdir(self.testOutDir)
+
+        os.mkdir(self.testOutDir)
+
+        with open(self.testOutFile,'w') as f:
+            f.close()
 
 
     def teardown_method(self, test_method):
@@ -67,6 +81,12 @@ class Test:
 
         if os.path.isdir(self.testDir):
             os.rmdir(self.testDir)
+
+        if os.path.isfile(self.testOutFile):
+            os.remove(self.testOutFile)
+
+        if os.path.isdir(self.testOutDir):
+            os.rmdir(self.testOutDir)
                     
 
     def test_read_header(self):
@@ -116,7 +136,11 @@ class Test:
         assert utilities.extract_match_id(self.testFilename2) == self.testMatchId
 
 
-
     # def test_folder_loader(self):
         # '''test loading source files in folder'''
         # assert blah
+
+
+    def test_clear_nb_output(self):
+        '''test clearing notebook output'''
+        assert utilities.clear_nb_output(self.testOutDir) == True

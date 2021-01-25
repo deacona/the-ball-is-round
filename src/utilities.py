@@ -6,6 +6,7 @@ Created on Tue 06 Nov 2018
 """
 
 import os
+import shutil
 import pandas as pd
 import src.config as config
 import requests
@@ -204,3 +205,26 @@ def draw_posts(ax):
     
     plt.plot(x, y, color="black")
     ax.axhline(y=0, color="black")
+
+
+def clear_nb_output(outFolder=config.NBOUT_DIR):
+    for filename in os.listdir(outFolder):
+        file_path = os.path.join(outFolder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+            return False
+    
+    return True
+
+
+def main():
+
+    clear_nb_output()
+
+if __name__ == '__main__':
+    main()

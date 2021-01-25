@@ -16,6 +16,8 @@ conf.read(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config.ini'
 HOME_DIR = conf["PROJECT"]["HOMEDIR"]
 SOURCE_DIR = os.path.join(HOME_DIR, "data", "raw")
 MASTER_DIR = os.path.join(HOME_DIR, "data", "processed")
+NBOUT_DIR = os.path.join(HOME_DIR, "notebooks", "output")
+
 
 #code: remoteurl, localfile
 RESULTS_SCRAPE = {
