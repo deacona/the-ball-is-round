@@ -26,6 +26,9 @@ I have performed some simple binning of the data and calculated metrics for shot
 
 ## Analysis
 
+## Messi versus the rest
+
+<p>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -67,28 +70,49 @@ I have performed some simple binning of the data and calculated metrics for shot
     </tr>
   </tbody>
 </table>
+</p>
 
-Messi take 18.0% of all shots taken in these matches
+Immediately we can see that Messi takes 18% of all shots in these matches and scores with 20% of those shots. He averages almost a goal a game, exceeding his expected goals by about 30%.
 
+
+### Trends over time
 
 ![png](figures/messi_01_finding_leo_14_0.png)
 ![png](figures/messi_01_finding_leo_14_1.png)
 ![png](figures/messi_01_finding_leo_14_2.png)
 
+We can see a consistent increase in shots and goals through Messi's early career before levelling out to fairly consistent values from 2009/2010 onwards. There isn't a mass of variation between calendar months. There's something of a peak in August but also the summer months will be based on a amuch smaller sample. Theer are dips in April and November. Interestingly, Messi appears (on average) to take more shots and score more goals as a match progresses.
+
+
+### Where does he shoot from?
+
 ![png](figures/messi_01_finding_leo_17_0.png)
 ![png](figures/messi_01_finding_leo_17_1.png)
-
 ![png](figures/messi_01_finding_leo_19_0.png)
 ![png](figures/messi_01_finding_leo_19_1.png)
+
+Messi takes most of his shots and scores most of his goals from central locations in the 18 yard box.
+
 
 ![png](figures/messi_01_finding_leo_19_3.png)
 ![png](figures/messi_01_finding_leo_20_0.png)
 
+He has a curious little hotspot on the left corner of the "D" where he has far exceeded his expected total of goals. Partly this is driven by him taking lots of shots from there as the skill percentage is not so prominant. Conversely, there are spots outside the box near the left corner and centrally at about 30m from goal where he does (on average) exceed the xG by a large margin - but this is from much smaller number of shots. We might say he underperforms his xG in other zones to the left - both close to goal and far out - but then he doesn't shoot from these areas much either.
+
+
+### Where does he shoot to?
+
 ![png](figures/messi_01_finding_leo_23_0.png)
 ![png](figures/messi_01_finding_leo_23_1.png)
 
+Messi's shots are mostly low with most goals being scored in the bottom corners.
+
+
 ![png](figures/messi_01_finding_leo_26_0.png)
+
+Similar, to open play, Messi likes to shoot his penalties low and to the corners. He slightly favours the natural side for a left-footer.
 
 
 ## Conclusions
 
+Messi is obviously an exceptional player and this is reflected in his shots data. Whether it's instinctive or deliberate, he does appear to shoot from and to locations which are most likely to result in goals. He combines volume, efficiency and skill in one very productive package.
