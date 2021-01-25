@@ -6,9 +6,8 @@
 SET /p projectName="Enter projectName: "
 
 :: Create virtual env
-CALL conda create -n %projectName% python=3
-CALL conda env list
-@PAUSE && @CLS
+@REM CALL conda create -n %projectName% python=3
+@REM @PAUSE && @CLS
 
 :: Switch to new virtual env
 CALL conda activate %projectName%
@@ -17,31 +16,33 @@ CALL conda env list
 
 :: Install packages
 :: conda list -e > requirements.txt
-FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
-@PAUSE && @CLS
+@REM FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+@REM @PAUSE && @CLS
 CALL pip install .
 @PAUSE && @CLS
-CALL conda list
-@PAUSE && @CLS
+@REM CALL conda list
+@REM @PAUSE && @CLS
 
 :: Test suite
-CALL flake8 --statistics --exclude=notebooks,checkpoints
-@PAUSE && @CLS
-CALL pytest --verbose .
-@PAUSE && @CLS
+@REM CALL flake8 --statistics --exclude=notebooks,checkpoints
+@REM @PAUSE && @CLS
+@REM CALL pytest --verbose .
+@REM @PAUSE && @CLS
 CALL coverage run --source src -m py.test
 CALL coverage report --fail-under=100
 @PAUSE && @CLS
 
 :: Data pipeline
-CALL python src/managers.py
-@PAUSE && @CLS
-CALL python src/stadiums.py
-@PAUSE && @CLS
-CALL python src/results.py
-@PAUSE && @CLS
-CALL python src/clubs.py
-@PAUSE && @CLS
+@REM CALL python src/managers.py
+@REM @PAUSE && @CLS
+@REM CALL python src/stadiums.py
+@REM @PAUSE && @CLS
+@REM CALL python src/results.py
+@REM @PAUSE && @CLS
+@REM CALL python src/clubs.py
+@REM @PAUSE && @CLS
+@REM CALL python src/events.py
+@REM @PAUSE && @CLS
 
 :: Launch applications
 :: TBC - Data quality dashboard?

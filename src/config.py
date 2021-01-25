@@ -1,7 +1,6 @@
-#!/usr/bin/python -tt
-"""
+"""config module
 
-@author: adeacon
+Used for any underlying configuration
 """
 
 import os
@@ -14,8 +13,9 @@ LOGLEVEL = logging.WARNING
 conf = configparser.RawConfigParser()
 conf.read(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config.ini'))
 
-SOURCE_DIR = os.path.join(conf["PROJECT"]["HOMEDIR"], "data", "raw")
-MASTER_DIR = os.path.join(conf["PROJECT"]["HOMEDIR"], "data", "processed")
+HOME_DIR = conf["PROJECT"]["HOMEDIR"]
+SOURCE_DIR = os.path.join(HOME_DIR, "data", "raw")
+MASTER_DIR = os.path.join(HOME_DIR, "data", "processed")
 
 #code: remoteurl, localfile
 RESULTS_SCRAPE = {

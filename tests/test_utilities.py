@@ -27,6 +27,8 @@ class Test:
         self.testFilename = "tmk_cnt_mbr_all_0910.csv"
         self.testSeason = "09/10"
         self.testCompetition = "all"
+        self.testFilename2 = "events_10_test.csv"
+        self.testMatchId = 10
 
         if os.path.isfile(self.testHtml):
             os.remove(self.testHtml)
@@ -107,6 +109,11 @@ class Test:
     def test_extract_competition(self):
         '''test extract competition from filename'''
         assert utilities.extract_competition(self.testFilename) == self.testCompetition
+
+
+    def test_extract_match_id(self):
+        '''test extract match_id from filename'''
+        assert utilities.extract_match_id(self.testFilename2) == self.testMatchId
 
 
 
