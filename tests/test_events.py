@@ -8,7 +8,6 @@ import src.events as events
 
 
 class Test(object):
-
     def setup_method(self, test_method):
         """setup method for events Test class
 
@@ -23,7 +22,6 @@ class Test(object):
         self.comps = sb.Competitions().get_dataframe()
         self.mats = sb.Matches(event_id="11", season_id="1").get_dataframe()
         self.events = sb.Events(event_id="9948").get_dataframe(event_type="shot")
-
 
     def teardown_method(self, test_method):
         """teardown method for events Test class
@@ -40,7 +38,6 @@ class Test(object):
         self.mats = None
         self.events = None
 
-
     def test_download_competitions(self):
         """test events.download_competitions
 
@@ -53,7 +50,6 @@ class Test(object):
         assert self.comps.shape[0] >= 16
         assert self.comps.shape[1] == 8
 
-
     def test_download_matches(self):
         """test events.download_matches
 
@@ -65,7 +61,6 @@ class Test(object):
         """
         assert self.mats.shape[0] == 36
         assert self.mats.shape[1] == 16
-
 
     def test_download_events(self):
         """test events.download_events
@@ -89,4 +84,3 @@ class Test(object):
 #         Returns:
 #             None
 #         """
-

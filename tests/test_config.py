@@ -8,7 +8,6 @@ import src.config as config
 
 
 class Test(object):
-
     def test_object_types(self):
 
         assert isinstance(config.SOURCE_DIR, str)

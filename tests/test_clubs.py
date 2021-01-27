@@ -10,24 +10,46 @@ import src.clubs as clubs
 
 
 class Test(object):
-
     def setup_method(self, test_method):
-        '''remove/create temp dir containing dummy files'''
+        """remove/create temp dir containing dummy files"""
         # configure self.attribute
-        self.testScore = [{"GoalDiff": -1, "Result": 'Loss', "Points": 0, "PointsOpp": 3, "Win": 0, "WinDraw": 0, "Draw": 0, "DrawLoss": 1, "Loss": 1, "WinShare": 0.},
-                        {"GoalDiff": 10, "Result": 'Win', "Points": 3, "PointsOpp": 0, "Win": 1, "WinDraw": 1, "Draw": 0, "DrawLoss": 0, "Loss": 0, "WinShare": 1.},
-                        ]
+        self.testScore = [
+            {
+                "GoalDiff": -1,
+                "Result": "Loss",
+                "Points": 0,
+                "PointsOpp": 3,
+                "Win": 0,
+                "WinDraw": 0,
+                "Draw": 0,
+                "DrawLoss": 1,
+                "Loss": 1,
+                "WinShare": 0.0,
+            },
+            {
+                "GoalDiff": 10,
+                "Result": "Win",
+                "Points": 3,
+                "PointsOpp": 0,
+                "Win": 1,
+                "WinDraw": 1,
+                "Draw": 0,
+                "DrawLoss": 0,
+                "Loss": 0,
+                "WinShare": 1.0,
+            },
+        ]
 
         self.testHome = "tests"
         self.testDir = os.path.join(self.testHome, "temp")
         self.testMaster = os.path.join(self.testDir, "ftb_fulldata.txt")
 
         self.testBuckets = ["Div"]
-        self.testStats = ("Goals")
+        self.testStats = "Goals"
         self.testFilteron = "Team"
         self.testValues = ["Arsenal"]
-        self.testAggfunc = 'mean'
-        self.testAggValue = 9. / 5.
+        self.testAggfunc = "mean"
+        self.testAggValue = 9.0 / 5.0
 
         self.testResultsFile = os.path.join(self.testDir, "ftb_results.txt")
         self.testResultsText = """|Season|Div|Country|Tier|Date|HomeTeam|AwayTeam|FTHG|FTAG|FTR|HTHG|HTAG|HTR|Attendance|Referee|HS|AS|HST|AST|HHW|AHW|HC|AC|HF|AF|HO|AO|HY|AY|HR|AR|HBP|ABP
@@ -85,21 +107,20 @@ class Test(object):
 
         os.mkdir(self.testDir)
 
-        with open(self.testResultsFile, 'a') as the_file:
+        with open(self.testResultsFile, "a") as the_file:
             the_file.write(self.testResultsText)
 
-        with open(self.testManagersFile, 'a') as the_file:
+        with open(self.testManagersFile, "a") as the_file:
             the_file.write(self.testManagersText)
 
-        with open(self.testStadiumsFile, 'a') as the_file:
+        with open(self.testStadiumsFile, "a") as the_file:
             the_file.write(self.testStadiumsText)
 
-        with open(self.testFulldataFile, 'a') as the_file:
+        with open(self.testFulldataFile, "a") as the_file:
             the_file.write(self.testFulldataText)
 
-
     def teardown_method(self, test_method):
-        '''remove temp dir containing dummy files'''
+        """remove temp dir containing dummy files"""
         # tear down self.attribute
         if os.path.isfile(self.testMaster):
             os.remove(self.testMaster)
@@ -119,38 +140,52 @@ class Test(object):
         if os.path.isdir(self.testDir):
             os.rmdir(self.testDir)
 
-
     def test_func_score(self):
         for score in self.testScore:
-            assert (score["Result"], score["Points"], score["PointsOpp"], score["Win"], 
-                score["WinDraw"], score["Draw"], score["DrawLoss"], score["Loss"], 
-                score["WinShare"]) == clubs.func_score(score["GoalDiff"])
-
+            assert (
+                score["Result"],
+                score["Points"],
+                score["PointsOpp"],
+                score["Win"],
+                score["WinDraw"],
+                score["Draw"],
+                score["DrawLoss"],
+                score["Loss"],
+                score["WinShare"],
+            ) == clubs.func_score(score["GoalDiff"])
 
     def test_func_nogoal(self):
-        for goal in range(0,10):
+        for goal in range(0, 10):
             if goal == 0:
                 assert clubs.func_nogoal(goal) == 1
             else:
                 assert clubs.func_nogoal(goal) == 0
-
 
     def test_build_fulldata(self):
         fulldataIn = pd.read_csv(self.testFulldataFile, sep="|", index_col=0)
         fulldataOut = clubs.build_fulldata(directory=self.testDir)
         assert fulldataIn.shape == fulldataOut.shape
 
-
     def test_fulldata_analysis(self):
         clubs.build_fulldata(directory=self.testDir)
-        frameValues = clubs.fulldata_analysis(directory=self.testDir, buckets=self.testBuckets, stats=self.testStats, 
-                                        filteron=self.testFilteron, 
-                                        values=self.testValues, aggfunc=self.testAggfunc).values
+        frameValues = clubs.fulldata_analysis(
+            directory=self.testDir,
+            buckets=self.testBuckets,
+            stats=self.testStats,
+            filteron=self.testFilteron,
+            values=self.testValues,
+            aggfunc=self.testAggfunc,
+        ).values
         frameAverage = sum(frameValues) / len(frameValues)
         assert frameAverage == self.testAggValue
 
     def test_get_summary(self):
         fulldataIn = pd.read_csv(self.testFulldataFile, sep="|", index_col=0)
-        summaryValues = clubs.get_summary("".join(self.testBuckets), df=fulldataIn, agg_method="mean", base_filters={self.testFilteron: self.testValues}, output_metrics=[self.testStats]).values
+        summaryValues = clubs.get_summary(
+            "".join(self.testBuckets),
+            df=fulldataIn,
+            agg_method="mean",
+            base_filters={self.testFilteron: self.testValues},
+            output_metrics=[self.testStats],
+        ).values
         assert summaryValues == self.testAggValue
-
