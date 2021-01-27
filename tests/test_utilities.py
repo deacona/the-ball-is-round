@@ -5,7 +5,6 @@ Created on 23/09/2019
 @author: adeacon
 """
 import os
-import csv
 import pandas as pd
 import src.utilities as utilities
 
@@ -28,7 +27,7 @@ class Test:
         self.testFrame = pd.DataFrame(self.testRow, index=self.testHeader)
         self.testFilename = "tmk_cnt_mbr_all_0910.csv"
         self.testSeason = "09/10"
-        self.testCompetition = "all"
+        self.testCompetition = "N/A"
         self.testFilename2 = "events_10_test.csv"
         self.testMatchId = 10
         self.testOutDir = os.path.join(self.testHome, "temp_out")

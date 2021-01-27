@@ -108,7 +108,6 @@ def extract_competition(file_name):
         "fac": "FA Cup",
         "lec": "League Cup",
         "prm": "Premier League",
-        "all": "all",
     }
 
     competition_out = competition_dict[competition_part]

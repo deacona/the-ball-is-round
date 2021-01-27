@@ -17,15 +17,19 @@ CALL conda env list
 
 :: Install packages
 :: conda list -e > requirements.txt
-@REM FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
-@REM @PAUSE && @CLS
+:: FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+CALL pip install -r requirements.txt
+CALL conda install basemap
+@PAUSE && @CLS
+CALL black . --exclude notebooks
+@PAUSE && @CLS
 CALL pip install .
 @PAUSE && @CLS
 @REM CALL conda list
 @REM @PAUSE && @CLS
 
 :: Test suite
-CALL flake8 --max-complexity 10 --statistics --exclude=notebooks,checkpoints
+CALL flake8 --max-complexity 10 --statistics --exclude notebooks,*/.ipynb_checkpoints/*
 @PAUSE && @CLS
 CALL pytest --verbose .
 @PAUSE && @CLS

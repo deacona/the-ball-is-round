@@ -1,3 +1,10 @@
+## build
+black
+flake8
+pytest
+coverage
+jupyterlab
+## modules/notebooks
 requests
 numpy
 scipy
@@ -6,11 +13,7 @@ seaborn
 pandas
 xlrd
 openpyxl
-flake8
-pytest
-coverage
 beautifulsoup4
 lxml
 scikit-learn
-jupyterlab
-statsbomb
+statsbombpy
