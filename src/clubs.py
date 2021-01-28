@@ -5,11 +5,6 @@ Created on Mon Feb 06 16:49:37 2017
 @author: adeacon
 """
 
-import pandas as pd
-from scipy.spatial import distance
-import math
-from numpy.random import permutation
-
 # from pandas.tools.plotting import scatter_matrix
 # import matplotlib.pyplot as plt
 # from sklearn import model_selection
@@ -23,6 +18,12 @@ from numpy.random import permutation
 # from sklearn.naive_bayes import GaussianNB
 # from sklearn.svm import SVC
 import logging
+import math
+
+import pandas as pd
+from numpy.random import permutation
+from scipy.spatial import distance
+
 import src.config as config
 import src.utilities as utilities
 

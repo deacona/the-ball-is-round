@@ -3,10 +3,12 @@
 Used for any event related data processing
 """
 
-import statsbomb as sb
-import os
-import pandas as pd
 import logging
+import os
+
+import pandas as pd
+import statsbomb as sb
+
 import src.config as config
 import src.utilities as utilities
 

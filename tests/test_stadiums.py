@@ -5,7 +5,9 @@ Created on 16/10/2019
 @author: adeacon
 """
 import os
+
 import pandas as pd
+
 import src.stadiums as stadiums
 
 

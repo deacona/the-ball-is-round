@@ -4,6 +4,7 @@ Used for testing of event related data processing
 """
 
 import statsbomb as sb
+
 import src.events as events
 
 

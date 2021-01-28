@@ -5,15 +5,17 @@ Created on Tue 06 Nov 2018
 @author: adeacon
 """
 
+import csv
 import os
 import shutil
+
+import matplotlib.pyplot as plt
 import pandas as pd
-import src.config as config
 import requests
 from bs4 import BeautifulSoup
-import csv
-import matplotlib.pyplot as plt
 from matplotlib.patches import Arc  # , Rectangle, ConnectionPatch
+
+import src.config as config
 
 # from matplotlib.offsetbox import  OffsetImage
 

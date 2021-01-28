@@ -5,11 +5,12 @@ Created on Fri Aug 25 14:29:17 2017
 @author: adeacon
 """
 
-import pandas as pd
-import numpy as np
 import math
-from scipy.spatial import distance
+
+import numpy as np
+import pandas as pd
 from numpy.random import permutation
+from scipy.spatial import distance
 
 # import config
 import utilities

@@ -3,9 +3,9 @@
 Used for any underlying configuration
 """
 
-import os
-import logging
 import configparser
+import logging
+import os
 
 LOGFORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 LOGLEVEL = logging.WARNING

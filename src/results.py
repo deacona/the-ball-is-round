@@ -5,12 +5,14 @@ Created on Mon Feb 06 16:49:37 2017
 @author: adeacon
 """
 
+import logging
 import os
 import urllib
-import pandas as pd
-import numpy as np
-import logging
 import zipfile
+
+import numpy as np
+import pandas as pd
+
 import src.config as config
 import src.utilities as utilities
 
