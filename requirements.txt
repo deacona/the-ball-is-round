@@ -1,19 +1,27 @@
 ## build
+isort
 black
 flake8
+flake8-docstrings
+flake8-bandit
+flake8-bugbear
+flake8-print
+flake8-todo
+pylint
 pytest
 coverage
-jupyterlab
 ## modules/notebooks
-requests
-numpy
-scipy
-matplotlib
-seaborn
-pandas
-xlrd
-openpyxl
-beautifulsoup4
-lxml
-scikit-learn
-statsbombpy
+# jupyterlab
+# requests
+# numpy
+# scipy
+# matplotlib
+# seaborn
+# pandas
+# xlrd
+# openpyxl
+# beautifulsoup4
+# lxml
+# scikit-learn
+# statsbombpy
+# basemap

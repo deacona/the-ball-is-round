@@ -19,7 +19,9 @@ CALL conda env list
 :: conda list -e > requirements.txt
 :: FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
 CALL pip install -r requirements.txt
-CALL conda install basemap
+@REM CALL conda install basemap
+@PAUSE && @CLS
+CALL isort --profile black --skip notebooks .
 @PAUSE && @CLS
 CALL black . --exclude notebooks
 @PAUSE && @CLS
@@ -31,11 +33,15 @@ CALL pip install .
 :: Test suite
 CALL flake8 --max-complexity 10 --statistics --exclude notebooks,*/.ipynb_checkpoints/*
 @PAUSE && @CLS
+@REM CALL bandit -r .
+@REM @PAUSE && @CLS
+CALL pylint --disable=all --enable=duplicate-code ./src/
+@PAUSE && @CLS
 CALL pytest --verbose .
 @PAUSE && @CLS
-@REM CALL coverage run --source src -m py.test
-@REM CALL coverage report --fail-under=100
-@REM @PAUSE && @CLS
+CALL coverage run --source src -m py.test
+CALL coverage report --fail-under=100
+@PAUSE && @CLS
 
 :: Data pipeline
 @REM CALL python src/managers.py
@@ -48,16 +54,16 @@ CALL pytest --verbose .
 @REM @PAUSE && @CLS
 @REM CALL python src/events.py
 @REM @PAUSE && @CLS
-CALL python src/utilities.py
-@PAUSE && @CLS
+@REM CALL python src/utilities.py
+@REM @PAUSE && @CLS
 
 :: Run notebooks and export contents
-jupyter nbconvert --to notebook --execute --inplace .\notebooks\*.ipynb
-@PAUSE && @CLS
-jupyter nbconvert --output-dir='.\notebooks\output' --to python .\notebooks\*.ipynb
-@PAUSE && @CLS
-jupyter nbconvert --no-input --output-dir='.\notebooks\output' --to markdown .\notebooks\*.ipynb
-@PAUSE && @CLS
+@REM jupyter nbconvert --to notebook --execute --inplace .\notebooks\*.ipynb
+@REM @PAUSE && @CLS
+@REM jupyter nbconvert --output-dir='.\notebooks\output' --to python .\notebooks\*.ipynb
+@REM @PAUSE && @CLS
+@REM jupyter nbconvert --no-input --output-dir='.\notebooks\output' --to markdown .\notebooks\*.ipynb
+@REM @PAUSE && @CLS
 
 :: Launch applications
 :: TBC - Data quality dashboard?
@@ -65,6 +71,7 @@ jupyter nbconvert --no-input --output-dir='.\notebooks\output' --to markdown .\n
 @REM @PAUSE && @CLS
 
 :: Remove virtual env when done
-:: conda env remove -n %projectName%
+:: CALL conda deactivate
+:: CALL conda env remove -n %projectName%
 :: CALL conda env list
 :: @PAUSE && @CLS
