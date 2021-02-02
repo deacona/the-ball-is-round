@@ -1,9 +1,16 @@
 
 :: Windows build automation
 
-:: Pass in projectName
+:: Pass in environment vars
 @ECHO off
-SET /p projectName="Enter projectName: "
+SET /p projectName="Enter Conda env name: "
+SET /p projectPath="Enter Project path: "
+
+:: Remove virtual env when done
+@REM CALL conda deactivate
+@REM CALL conda env remove -n %projectName%
+@REM CALL conda env list
+@REM @PAUSE && @CLS
 
 :: Create virtual env
 @REM CALL conda create -n %projectName% python=3
@@ -18,13 +25,13 @@ CALL conda env list
 :: Install packages
 :: conda list -e > requirements.txt
 :: FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
-CALL pip install -r requirements.txt
+@REM CALL pip install -r requirements.txt
 @REM CALL conda install basemap
-@PAUSE && @CLS
-CALL isort --profile black --skip notebooks .
-@PAUSE && @CLS
-CALL black . --exclude notebooks
-@PAUSE && @CLS
+@REM @PAUSE && @CLS
+@REM CALL isort --profile black --skip notebooks .
+@REM @PAUSE && @CLS
+@REM CALL black . --exclude notebooks
+@REM @PAUSE && @CLS
 CALL pip install .
 @PAUSE && @CLS
 @REM CALL conda list
@@ -69,9 +76,3 @@ CALL coverage report --fail-under=100
 :: TBC - Data quality dashboard?
 @REM CALL jupyter lab
 @REM @PAUSE && @CLS
-
-:: Remove virtual env when done
-:: CALL conda deactivate
-:: CALL conda env remove -n %projectName%
-:: CALL conda env list
-:: @PAUSE && @CLS

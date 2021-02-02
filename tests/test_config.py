@@ -1,9 +1,4 @@
-#!/usr/bin/python -tt
-"""
-Created on 23/09/2019
-
-@author: adeacon
-"""
+"""Test module for config."""
 
 import os
 
@@ -11,6 +6,8 @@ import src.config as config
 
 
 class Test(object):
+    """Test class for config."""
+
     def test_object_types(self):
 
         for obj in [

@@ -1,19 +1,15 @@
-"""config module
+"""config module.
 
 Used for any underlying configuration
 """
 
-import configparser
 import logging
 import os
 
 LOGFORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 LOGLEVEL = logging.WARNING
 
-conf = configparser.RawConfigParser()
-conf.read(os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.ini"))
-
-HOME_DIR = conf["PROJECT"]["HOMEDIR"]
+HOME_DIR = os.environ.get("projectPath")
 SOURCE_DIR = os.path.join(HOME_DIR, "data", "raw")
 MASTER_DIR = os.path.join(HOME_DIR, "data", "processed")
 NBOUT_DIR = os.path.join(HOME_DIR, "notebooks", "output")
@@ -52,9 +48,9 @@ MANAGERS_SCRAPE = {
             "YearRange",
             "Notes",
         ],
-    ]
-    # ,{'Name': 'Manager','Nat.': 'ManagerCountry', 'Club': 'Team','From': 'DateFrom','Until': 'DateTo','Duration (days)': 'Duration','"Years in\r\nPremier League"': 'YearRange','Ref.': 'Notes'}]
-    ,
+        # ,{'Name': 'Manager','Nat.': 'ManagerCountry', 'Club': 'Team','From': 'DateFrom',
+        # 'Until': 'DateTo','Duration (days)': 'Duration','"Years in\r\nPremier League"': 'YearRange','Ref.': 'Notes'}]
+    ],
     "chm": [
         "https://en.wikipedia.org/wiki/List_of_EFL_Championship_managers",
         os.path.join(SOURCE_DIR, "wkp", "wkp_mgr", "wkp_mgr_chm.csv"),
@@ -68,6 +64,7 @@ MANAGERS_SCRAPE = {
             "YearRange",
             "Notes",
         ],
+        # ,{'Name': 'Manager','Nat.': 'ManagerCountry','Championship club': 'Team','From': 'DateFrom',
+        # 'Until': 'DateTo','"Years in\r\nFLC"': 'YearRange','Ref.': 'Notes'}]
     ]
-    # ,{'Name': 'Manager','Nat.': 'ManagerCountry','Championship club': 'Team','From': 'DateFrom','Until': 'DateTo','"Years in\r\nFLC"': 'YearRange','Ref.': 'Notes'}]
 }
