@@ -66,5 +66,5 @@ MANAGERS_SCRAPE = {
         ],
         # ,{'Name': 'Manager','Nat.': 'ManagerCountry','Championship club': 'Team','From': 'DateFrom',
         # 'Until': 'DateTo','"Years in\r\nFLC"': 'YearRange','Ref.': 'Notes'}]
-    ]
+    ],
 }

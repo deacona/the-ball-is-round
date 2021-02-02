@@ -101,7 +101,7 @@ def get_master(stub, directory=config.MASTER_DIR):
     OUTPUT:
         Datatframe for master file
     """
-    logging.info("Fetching "+master_path(stub))
+    logging.info("Fetching " + master_path(stub))
     return pd.read_csv(master_path(stub, directory=directory), encoding="utf8", sep="|")
 
 
