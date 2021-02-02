@@ -28,10 +28,10 @@ CALL conda env list
 @REM CALL pip install -r requirements.txt
 @REM CALL conda install basemap
 @REM @PAUSE && @CLS
-@REM CALL isort --profile black --skip notebooks .
-@REM @PAUSE && @CLS
-@REM CALL black . --exclude notebooks
-@REM @PAUSE && @CLS
+CALL isort --profile black --skip notebooks .
+@PAUSE && @CLS
+CALL black . --exclude notebooks
+@PAUSE && @CLS
 CALL pip install .
 @PAUSE && @CLS
 @REM CALL conda list

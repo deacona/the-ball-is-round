@@ -1,9 +1,4 @@
-#!/usr/bin/python -tt
-"""
-Created on 23/09/2019
-
-@author: adeacon
-"""
+"""Test module for utilities."""
 import os
 
 import pandas as pd
@@ -12,8 +7,10 @@ import src.utilities as utilities
 
 
 class Test:
+    """Test class for config."""
+
     def setup_method(self, test_method):
-        """remove/create temp dir containing dummy html and csv"""
+        """Remove/create temp objects."""
         # configure self.attribute
 
         self.testHome = "tests"
@@ -70,7 +67,7 @@ class Test:
             f.close()
 
     def teardown_method(self, test_method):
-        """remove temp dir containing dummy html and csv"""
+        """Remove temp objects."""
         # tear down self.attribute
         if os.path.isfile(self.testHtml):
             os.remove(self.testHtml)
@@ -91,7 +88,7 @@ class Test:
             os.rmdir(self.testOutDir)
 
     def test_read_header(self):
-        """test returns first line of dummy csv file"""
+        """Test returns first line of dummy csv file."""
         # print(utilities.read_header(testCsv))
         assert utilities.read_header(self.testCsv) == self.testHeader
 
@@ -102,35 +99,37 @@ class Test:
     #         </html>"""
 
     def test_ensure_dir(self):
+        """Test ensure dir exists."""
         assert utilities.ensure_dir(self.testHtml) == 0
 
     def test_master_path(self):
+        """Test build master filepath."""
         assert utilities.master_path("dummy", directory=self.testDir) == self.testMaster
 
     def test_get_master(self):
-        """test return dummy dataframe from dummy csv"""
+        """Test return dummy dataframe from dummy csv."""
         utilities.save_master(self.testFrame, "dummy", directory=self.testDir)
         utilities.get_master(
             "dummy", directory=self.testDir
         ).shape == self.testFrame.shape
 
     def test_save_master(self):
-        """test save dummy dataframe to dummy csv"""
+        """Test save dummy dataframe to dummy csv."""
         assert (
             utilities.save_master(self.testFrame, "dummy", directory=self.testDir)
             == self.testMaster
         )
 
     def test_extract_season(self):
-        """test extract season from filename"""
+        """Test extract season from filename."""
         assert utilities.extract_season(self.testFilename) == self.testSeason
 
     def test_extract_competition(self):
-        """test extract competition from filename"""
+        """Test extract competition from filename."""
         assert utilities.extract_competition(self.testFilename) == self.testCompetition
 
     def test_extract_match_id(self):
-        """test extract match_id from filename"""
+        """Test extract match_id from filename."""
         assert utilities.extract_match_id(self.testFilename2) == self.testMatchId
 
     # def test_folder_loader(self):
@@ -138,5 +137,5 @@ class Test:
     # assert blah
 
     def test_clear_nb_output(self):
-        """test clearing notebook output"""
-        assert utilities.clear_nb_output(self.testOutDir) == True
+        """Test clearing notebook output."""
+        assert utilities.clear_nb_output(self.testOutDir)

@@ -7,7 +7,7 @@ import logging
 import os
 
 LOGFORMAT = "%(asctime)s - %(levelname)s - %(message)s"
-LOGLEVEL = logging.WARNING
+LOGLEVEL = logging.INFO
 
 HOME_DIR = os.environ.get("projectPath")
 SOURCE_DIR = os.path.join(HOME_DIR, "data", "raw")
