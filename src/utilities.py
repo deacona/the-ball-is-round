@@ -8,7 +8,7 @@ import logging
 import os
 import shutil
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
@@ -228,10 +228,11 @@ def folder_loader(source_level1, source_level2, file_info=None, source_header=No
     return df
 
 
-def draw_pen_box(ax):
+def draw_pen_box(plt, ax):
     """Draw penalty box on chart.
 
     INPUT:
+        plt: Existing plot
         ax: Existing plot axes
 
     OUTPUT:
@@ -267,11 +268,14 @@ def draw_pen_box(ax):
     # Goal line
     ax.axhline(y=120, color="black")
 
+    return True
 
-def draw_posts(ax):
+
+def draw_posts(plt, ax):
     """Draw goalposts on chart.
 
     INPUT:
+        plt: Existing plot
         ax: Existing plot axes
 
     OUTPUT:
@@ -289,6 +293,8 @@ def draw_posts(ax):
 
     plt.plot(x, y, color="black")
     ax.axhline(y=0, color="black")
+
+    return True
 
 
 def clear_nb_output(outFolder=config.NBOUT_DIR):
@@ -316,7 +322,7 @@ def clear_nb_output(outFolder=config.NBOUT_DIR):
 
 
 def main():
-    """Main function used for CLI."""
+    """Use the Main for CLI usage."""
     logging.info("Executing utilities module")
 
     clear_nb_output()

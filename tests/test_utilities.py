@@ -1,6 +1,8 @@
 """Test module for utilities."""
 import os
+import shutil
 
+import matplotlib.pyplot as plt
 import pandas as pd
 
 import src.utilities as utilities
@@ -16,6 +18,8 @@ class Test:
         self.testHome = "tests"
         self.testDir = os.path.join(self.testHome, "temp")
         self.testHtml = os.path.join(self.testDir, "dummy.html")
+        self.testSubDir = os.path.join(self.testDir, "temp_sub")
+        self.testSubDirFile = os.path.join(self.testSubDir, "dummy.txt")
         self.testCsv = os.path.join(self.testDir, "dummy.csv")
         self.testMaster = os.path.join(self.testDir, "ftb_dummy.txt")
         self.testMessage = (
@@ -32,19 +36,13 @@ class Test:
         self.testOutDir = os.path.join(self.testHome, "temp_out")
         self.testOutFile = os.path.join(self.testOutDir, "dummy.md")
 
-        if os.path.isfile(self.testHtml):
-            os.remove(self.testHtml)
+        self.plt = plt
+        self.ax = plt.gca()
 
-        if os.path.isfile(self.testCsv):
-            os.remove(self.testCsv)
-
-        if os.path.isfile(self.testMaster):
-            os.remove(self.testMaster)
-
-        if os.path.isdir(self.testDir):
-            os.rmdir(self.testDir)
-
-        os.mkdir(self.testDir)
+        for obj in [self.testDir, self.testOutDir]:
+            if os.path.isdir(obj):
+                shutil.rmtree(obj)
+            os.mkdir(obj)
 
         with open(self.testHtml, "w") as f:
             f.write(self.testMessage)
@@ -55,37 +53,15 @@ class Test:
             f.write(",".join(self.testRow) + "\n")
             f.close()
 
-        if os.path.isfile(self.testOutFile):
-            os.remove(self.testOutFile)
-
-        if os.path.isdir(self.testOutDir):
-            os.rmdir(self.testOutDir)
-
-        os.mkdir(self.testOutDir)
-
         with open(self.testOutFile, "w") as f:
             f.close()
 
     def teardown_method(self, test_method):
         """Remove temp objects."""
         # tear down self.attribute
-        if os.path.isfile(self.testHtml):
-            os.remove(self.testHtml)
-
-        if os.path.isfile(self.testCsv):
-            os.remove(self.testCsv)
-
-        if os.path.isfile(self.testMaster):
-            os.remove(self.testMaster)
-
-        if os.path.isdir(self.testDir):
-            os.rmdir(self.testDir)
-
-        if os.path.isfile(self.testOutFile):
-            os.remove(self.testOutFile)
-
-        if os.path.isdir(self.testOutDir):
-            os.rmdir(self.testOutDir)
+        for obj in [self.testDir, self.testOutDir]:
+            if os.path.isdir(obj):
+                shutil.rmtree(obj)
 
     def test_read_header(self):
         """Test returns first line of dummy csv file."""
@@ -100,7 +76,8 @@ class Test:
 
     def test_ensure_dir(self):
         """Test ensure dir exists."""
-        assert utilities.ensure_dir(self.testHtml) == 0
+        assert utilities.ensure_dir(self.testOutFile) == 0
+        assert utilities.ensure_dir(self.testSubDirFile) == 1
 
     def test_master_path(self):
         """Test build master filepath."""
@@ -135,6 +112,14 @@ class Test:
     # def test_folder_loader(self):
     # '''test loading source files in folder'''
     # assert blah
+
+    def test_draw_pen_box(self):
+        """Test drawing penalty box on plot."""
+        assert utilities.draw_pen_box(self.plt, self.ax)
+
+    def test_draw_posts(self):
+        """Test drawing goal posts on plot."""
+        assert utilities.draw_posts(self.plt, self.ax)
 
     def test_clear_nb_output(self):
         """Test clearing notebook output."""

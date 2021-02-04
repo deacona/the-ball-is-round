@@ -18,9 +18,9 @@ SET /p projectPath="Enter Project path: "
 @REM @PAUSE && @CLS
 
 :: Switch to new virtual env
-CALL conda activate %projectName%
-CALL conda env list
-@PAUSE && @CLS
+@REM CALL conda activate %projectName%
+@REM CALL conda env list
+@REM @PAUSE && @CLS
 
 :: Install packages
 :: conda list -e > requirements.txt
@@ -38,7 +38,7 @@ CALL pip install .
 @REM @PAUSE && @CLS
 
 :: Test suite
-CALL flake8 --max-complexity 10 --statistics --exclude notebooks,*/.ipynb_checkpoints/*
+CALL flake8 --max-complexity 10 --max-line-length 99 --statistics --exclude notebooks,*/.ipynb_checkpoints/*
 @PAUSE && @CLS
 @REM CALL bandit -r .
 @REM @PAUSE && @CLS
