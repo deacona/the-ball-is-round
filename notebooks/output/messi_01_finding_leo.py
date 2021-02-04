@@ -58,7 +58,7 @@ messi_fullname
 
 
 
-# In[110]:
+# In[8]:
 
 
 df["shot"] = 1
@@ -80,7 +80,7 @@ df["end_location_z_bin"] = 1 * (df.end_location_z / 1).round()
 df.iloc[:, -10:].describe(include="all").T
 
 
-# In[14]:
+# In[9]:
 
 
 ## shots, goals, xg, efficiency, skill
@@ -90,7 +90,7 @@ summary["shot_efficiency_%"] = summary.goal / summary.shot
 summary.sort_index(ascending=False).T
 
 
-# In[123]:
+# In[10]:
 
 
 ## volume
@@ -105,7 +105,7 @@ print("Messi take {0:.1f}% of all shots taken in these matches".format(100 * sum
 
 # ## Trends over time
 
-# In[40]:
+# In[11]:
 
 
 for x_col in ["season_name", "month", "minute", "10_minute_bin"]:
@@ -137,7 +137,7 @@ for x_col in ["season_name", "month", "minute", "10_minute_bin"]:
 
 # ## Where shots are taken from
 
-# In[65]:
+# In[12]:
 
 
 for metric_col in ["shot", "goal"]:
@@ -158,7 +158,7 @@ for metric_col in ["shot", "goal"]:
     plt.show()
 
 
-# In[66]:
+# In[13]:
 
 
 def plot_contour_map(data, title, cmap, plot_type="contour", plot_elevation="pitch", plot_range=[[20, 60], [90, 120]]):
@@ -193,7 +193,7 @@ def plot_contour_map(data, title, cmap, plot_type="contour", plot_elevation="pit
     plt.show() 
 
 
-# In[67]:
+# In[14]:
 
 
 plot_type = "contourf"
@@ -207,7 +207,7 @@ for metric_col in ["shot", "goal", "statsbomb_xg", "shot_skill_diff"]:
     plot_contour_map(data, title, cmap, plot_type)
 
 
-# In[68]:
+# In[15]:
 
 
 plot_type = "imshow"
@@ -228,7 +228,7 @@ plot_contour_map(data, title, cmap, plot_type, plot_range=[[20, 60], [85, 120]])
 
 # ## Where shots end up
 
-# In[109]:
+# In[16]:
 
 
 for metric_col in ["shot", "goal"]:
@@ -249,7 +249,7 @@ for metric_col in ["shot", "goal"]:
     plt.show()
 
 
-# In[115]:
+# In[17]:
 
 
 # plot_type = "contourf"
@@ -265,7 +265,7 @@ for metric_col in ["shot", "goal"]:
 #     plot_contour_map(data, title, cmap, plot_type, plot_elevation="goal", plot_range=[[25, 55], [0, 4]])
 
 
-# In[116]:
+# In[18]:
 
 
 plot_type = "contourf"
@@ -282,7 +282,7 @@ title = "Messi: Open play shot efficiency map"
 plot_contour_map(data, title, cmap, plot_type, plot_elevation="goal", plot_range=[[35, 45], [0, 4]])
 
 
-# In[120]:
+# In[19]:
 
 
 pens = df[(df.is_Messi) & (df.type == "Penalty")]

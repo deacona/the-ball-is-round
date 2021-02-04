@@ -1,33 +1,51 @@
 
 :: Windows build automation
 
-:: Pass in projectName
+:: Pass in environment vars
 @ECHO off
-SET /p projectName="Enter projectName: "
+SET /p projectName="Enter Conda env name: "
+SET /p projectPath="Enter Project path: "
+
+:: Remove virtual env when done
+@REM CALL conda deactivate
+@REM CALL conda env remove -n %projectName%
+@REM CALL conda env list
+@REM @PAUSE && @CLS
 
 :: Create virtual env
 @REM CALL conda create -n %projectName% python=3
+@REM CALL conda env list
 @REM @PAUSE && @CLS
 
 :: Switch to new virtual env
-CALL conda activate %projectName%
-CALL conda env list
-@PAUSE && @CLS
+@REM CALL conda activate %projectName%
+@REM CALL conda env list
+@REM @PAUSE && @CLS
 
 :: Install packages
 :: conda list -e > requirements.txt
-@REM FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+:: FOR /F "delims=~" %%f in (requirements.txt) DO conda install --yes "%%f" || pip install "%%f"
+@REM CALL pip install -r requirements.txt
+@REM CALL conda install basemap
 @REM @PAUSE && @CLS
+CALL isort --profile black --skip notebooks .
+@PAUSE && @CLS
+CALL black . --exclude notebooks
+@PAUSE && @CLS
 CALL pip install .
 @PAUSE && @CLS
 @REM CALL conda list
 @REM @PAUSE && @CLS
 
 :: Test suite
-@REM CALL flake8 --statistics --exclude=notebooks,checkpoints
+CALL flake8 --max-complexity 10 --max-line-length 99 --statistics --exclude notebooks,*/.ipynb_checkpoints/*
+@PAUSE && @CLS
+@REM CALL bandit -r .
 @REM @PAUSE && @CLS
-@REM CALL pytest --verbose .
-@REM @PAUSE && @CLS
+CALL pylint --disable=all --enable=duplicate-code ./src/
+@PAUSE && @CLS
+CALL pytest --verbose .
+@PAUSE && @CLS
 CALL coverage run --source src -m py.test
 CALL coverage report --fail-under=100
 @PAUSE && @CLS
@@ -43,13 +61,18 @@ CALL coverage report --fail-under=100
 @REM @PAUSE && @CLS
 @REM CALL python src/events.py
 @REM @PAUSE && @CLS
+@REM CALL python src/utilities.py
+@REM @PAUSE && @CLS
+
+:: Run notebooks and export contents
+@REM jupyter nbconvert --to notebook --execute --inplace .\notebooks\*.ipynb
+@REM @PAUSE && @CLS
+@REM jupyter nbconvert --output-dir='.\notebooks\output' --to python .\notebooks\*.ipynb
+@REM @PAUSE && @CLS
+@REM jupyter nbconvert --no-input --output-dir='.\notebooks\output' --to markdown .\notebooks\*.ipynb
+@REM @PAUSE && @CLS
 
 :: Launch applications
 :: TBC - Data quality dashboard?
-CALL jupyter lab
-@PAUSE && @CLS
-
-:: Remove virtual env when done
-:: conda env remove -n %projectName%
-:: CALL conda env list
-:: @PAUSE && @CLS
+@REM CALL jupyter lab
+@REM @PAUSE && @CLS

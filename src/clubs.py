@@ -5,10 +5,6 @@ Created on Mon Feb 06 16:49:37 2017
 @author: adeacon
 """
 
-import pandas as pd
-from scipy.spatial import distance
-import math
-from numpy.random import permutation
 # from pandas.tools.plotting import scatter_matrix
 # import matplotlib.pyplot as plt
 # from sklearn import model_selection
@@ -22,23 +18,29 @@ from numpy.random import permutation
 # from sklearn.naive_bayes import GaussianNB
 # from sklearn.svm import SVC
 import logging
+import math
+
+import pandas as pd
+from numpy.random import permutation
+from scipy.spatial import distance
+
 import src.config as config
 import src.utilities as utilities
 
 logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
 
-pd.set_option('display.max_columns', 50)
+pd.set_option("display.max_columns", 50)
 # pd.set_option('display.expand_frame_repr', False)
 
 
 def func_score(x):
-    #Result,Points,PointsOpp,Win,WinDraw,Draw,DrawLoss,Loss,WinShare
+    # Result,Points,PointsOpp,Win,WinDraw,Draw,DrawLoss,Loss,WinShare
     if x > 0:
-        return 'Win', 3, 0, 1, 1, 0, 0, 0, 1.0
+        return "Win", 3, 0, 1, 1, 0, 0, 0, 1.0
     elif x < 0:
-        return 'Loss', 0, 3, 0, 0, 0, 1, 1, 0.0
+        return "Loss", 0, 3, 0, 0, 0, 1, 1, 0.0
     else:
-        return 'Draw', 1, 1, 0, 1, 1, 1, 0, 0.5
+        return "Draw", 1, 1, 0, 1, 1, 1, 0, 0.5
 
 
 def func_nogoal(x):
@@ -50,155 +52,228 @@ def func_nogoal(x):
 
 def build_fulldata(directory=config.MASTER_DIR):
     logging.info("Building fulldata dataframe from results, stadiums, managers ...")
-    
+
     home_renames = {
-            'HomeTeam': 'Team'
-            , 'AwayTeam': 'TeamOpp'
-            , 'FTHG': 'Goals'
-            , 'FTAG': 'GoalsOpp'
-            , 'HTHG': 'Goals1stHalf'
-            , 'HTAG': 'Goals1stHalfOpp'
-            , 'HS': 'Shots'
-            , 'AS': 'ShotsOpp'
-            , 'HST': 'ShotsOnTarget'
-            , 'AST': 'ShotsOnTargetOpp'
-            , 'HHW': 'ShotsHitWoodwork'
-            , 'AHW': 'ShotsHitWoodworkOpp'
-            , 'HC': 'Corners'
-            , 'AC': 'CornersOpp'
-            , 'HF': 'Fouls'
-            , 'AF': 'FoulsOpp'
-            , 'HO': 'Offsides'
-            , 'AO': 'OffsidesOpp'
-            , 'HY': 'YellowCards'
-            , 'AY': 'YellowCardsOpp'
-            , 'HR': 'RedCards'
-            , 'AR': 'RedCardsOpp'
-            , 'HBP': 'BookingPoints'
-            , 'ABP': 'BookingPointsOpp'
-            }
+        "HomeTeam": "Team",
+        "AwayTeam": "TeamOpp",
+        "FTHG": "Goals",
+        "FTAG": "GoalsOpp",
+        "HTHG": "Goals1stHalf",
+        "HTAG": "Goals1stHalfOpp",
+        "HS": "Shots",
+        "AS": "ShotsOpp",
+        "HST": "ShotsOnTarget",
+        "AST": "ShotsOnTargetOpp",
+        "HHW": "ShotsHitWoodwork",
+        "AHW": "ShotsHitWoodworkOpp",
+        "HC": "Corners",
+        "AC": "CornersOpp",
+        "HF": "Fouls",
+        "AF": "FoulsOpp",
+        "HO": "Offsides",
+        "AO": "OffsidesOpp",
+        "HY": "YellowCards",
+        "AY": "YellowCardsOpp",
+        "HR": "RedCards",
+        "AR": "RedCardsOpp",
+        "HBP": "BookingPoints",
+        "ABP": "BookingPointsOpp",
+    }
     away_renames = {}
-    for key,val in home_renames.items():
-        if val.endswith('Opp'):
+    for key, val in home_renames.items():
+        if val.endswith("Opp"):
             away_renames[key] = val[:-3]
         else:
-            away_renames[key] = val+'Opp'
-    stat_to_diff = ['Goals','Goals1stHalf','Shots','ShotsOnTarget','ShotsHitWoodwork','Corners','Fouls','Offsides','YellowCards','RedCards','BookingPoints']
-    #logging.debug(list(away_renames))
-    #logging.debug(list(home_renames))
+            away_renames[key] = val + "Opp"
+    stat_to_diff = [
+        "Goals",
+        "Goals1stHalf",
+        "Shots",
+        "ShotsOnTarget",
+        "ShotsHitWoodwork",
+        "Corners",
+        "Fouls",
+        "Offsides",
+        "YellowCards",
+        "RedCards",
+        "BookingPoints",
+    ]
+    # logging.debug(list(away_renames))
+    # logging.debug(list(home_renames))
 
     logging.info("Process results")
     results = utilities.get_master("results", directory=directory)
-    
+
     homeresults = results.rename(columns=home_renames)
-    homeresults['HomeAway'] = 'Home'
-    #homeresults.info()
-    #logging.debug(homeresults.describe(include="all"))
+    homeresults["HomeAway"] = "Home"
+    # homeresults.info()
+    # logging.debug(homeresults.describe(include="all"))
 
     awayresults = results.rename(columns=away_renames)
-    awayresults['HomeAway'] = 'Away'
-    #awayresults.info()
-    #logging.debug(homeresults.describe(include="all"))
-    
-    allresults = pd.concat([homeresults,awayresults], ignore_index=True, sort=False)
-    allresults.drop(['FTR','HTR','Unnamed: 0'], axis=1, inplace=True)
+    awayresults["HomeAway"] = "Away"
+    # awayresults.info()
+    # logging.debug(homeresults.describe(include="all"))
+
+    allresults = pd.concat([homeresults, awayresults], ignore_index=True, sort=False)
+    allresults.drop(["FTR", "HTR", "Unnamed: 0"], axis=1, inplace=True)
 
     # logging.debug(allresults[(allresults['Team']=="Middlesbrough")&(allresults['Season']=="2006-2007")]["Date"].min())
 
     for stat in stat_to_diff:
-        allresults[stat+'Diff'] = allresults[stat] - allresults[stat+'Opp']
-        allresults['Total'+stat] = allresults[stat] + allresults[stat+'Opp']
+        allresults[stat + "Diff"] = allresults[stat] - allresults[stat + "Opp"]
+        allresults["Total" + stat] = allresults[stat] + allresults[stat + "Opp"]
 
-    allresults['Saves'] = allresults['ShotsOnTargetOpp'] - allresults['GoalsOpp']
-    allresults['SavesOpp'] = allresults['ShotsOnTarget'] - allresults['Goals']
-    allresults['SavesDiff'] = allresults['Saves'] - allresults['SavesOpp']
-    allresults['Goals2ndHalf'] = allresults['Goals'] - allresults['Goals1stHalf']
-    allresults['Goals2ndHalfOpp'] = allresults['GoalsOpp'] - allresults['Goals1stHalfOpp']
-    allresults['Goals2ndHalfDiff'] = allresults['GoalsDiff'] - allresults['Goals1stHalfDiff']
-    #Result,Points,PointsOpp,Win,WinDraw,Draw,DrawLoss,Loss,CleanSheet,CleanSheetOpp
-    allresults['Result'], allresults['Points'], allresults['PointsOpp'], allresults['Win'], allresults['WinDraw'], allresults['Draw'], allresults['DrawLoss'], allresults['Loss'], allresults['WinShare'] = zip(*allresults['GoalsDiff'].map(func_score))
-    allresults['CleanSheet'] = allresults['Goals'].map(func_nogoal)
-    allresults['CleanSheetOpp'] = allresults['GoalsOpp'].map(func_nogoal)
-    
-    #allresults['Date'] = pd.to_datetime(allresults['Date'], format="%d/%m/%y")
-    
-    allresults['GameWeek'] = allresults.sort_values('Date').groupby(['Season','Div','Team']).cumcount() + 1
+    allresults["Saves"] = allresults["ShotsOnTargetOpp"] - allresults["GoalsOpp"]
+    allresults["SavesOpp"] = allresults["ShotsOnTarget"] - allresults["Goals"]
+    allresults["SavesDiff"] = allresults["Saves"] - allresults["SavesOpp"]
+    allresults["Goals2ndHalf"] = allresults["Goals"] - allresults["Goals1stHalf"]
+    allresults["Goals2ndHalfOpp"] = (
+        allresults["GoalsOpp"] - allresults["Goals1stHalfOpp"]
+    )
+    allresults["Goals2ndHalfDiff"] = (
+        allresults["GoalsDiff"] - allresults["Goals1stHalfDiff"]
+    )
+    # Result,Points,PointsOpp,Win,WinDraw,Draw,DrawLoss,Loss,CleanSheet,CleanSheetOpp
+    (
+        allresults["Result"],
+        allresults["Points"],
+        allresults["PointsOpp"],
+        allresults["Win"],
+        allresults["WinDraw"],
+        allresults["Draw"],
+        allresults["DrawLoss"],
+        allresults["Loss"],
+        allresults["WinShare"],
+    ) = zip(*allresults["GoalsDiff"].map(func_score))
+    allresults["CleanSheet"] = allresults["Goals"].map(func_nogoal)
+    allresults["CleanSheetOpp"] = allresults["GoalsOpp"].map(func_nogoal)
+
+    # allresults['Date'] = pd.to_datetime(allresults['Date'], format="%d/%m/%y")
+
+    allresults["GameWeek"] = (
+        allresults.sort_values("Date").groupby(["Season", "Div", "Team"]).cumcount() + 1
+    )
 
     ## TODO - Validate derived values
 
     logging.info("Process stadiums")
     stadiums = utilities.get_master("stadiums", directory=directory)
-    stadiums.drop(['Country','TeamFull'], axis=1, inplace=True)
+    stadiums.drop(["Country", "TeamFull"], axis=1, inplace=True)
 
-    fulldata = pd.merge(allresults, stadiums, on='Team', how='left')
-    #fulldata.drop(['Unnamed: 0'], axis=1, inplace=True)
-    stadiums.rename(columns={'Team': 'TeamOpp'}, inplace=True)
-    fulldata = pd.merge(fulldata, stadiums, on='TeamOpp', how='left', suffixes=('', 'Opp'))
-    fulldata.drop(['Unnamed: 0','Unnamed: 0Opp'], axis=1, inplace=True)
-    
-    fulldata['EuclideanDistance'] = ( (fulldata.Latitude-fulldata.LatitudeOpp)**2 + (fulldata.Longitude-fulldata.LongitudeOpp)**2 )**0.5
-    #logging.debug(100000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
+    fulldata = pd.merge(allresults, stadiums, on="Team", how="left")
+    # fulldata.drop(['Unnamed: 0'], axis=1, inplace=True)
+    stadiums.rename(columns={"Team": "TeamOpp"}, inplace=True)
+    fulldata = pd.merge(
+        fulldata, stadiums, on="TeamOpp", how="left", suffixes=("", "Opp")
+    )
+    fulldata.drop(["Unnamed: 0", "Unnamed: 0Opp"], axis=1, inplace=True)
+
+    fulldata["EuclideanDistance"] = (
+        (fulldata.Latitude - fulldata.LatitudeOpp) ** 2
+        + (fulldata.Longitude - fulldata.LongitudeOpp) ** 2
+    ) ** 0.5
+    # logging.debug(100000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
 
     logging.info("Process managers")
     managers = utilities.get_master("managers", directory=directory)
     managers.dropna(subset=["Manager"], inplace=True)
 
-    fulldata = pd.merge(fulldata, managers, on='Team', how='left')
-    #logging.debug(200000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
-    fulldata = fulldata[((fulldata['Date'] >= fulldata['DateFrom']) & (fulldata['Date'] <= fulldata['DateTo'])) | (fulldata['Manager'].isnull())]
-    #logging.debug(300000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
-    fulldata.drop(['Unnamed: 0','DateFrom','DateTo','Duration','YearRange'], axis=1, inplace=True)
+    fulldata = pd.merge(fulldata, managers, on="Team", how="left")
+    # logging.debug(200000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
+    fulldata = fulldata[
+        (
+            (fulldata["Date"] >= fulldata["DateFrom"])
+            & (fulldata["Date"] <= fulldata["DateTo"])
+        )
+        | (fulldata["Manager"].isnull())
+    ]
+    # logging.debug(300000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
+    fulldata.drop(
+        ["Unnamed: 0", "DateFrom", "DateTo", "Duration", "YearRange"],
+        axis=1,
+        inplace=True,
+    )
     fulldata = fulldata.drop_duplicates()
-    #fulldata.info()
-    #logging.debug(400000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
+    # fulldata.info()
+    # logging.debug(400000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
 
-    managers.rename(columns={'Team': 'TeamOpp'}, inplace=True)
-    fulldata = pd.merge(fulldata, managers, on='TeamOpp', how='left', suffixes=('', 'Opp'))
-    #logging.debug(500000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')])
-    fulldata = fulldata[((fulldata['Date'] >= fulldata['DateFrom']) & (fulldata['Date'] <= fulldata['DateTo'])) | (fulldata['ManagerOpp'].isnull())]
-    #logging.debug(600000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
-    fulldata.drop(['Unnamed: 0','DateFrom','DateTo','Duration','YearRange'], axis=1, inplace=True)
+    managers.rename(columns={"Team": "TeamOpp"}, inplace=True)
+    fulldata = pd.merge(
+        fulldata, managers, on="TeamOpp", how="left", suffixes=("", "Opp")
+    )
+    # logging.debug(500000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')])
+    fulldata = fulldata[
+        (
+            (fulldata["Date"] >= fulldata["DateFrom"])
+            & (fulldata["Date"] <= fulldata["DateTo"])
+        )
+        | (fulldata["ManagerOpp"].isnull())
+    ]
+    # logging.debug(600000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
+    fulldata.drop(
+        ["Unnamed: 0", "DateFrom", "DateTo", "Duration", "YearRange"],
+        axis=1,
+        inplace=True,
+    )
     fulldata = fulldata.drop_duplicates()
-    #fulldata.info()
-    #logging.debug(700000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
-    
-    #fulldata.info()
-    #logging.debug(fulldata.describe(include="all"))
+    # fulldata.info()
+    # logging.debug(700000+len(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['TeamOpp']=="Chelsea")&(fulldata['Season']=="2016-2017")&(fulldata['HomeAway']=='Home')]))
+
+    # fulldata.info()
+    # logging.debug(fulldata.describe(include="all"))
     # logging.debug(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['Season']=="2006-2007")]["Date"].min()#.describe(include="all"))
-    
+
     utilities.save_master(fulldata, "fulldata", directory=directory)
     return fulldata
 
 
-def fulldata_analysis(directory=config.MASTER_DIR, buckets = ['Div','Season','Team'], 
-                        stats = ('Shots','ShotsOnTarget','Goals','Corners','Points','Win'),
-                        filteron = 'Div', values = ['E0','E1'], aggfunc = 'mean'):
+def fulldata_analysis(
+    directory=config.MASTER_DIR,
+    buckets=["Div", "Season", "Team"],
+    stats=("Shots", "ShotsOnTarget", "Goals", "Corners", "Points", "Win"),
+    filteron="Div",
+    values=["E0", "E1"],
+    aggfunc="mean",
+):
     logging.info("High-level analysis of all clubs data")
     fulldata = utilities.get_master("fulldata", directory=directory)
 
-    #logging.debug(pd.show_versions())
+    # logging.debug(pd.show_versions())
     logging.info("Dataframe info...")
     fulldata.info()
-    #logging.debug(fulldata.describe(include="all"))
-    #logging.debug(fulldata["Div"].value_counts())
-    #logging.debug(fulldata["Tier"].value_counts())
-    #logging.debug(fulldata["Country"].value_counts())
-    #logging.debug(fulldata["Season"].value_counts())
-    #logging.debug(fulldata["Goals"].value_counts())
-    #logging.debug(fulldata["Stadium"].value_counts())
-    #logging.debug(fulldata["City"].value_counts())
-    #logging.debug(fulldata["Manager"].value_counts())
-    #logging.debug(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['Season']=="2017-2018")].describe(include="all"))
-    #logging.debug(fulldata[(fulldata['EuclideanDistance']==0)] #.head())
+    # logging.debug(fulldata.describe(include="all"))
+    # logging.debug(fulldata["Div"].value_counts())
+    # logging.debug(fulldata["Tier"].value_counts())
+    # logging.debug(fulldata["Country"].value_counts())
+    # logging.debug(fulldata["Season"].value_counts())
+    # logging.debug(fulldata["Goals"].value_counts())
+    # logging.debug(fulldata["Stadium"].value_counts())
+    # logging.debug(fulldata["City"].value_counts())
+    # logging.debug(fulldata["Manager"].value_counts())
+    # logging.debug(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['Season']=="2017-2018")].describe(include="all"))
+    # logging.debug(fulldata[(fulldata['EuclideanDistance']==0)] #.head())
 
     # buckets = ['Div','Season','Team']
     # stats = 'Shots','ShotsOnTarget','Goals','Corners','Points','Win'
     # filteron = 'Div'
     # values = ['E0','E1']
     # aggfunc = 'mean'
-    pseudocode = "SELECT "+aggfunc+" OF "+str(stats)+" WHERE "+filteron+" IS "+str(values)+" GROUPED BY "+str(buckets)
+    pseudocode = (
+        "SELECT "
+        + aggfunc
+        + " OF "
+        + str(stats)
+        + " WHERE "
+        + filteron
+        + " IS "
+        + str(values)
+        + " GROUPED BY "
+        + str(buckets)
+    )
     logging.info("Analysis pseudocode: {0}".format(pseudocode))
-    selected = fulldata[fulldata[filteron].isin(values)].groupby(buckets)[stats].agg([aggfunc])
+    selected = (
+        fulldata[fulldata[filteron].isin(values)].groupby(buckets)[stats].agg([aggfunc])
+    )
 
     logging.info("Describe summary dataframe...")
     print(selected.describe(include="all"))
@@ -207,38 +282,45 @@ def fulldata_analysis(directory=config.MASTER_DIR, buckets = ['Div','Season','Te
     return selected
 
 
-def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_mins={}, output_metrics=[]):
+def get_summary(
+    group_key,
+    df=None,
+    agg_method="mean",
+    base_filters={},
+    metric_mins={},
+    output_metrics=[],
+):
     logging.debug("Get summarised data")
 
     if df is None:
-        #fetch from master csv
+        # fetch from master csv
         df = utilities.get_master("fulldata")
-    #logging.debug(list(df.columns.values))
-    
-    #filter unwanted records
-    #df = df[(df['Team']=="Chelsea")]
-    #df = df[(df['Country']=="England")]
-    #df = df[(df['Tier']==1)]
+    # logging.debug(list(df.columns.values))
+
+    # filter unwanted records
+    # df = df[(df['Team']=="Chelsea")]
+    # df = df[(df['Country']=="England")]
+    # df = df[(df['Tier']==1)]
     for field, vals in base_filters.items():
         df = df[(df[field].isin(vals))]
-        
-#    selected_columns = [group_key]+metrics
-#    df = df[selected_columns]
+
+    #    selected_columns = [group_key]+metrics
+    #    df = df[selected_columns]
     df.dropna(subset=[group_key], inplace=True)
-    
-    #aggregate data
-#   df_avg = df[[group_key]+metrics].groupby(group_key).mean()
+
+    # aggregate data
+    #   df_avg = df[[group_key]+metrics].groupby(group_key).mean()
     df_avg = df.groupby(group_key).agg(agg_method)
-    #df_avg.info()
+    # df_avg.info()
     df_cnt = df[group_key].value_counts()
-    #df_cnt.columns = ['NumberOfMatches']
-    #logging.debug(df_cnt)
+    # df_cnt.columns = ['NumberOfMatches']
+    # logging.debug(df_cnt)
     df = pd.concat([df_cnt, df_avg], axis=1, sort=True)
-    df.rename(columns = {group_key:'NumberOfMatches'}, inplace = True)
-    if 'Unnamed: 0' in df.columns:
-        df.drop(['Unnamed: 0'], axis=1, inplace=True)
-    
-    #add derived metrics
+    df.rename(columns={group_key: "NumberOfMatches"}, inplace=True)
+    if "Unnamed: 0" in df.columns:
+        df.drop(["Unnamed: 0"], axis=1, inplace=True)
+
+    # add derived metrics
     df["ShotAccuracy"] = df["ShotsOnTarget"] / df["Shots"]
     df["ShotAccuracyOpp"] = df["ShotsOnTargetOpp"] / df["ShotsOpp"]
     df["ShotPercent"] = df["Goals"] / df["ShotsOnTarget"]
@@ -257,19 +339,27 @@ def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_m
     df["PDOOpp"] = 1000 * (df["ShotPercentOpp"] + df["SavePercentOpp"])
     df["%TSoTt"] = df["ShotAccuracy"] + (1 - df["ShotAccuracyOpp"])
     df["%TSoTtOpp"] = df["ShotAccuracyOpp"] + (1 - df["ShotAccuracy"])
-    df["GraysonRating"] = (0.5+(df["TSR"]-0.5)*0.732**0.5)*(1.0+(df["%TSoTt"]-1.0)*0.166**0.5)*(1000+(df["PDO"]-1000)*0.176**0.5)
-    df["GraysonRatingOpp"] = (0.5+(df["TSROpp"]-0.5)*0.732**0.5)*(1.0+(df["%TSoTtOpp"]-1.0)*0.166**0.5)*(1000+(df["PDOOpp"]-1000)*0.176**0.5)
-    df["GraysonScore"] = 10 * (df["GraysonRating"]-363) / (695-363)
-    df["GraysonScoreOpp"] = 10 * (df["GraysonRatingOpp"]-363) / (695-363)
-    
-    #filter unwanted aggregate data
-    #df = df[(df["NumberOfMatches"] >= 50)]
+    df["GraysonRating"] = (
+        (0.5 + (df["TSR"] - 0.5) * 0.732 ** 0.5)
+        * (1.0 + (df["%TSoTt"] - 1.0) * 0.166 ** 0.5)
+        * (1000 + (df["PDO"] - 1000) * 0.176 ** 0.5)
+    )
+    df["GraysonRatingOpp"] = (
+        (0.5 + (df["TSROpp"] - 0.5) * 0.732 ** 0.5)
+        * (1.0 + (df["%TSoTtOpp"] - 1.0) * 0.166 ** 0.5)
+        * (1000 + (df["PDOOpp"] - 1000) * 0.176 ** 0.5)
+    )
+    df["GraysonScore"] = 10 * (df["GraysonRating"] - 363) / (695 - 363)
+    df["GraysonScoreOpp"] = 10 * (df["GraysonRatingOpp"] - 363) / (695 - 363)
+
+    # filter unwanted aggregate data
+    # df = df[(df["NumberOfMatches"] >= 50)]
     for field, val in metric_mins.items():
         df = df[(df[field] >= val)]
-    
+
     if output_metrics:
         df = df[output_metrics]
-    #df.info()
+    # df.info()
     logging.debug("Showing summarised dataframe...\n{0}".format(df))
     return df
 
@@ -277,49 +367,48 @@ def get_summary(group_key, df=None, agg_method="mean", base_filters={}, metric_m
 def find_similar():
 
     group_key = "Manager"
-    base_filters = {
-            "Tier": [1]
-            , "Country": ["England", "Spain", "Italy", "Germany"]
-            }
-    metric_mins = {
-            "NumberOfMatches": 100
-            }
+    base_filters = {"Tier": [1], "Country": ["England", "Spain", "Italy", "Germany"]}
+    metric_mins = {"NumberOfMatches": 100}
 
     items = get_summary(group_key, base_filters=base_filters, metric_mins=metric_mins)
     items.info()
 
-    #logging.debug(players)
-    logging.debug("\nNumber of items included: "+str(len(items)))
+    # logging.debug(players)
+    logging.debug("\nNumber of items included: " + str(len(items)))
 
     # Normalize all of the numeric columns
     items_normalized = (items - items.mean()) / items.std()
     items_normalized.fillna(0, inplace=True)
-    #items_normalized.info()
-    #logging.debug(items_normalized.describe(include="all")
+    # items_normalized.info()
+    # logging.debug(items_normalized.describe(include="all")
 
-    #logging.debug(players_normalized.index.values
+    # logging.debug(players_normalized.index.values
     for item in items_normalized.index.values:
-        #logging.debug("\n###############################"
-        logging.debug("\n"+item)
+        # logging.debug("\n###############################"
+        logging.debug("\n" + item)
 
-        #selected_player = players.loc[name]
-        #logging.debug(selected_player.name
-        #logging.debug(selected_player.to_frame().T #.name
+        # selected_player = players.loc[name]
+        # logging.debug(selected_player.name
+        # logging.debug(selected_player.to_frame().T #.name
 
         # Normalize all of the numeric columns
         selected_normalized = items_normalized.loc[item]
-        #logging.debug(selected_normalized
+        # logging.debug(selected_normalized
 
         # Find the distance between select player and everyone else.
-        euclidean_distances = items_normalized.apply(lambda row: distance.euclidean(row, selected_normalized), axis=1)
+        euclidean_distances = items_normalized.apply(
+            lambda row: distance.euclidean(row, selected_normalized), axis=1
+        )
 
         # Create a new dataframe with distances.
-        distance_frame = pd.DataFrame(data={"dist": euclidean_distances, "idx": euclidean_distances.index})
+        distance_frame = pd.DataFrame(
+            data={"dist": euclidean_distances, "idx": euclidean_distances.index}
+        )
         distance_frame.sort_values("dist", inplace=True)
 
         most_similar = distance_frame.iloc[1:4]["idx"]
-        #most_similar = items.loc[nearest_neighbours]
-        #logging.debug(most_similar
+        # most_similar = items.loc[nearest_neighbours]
+        # logging.debug(most_similar
         logging.debug("... is similar to... ")
         logging.debug(list(most_similar.index.values))
 
@@ -327,10 +416,8 @@ def find_similar():
 def make_prediction():
 
     group_key = "Team"
-    base_filters = {
-            "Div":["E0"]
-            }
-    pred_col = 'Points'
+    base_filters = {"Div": ["E0"]}
+    pred_col = "Points"
 
     items = get_summary(group_key, base_filters=base_filters)
 
@@ -343,33 +430,34 @@ def make_prediction():
     # Randomly shuffle the index of nba.
     random_indices = permutation(items.index)
     # Set a cutoff for how many items we want in the test set (in this case 1/3 of the items)
-    test_cutoff = math.floor(len(items)/3)
+    test_cutoff = math.floor(len(items) / 3)
     # Generate the test set by taking the first 1/3 of the randomly shuffled indices.
     test = items.loc[random_indices[1:test_cutoff]]
     test.fillna(0, inplace=True)
-    #test.info()
-    #logging.debug(test.describe(include="all"))
+    # test.info()
+    # logging.debug(test.describe(include="all"))
     # Generate the train set with the rest of the data.
     train = items.loc[random_indices[test_cutoff:]]
     train.fillna(0, inplace=True)
-    #train.info()
-    #logging.debug(train.describe(include="all"))
+    # train.info()
+    # logging.debug(train.describe(include="all"))
 
     ###Using sklearn for k nearest neighbors
-    #logging.debug("Using sklearn for k nearest neighbors...")
+    # logging.debug("Using sklearn for k nearest neighbors...")
 
     from sklearn.neighbors import KNeighborsRegressor
+
     # Create the knn model.
     # Look at the five closest neighbors.
     knn = KNeighborsRegressor(n_neighbors=5)
-    #logging.debug(knn)
+    # logging.debug(knn)
     # Fit the model on the training data.
     knn.fit(train[x_columns], train[y_column])
-    #logging.debug(knn)
+    # logging.debug(knn)
     # Make point predictions on the test set using the fit model.
     predictions = knn.predict(test[x_columns])
-    #logging.debug("\nPredicted PointsPGm:")
-    #logging.debug(predictions.shape)
+    # logging.debug("\nPredicted PointsPGm:")
+    # logging.debug(predictions.shape)
 
     ###Computing error
 
@@ -381,23 +469,28 @@ def make_prediction():
     logging.debug("\nMean Squared Error:")
     logging.debug(mse)
 
-    actual["Predicted"+pred_col] = predictions
-    actual["Diff"] = actual[pred_col] - actual["Predicted"+pred_col]
-    logging.debug("\nActual and Predicted "+pred_col+":")
+    actual["Predicted" + pred_col] = predictions
+    actual["Diff"] = actual[pred_col] - actual["Predicted" + pred_col]
+    logging.debug("\nActual and Predicted " + pred_col + ":")
     logging.debug(actual.sort_values(["Diff"], ascending=False))
 
 
 def do_classification():
     # Load dataset
-    #url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+    # url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
     dataset = utilities.get_master("fulldata")
 
-    #filter unwanted records and columns
-    dataset = dataset[(dataset['Div']=="E0")]
-    #dataset.info()
-    dataset = dataset[["ShotsOnTarget", "ShotsOnTargetOpp", "Saves", "SavesOpp", "Result"]]
-    dataset.dropna(subset=["ShotsOnTarget", "ShotsOnTargetOpp", "Saves", "SavesOpp", "Result"], inplace=True)
-    #logging.debug(list(dataset.columns.values))
+    # filter unwanted records and columns
+    dataset = dataset[(dataset["Div"] == "E0")]
+    # dataset.info()
+    dataset = dataset[
+        ["ShotsOnTarget", "ShotsOnTargetOpp", "Saves", "SavesOpp", "Result"]
+    ]
+    dataset.dropna(
+        subset=["ShotsOnTarget", "ShotsOnTargetOpp", "Saves", "SavesOpp", "Result"],
+        inplace=True,
+    )
+    # logging.debug(list(dataset.columns.values))
 
     # shape
     logging.debug(dataset.shape)
@@ -409,10 +502,10 @@ def do_classification():
     logging.debug(dataset.describe())
 
     # class distribution
-    logging.debug(dataset.groupby('Result').size())
+    logging.debug(dataset.groupby("Result").size())
 
     # box and whisker plots
-    dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
+    dataset.plot(kind="box", subplots=True, layout=(2, 2), sharex=False, sharey=False)
     plt.show()
 
     # histograms
@@ -425,11 +518,13 @@ def do_classification():
 
     # Split-out validation dataset
     array = dataset.values
-    X = array[:,0:4]
-    Y = array[:,4]
+    X = array[:, 0:4]
+    Y = array[:, 4]
     validation_size = 0.20
     seed = 7
-    X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
+    X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(
+        X, Y, test_size=validation_size, random_state=seed
+    )
 
     logging.debug(X_train[:5])
     logging.debug(X_validation[:5])
@@ -438,30 +533,32 @@ def do_classification():
 
     # Test options and evaluation metric
     seed = 7
-    scoring = 'accuracy'
+    scoring = "accuracy"
 
     # Spot Check Algorithms
     models = []
-    models.append(('LR', LogisticRegression()))
-    models.append(('LDA', LinearDiscriminantAnalysis()))
-    models.append(('KNN', KNeighborsClassifier()))
-    models.append(('CART', DecisionTreeClassifier()))
-    models.append(('NB', GaussianNB()))
-    models.append(('SVM', SVC()))
+    models.append(("LR", LogisticRegression()))
+    models.append(("LDA", LinearDiscriminantAnalysis()))
+    models.append(("KNN", KNeighborsClassifier()))
+    models.append(("CART", DecisionTreeClassifier()))
+    models.append(("NB", GaussianNB()))
+    models.append(("SVM", SVC()))
     # evaluate each model in turn
     results = []
     names = []
     for name, model in models:
-    	kfold = model_selection.KFold(n_splits=10, random_state=seed)
-    	cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
-    	results.append(cv_results)
-    	names.append(name)
-    	msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
-    	logging.debug(msg)
+        kfold = model_selection.KFold(n_splits=10, random_state=seed)
+        cv_results = model_selection.cross_val_score(
+            model, X_train, Y_train, cv=kfold, scoring=scoring
+        )
+        results.append(cv_results)
+        names.append(name)
+        msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
+        logging.debug(msg)
 
     # Compare Algorithms
     fig = plt.figure()
-    fig.suptitle('Algorithm Comparison')
+    fig.suptitle("Algorithm Comparison")
     ax = fig.add_subplot(111)
     plt.boxplot(results)
     ax.set_xticklabels(names)
@@ -487,6 +584,8 @@ def do_classification():
 
 def test_soccernomics():
     pass
+
+
 #        ## Soccernomics (* need financial/economic data)
 #            *Avg lge pos Vs Relative wage spend
 #                EPL+Champ 98-07 R^2 = 0.8872
@@ -503,18 +602,42 @@ def test_soccernomics():
 
 def test_numbers_game():
 
-#        ## Numbers Game (* need betting data)
-#            Corners Vs Shots, Goals
-#                EPL 2001/02-2010/11
+    #        ## Numbers Game (* need betting data)
+    #            Corners Vs Shots, Goals
+    #                EPL 2001/02-2010/11
     group_key = "Corners"
     base_filters = {
-            "Div": ["E0"]
-            , "Season": ["2001-2002", "2002-2003", "2003-2004", "2004-2005", "2005-2006", "2006-2007", "2007-2008", "2008-2009", "2009-2010", "2010-2011"]
-            }
-    output_metrics = ["NumberOfMatches", "Shots","ShotsOnTarget", "Goals", "Win", "WinDraw", "Points", "GraysonScore"]
-    corners = get_summary(group_key, base_filters=base_filters, output_metrics=output_metrics)
+        "Div": ["E0"],
+        "Season": [
+            "2001-2002",
+            "2002-2003",
+            "2003-2004",
+            "2004-2005",
+            "2005-2006",
+            "2006-2007",
+            "2007-2008",
+            "2008-2009",
+            "2009-2010",
+            "2010-2011",
+        ],
+    }
+    output_metrics = [
+        "NumberOfMatches",
+        "Shots",
+        "ShotsOnTarget",
+        "Goals",
+        "Win",
+        "WinDraw",
+        "Points",
+        "GraysonScore",
+    ]
+    corners = get_summary(
+        group_key, base_filters=base_filters, output_metrics=output_metrics
+    )
     corners.info()
     logging.debug(corners)
+
+
 #            Actual goal freq Vs Predicted (Poisson dist)
 #                England, Germany, Spain, Italy, France 1993-2011
 #            Home goals Vs Away goals (%)
@@ -527,47 +650,61 @@ def test_numbers_game():
 
 def test_footballintheclouds():
     ### Various Shot Metrics - Premier League 2016/17
-    #http://footballintheclouds.blogspot.co.uk/p/various-shot-metrics-premier-league.html
-    #https://jameswgrayson.wordpress.com/2014/08/11/methodology-and-validation-of-the-team-ratings/
+    # http://footballintheclouds.blogspot.co.uk/p/various-shot-metrics-premier-league.html
+    # https://jameswgrayson.wordpress.com/2014/08/11/methodology-and-validation-of-the-team-ratings/
     group_key = "Team"
-    base_filters = {
-            "Div": ["E0"]
-            , "Season": ["2016-2017"] #["2009-2010"]
-            }
-    output_metrics = ["NumberOfMatches", 'Shots', 'ShotsOpp', 'TSR', 'ShotPercent'	, 'SavePercent', 'PDO', '%TSoTt', 'GraysonRating', 'GraysonScore']
-    teams = get_summary(group_key, base_filters=base_filters, output_metrics=output_metrics)
+    base_filters = {"Div": ["E0"], "Season": ["2016-2017"]}  # ["2009-2010"]
+    output_metrics = [
+        "NumberOfMatches",
+        "Shots",
+        "ShotsOpp",
+        "TSR",
+        "ShotPercent",
+        "SavePercent",
+        "PDO",
+        "%TSoTt",
+        "GraysonRating",
+        "GraysonScore",
+    ]
+    teams = get_summary(
+        group_key, base_filters=base_filters, output_metrics=output_metrics
+    )
     teams.info()
     logging.debug(teams)
 
 
 def boro_analysis():
-    #group_key = "Season"
+    # group_key = "Season"
     group_key = "Manager"
     base_filters = {
-            "Team": ["Middlesbrough"]
-            #, "Div": ["E1"]
-            #, "Manager": ["Aitor Karanka", "Garry Monk"]
-            }
+        "Team": ["Middlesbrough"]
+        # , "Div": ["E1"]
+        # , "Manager": ["Aitor Karanka", "Garry Monk"]
+    }
     output_metrics = [
-            "NumberOfMatches",
-            "Points",
-            "Goals", #"GoalsOpp",
-            #'Shots', 'ShotsOpp',
-            #'ShotsOnTarget', 'ShotsOnTargetOpp',
-            # 'TSR', #'TSROpp',
-            #'ShotPercent',
-            #'SavePercent',
-            # 'PDO', #'PDOOpp',
-            # 'GraysonScore', 'GraysonScoreOpp',
-            ]
-    boro = get_summary(group_key, base_filters=base_filters, output_metrics=output_metrics)
-    #boro.info()
+        "NumberOfMatches",
+        "Points",
+        "Goals",  # "GoalsOpp",
+        #'Shots', 'ShotsOpp',
+        #'ShotsOnTarget', 'ShotsOnTargetOpp',
+        # 'TSR', #'TSROpp',
+        #'ShotPercent',
+        #'SavePercent',
+        # 'PDO', #'PDOOpp',
+        # 'GraysonScore', 'GraysonScoreOpp',
+    ]
+    boro = get_summary(
+        group_key, base_filters=base_filters, output_metrics=output_metrics
+    )
+    # boro.info()
     logging.debug(boro)
-    pd.scatter_matrix(boro, diagonal='kde')
+    pd.scatter_matrix(boro, diagonal="kde")
 
 
 def best_rivalries():
     pass
+
+
 #    Best rivalries (frequency, closeness, equality, action)
 
 
@@ -577,6 +714,7 @@ def main():
     fulldata_analysis()
     get_summary("Div")
 
+
 ## TODO move analysis to jupyter notebooks
 
 #    find_similar()
@@ -585,10 +723,10 @@ def main():
 
 #    test_soccernomics()
 #    test_numbers_game()
-    # test_footballintheclouds()
-    # boro_analysis()
+# test_footballintheclouds()
+# boro_analysis()
 #    best_rivalries()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

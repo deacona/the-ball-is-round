@@ -2,6 +2,8 @@
 # coding: utf-8
 
 # # Boro Player Predictions - Current Market Value
+# 
+# Written report for this analysis can be found [here](../reports/boro_01_market_value.md)
 
 # In[1]:
 
@@ -1029,28 +1031,28 @@ with open(ftn_file, "wb") as ftn_outfile:
 # In[83]:
 
 
-outFolder = './output'
-for filename in os.listdir(outFolder):
-    file_path = os.path.join(outFolder, filename)
-    try:
-        if os.path.isfile(file_path) or os.path.islink(file_path):
-            os.unlink(file_path)
-        elif os.path.isdir(file_path):
-            shutil.rmtree(file_path)
-    except Exception as e:
-        print('Failed to delete %s. Reason: %s' % (file_path, e))
+# outFolder = './output'
+# for filename in os.listdir(outFolder):
+#     file_path = os.path.join(outFolder, filename)
+#     try:
+#         if os.path.isfile(file_path) or os.path.islink(file_path):
+#             os.unlink(file_path)
+#         elif os.path.isdir(file_path):
+#             shutil.rmtree(file_path)
+#     except Exception as e:
+#         print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
 # In[84]:
 
 
-get_ipython().system("jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb")
+# !jupyter nbconvert --no-input --output-dir='./output' --to markdown boro_01_current_market_value.ipynb
 
 
-# In[ ]:
+# In[85]:
 
 
-get_ipython().system("jupyter nbconvert --output-dir='./output' --to python boro_01_current_market_value.ipynb")
+# !jupyter nbconvert --output-dir='./output' --to python boro_01_current_market_value.ipynb
 
 
 # In[ ]:

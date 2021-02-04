@@ -1,22 +1,36 @@
-#!/usr/bin/python -tt
-"""
-Created on 23/09/2019
+"""Test module for config."""
 
-@author: adeacon
-"""
+import os
+
 import src.config as config
 
 
 class Test(object):
+    """Test class for config."""
 
     def test_object_types(self):
 
-        assert isinstance(config.SOURCE_DIR, str)
+        for obj in [
+            config.HOME_DIR,
+            config.SOURCE_DIR,
+            config.MASTER_DIR,
+            config.NBOUT_DIR,
+        ]:
+            assert isinstance(obj, str)
 
-        assert isinstance(config.MASTER_DIR, str)
+        for obj in [
+            config.RESULTS_SCRAPE,
+            config.STADIUMS_SCRAPE,
+            config.MANAGERS_SCRAPE,
+        ]:
+            assert isinstance(obj, dict)
 
-        assert isinstance(config.RESULTS_SCRAPE, dict)
+    def test_dirs_exist(self):
 
-        assert isinstance(config.STADIUMS_SCRAPE, dict)
-
-        assert isinstance(config.MANAGERS_SCRAPE, dict)
+        for folder in [
+            config.HOME_DIR,
+            config.SOURCE_DIR,
+            config.MASTER_DIR,
+            config.NBOUT_DIR,
+        ]:
+            assert os.path.exists(folder)
