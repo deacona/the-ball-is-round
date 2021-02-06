@@ -36,7 +36,7 @@ STADIUMS_SCRAPE = {
 MANAGERS_SCRAPE = {
     "prm": [
         "https://en.wikipedia.org/wiki/List_of_Premier_League_managers",
-        os.path.join(SOURCE_DIR, "wkp", "wkp_mgr", "wkp_mgr_prm.csv"),
+        os.path.join("wkp", "wkp_mgr", "wkp_mgr_prm.csv"),
         {"class": "wikitable sortable plainrowheaders"},
         [
             "Manager",
@@ -53,7 +53,7 @@ MANAGERS_SCRAPE = {
     ],
     "chm": [
         "https://en.wikipedia.org/wiki/List_of_EFL_Championship_managers",
-        os.path.join(SOURCE_DIR, "wkp", "wkp_mgr", "wkp_mgr_chm.csv"),
+        os.path.join("wkp", "wkp_mgr", "wkp_mgr_chm.csv"),
         {"class": "wikitable sortable"},
         [
             "Manager",
