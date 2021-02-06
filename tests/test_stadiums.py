@@ -8,7 +8,7 @@ import src.stadiums as stadiums
 
 
 class Test(object):
-    """Test class for config."""
+    """Test class for stadiums."""
 
     def setup_method(self, test_method):
         """Remove/create temp dir containing dummy files."""

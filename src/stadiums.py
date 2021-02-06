@@ -77,6 +77,8 @@ def format_stadiums(
 
     utilities.save_master(combo, "stadiums", directory=directoryOut)
 
+    return
+
 
 def main():
     """Use the Main for CLI usage."""
