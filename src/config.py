@@ -24,11 +24,11 @@ RESULTS_SCRAPE = {
 STADIUMS_SCRAPE = {
     "ops": [
         "http://opisthokonta.net/wp-content/uploads/2015/03/stadiums_20150302.csv",
-        os.path.join(SOURCE_DIR, "ops", "stadiums", "stadiums_20150302.csv"),
+        os.path.join("ops", "stadiums", "stadiums_20150302.csv"),
     ],
     "dgl": [
         "https://www.doogal.co.uk/FootballStadiumsCSV.ashx",
-        os.path.join(SOURCE_DIR, "dgl", "stadiums", "stadiums.csv"),
+        os.path.join("dgl", "stadiums", "stadiums.csv"),
     ],
 }
 

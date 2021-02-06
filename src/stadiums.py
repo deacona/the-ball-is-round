@@ -1,30 +1,39 @@
-#!/usr/bin/python -tt
-"""
-Created on Mon Feb 06 16:49:37 2017
+"""stadium module.
 
-@author: adeacon
+Used for any stadium data processes
 """
 
-import logging
-import urllib
+import os
 
 import pandas as pd
 
 import src.config as config
 import src.utilities as utilities
+from src.utilities import logging
 
-logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
 
+def download_stadiums(
+    scrapeSource=config.STADIUMS_SCRAPE, directoryIn=config.SOURCE_DIR
+):
+    """Download stadiums data.
 
-def download_stadiums():
+    INPUT:
+        None
+
+    OUTPUT:
+        Boolean: True if download ok, False otherwise
+    """
     logging.info("Downloading stadiums")
-    for code, endpoints in config.STADIUMS_SCRAPE.items():
+    for _code, endpoints in scrapeSource.items():
         try:
-            testfile = urllib.URLopener()
-            testfile.retrieve(*endpoints)
-            logging.debug("retrieve OK: {0}".format(endpoints))
-        except:
+            df = pd.read_csv(endpoints[0])
+            df.to_csv(os.path.join(directoryIn, endpoints[1]), index=False)
+            logging.info("retrieve OK: {0}".format(endpoints))
+            return True
+        except Exception as e:
             logging.warning("retrieve FAILED: {0}".format(endpoints))
+            logging.error(e)
+            return False
 
 
 def format_stadiums(
@@ -32,6 +41,16 @@ def format_stadiums(
     ops_file=config.STADIUMS_SCRAPE["ops"][1],
     directoryOut=config.MASTER_DIR,
 ):
+    """Format stadiums data.
+
+    INPUT:
+        dgl_file: Path for "dgl" stadiums file
+        ops_file: Path for "ops" stadiums file
+        directoryOut: Direcory to save formatted data to
+
+    OUTPUT:
+        None
+    """
     logging.info("Formatting stadiums")
 
     # dgl_file = config.STADIUMS_SCRAPE["dgl"][1]
@@ -60,6 +79,8 @@ def format_stadiums(
 
 
 def main():
+    """Use the Main for CLI usage."""
+    logging.info("Executing stadiums module")
 
     download_stadiums()
     format_stadiums()
