@@ -18,7 +18,8 @@ def download_stadiums(
     """Download stadiums data.
 
     INPUT:
-        None
+        scrapeSource: Info on scraped data
+        directoryIn: Location to download to
 
     OUTPUT:
         Boolean: True if download ok, False otherwise
