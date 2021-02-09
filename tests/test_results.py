@@ -1,10 +1,6 @@
-#!/usr/bin/python -tt
-"""
-Created on 23/09/2019
-
-@author: adeacon
-"""
+"""Test module for results."""
 import os
+import shutil
 
 import pandas as pd
 
@@ -12,8 +8,10 @@ import src.results as results
 
 
 class Test(object):
+    """Test class for results."""
+
     def setup_method(self, test_method):
-        """remove/create temp dir containing dummy files"""
+        """Remove/create temp dir containing dummy files."""
         # configure self.attribute
 
         self.testHome = "tests"
@@ -114,34 +112,15 @@ class Test(object):
         self.testFrameReal = pd.DataFrame(
             data=[self.testRowReal], columns=self.testHeaderReal
         )
+        self.testSeason = "2005-2006"
+        self.testResultsFile = os.path.join(self.testDir, "ftd", self.testSeason, "data.zip")
 
-        if os.path.isfile(self.testZip):
-            os.remove(self.testZip)
+        for obj in [self.testDirReal, self.testDir]:
+            if os.path.isdir(obj):
+                shutil.rmtree(obj)
 
-        if os.path.isfile(self.testXlsx):
-            os.remove(self.testXlsx)
-
-        if os.path.isfile(self.testCsv):
-            os.remove(self.testCsv)
-
-        if os.path.isfile(self.testCsvReal):
-            os.remove(self.testCsvReal)
-
-        if os.path.isfile(self.testMaster):
-            os.remove(self.testMaster)
-
-        if os.path.isfile(self.testMasterReal):
-            os.remove(self.testMasterReal)
-
-        if os.path.isdir(self.testDirReal):
-            os.rmdir(self.testDirReal)
-
-        if os.path.isdir(self.testDir):
-            os.rmdir(self.testDir)
-
-        os.mkdir(self.testDir)
-
-        os.mkdir(self.testDirReal)
+        for obj in [self.testDir, self.testDirReal]:
+            os.mkdir(obj)
 
         self.testFrame.to_excel(self.testXlsx)
 
@@ -152,65 +131,49 @@ class Test(object):
         self.testFrame.to_csv(self.testMaster, sep="|")
 
     def teardown_method(self, test_method):
-        """remove temp dir containing dummy files"""
+        """Remove temp dir containing dummy files."""
         # tear down self.attribute
-        if os.path.isfile(self.testZip):
-            os.remove(self.testZip)
+        for obj in [self.testDirReal, self.testDir]:
+            if os.path.isdir(obj):
+                shutil.rmtree(obj)
 
-        if os.path.isfile(self.testXlsx):
-            os.remove(self.testXlsx)
+    def test_download_results(self):
+        """Test for downloading results files from web."""
+        assert not os.path.isfile(self.testResultsFile)
+        results.download_results(directory=self.testDir, season_filter=self.testSeason)
+        assert os.path.isfile(self.testResultsFile)
 
-        if os.path.isfile(self.testCsv):
-            os.remove(self.testCsv)
-
-        if os.path.isfile(self.testCsvReal):
-            os.remove(self.testCsvReal)
-
-        if os.path.isfile(self.testMaster):
-            os.remove(self.testMaster)
-
-        if os.path.isfile(self.testMasterReal):
-            os.remove(self.testMasterReal)
-
-        if os.path.isdir(self.testDirReal):
-            os.rmdir(self.testDirReal)
-
-        if os.path.isdir(self.testDir):
-            os.rmdir(self.testDir)
-
-    def test_country_and_tier_from_div(self):
-
+    def test_func_div(self):
+        """Test for mapping Div code to Country and Tier."""
         for div in self.testDiv:
             country, tier = results.func_div(div["Div"])
             assert country == div["Country"] and tier == div["Tier"]
 
     def test_archive_then_unzip_results_files(self):
-
+        """Test for archive_results_files AND unzip_results_files."""
         assert os.path.isfile(self.testXlsx)
         assert os.path.isfile(self.testCsv)
         assert not (os.path.isfile(self.testZip))
 
-        results.archive_results_files(directory=self.testDir)
+        results.archive_results_files(parentDirectory=self.testDir, subDirectory="")
         assert not (os.path.isfile(self.testXlsx))
         assert not (os.path.isfile(self.testCsv))
         assert os.path.isfile(self.testZip)
 
-        results.unzip_results_files(directory=self.testDir)
+        results.unzip_results_files(parentDirectory=self.testDir, subDirectory="")
         assert os.path.isfile(self.testXlsx)
         assert not (os.path.isfile(self.testCsv))
         assert not (os.path.isfile(self.testZip))
 
-    # def test_download_results(self):
-    #     ''' No test for downloading files from web '''
-    #     pass
-
     def test_format_results(self):
+        """Test for formatting and saving results."""
         results.format_results(
-            directoryIn=self.testDirReal, directoryOut=self.testDirReal
+            parentDirectory=self.testDirReal, subDirectory="", directoryOut=self.testDirReal
         )
         assert os.path.isfile(self.testMasterReal)
 
     def test_results_analysis(self):
+        """Test for customisable results aggregation."""
         # assert pd.util.testing.assert_frame_equal(results.results_analysis(directory=self.testDir, buckets=self.testBuckets, stats=self.testStats, filteron=self.testFilteron,
         #                                 values=self.testValues, aggfunc=self.testAggfunc),
         #                                 self.testFrameAgg,

@@ -17,7 +17,7 @@ NBOUT_DIR = os.path.join(HOME_DIR, "notebooks", "output")
 
 # code: remoteurl, localfile
 RESULTS_SCRAPE = {
-    "ftd": ["http://football-data.co.uk/downloadm.php", os.path.join(SOURCE_DIR, "ftd")]
+    "ftd": ["http://football-data.co.uk/downloadm.php", "ftd"]
 }
 
 # code: remoteurl, localfile
