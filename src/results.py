@@ -4,7 +4,8 @@ Used for results data processes
 """
 
 import os
-import urllib
+import urllib.request
+# import requests
 import zipfile
 
 import numpy as np
@@ -61,8 +62,20 @@ def download_results(directory=config.SOURCE_DIR, season_filter=()):
 
             utilities.ensure_dir(localfile)
 
-            testfile = urllib.request.URLopener()
-            testfile.retrieve(remotefile, localfile)
+            if remotefile.lower().startswith('http'):
+                req = urllib.request.Request(remotefile)
+            else:
+                raise ValueError from None
+
+            with urllib.request.urlopen(req) as response:
+                with open(localfile, 'wb') as output:
+                    output.write(response.read())
+
+            # response = requests.get(remotefile, stream=True)
+            # with open(localfile, 'wb') as output:
+            #     for data in response.iter_content():
+            #         output.write(data)
+
             logging.info("Retrieve OK: " + str([remotefile, localfile]))
 
 
