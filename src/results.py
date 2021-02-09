@@ -5,6 +5,7 @@ Used for results data processes
 
 import os
 import urllib.request
+
 # import requests
 import zipfile
 
@@ -62,13 +63,13 @@ def download_results(directory=config.SOURCE_DIR, season_filter=()):
 
             utilities.ensure_dir(localfile)
 
-            if remotefile.lower().startswith('http'):
+            if remotefile.lower().startswith("http"):
                 req = urllib.request.Request(remotefile)
             else:
                 raise ValueError from None
 
             with urllib.request.urlopen(req) as response:
-                with open(localfile, 'wb') as output:
+                with open(localfile, "wb") as output:
                     output.write(response.read())
 
             # response = requests.get(remotefile, stream=True)

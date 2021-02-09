@@ -113,7 +113,9 @@ class Test(object):
             data=[self.testRowReal], columns=self.testHeaderReal
         )
         self.testSeason = "2005-2006"
-        self.testResultsFile = os.path.join(self.testDir, "ftd", self.testSeason, "data.zip")
+        self.testResultsFile = os.path.join(
+            self.testDir, "ftd", self.testSeason, "data.zip"
+        )
 
         for obj in [self.testDirReal, self.testDir]:
             if os.path.isdir(obj):
@@ -168,7 +170,9 @@ class Test(object):
     def test_format_results(self):
         """Test for formatting and saving results."""
         results.format_results(
-            parentDirectory=self.testDirReal, subDirectory="", directoryOut=self.testDirReal
+            parentDirectory=self.testDirReal,
+            subDirectory="",
+            directoryOut=self.testDirReal,
         )
         assert os.path.isfile(self.testMasterReal)
 
