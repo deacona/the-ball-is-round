@@ -94,7 +94,7 @@ def download_managers(
         dataframe.to_csv(os.path.join(directoryIn, endpoints[1]), encoding="utf-8")
         logging.debug("Retrieve OK: {0}".format(endpoints[:2]))
 
-    return
+    return True
 
 
 def format_managers(

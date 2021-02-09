@@ -16,13 +16,17 @@ class Test(object):
 
         self.testHome = "tests"
         self.testDir = os.path.join(self.testHome, "temp")
+        self.testWkpDir = os.path.join(self.testDir, "wkp")
+        self.testWkpMgrDir = os.path.join(self.testWkpDir, "wkp_mgr")
         self.testOutDir = os.path.join(self.testHome, "temp_out")
         self.testSource = os.path.join(self.testDir, "managers_test.csv")
         self.testMaster = os.path.join(self.testOutDir, "ftb_managers.txt")
 
-        for obj in [self.testDir, self.testOutDir]:
+        for obj in [self.testWkpMgrDir, self.testWkpDir, self.testDir, self.testOutDir]:
             if os.path.isdir(obj):
                 shutil.rmtree(obj)
+
+        for obj in [self.testDir, self.testWkpDir, self.testWkpMgrDir, self.testOutDir]:
             os.mkdir(obj)
 
         self.testMgrHeader = [
@@ -66,18 +70,13 @@ class Test(object):
     def teardown_method(self, test_method):
         """Remove temp dir containing dummy files."""
         # tear down self.attribute
-        for obj in [self.testDir, self.testOutDir]:
+        for obj in [self.testWkpMgrDir, self.testWkpDir, self.testDir, self.testOutDir]:
             if os.path.isdir(obj):
                 shutil.rmtree(obj)
 
-    # def test_download_managers(self):
-    #     """Test for downloading files from web."""
-    #     assert managers.download_managers(
-    #         managersDict=self.testScrapeOk, directoryIn=self.testDir
-    #     )
-    #     assert not managers.download_managers(
-    #         managersDict=self.testScrapeFail, directoryIn=self.testDir
-    #     )
+    def test_download_managers(self):
+        """Test for downloading files from web."""
+        assert managers.download_managers(directoryIn=self.testDir)
 
     def test_format_managers(self):
         """Test for formatting managers data."""
