@@ -1,40 +1,26 @@
-#!/usr/bin/python -tt
+"""clubs module.
+
+Used for clubs data processes
 """
-Created on Mon Feb 06 16:49:37 2017
-
-@author: adeacon
-"""
-
-# from pandas.tools.plotting import scatter_matrix
-# import matplotlib.pyplot as plt
-# from sklearn import model_selection
-# from sklearn.metrics import classification_report
-# from sklearn.metrics import confusion_matrix
-# from sklearn.metrics import accuracy_score
-# from sklearn.linear_model import LogisticRegression
-# from sklearn.tree import DecisionTreeClassifier
-# from sklearn.neighbors import KNeighborsClassifier
-# from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-# from sklearn.naive_bayes import GaussianNB
-# from sklearn.svm import SVC
-import logging
-import math
-
 import pandas as pd
-from numpy.random import permutation
-from scipy.spatial import distance
 
 import src.config as config
 import src.utilities as utilities
-
-logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
+from src.utilities import logging
 
 pd.set_option("display.max_columns", 50)
 # pd.set_option('display.expand_frame_repr', False)
 
 
 def func_score(x):
-    # Result,Points,PointsOpp,Win,WinDraw,Draw,DrawLoss,Loss,WinShare
+    """Map Goal diff to various fields.
+
+    INPUT:
+        x: Goal difference
+
+    OUTPUT:
+        Tuple containing Result,Points,PointsOpp,Win,WinDraw,Draw,DrawLoss,Loss,WinShare
+    """
     if x > 0:
         return "Win", 3, 0, 1, 1, 0, 0, 0, 1.0
     elif x < 0:
@@ -44,6 +30,14 @@ def func_score(x):
 
 
 def func_nogoal(x):
+    """Map goals scored to nogoal flag.
+
+    INPUT:
+        x: Goals scored
+
+    OUTPUT:
+        1 (no goals scored) or 0 (at least 1 goal scored)
+    """
     if x == 0:
         return 1
     else:
@@ -51,6 +45,14 @@ def func_nogoal(x):
 
 
 def build_fulldata(directory=config.MASTER_DIR):
+    """Combine results, stadiums and managers data into full dataset for clubs.
+
+    INPUT:
+        directory: Directory to save output to
+
+    OUTPUT:
+        fulldata: Dataframe containing all the clubs data
+    """
     logging.info("Building fulldata dataframe from results, stadiums, managers ...")
 
     home_renames = {
@@ -227,69 +229,27 @@ def build_fulldata(directory=config.MASTER_DIR):
     return fulldata
 
 
-def fulldata_analysis(
-    directory=config.MASTER_DIR,
-    buckets=["Div", "Season", "Team"],
-    stats=("Shots", "ShotsOnTarget", "Goals", "Corners", "Points", "Win"),
-    filteron="Div",
-    values=["E0", "E1"],
-    aggfunc="mean",
-):
-    logging.info("High-level analysis of all clubs data")
-    fulldata = utilities.get_master("fulldata", directory=directory)
-
-    # logging.debug(pd.show_versions())
-    logging.info("Dataframe info...")
-    fulldata.info()
-    # logging.debug(fulldata.describe(include="all"))
-    # logging.debug(fulldata["Div"].value_counts())
-    # logging.debug(fulldata["Tier"].value_counts())
-    # logging.debug(fulldata["Country"].value_counts())
-    # logging.debug(fulldata["Season"].value_counts())
-    # logging.debug(fulldata["Goals"].value_counts())
-    # logging.debug(fulldata["Stadium"].value_counts())
-    # logging.debug(fulldata["City"].value_counts())
-    # logging.debug(fulldata["Manager"].value_counts())
-    # logging.debug(fulldata[(fulldata['Team']=="Middlesbrough")&(fulldata['Season']=="2017-2018")].describe(include="all"))
-    # logging.debug(fulldata[(fulldata['EuclideanDistance']==0)] #.head())
-
-    # buckets = ['Div','Season','Team']
-    # stats = 'Shots','ShotsOnTarget','Goals','Corners','Points','Win'
-    # filteron = 'Div'
-    # values = ['E0','E1']
-    # aggfunc = 'mean'
-    pseudocode = (
-        "SELECT "
-        + aggfunc
-        + " OF "
-        + str(stats)
-        + " WHERE "
-        + filteron
-        + " IS "
-        + str(values)
-        + " GROUPED BY "
-        + str(buckets)
-    )
-    logging.info("Analysis pseudocode: {0}".format(pseudocode))
-    selected = (
-        fulldata[fulldata[filteron].isin(values)].groupby(buckets)[stats].agg([aggfunc])
-    )
-
-    logging.info("Describe summary dataframe...")
-    print(selected.describe(include="all"))
-    # pd.scatter_matrix(selected, diagonal='kde')
-
-    return selected
-
-
 def get_summary(
     group_key,
     df=None,
     agg_method="mean",
     base_filters={},
     metric_mins={},
-    output_metrics=[],
+    output_metrics=(),
 ):
+    """Generate summarised clubs data.
+
+    INPUT:
+        group_key: Field (or Fields) to group data on
+        df: (Optional) pass in clubs Datafarme
+        agg_method: Aggregation method
+        base_filters: Dictionary with Field/Value(s) pairs to filter base data
+        metric_mins: Dictionary with Field/Value(s) pairs to filter agg data
+        output_metrics: Metric fields to include in output
+
+    OUTPUT:
+        df: Aggregated dataframe
+    """
     logging.debug("Get summarised data")
 
     if df is None:
@@ -364,354 +324,355 @@ def get_summary(
     return df
 
 
-def find_similar():
+# def find_similar():
 
-    group_key = "Manager"
-    base_filters = {"Tier": [1], "Country": ["England", "Spain", "Italy", "Germany"]}
-    metric_mins = {"NumberOfMatches": 100}
+#     group_key = "Manager"
+#     base_filters = {"Tier": [1], "Country": ["England", "Spain", "Italy", "Germany"]}
+#     metric_mins = {"NumberOfMatches": 100}
 
-    items = get_summary(group_key, base_filters=base_filters, metric_mins=metric_mins)
-    items.info()
+#     items = get_summary(group_key, base_filters=base_filters, metric_mins=metric_mins)
+#     items.info()
 
-    # logging.debug(players)
-    logging.debug("\nNumber of items included: " + str(len(items)))
+#     # logging.debug(players)
+#     logging.debug("\nNumber of items included: " + str(len(items)))
 
-    # Normalize all of the numeric columns
-    items_normalized = (items - items.mean()) / items.std()
-    items_normalized.fillna(0, inplace=True)
-    # items_normalized.info()
-    # logging.debug(items_normalized.describe(include="all")
+#     # Normalize all of the numeric columns
+#     items_normalized = (items - items.mean()) / items.std()
+#     items_normalized.fillna(0, inplace=True)
+#     # items_normalized.info()
+#     # logging.debug(items_normalized.describe(include="all")
 
-    # logging.debug(players_normalized.index.values
-    for item in items_normalized.index.values:
-        # logging.debug("\n###############################"
-        logging.debug("\n" + item)
+#     # logging.debug(players_normalized.index.values
+#     for item in items_normalized.index.values:
+#         # logging.debug("\n###############################"
+#         logging.debug("\n" + item)
 
-        # selected_player = players.loc[name]
-        # logging.debug(selected_player.name
-        # logging.debug(selected_player.to_frame().T #.name
+#         # selected_player = players.loc[name]
+#         # logging.debug(selected_player.name
+#         # logging.debug(selected_player.to_frame().T #.name
 
-        # Normalize all of the numeric columns
-        selected_normalized = items_normalized.loc[item]
-        # logging.debug(selected_normalized
+#         # Normalize all of the numeric columns
+#         selected_normalized = items_normalized.loc[item]
+#         # logging.debug(selected_normalized
 
-        # Find the distance between select player and everyone else.
-        euclidean_distances = items_normalized.apply(
-            lambda row: distance.euclidean(row, selected_normalized), axis=1
-        )
+#         # Find the distance between select player and everyone else.
+#         euclidean_distances = items_normalized.apply(
+#             lambda row: distance.euclidean(row, selected_normalized), axis=1
+#         )
 
-        # Create a new dataframe with distances.
-        distance_frame = pd.DataFrame(
-            data={"dist": euclidean_distances, "idx": euclidean_distances.index}
-        )
-        distance_frame.sort_values("dist", inplace=True)
+#         # Create a new dataframe with distances.
+#         distance_frame = pd.DataFrame(
+#             data={"dist": euclidean_distances, "idx": euclidean_distances.index}
+#         )
+#         distance_frame.sort_values("dist", inplace=True)
 
-        most_similar = distance_frame.iloc[1:4]["idx"]
-        # most_similar = items.loc[nearest_neighbours]
-        # logging.debug(most_similar
-        logging.debug("... is similar to... ")
-        logging.debug(list(most_similar.index.values))
-
-
-def make_prediction():
-
-    group_key = "Team"
-    base_filters = {"Div": ["E0"]}
-    pred_col = "Points"
-
-    items = get_summary(group_key, base_filters=base_filters)
-
-    x_columns = list(items.columns.values)
-    x_columns.remove(pred_col)
-    y_column = [pred_col]
-
-    ###Generating training and testing sets
-
-    # Randomly shuffle the index of nba.
-    random_indices = permutation(items.index)
-    # Set a cutoff for how many items we want in the test set (in this case 1/3 of the items)
-    test_cutoff = math.floor(len(items) / 3)
-    # Generate the test set by taking the first 1/3 of the randomly shuffled indices.
-    test = items.loc[random_indices[1:test_cutoff]]
-    test.fillna(0, inplace=True)
-    # test.info()
-    # logging.debug(test.describe(include="all"))
-    # Generate the train set with the rest of the data.
-    train = items.loc[random_indices[test_cutoff:]]
-    train.fillna(0, inplace=True)
-    # train.info()
-    # logging.debug(train.describe(include="all"))
-
-    ###Using sklearn for k nearest neighbors
-    # logging.debug("Using sklearn for k nearest neighbors...")
-
-    from sklearn.neighbors import KNeighborsRegressor
-
-    # Create the knn model.
-    # Look at the five closest neighbors.
-    knn = KNeighborsRegressor(n_neighbors=5)
-    # logging.debug(knn)
-    # Fit the model on the training data.
-    knn.fit(train[x_columns], train[y_column])
-    # logging.debug(knn)
-    # Make point predictions on the test set using the fit model.
-    predictions = knn.predict(test[x_columns])
-    # logging.debug("\nPredicted PointsPGm:")
-    # logging.debug(predictions.shape)
-
-    ###Computing error
-
-    # Get the actual values for the test set.
-    actual = test[y_column].copy()
-
-    # Compute the mean squared error of our predictions.
-    mse = (((predictions - actual) ** 2).sum()) / len(predictions)
-    logging.debug("\nMean Squared Error:")
-    logging.debug(mse)
-
-    actual["Predicted" + pred_col] = predictions
-    actual["Diff"] = actual[pred_col] - actual["Predicted" + pred_col]
-    logging.debug("\nActual and Predicted " + pred_col + ":")
-    logging.debug(actual.sort_values(["Diff"], ascending=False))
+#         most_similar = distance_frame.iloc[1:4]["idx"]
+#         # most_similar = items.loc[nearest_neighbours]
+#         # logging.debug(most_similar
+#         logging.debug("... is similar to... ")
+#         logging.debug(list(most_similar.index.values))
 
 
-def do_classification():
-    # Load dataset
-    # url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
-    dataset = utilities.get_master("fulldata")
+# def make_prediction():
 
-    # filter unwanted records and columns
-    dataset = dataset[(dataset["Div"] == "E0")]
-    # dataset.info()
-    dataset = dataset[
-        ["ShotsOnTarget", "ShotsOnTargetOpp", "Saves", "SavesOpp", "Result"]
-    ]
-    dataset.dropna(
-        subset=["ShotsOnTarget", "ShotsOnTargetOpp", "Saves", "SavesOpp", "Result"],
-        inplace=True,
-    )
-    # logging.debug(list(dataset.columns.values))
+#     group_key = "Team"
+#     base_filters = {"Div": ["E0"]}
+#     pred_col = "Points"
 
-    # shape
-    logging.debug(dataset.shape)
+#     items = get_summary(group_key, base_filters=base_filters)
 
-    # head
-    logging.debug(dataset.head(20))
+#     x_columns = list(items.columns.values)
+#     x_columns.remove(pred_col)
+#     y_column = [pred_col]
 
-    # descriptions
-    logging.debug(dataset.describe())
+#     ###Generating training and testing sets
 
-    # class distribution
-    logging.debug(dataset.groupby("Result").size())
+#     # Randomly shuffle the index of nba.
+#     random_indices = permutation(items.index)
+#     # Set a cutoff for how many items we want in the test set (in this case 1/3 of the items)
+#     test_cutoff = math.floor(len(items) / 3)
+#     # Generate the test set by taking the first 1/3 of the randomly shuffled indices.
+#     test = items.loc[random_indices[1:test_cutoff]]
+#     test.fillna(0, inplace=True)
+#     # test.info()
+#     # logging.debug(test.describe(include="all"))
+#     # Generate the train set with the rest of the data.
+#     train = items.loc[random_indices[test_cutoff:]]
+#     train.fillna(0, inplace=True)
+#     # train.info()
+#     # logging.debug(train.describe(include="all"))
 
-    # box and whisker plots
-    dataset.plot(kind="box", subplots=True, layout=(2, 2), sharex=False, sharey=False)
-    plt.show()
+#     ###Using sklearn for k nearest neighbors
+#     # logging.debug("Using sklearn for k nearest neighbors...")
 
-    # histograms
-    dataset.hist()
-    plt.show()
+#     from sklearn.neighbors import KNeighborsRegressor
 
-    # scatter plot matrix
-    scatter_matrix(dataset)
-    plt.show()
+#     # Create the knn model.
+#     # Look at the five closest neighbors.
+#     knn = KNeighborsRegressor(n_neighbors=5)
+#     # logging.debug(knn)
+#     # Fit the model on the training data.
+#     knn.fit(train[x_columns], train[y_column])
+#     # logging.debug(knn)
+#     # Make point predictions on the test set using the fit model.
+#     predictions = knn.predict(test[x_columns])
+#     # logging.debug("\nPredicted PointsPGm:")
+#     # logging.debug(predictions.shape)
 
-    # Split-out validation dataset
-    array = dataset.values
-    X = array[:, 0:4]
-    Y = array[:, 4]
-    validation_size = 0.20
-    seed = 7
-    X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(
-        X, Y, test_size=validation_size, random_state=seed
-    )
+#     ###Computing error
 
-    logging.debug(X_train[:5])
-    logging.debug(X_validation[:5])
-    logging.debug(Y_train[:5])
-    logging.debug(Y_validation[:5])
+#     # Get the actual values for the test set.
+#     actual = test[y_column].copy()
 
-    # Test options and evaluation metric
-    seed = 7
-    scoring = "accuracy"
+#     # Compute the mean squared error of our predictions.
+#     mse = (((predictions - actual) ** 2).sum()) / len(predictions)
+#     logging.debug("\nMean Squared Error:")
+#     logging.debug(mse)
 
-    # Spot Check Algorithms
-    models = []
-    models.append(("LR", LogisticRegression()))
-    models.append(("LDA", LinearDiscriminantAnalysis()))
-    models.append(("KNN", KNeighborsClassifier()))
-    models.append(("CART", DecisionTreeClassifier()))
-    models.append(("NB", GaussianNB()))
-    models.append(("SVM", SVC()))
-    # evaluate each model in turn
-    results = []
-    names = []
-    for name, model in models:
-        kfold = model_selection.KFold(n_splits=10, random_state=seed)
-        cv_results = model_selection.cross_val_score(
-            model, X_train, Y_train, cv=kfold, scoring=scoring
-        )
-        results.append(cv_results)
-        names.append(name)
-        msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
-        logging.debug(msg)
-
-    # Compare Algorithms
-    fig = plt.figure()
-    fig.suptitle("Algorithm Comparison")
-    ax = fig.add_subplot(111)
-    plt.boxplot(results)
-    ax.set_xticklabels(names)
-    plt.show()
-
-    # Make predictions on validation dataset
-    logging.debug("\nPrediction using K Nearest Neighbours algorithm...")
-    knn = KNeighborsClassifier()
-    knn.fit(X_train, Y_train)
-    predictions = knn.predict(X_validation)
-    logging.debug(accuracy_score(Y_validation, predictions))
-    logging.debug(confusion_matrix(Y_validation, predictions))
-    logging.debug(classification_report(Y_validation, predictions))
-
-    logging.debug("\nPrediction using Support Vector Clustering algorithm...")
-    svc = SVC()
-    svc.fit(X_train, Y_train)
-    predictions = svc.predict(X_validation)
-    logging.debug(accuracy_score(Y_validation, predictions))
-    logging.debug(confusion_matrix(Y_validation, predictions))
-    logging.debug(classification_report(Y_validation, predictions))
+#     actual["Predicted" + pred_col] = predictions
+#     actual["Diff"] = actual[pred_col] - actual["Predicted" + pred_col]
+#     logging.debug("\nActual and Predicted " + pred_col + ":")
+#     logging.debug(actual.sort_values(["Diff"], ascending=False))
 
 
-def test_soccernomics():
-    pass
+# def do_classification():
+#     # Load dataset
+#     # url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+#     dataset = utilities.get_master("fulldata")
+
+#     # filter unwanted records and columns
+#     dataset = dataset[(dataset["Div"] == "E0")]
+#     # dataset.info()
+#     dataset = dataset[
+#         ["ShotsOnTarget", "ShotsOnTargetOpp", "Saves", "SavesOpp", "Result"]
+#     ]
+#     dataset.dropna(
+#         subset=["ShotsOnTarget", "ShotsOnTargetOpp", "Saves", "SavesOpp", "Result"],
+#         inplace=True,
+#     )
+#     # logging.debug(list(dataset.columns.values))
+
+#     # shape
+#     logging.debug(dataset.shape)
+
+#     # head
+#     logging.debug(dataset.head(20))
+
+#     # descriptions
+#     logging.debug(dataset.describe())
+
+#     # class distribution
+#     logging.debug(dataset.groupby("Result").size())
+
+#     # box and whisker plots
+#     dataset.plot(kind="box", subplots=True, layout=(2, 2), sharex=False, sharey=False)
+#     plt.show()
+
+#     # histograms
+#     dataset.hist()
+#     plt.show()
+
+#     # scatter plot matrix
+#     scatter_matrix(dataset)
+#     plt.show()
+
+#     # Split-out validation dataset
+#     array = dataset.values
+#     X = array[:, 0:4]
+#     Y = array[:, 4]
+#     validation_size = 0.20
+#     seed = 7
+#     X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(
+#         X, Y, test_size=validation_size, random_state=seed
+#     )
+
+#     logging.debug(X_train[:5])
+#     logging.debug(X_validation[:5])
+#     logging.debug(Y_train[:5])
+#     logging.debug(Y_validation[:5])
+
+#     # Test options and evaluation metric
+#     seed = 7
+#     scoring = "accuracy"
+
+#     # Spot Check Algorithms
+#     models = []
+#     models.append(("LR", LogisticRegression()))
+#     models.append(("LDA", LinearDiscriminantAnalysis()))
+#     models.append(("KNN", KNeighborsClassifier()))
+#     models.append(("CART", DecisionTreeClassifier()))
+#     models.append(("NB", GaussianNB()))
+#     models.append(("SVM", SVC()))
+#     # evaluate each model in turn
+#     results = []
+#     names = []
+#     for name, model in models:
+#         kfold = model_selection.KFold(n_splits=10, random_state=seed)
+#         cv_results = model_selection.cross_val_score(
+#             model, X_train, Y_train, cv=kfold, scoring=scoring
+#         )
+#         results.append(cv_results)
+#         names.append(name)
+#         msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
+#         logging.debug(msg)
+
+#     # Compare Algorithms
+#     fig = plt.figure()
+#     fig.suptitle("Algorithm Comparison")
+#     ax = fig.add_subplot(111)
+#     plt.boxplot(results)
+#     ax.set_xticklabels(names)
+#     plt.show()
+
+#     # Make predictions on validation dataset
+#     logging.debug("\nPrediction using K Nearest Neighbours algorithm...")
+#     knn = KNeighborsClassifier()
+#     knn.fit(X_train, Y_train)
+#     predictions = knn.predict(X_validation)
+#     logging.debug(accuracy_score(Y_validation, predictions))
+#     logging.debug(confusion_matrix(Y_validation, predictions))
+#     logging.debug(classification_report(Y_validation, predictions))
+
+#     logging.debug("\nPrediction using Support Vector Clustering algorithm...")
+#     svc = SVC()
+#     svc.fit(X_train, Y_train)
+#     predictions = svc.predict(X_validation)
+#     logging.debug(accuracy_score(Y_validation, predictions))
+#     logging.debug(confusion_matrix(Y_validation, predictions))
+#     logging.debug(classification_report(Y_validation, predictions))
 
 
-#        ## Soccernomics (* need financial/economic data)
-#            *Avg lge pos Vs Relative wage spend
-#                EPL+Champ 98-07 R^2 = 0.8872
-#                40 English clubs 78-97 R^2 = 0.92
-#            *Change in lge pos Vs Pre-tax profits
-#            Change in lge pos Vs Change in attendance
-#            Win% Vs Experience, Population, Wealth
-#                International teams 1872-2001
-#                    Home adv = 2/3 GoalsPG
-#                    Int experience (matches) = 1/2GoalsPG
-#                    *Population = 1/10 GoalsPG
-#                    *GDP = 1/10 GoalsPG
+# def test_soccernomics():
+#     pass
 
 
-def test_numbers_game():
-
-    #        ## Numbers Game (* need betting data)
-    #            Corners Vs Shots, Goals
-    #                EPL 2001/02-2010/11
-    group_key = "Corners"
-    base_filters = {
-        "Div": ["E0"],
-        "Season": [
-            "2001-2002",
-            "2002-2003",
-            "2003-2004",
-            "2004-2005",
-            "2005-2006",
-            "2006-2007",
-            "2007-2008",
-            "2008-2009",
-            "2009-2010",
-            "2010-2011",
-        ],
-    }
-    output_metrics = [
-        "NumberOfMatches",
-        "Shots",
-        "ShotsOnTarget",
-        "Goals",
-        "Win",
-        "WinDraw",
-        "Points",
-        "GraysonScore",
-    ]
-    corners = get_summary(
-        group_key, base_filters=base_filters, output_metrics=output_metrics
-    )
-    corners.info()
-    logging.debug(corners)
+# #        ## Soccernomics (* need financial/economic data)
+# #            *Avg lge pos Vs Relative wage spend
+# #                EPL+Champ 98-07 R^2 = 0.8872
+# #                40 English clubs 78-97 R^2 = 0.92
+# #            *Change in lge pos Vs Pre-tax profits
+# #            Change in lge pos Vs Change in attendance
+# #            Win% Vs Experience, Population, Wealth
+# #                International teams 1872-2001
+# #                    Home adv = 2/3 GoalsPG
+# #                    Int experience (matches) = 1/2GoalsPG
+# #                    *Population = 1/10 GoalsPG
+# #                    *GDP = 1/10 GoalsPG
 
 
-#            Actual goal freq Vs Predicted (Poisson dist)
-#                England, Germany, Spain, Italy, France 1993-2011
-#            Home goals Vs Away goals (%)
-#                EPL 2011/02-2010/11
-#                Serie A
-#                La Liga
-#                Bundesliga
-#            *% favourite wins Vs % gap in odds
+# def test_numbers_game():
+
+#     #        ## Numbers Game (* need betting data)
+#     #            Corners Vs Shots, Goals
+#     #                EPL 2001/02-2010/11
+#     group_key = "Corners"
+#     base_filters = {
+#         "Div": ["E0"],
+#         "Season": [
+#             "2001-2002",
+#             "2002-2003",
+#             "2003-2004",
+#             "2004-2005",
+#             "2005-2006",
+#             "2006-2007",
+#             "2007-2008",
+#             "2008-2009",
+#             "2009-2010",
+#             "2010-2011",
+#         ],
+#     }
+#     output_metrics = [
+#         "NumberOfMatches",
+#         "Shots",
+#         "ShotsOnTarget",
+#         "Goals",
+#         "Win",
+#         "WinDraw",
+#         "Points",
+#         "GraysonScore",
+#     ]
+#     corners = get_summary(
+#         group_key, base_filters=base_filters, output_metrics=output_metrics
+#     )
+#     corners.info()
+#     logging.debug(corners)
 
 
-def test_footballintheclouds():
-    ### Various Shot Metrics - Premier League 2016/17
-    # http://footballintheclouds.blogspot.co.uk/p/various-shot-metrics-premier-league.html
-    # https://jameswgrayson.wordpress.com/2014/08/11/methodology-and-validation-of-the-team-ratings/
-    group_key = "Team"
-    base_filters = {"Div": ["E0"], "Season": ["2016-2017"]}  # ["2009-2010"]
-    output_metrics = [
-        "NumberOfMatches",
-        "Shots",
-        "ShotsOpp",
-        "TSR",
-        "ShotPercent",
-        "SavePercent",
-        "PDO",
-        "%TSoTt",
-        "GraysonRating",
-        "GraysonScore",
-    ]
-    teams = get_summary(
-        group_key, base_filters=base_filters, output_metrics=output_metrics
-    )
-    teams.info()
-    logging.debug(teams)
+# #            Actual goal freq Vs Predicted (Poisson dist)
+# #                England, Germany, Spain, Italy, France 1993-2011
+# #            Home goals Vs Away goals (%)
+# #                EPL 2011/02-2010/11
+# #                Serie A
+# #                La Liga
+# #                Bundesliga
+# #            *% favourite wins Vs % gap in odds
 
 
-def boro_analysis():
-    # group_key = "Season"
-    group_key = "Manager"
-    base_filters = {
-        "Team": ["Middlesbrough"]
-        # , "Div": ["E1"]
-        # , "Manager": ["Aitor Karanka", "Garry Monk"]
-    }
-    output_metrics = [
-        "NumberOfMatches",
-        "Points",
-        "Goals",  # "GoalsOpp",
-        #'Shots', 'ShotsOpp',
-        #'ShotsOnTarget', 'ShotsOnTargetOpp',
-        # 'TSR', #'TSROpp',
-        #'ShotPercent',
-        #'SavePercent',
-        # 'PDO', #'PDOOpp',
-        # 'GraysonScore', 'GraysonScoreOpp',
-    ]
-    boro = get_summary(
-        group_key, base_filters=base_filters, output_metrics=output_metrics
-    )
-    # boro.info()
-    logging.debug(boro)
-    pd.scatter_matrix(boro, diagonal="kde")
+# def test_footballintheclouds():
+#     ### Various Shot Metrics - Premier League 2016/17
+#     # http://footballintheclouds.blogspot.co.uk/p/various-shot-metrics-premier-league.html
+#     # https://jameswgrayson.wordpress.com/2014/08/11/methodology-and-validation-of-the-team-ratings/
+#     group_key = "Team"
+#     base_filters = {"Div": ["E0"], "Season": ["2016-2017"]}  # ["2009-2010"]
+#     output_metrics = [
+#         "NumberOfMatches",
+#         "Shots",
+#         "ShotsOpp",
+#         "TSR",
+#         "ShotPercent",
+#         "SavePercent",
+#         "PDO",
+#         "%TSoTt",
+#         "GraysonRating",
+#         "GraysonScore",
+#     ]
+#     teams = get_summary(
+#         group_key, base_filters=base_filters, output_metrics=output_metrics
+#     )
+#     teams.info()
+#     logging.debug(teams)
 
 
-def best_rivalries():
-    pass
+# def boro_analysis():
+#     # group_key = "Season"
+#     group_key = "Manager"
+#     base_filters = {
+#         "Team": ["Middlesbrough"]
+#         # , "Div": ["E1"]
+#         # , "Manager": ["Aitor Karanka", "Garry Monk"]
+#     }
+#     output_metrics = [
+#         "NumberOfMatches",
+#         "Points",
+#         "Goals",  # "GoalsOpp",
+#         #'Shots', 'ShotsOpp',
+#         #'ShotsOnTarget', 'ShotsOnTargetOpp',
+#         # 'TSR', #'TSROpp',
+#         #'ShotPercent',
+#         #'SavePercent',
+#         # 'PDO', #'PDOOpp',
+#         # 'GraysonScore', 'GraysonScoreOpp',
+#     ]
+#     boro = get_summary(
+#         group_key, base_filters=base_filters, output_metrics=output_metrics
+#     )
+#     # boro.info()
+#     logging.debug(boro)
+#     pd.scatter_matrix(boro, diagonal="kde")
+
+
+# def best_rivalries():
+#     pass
 
 
 #    Best rivalries (frequency, closeness, equality, action)
 
 
 def main():
+    """Use the Main for CLI usage."""
+    logging.info("Executing clubs module")
 
     build_fulldata()
-    fulldata_analysis()
     get_summary("Div")
 
 

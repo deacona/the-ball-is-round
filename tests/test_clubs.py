@@ -1,10 +1,6 @@
-#!/usr/bin/python -tt
-"""
-Created on 17/10/2019
-
-@author: adeacon
-"""
+"""Test module for clubs."""
 import os
+import shutil
 
 import pandas as pd
 
@@ -12,8 +8,10 @@ import src.clubs as clubs
 
 
 class Test(object):
+    """Test class for clubs."""
+
     def setup_method(self, test_method):
-        """remove/create temp dir containing dummy files"""
+        """Remove/create temp dir containing dummy files."""
         # configure self.attribute
         self.testScore = [
             {
@@ -89,25 +87,10 @@ class Test(object):
 368929|1997-1998|E0|England|1|1997-08-30|Tottenham|Arsenal|0.0|0.0|0.0|0.0|||||||||||||||||||||Away|0.0|0.0|0.0|0.0||||||||||||||||||||||0.0|0.0|0.0|Draw|1|1|0|1|1|1|0|0.0|1|1|5|||||||||London |Emirates Stadium |60361.0|51.555|-0.108611|531236.0|185697.0|TQ312856|||Stewart Houston
 """
 
-        if os.path.isfile(self.testMaster):
-            os.remove(self.testMaster)
-
-        if os.path.isfile(self.testResultsFile):
-            os.remove(self.testResultsFile)
-
-        if os.path.isfile(self.testManagersFile):
-            os.remove(self.testManagersFile)
-
-        if os.path.isfile(self.testStadiumsFile):
-            os.remove(self.testStadiumsFile)
-
-        if os.path.isfile(self.testFulldataFile):
-            os.remove(self.testFulldataFile)
-
-        if os.path.isdir(self.testDir):
-            os.rmdir(self.testDir)
-
-        os.mkdir(self.testDir)
+        for obj in [self.testDir]:
+            if os.path.isdir(obj):
+                shutil.rmtree(obj)
+            os.mkdir(obj)
 
         with open(self.testResultsFile, "a") as the_file:
             the_file.write(self.testResultsText)
@@ -122,27 +105,15 @@ class Test(object):
             the_file.write(self.testFulldataText)
 
     def teardown_method(self, test_method):
-        """remove temp dir containing dummy files"""
+        """Remove temp dir containing dummy files."""
         # tear down self.attribute
-        if os.path.isfile(self.testMaster):
-            os.remove(self.testMaster)
-
-        if os.path.isfile(self.testResultsFile):
-            os.remove(self.testResultsFile)
-
-        if os.path.isfile(self.testManagersFile):
-            os.remove(self.testManagersFile)
-
-        if os.path.isfile(self.testStadiumsFile):
-            os.remove(self.testStadiumsFile)
-
-        if os.path.isfile(self.testFulldataFile):
-            os.remove(self.testFulldataFile)
-
-        if os.path.isdir(self.testDir):
-            os.rmdir(self.testDir)
+        for obj in [self.testDir]:
+            if os.path.isdir(obj):
+                shutil.rmtree(obj)
+            os.mkdir(obj)
 
     def test_func_score(self):
+        """Test for various score-related fields."""
         for score in self.testScore:
             assert (
                 score["Result"],
@@ -157,6 +128,7 @@ class Test(object):
             ) == clubs.func_score(score["GoalDiff"])
 
     def test_func_nogoal(self):
+        """Test for no goal flag."""
         for goal in range(0, 10):
             if goal == 0:
                 assert clubs.func_nogoal(goal) == 1
@@ -164,24 +136,13 @@ class Test(object):
                 assert clubs.func_nogoal(goal) == 0
 
     def test_build_fulldata(self):
+        """Test for full club data consolidation."""
         fulldataIn = pd.read_csv(self.testFulldataFile, sep="|", index_col=0)
         fulldataOut = clubs.build_fulldata(directory=self.testDir)
         assert fulldataIn.shape == fulldataOut.shape
 
-    def test_fulldata_analysis(self):
-        clubs.build_fulldata(directory=self.testDir)
-        frameValues = clubs.fulldata_analysis(
-            directory=self.testDir,
-            buckets=self.testBuckets,
-            stats=self.testStats,
-            filteron=self.testFilteron,
-            values=self.testValues,
-            aggfunc=self.testAggfunc,
-        ).values
-        frameAverage = sum(frameValues) / len(frameValues)
-        assert frameAverage == self.testAggValue
-
     def test_get_summary(self):
+        """Test for summary calcs."""
         fulldataIn = pd.read_csv(self.testFulldataFile, sep="|", index_col=0)
         summaryValues = clubs.get_summary(
             "".join(self.testBuckets),
