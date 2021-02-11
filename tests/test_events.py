@@ -8,7 +8,7 @@ class Test(object):
     """Test class for config."""
 
     def setup_method(self, test_method):
-        """Setup method for events Test class."""
+        """Prepare method events Test class."""
         # configure self.attribute
         self.comps = sb.Competitions().get_dataframe()
         self.mats = sb.Matches(event_id="11", season_id="1").get_dataframe()
