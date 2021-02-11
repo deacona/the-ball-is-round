@@ -86,7 +86,7 @@ def master_path(stub, directory=config.MASTER_DIR):
     OUTPUT:
         Fullpath for master file
     """
-    logging.info("Building master filepath using {0} / {1}".format(stub, directory))
+    logging.info("Building master filepath for {0}".format(stub))
     # return config.MASTER_DIR+"/"+"ftb_"+stub+".txt"
     return os.path.join(directory, "ftb_" + stub + ".txt")
 
