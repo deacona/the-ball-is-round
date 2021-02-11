@@ -80,8 +80,7 @@ sys.path.insert(0, os.path.abspath('../src'))
 get_ipython().run_line_magic('load_ext', 'autoreload')
 get_ipython().run_line_magic('autoreload', '2')
 
-# import utilities
-import players
+import src.utilities as utilities
 
 
 # In[6]:
@@ -133,7 +132,7 @@ RANDOM_STATE = 4
 
 print("Loading Transfermarkt general information...")
 
-tmk_df = players.clean_data("tmk_cnt")
+tmk_df = utilities.get_master("players_contract")
 # tmk_df.info()
 
 
@@ -323,7 +322,7 @@ print("Loading Transfermarkt performance summary...")
 #                                     "Yellow cards", "Second yellow cards", "Red cards",
 #                                    "Substitutions on", "Substitutions off", "PPG", "Minutes played"])
 
-psm_df = players.clean_data("tmk_psm")
+psm_df = utilities.get_master("players_performance")
 # psm_df.info()
 
 

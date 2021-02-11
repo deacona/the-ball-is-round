@@ -128,7 +128,7 @@ def save_master(dframe, stub, directory=config.MASTER_DIR, enc="utf-8"):
         file: Fullpath for master file
     """
     file = master_path(stub, directory=directory)
-    logging.info("Saving dataframe to {0}".format(file))
+    logging.info("Saving dataframe to {0}".format(stub))
     dframe.to_csv(file, encoding=enc, sep="|")
     # dframe.to_csv(master_path(stub), sep='|')
     # print "... saved to "+master_path(stub)
@@ -306,7 +306,7 @@ def clear_nb_output(outFolder=config.NBOUT_DIR):
     OUTPUT:
         None
     """
-    logging.info("Clearing output from {0}".format(outFolder))
+    logging.info("Clearing notebook output")
     for filename in os.listdir(outFolder):
         file_path = os.path.join(outFolder, filename)
         try:
