@@ -9,7 +9,7 @@ class Test(object):
     """Test class for config."""
 
     def test_object_types(self):
-
+        """Test config object types."""
         for obj in [
             config.HOME_DIR,
             config.SOURCE_DIR,
@@ -26,7 +26,7 @@ class Test(object):
             assert isinstance(obj, dict)
 
     def test_dirs_exist(self):
-
+        """Test config directories exist."""
         for folder in [
             config.HOME_DIR,
             config.SOURCE_DIR,

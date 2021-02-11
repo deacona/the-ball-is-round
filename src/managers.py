@@ -1,32 +1,49 @@
-#!/usr/bin/python -tt
-"""
-Created on Mon Feb 06 16:49:37 2017
+"""managers module.
 
-@author: adeacon
+Used for manager data processes
 """
 
 import datetime
-import logging
+import os
 
 import pandas as pd
 
 import src.config as config
 import src.utilities as utilities
-
-logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
+from src.utilities import logging
 
 pd.set_option("display.max_columns", 500)
 # pd.set_option('display.expand_frame_repr', False)
 
 
 def _unpack(row, kind="td"):
+    """Unpack data in html table.
+
+    INPUT:
+        row: Row in table with html tags
+        kind: Tag to iterate on
+
+    OUTPUT:
+        List of cell texts
+    """
     elts = row.findAll("%s" % kind)
     return [val.text for val in elts]
 
 
-def download_managers():
+def download_managers(
+    managersDict=config.MANAGERS_SCRAPE, directoryIn=config.SOURCE_DIR
+):
+    """Download managers data.
+
+    INPUT:
+        managersDict: Info on scraped managers data
+        directoryIn: Location of processed data
+
+    OUTPUT:
+        None
+    """
     logging.info("Downloading managers")
-    for code, endpoints in config.MANAGERS_SCRAPE.items():
+    for _code, endpoints in config.MANAGERS_SCRAPE.items():
         logging.info("Scraping from {0}".format(endpoints[0]))
         soup = utilities.make_soup(endpoints[0])
 
@@ -74,20 +91,36 @@ def download_managers():
 
         # dataframe.info()
         # logging.debug(dataframe.describe(include="all"))
-        dataframe.to_csv(endpoints[1], encoding="utf-8")
+        dataframe.to_csv(os.path.join(directoryIn, endpoints[1]), encoding="utf-8")
         logging.debug("Retrieve OK: {0}".format(endpoints[:2]))
+
+    return True
 
 
 def format_managers(
-    managersDict=config.MANAGERS_SCRAPE, directoryOut=config.MASTER_DIR
+    managersDict=config.MANAGERS_SCRAPE,
+    directoryIn=config.SOURCE_DIR,
+    directoryOut=config.MASTER_DIR,
 ):
+    """Format  managers data.
+
+    INPUT:
+        managersDict: Info on scraped managers data
+        directoryOut: Location of processed data
+
+    OUTPUT:
+        None
+    """
     logging.info("Formatting managers")
     pieces = []
     # future_date = datetime.datetime(2099, 12, 31)
-    for code, endpoints in managersDict.items():
+    for _code, endpoints in managersDict.items():
         logging.info("Loading managers data from {0}".format(endpoints[1]))
         dataframe = pd.read_csv(
-            endpoints[1], encoding="utf8", sep=",", parse_dates=["DateFrom", "DateTo"]
+            os.path.join(directoryIn, endpoints[1]),
+            encoding="utf8",
+            sep=",",
+            parse_dates=["DateFrom", "DateTo"],
         )
         pieces.append(dataframe)
 
@@ -151,9 +184,12 @@ def format_managers(
     # logging.debug(managers[95:105])
 
     utilities.save_master(managers, "managers", directory=directoryOut)
+    return
 
 
 def main():
+    """Use the Main for CLI usage."""
+    logging.info("Executing managers module")
 
     download_managers()
     format_managers()

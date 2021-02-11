@@ -1,9 +1,8 @@
-"""events module
+"""events module.
 
 Used for any event related data processing
 """
 
-import logging
 import os
 
 import pandas as pd
@@ -11,12 +10,11 @@ import statsbomb as sb
 
 import src.config as config
 import src.utilities as utilities
-
-logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
+from src.utilities import logging
 
 
 def download_competitions():
-    """Download all competition data for events
+    """Download all competition data for events.
 
     Args:
         None
@@ -33,7 +31,7 @@ def download_competitions():
 
 
 def download_matches(competition_id):
-    """Download all match data for events
+    """Download all match data for events.
 
     Args:
         competition_id: Id of competition
@@ -57,7 +55,7 @@ def download_matches(competition_id):
 
 
 def download_events(competition_id, event_type):
-    """Download all event data
+    """Download all event data.
 
     Args:
         competition_id: Id of competition
@@ -95,7 +93,7 @@ def download_events(competition_id, event_type):
 
 
 def build_event_data(competition_id, event_type, directory=config.MASTER_DIR):
-    """Building event data
+    """Build formatted event data from source files.
 
     Args:
         event_type: String value of event type
@@ -107,11 +105,11 @@ def build_event_data(competition_id, event_type, directory=config.MASTER_DIR):
     logging.info("Building event data")
 
     comps = utilities.folder_loader("stb", "competitions")
-    print(comps.info())
+    logging.debug(comps.info())
     matches = utilities.folder_loader("stb", "matches")
-    print(matches.info())
+    logging.debug(matches.info())
     events = utilities.folder_loader("stb", "events", "match_event")
-    print(events.info())
+    logging.debug(events.info())
 
     data = (
         comps.loc[
@@ -151,7 +149,7 @@ def build_event_data(competition_id, event_type, directory=config.MASTER_DIR):
             on="match_id",
         )
     )
-    print(data.info())
+    logging.debug(data.info())
 
     utilities.save_master(data, "events_{0}".format(event_type), directory=directory)
 
@@ -159,14 +157,8 @@ def build_event_data(competition_id, event_type, directory=config.MASTER_DIR):
 
 
 def main():
-    """Sequence functions for use in data pipeline
-
-    Args:
-        None
-
-    Returns:
-        None
-    """
+    """Use the Main for CLI usage."""
+    logging.info("Executing events module")
 
     download_competitions()
     download_matches(competition_id=11)

@@ -1,10 +1,6 @@
-#!/usr/bin/python -tt
-"""
-Created on 17/10/2019
-
-@author: adeacon
-"""
+"""Test module for managers."""
 import os
+import shutil
 
 import pandas as pd
 
@@ -12,14 +8,26 @@ import src.managers as managers
 
 
 class Test(object):
+    """Test class for managers."""
+
     def setup_method(self, test_method):
-        """remove/create temp dir containing dummy files"""
+        """Remove/create temp dir containing dummy files."""
         # configure self.attribute
 
         self.testHome = "tests"
         self.testDir = os.path.join(self.testHome, "temp")
+        self.testWkpDir = os.path.join(self.testDir, "wkp")
+        self.testWkpMgrDir = os.path.join(self.testWkpDir, "wkp_mgr")
+        self.testOutDir = os.path.join(self.testHome, "temp_out")
         self.testSource = os.path.join(self.testDir, "managers_test.csv")
-        self.testMaster = os.path.join(self.testDir, "ftb_managers.txt")
+        self.testMaster = os.path.join(self.testOutDir, "ftb_managers.txt")
+
+        for obj in [self.testWkpMgrDir, self.testWkpDir, self.testDir, self.testOutDir]:
+            if os.path.isdir(obj):
+                shutil.rmtree(obj)
+
+        for obj in [self.testDir, self.testWkpDir, self.testWkpMgrDir, self.testOutDir]:
+            os.mkdir(obj)
 
         self.testMgrHeader = [
             "Manager",
@@ -49,39 +57,32 @@ class Test(object):
             data=[self.testMgrRow], columns=self.testMgrHeader
         )
 
-        self.testMgrDict = {"test": ["", self.testSource, {}, []]}
-
-        if os.path.isfile(self.testSource):
-            os.remove(self.testSource)
-
-        if os.path.isfile(self.testMaster):
-            os.remove(self.testMaster)
-
-        if os.path.isdir(self.testDir):
-            os.rmdir(self.testDir)
-
-        os.mkdir(self.testDir)
+        self.testMgrDict = {"test": ["", "managers_test.csv", {}, []]}
 
         self.testMgrFrame.to_csv(self.testSource, index=False)
 
+        # self.testScrapeOk = {"yay": [self.testSource, os.path.join("temp_scrape.csv"), self.testMgrHeader]}
+
+        # self.testScrapeFail = {
+        #     "err": ["does_not_exist.html", "should_not_be_created.csv", ["blah1", "blah2"]]
+        # }
+
     def teardown_method(self, test_method):
-        """remove temp dir containing dummy files"""
+        """Remove temp dir containing dummy files."""
         # tear down self.attribute
-        if os.path.isfile(self.testSource):
-            os.remove(self.testSource)
+        for obj in [self.testWkpMgrDir, self.testWkpDir, self.testDir, self.testOutDir]:
+            if os.path.isdir(obj):
+                shutil.rmtree(obj)
 
-        if os.path.isfile(self.testMaster):
-            os.remove(self.testMaster)
-
-        if os.path.isdir(self.testDir):
-            os.rmdir(self.testDir)
-
-    # def test_download_managers(self):
-    #     ''' No test for downloading files from web '''
-    #     pass
+    def test_download_managers(self):
+        """Test for downloading files from web."""
+        assert managers.download_managers(directoryIn=self.testDir)
 
     def test_format_managers(self):
+        """Test for formatting managers data."""
         managers.format_managers(
-            managersDict=self.testMgrDict, directoryOut=self.testDir
+            managersDict=self.testMgrDict,
+            directoryIn=self.testDir,
+            directoryOut=self.testOutDir,
         )
         assert os.path.isfile(self.testMaster)

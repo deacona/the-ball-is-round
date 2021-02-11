@@ -1,13 +1,12 @@
-#!/usr/bin/python -tt
-"""
-Created on Mon Feb 06 16:49:37 2017
+"""results module.
 
-@author: adeacon
+Used for results data processes
 """
 
-import logging
 import os
-import urllib
+import urllib.request
+
+# import requests
 import zipfile
 
 import numpy as np
@@ -15,8 +14,7 @@ import pandas as pd
 
 import src.config as config
 import src.utilities as utilities
-
-logging.basicConfig(format=config.LOGFORMAT, level=config.LOGLEVEL)
+from src.utilities import logging
 
 pd.set_option("display.max_columns", 50)
 # pd.set_option('display.expand_frame_repr', False)
@@ -25,7 +23,16 @@ pd.set_option("display.max_columns", 50)
 # for i in {0..23}; do mkdir $((1993+i))-$((1994+i)); done
 
 
-def download_results():
+def download_results(directory=config.SOURCE_DIR, season_filter=()):
+    """Download results.
+
+    INPUT:
+        directory: Parent folder to save results under
+        season_filter: Optional List of seasons to filter on
+
+    OUTPUT:
+        None
+    """
     logging.info("Downloading results")
 
     remotepath = os.path.dirname(config.RESULTS_SCRAPE["ftd"][0])
@@ -38,29 +45,55 @@ def download_results():
         for item in table.findAll("a", href=True):
             # logging.info(item.text)
             # logging.info(item['href'])
+            season = item.text.replace("Season ", "").replace("/", "-")
+
+            if len(season) > 0 and season not in season_filter:
+                continue
 
             remotefile = remotepath + "/" + item["href"]
             logging.info("Remote file: {0}".format(remotefile))
 
-            localfile = (
-                config.RESULTS_SCRAPE["ftd"][1]
-                + "/"
-                + item.text.replace("Season ", "").replace("/", "-")
-                + "/"
-                + os.path.basename(item["href"])
+            localfile = os.path.join(
+                directory,
+                config.RESULTS_SCRAPE["ftd"][1],
+                season,
+                os.path.basename(item["href"]),
             )
             logging.info("Local file: {0}".format(localfile))
 
             utilities.ensure_dir(localfile)
 
-            testfile = urllib.request.URLopener()
-            testfile.retrieve(remotefile, localfile)
+            if remotefile.lower().startswith("http"):
+                req = urllib.request.Request(remotefile)
+            else:
+                raise ValueError from None
+
+            with urllib.request.urlopen(req) as response:
+                with open(localfile, "wb") as output:
+                    output.write(response.read())
+
+            # response = requests.get(remotefile, stream=True)
+            # with open(localfile, 'wb') as output:
+            #     for data in response.iter_content():
+            #         output.write(data)
+
             logging.info("Retrieve OK: " + str([remotefile, localfile]))
 
 
-def unzip_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
-    logging.info("Unzipping results files")
-    for root, dirs, files in os.walk(directory):
+def unzip_results_files(
+    parentDirectory=config.SOURCE_DIR, subDirectory=config.RESULTS_SCRAPE["ftd"][1]
+):
+    """Unzip downloaded results files.
+
+    INPUT:
+        directory: Directory to traverse looking for zip files
+
+    OUTPUT:
+        None
+    """
+    directory = os.path.join(parentDirectory, subDirectory)
+    logging.info("Unzipping results files in {0}".format(directory))
+    for root, _dirs, files in os.walk(directory):
         for file in files:
             if file == "data.zip":
                 # logging.info(root)
@@ -74,6 +107,14 @@ def unzip_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
 
 
 def func_div(x):
+    """Map Div code to Country and Tier.
+
+    INPUT:
+        x: Div code
+
+    OUTPUT:
+        List containing Country and Tier
+    """
     div_dict = {
         "B1": ["Belgium", 1],
         "D1": ["Germany", 1],
@@ -102,9 +143,22 @@ def func_div(x):
 
 
 def format_results(
-    directoryIn=config.RESULTS_SCRAPE["ftd"][1], directoryOut=config.MASTER_DIR
+    parentDirectory=config.SOURCE_DIR,
+    subDirectory=config.RESULTS_SCRAPE["ftd"][1],
+    directoryOut=config.MASTER_DIR,
 ):
-    logging.info("Format results")
+    """Format raw results and save processed output.
+
+    INPUT:
+        parentDirectory: Parent directory  to traverse looking for files to zip/clear
+        subDirectory: Sub-Directory to traverse looking for files to zip/clear
+        directoryOut: Directory to save output to
+
+    OUTPUT:
+        None
+    """
+    directoryIn = os.path.join(parentDirectory, subDirectory)
+    logging.info("Format results in {0}".format(directoryIn))
     pieces = []
     core_cols = ["Div", "Date"]  # ,'HomeTeam','AwayTeam','FTHG','FTAG','FTR']
     use_cols = [
@@ -143,7 +197,7 @@ def format_results(
         "ABP",
     ]
 
-    for root, dirs, files in os.walk(directoryIn):
+    for root, _dirs, files in os.walk(directoryIn):
         for file in files:
             if file.endswith(".csv"):
                 # logging.info(root)
@@ -170,7 +224,7 @@ def format_results(
                         df["AwayTeam"] = df[
                             "AwayTeam"
                         ]  # .apply(lambda x: x.decode('latin9').encode('utf-8'))
-                    except:
+                    except BaseException:
                         df["HomeTeam"] = np.nan
                         df["AwayTeam"] = np.nan
 
@@ -183,7 +237,7 @@ def format_results(
                         df["AwayTeam"] = df[
                             "AT"
                         ]  # .apply(lambda x: x.decode('latin9').encode('utf-8'))
-                    except:
+                    except BaseException:
                         df["HomeTeam"] = np.nan
                         df["AwayTeam"] = np.nan
                 else:
@@ -215,9 +269,21 @@ def format_results(
     # return dframe[use_cols]
 
 
-def archive_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
+def archive_results_files(
+    parentDirectory=config.SOURCE_DIR, subDirectory=config.RESULTS_SCRAPE["ftd"][1]
+):
+    """Zip/cleardown all source files.
+
+    INPUT:
+        parentDirectory: Parent directory  to traverse looking for files to zip/clear
+        subDirectory: Sub-Directory to traverse looking for files to zip/clear
+
+    OUTPUT:
+        None
+    """
+    directory = os.path.join(parentDirectory, subDirectory)
     logging.info("Removing/zipping unzipped results files from {0}".format(directory))
-    for root, dirs, files in os.walk(directory):
+    for root, _dirs, files in os.walk(directory):
         for file in files:
             if file.endswith(".csv"):
                 file_to_delete = os.path.join(root, file)
@@ -234,12 +300,25 @@ def archive_results_files(directory=config.RESULTS_SCRAPE["ftd"][1]):
 
 def results_analysis(
     directory=config.MASTER_DIR,
-    buckets=["Div", "Season"],
+    buckets=("Div", "Season"),
     stats=("HS", "AS", "HST", "AST", "FTHG", "FTAG"),
     filteron="HomeTeam",
-    values=["Barcelona"],
+    values=("Barcelona"),
     aggfunc="mean",
 ):
+    """Customizable analysis of results.
+
+    INPUT:
+        directory: Directory containing processed results
+        buckets: List of Fields to group by
+        stats: Aggregated metrics to include
+        filteron: Field to filter on
+        values: List of values to filter on
+        aggfunc: Aggregation method
+
+    OUTPUT:
+        selected: Analysis dataframe
+    """
     logging.info("Results analysis")
 
     dframe = utilities.get_master("results", directory)
@@ -269,7 +348,7 @@ def results_analysis(
     logging.info("Analysis pseudocode: {0}".format(pseudocode))
 
     selected = (
-        dframe[dframe[filteron].isin(values)].groupby(buckets)[stats].agg([aggfunc])
+        dframe[dframe[filteron].isin(values)].groupby(buckets)[stats].agg(aggfunc)
     )
 
     # print(selected)
@@ -281,6 +360,8 @@ def results_analysis(
 
 
 def main():
+    """Use the Main for CLI usage."""
+    logging.info("Executing results module")
 
     download_results()  ## Some dates wrong???
     unzip_results_files()

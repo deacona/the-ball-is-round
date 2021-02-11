@@ -1,3 +1,4 @@
+"""Standard Python packaging script."""
 import setuptools
 
 with open("README.md", "r") as fh:
@@ -5,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="src",
-    version="0.0.1",
+    version="0.0.2",
     author="deacona",
     # author_email="",
     description="Football + Data science",
