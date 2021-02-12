@@ -11,17 +11,17 @@ pylint
 pytest
 coverage
 ## modules/notebooks
-# jupyterlab
-# requests
-# numpy
-# scipy
-# matplotlib
-# seaborn
-# pandas
-# xlrd
-# openpyxl
-# beautifulsoup4
-# lxml
-# scikit-learn
-# statsbombpy
+jupyterlab
+requests
+numpy
+scipy
+matplotlib
+seaborn
+pandas
+xlrd
+openpyxl
+beautifulsoup4
+lxml
+scikit-learn
+statsbombpy
 # basemap
