@@ -65,6 +65,8 @@ CALL python src/players.py
 @PAUSE && @CLS
 CALL python src/events.py
 @PAUSE && @CLS
+CALL python src/quality.py
+@PAUSE && @CLS
 CALL python src/utilities.py
 @PAUSE && @CLS
 
