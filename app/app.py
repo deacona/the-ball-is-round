@@ -1,3 +1,8 @@
+"""data quality dashboard app.
+
+Used for running data quality dashboard webapp
+"""
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
