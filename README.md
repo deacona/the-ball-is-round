@@ -16,6 +16,8 @@ Having some fun with football stats and data science
 
 This project is written mostly in Python using the Miniconda distribution for Windows. To this end, I have a [script](build_automation.bat) to automate the build - setting up environment, running tests, processing data and launching applications.
 
+![png](app/quality_dashboard.png)
+
 
 
 ## 2. Results

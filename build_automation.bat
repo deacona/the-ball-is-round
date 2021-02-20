@@ -79,6 +79,8 @@ jupyter nbconvert --no-input --output-dir='.\notebooks\output' --to markdown .\n
 @PAUSE && @CLS
 
 :: Launch applications
-:: TBC - Data quality dashboard?
-CALL jupyter lab
+START /min python app/app.py
+START "" "http://localhost:8050/"
+START /min jupyter lab
+@REM START /min jupyter lab --no-browser
 @PAUSE && @CLS
