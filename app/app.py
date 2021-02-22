@@ -33,6 +33,8 @@ fig = go.Figure(
         y=data_pivot.index,
         colorscale="Viridis",
         colorbar=dict(title="<b>Average Score</b>"),
+        zmin=0.0,
+        zmax=1.0,
     )
 )
 
