@@ -35,6 +35,7 @@ This project is written mostly in Python using the Miniconda distribution for Wi
 
 |Directory/File|Description|
 |-----|-----|
+|[app/](app/)|Web app for Dash dashboards, with [assets](app/assets/)|
 |[data/](data/)|All the data, from the original [raw](data/raw/) data dump through to the final [processed](data/processed/) data|
 |[models/](models/)|Trained and serialized models, model predictions, or model summaries|
 |[notebooks/](notebooks/)|Jupyter notebooks. Naming convention is a project area, a number (for ordering), and a short description|
