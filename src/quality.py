@@ -23,13 +23,6 @@ def calculate_quality(directory=config.MASTER_DIR):
     """
     logging.info("Calculating data quality")
 
-    # https://en.wikipedia.org/wiki/Data_quality
-    # https://www.google.com/search?q=data+quality+dashboard&safe=active&rlz=1C1GCEU_en-GBGB902GB902&tbm=isch&source=iu&ictx=1&fir=_yUTRx89golw1M%252CAIc119nr574KBM%252C_&vet=1&usg=AI4_-kTS1UvktVERaqZf_2mXrR9N5Zlf6A&sa=X&ved=2ahUKEwiG39qYzuTuAhUSu3EKHc5jCi0Q9QF6BAgFEAE&biw=1360&bih=625#imgrc=GkT7s1S75HZQOM
-    # https://towardsdatascience.com/automate-your-data-management-discipline-with-python-d7f3e1d78a89
-    # https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework#Data-quality-dimensions
-    # https://towardsdatascience.com/how-to-improve-data-preparation-for-machine-learning-dde107b60091
-    # https://machinelearningmastery.com/how-to-use-statistics-to-identify-outliers-in-data/#:~:text=A%20value%20that%20falls%20outside,Gaussian%20or%20Gaussian%2Dlike%20distribution.
-
     calc_date = datetime.datetime.today().strftime("%Y-%m-%d")
     logging.info("Current date is {0}".format(calc_date))
 
@@ -71,7 +64,7 @@ def calculate_quality(directory=config.MASTER_DIR):
         score = df.count().sum() / no_of_cells
         dq_data.append(
             {
-                "file": file,
+                "file": file_stub,
                 "file_date": file_date,
                 "calc_date": calc_date,
                 "category": category,
@@ -95,7 +88,7 @@ def calculate_quality(directory=config.MASTER_DIR):
         )
         dq_data.append(
             {
-                "file": file,
+                "file": file_stub,
                 "file_date": file_date,
                 "calc_date": calc_date,
                 "category": category,
@@ -104,14 +97,22 @@ def calculate_quality(directory=config.MASTER_DIR):
             }
         )
 
-        if file in ["ftb_fulldata.txt"]:
+        date_field = None
+        if file in ["ftb_fulldata.txt", "ftb_results.txt"]:
+            date_field = "Date"
+        elif file in ["ftb_events_shot.txt"]:
+            date_field = "match_date"
+        elif file in ["ftb_managers.txt"]:
+            date_field = "DateTo"
+
+        if date_field:
             test = "Days since last match date"
             score = max(
                 1
                 - (
                     (
                         int(calc_date.replace("-", ""))
-                        - int(df.Date.max().replace("-", ""))
+                        - int(df[date_field].max().replace("-", ""))
                     )
                     / 100000
                 ),
@@ -119,7 +120,7 @@ def calculate_quality(directory=config.MASTER_DIR):
             )
             dq_data.append(
                 {
-                    "file": file,
+                    "file": file_stub,
                     "file_date": file_date,
                     "calc_date": calc_date,
                     "category": category,
@@ -145,7 +146,7 @@ def calculate_quality(directory=config.MASTER_DIR):
         score = df.drop_duplicates().shape[0] / no_of_rows
         dq_data.append(
             {
-                "file": file,
+                "file": file_stub,
                 "file_date": file_date,
                 "calc_date": calc_date,
                 "category": category,
@@ -158,7 +159,7 @@ def calculate_quality(directory=config.MASTER_DIR):
         score = df.T.drop_duplicates().T.shape[0] / no_of_rows
         dq_data.append(
             {
-                "file": file,
+                "file": file_stub,
                 "file_date": file_date,
                 "calc_date": calc_date,
                 "category": category,
@@ -182,7 +183,7 @@ def calculate_quality(directory=config.MASTER_DIR):
         )
         dq_data.append(
             {
-                "file": file,
+                "file": file_stub,
                 "file_date": file_date,
                 "calc_date": calc_date,
                 "category": category,
@@ -201,7 +202,7 @@ def calculate_quality(directory=config.MASTER_DIR):
         )
         dq_data.append(
             {
-                "file": file,
+                "file": file_stub,
                 "file_date": file_date,
                 "calc_date": calc_date,
                 "category": category,

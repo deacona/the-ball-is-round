@@ -65,20 +65,22 @@ CALL python src/players.py
 @PAUSE && @CLS
 CALL python src/events.py
 @PAUSE && @CLS
+
+:: Run data quality tests and launch Dash data quality dashboard
 CALL python src/quality.py
 @PAUSE && @CLS
+START /min python app/app.py
+START "" "http://localhost:8050/"
+
+:: Clear previous exports, run notebooks, export contents and launch Jupyter for analysis
 CALL python src/utilities.py
 @PAUSE && @CLS
-
-:: Run notebooks and export contents
 jupyter nbconvert --to notebook --execute --inplace .\notebooks\*.ipynb
 @PAUSE && @CLS
 jupyter nbconvert --output-dir='.\notebooks\output' --to python .\notebooks\*.ipynb
 @PAUSE && @CLS
 jupyter nbconvert --no-input --output-dir='.\notebooks\output' --to markdown .\notebooks\*.ipynb
 @PAUSE && @CLS
-
-:: Launch applications
-:: TBC - Data quality dashboard?
-CALL jupyter lab
+START /min jupyter lab
+@REM START /min jupyter lab --no-browser
 @PAUSE && @CLS

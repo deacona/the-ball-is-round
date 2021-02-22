@@ -10,7 +10,8 @@ flake8-todo
 pylint
 pytest
 coverage
-## modules/notebooks
+## analysis
+dash
 jupyterlab
 requests
 numpy
