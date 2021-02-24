@@ -42,9 +42,9 @@ def calculate_quality(directory=config.MASTER_DIR):
         logging.info("File modification date is {0}".format(calc_date))
 
         file_stub = file.replace("ftb_", "").replace(".txt", "")
-        df = utilities.get_master(file_stub, directory=directory).sample(
-            frac=0.1, replace=False, random_state=42
-        )
+        df = utilities.get_master(file_stub, directory=directory)
+        if df.shape[0] > 50000:
+            df = df.sample(50000, replace=False, random_state=42)
 
         no_of_rows, no_of_columns = df.shape
         no_of_cells = no_of_rows * no_of_columns
@@ -53,8 +53,41 @@ def calculate_quality(directory=config.MASTER_DIR):
         category = "Consistency"
         logging.info("Running {0} tests".format(category))
 
-        # DOB < Joined date < Contract date
-        # Goals <= SoT <= Shots
+        test = None
+        if file in ["ftb_events_shot.txt"]:
+            test = "xG between 0 and 1"
+            score = 1 - (df[~df.statsbomb_xg.between(0, 1)].shape[0] / df.shape[0])
+        elif file in ["ftb_fulldata.txt"]:
+            test = "Goals <= Shots"
+            score = 1 - (df[df["Goals"] > df["Shots"]].shape[0] / df.shape[0])
+        elif file in ["ftb_managers.txt"]:
+            test = "DateFrom <= DateTo"
+            score = 1 - (df[df.DateFrom > df.DateTo].shape[0] / df.shape[0])
+        elif file in ["ftb_players_contract.txt"]:
+            test = "Joined <= Contract expires"
+            score = 1 - (
+                df[df["Joined"] > df["Contract expires"]].shape[0] / df.shape[0]
+            )
+        elif file in ["ftb_players_performance.txt"]:
+            test = "Games started <= In squad"
+            score = 1 - (
+                df[df["Games started"] > df["In squad"]].shape[0] / df.shape[0]
+            )
+        elif file in ["ftb_results.txt"]:
+            test = "Home goals <= Home shots"
+            score = 1 - (df[df["FTHG"] > df["HS"]].shape[0] / df.shape[0])
+
+        if test:
+            dq_data.append(
+                {
+                    "file": file_stub,
+                    "file_date": file_date,
+                    "calc_date": calc_date,
+                    "category": category,
+                    "test": test,
+                    "score": score,
+                }
+            )
 
         # Completeness or comprehensiveness
         category = "Completeness"
