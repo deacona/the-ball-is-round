@@ -29,7 +29,7 @@ class Test(object):
     def test_download_matches(self):
         """Test events.download_matches."""
         assert self.mats.shape[0] == 36
-        assert self.mats.shape[1] == 16
+        assert self.mats.shape[1] == 18
 
     def test_download_events(self):
         """Test events.download_events."""
