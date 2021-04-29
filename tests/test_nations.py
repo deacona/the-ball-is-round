@@ -13,7 +13,8 @@ class Test(object):
         # configure self.attribute
         self.testHome = "tests"
         self.testDir = os.path.join(self.testHome, "temp")
-        self.testMaster = os.path.join(self.testDir, "ftb_nations_matches.txt")
+        self.testMaster1 = os.path.join(self.testDir, "ftb_nations_matches.txt")
+        self.testMaster2 = os.path.join(self.testDir, "ftb_nations_summaries.txt")
 
         for obj in [self.testDir]:
             if os.path.isdir(obj):
@@ -32,4 +33,9 @@ class Test(object):
     def test_format_matches(self):
         """Test for format_matches."""
         assert nations.format_matches(directoryOut=self.testDir).shape[0] > 200
-        assert os.path.isfile(self.testMaster)
+        assert os.path.isfile(self.testMaster1)
+
+    def test_format_summaries(self):
+        """Test for format_summaries."""
+        assert nations.format_summaries(directoryOut=self.testDir).shape[0] > 0
+        assert os.path.isfile(self.testMaster2)

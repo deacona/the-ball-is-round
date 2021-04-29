@@ -76,6 +76,9 @@ def calculate_quality(directory=config.MASTER_DIR):
         elif file in ["ftb_results.txt"]:
             test = "Home goals <= Home shots"
             score = 1 - (df[df["FTHG"] > df["HS"]].shape[0] / df.shape[0])
+        elif file in ["ftb_nations_matches.txt"]:
+            test = "Max one home team"
+            score = 1 - (df[df["Home_1"] + df["Home_2"] == 2].shape[0] / df.shape[0])
 
         if test:
             dq_data.append(
@@ -131,7 +134,7 @@ def calculate_quality(directory=config.MASTER_DIR):
         )
 
         date_field = None
-        if file in ["ftb_fulldata.txt", "ftb_results.txt"]:
+        if file in ["ftb_fulldata.txt", "ftb_results.txt", "ftb_nations_matches.txt"]:
             date_field = "Date"
         elif file in ["ftb_events_shot.txt"]:
             date_field = "match_date"
@@ -253,6 +256,7 @@ def calculate_quality(directory=config.MASTER_DIR):
         # relevance, pertinence, or usefulness
 
     df_dq = pd.DataFrame(dq_data)
+    df_dq["score"] = df_dq["score"].clip(lower=0, upper=1)
     utilities.save_master(df_dq, "quality", directory=directory)
 
     overall_score = df_dq.score.mean()

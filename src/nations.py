@@ -21,7 +21,7 @@ def format_matches(
         directoryOut: Directory to save formatted data to
 
     OUTPUT:
-        None
+        match: National match data dataframe
     """
     logging.info("Formatting national team match data")
 
@@ -51,8 +51,8 @@ def format_matches(
     comp["Team_1"] = comp["Team_1"].str[:-3]
     comp["Team_abbrev_2"] = comp["Team_2"].str[:2]
     comp["Team_2"] = comp["Team_2"].str[3:]
-    comp["Goals_1"] = comp.Score.str.extract(pat="([0-9]{1,2})–[0-9]{1,2}")
-    comp["Goals_2"] = comp.Score.str.extract(pat="[0-9]{1,2}–([0-9]{1,2})")
+    comp["Goals_1"] = comp.Score.str.extract(pat="([0-9]{1,2})[^0-9]+[0-9]{1,2}")
+    comp["Goals_2"] = comp.Score.str.extract(pat="[0-9]{1,2}[^0-9]+([0-9]{1,2})")
     for i in range(1, 3):
         comp["Goals_" + str(i)] = pd.to_numeric(
             comp["Goals_" + str(i)], errors="coerce"
@@ -86,11 +86,28 @@ def format_matches(
     return match
 
 
+def format_summaries(
+    directoryOut=config.MASTER_DIR,
+):
+    """Format national statistical summary data.
+
+    INPUT:
+        directoryOut: Directory to save formatted data to
+
+    OUTPUT:
+        None
+    """
+    logging.info("Formatting national statistical summary data")
+
+    return
+
+
 def main():
     """Use the Main for CLI usage."""
     logging.info("Executing nations module")
 
     format_matches()
+    format_summaries()
 
 
 if __name__ == "__main__":
