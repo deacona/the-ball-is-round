@@ -129,7 +129,9 @@ def format_summaries(
 
     # elo.describe().T
 
-    penn = pd.read_excel("../data/raw/rug/pwt100.xlsx", sheet_name="Data")
+    penn = pd.read_excel(
+        os.path.join(config.SOURCE_DIR, "rug", "pwt100.xlsx"), sheet_name="Data"
+    )
     penn = penn[["country", "year", "rgdpe", "pop"]]
     penn.columns = ["Country", "Data Year", "GDP (PPP)", "Population"]
     penn.dropna(axis="index", inplace=True)
