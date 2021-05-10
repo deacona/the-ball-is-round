@@ -53,12 +53,10 @@ This project is written mostly in Python using the Miniconda distribution for Wi
 
 ## 4. Licensing, Authors, Acknowledgements, etc.
 
+Credit to all the data sources, not least...
+* [FBref](https://fbref.com/en/)
+* [Penn World Tables](https://www.ggdc.net/pwt) Feenstra, Robert C., Robert Inklaar and Marcel P. Timmer (2015), "The Next Generation of the Penn World Table" American Economic Review, 105(10), 3150-3182, available for download at www.ggdc.net/pwt
+
 Shoutouts to all the creators and maintainers of libraries that made this work possible.
-
-Also, thankyou to [FBref](https://fbref.com/en/) amongst others for publishing so much varied and interesting footdall data.
-
-<!--
-Feenstra, Robert C., Robert Inklaar and Marcel P. Timmer (2015), "The Next Generation of the Penn World Table" American Economic Review, 105(10), 3150-3182, available for download at www.ggdc.net/pwt
--->
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
