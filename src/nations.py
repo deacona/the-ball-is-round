@@ -99,7 +99,58 @@ def format_summaries(
     """
     logging.info("Formatting national statistical summary data")
 
-    return
+    elo_list = []
+    for file in os.listdir(os.path.join(config.SOURCE_DIR, "elo")):
+        if not file.endswith(".json"):
+            continue
+
+        df_json = pd.read_json(os.path.join(config.SOURCE_DIR, "elo", file))
+        for i in df_json.index.values:
+            df_tmp = pd.DataFrame(df_json.Team[i], index=[i])
+            for col in df_tmp.columns.drop("Team"):
+                df_tmp[col] = (
+                    df_tmp[col].str.replace("−", "-").str.replace("+", "").astype(int)
+                )
+            df_tmp["Filename"] = file
+            df_tmp["Year"] = int(file[:4])
+            elo_list.append(df_tmp)
+
+    # print(len(elo_list))
+
+    elo = pd.concat(elo_list, ignore_index=True)
+
+    elo.loc[elo.Team == "Czechia", "Team"] = "Czech Republic"
+    elo.loc[elo.Team == "Yugoslavia", "Team"] = "Serbia"
+    elo["Country"] = elo.Team
+    elo.loc[
+        elo.Team.isin(["England", "Scotland", "Wales", "Northern Ireland"]), "Country"
+    ] = "United Kingdom"
+    elo.loc[(elo.Team == "Russia"), "Country"] = "Russian Federation"
+
+    # elo.describe().T
+
+    penn = pd.read_excel("../data/raw/rug/pwt100.xlsx", sheet_name="Data")
+    penn = penn[["country", "year", "rgdpe", "pop"]]
+    penn.columns = ["Country", "Data Year", "GDP (PPP)", "Population"]
+    penn.dropna(axis="index", inplace=True)
+    penn.sort_values(by=["Data Year"], inplace=True)
+    # penn.info()
+
+    summary = pd.merge_asof(
+        elo,
+        penn,
+        left_by="Country",
+        right_by="Country",
+        left_on="Year",
+        right_on="Data Year",
+        tolerance=4,
+        allow_exact_matches=False,
+    )
+
+    # summary.info()
+    utilities.save_master(summary, "nations_summaries", directory=directoryOut)
+
+    return summary
 
 
 def main():

@@ -37,5 +37,5 @@ class Test(object):
 
     def test_format_summaries(self):
         """Test for format_summaries."""
-        assert nations.format_summaries(directoryOut=self.testDir).shape[0] > 0
+        assert nations.format_summaries(directoryOut=self.testDir).shape[0] > 100
         assert os.path.isfile(self.testMaster2)
