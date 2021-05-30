@@ -47,10 +47,10 @@ def format_matches(
     comp.dropna(subset=["Round"], inplace=True)
     comp.reset_index(drop=True, inplace=True)
     comp["Year"] = comp.Date.str[:4]
-    comp["Team_abbrev_1"] = comp["Team_1"].str[-2:]
-    comp["Team_1"] = comp["Team_1"].str[:-3]
-    comp["Team_abbrev_2"] = comp["Team_2"].str[:2]
-    comp["Team_2"] = comp["Team_2"].str[3:]
+    comp["Team_abbrev_1"] = comp["Team_1"].str[-3:].str.strip()
+    comp["Team_1"] = comp["Team_1"].str[:-3].str.strip()
+    comp["Team_abbrev_2"] = comp["Team_2"].str[:3].str.strip()
+    comp["Team_2"] = comp["Team_2"].str[3:].str.strip()
     comp["Goals_1"] = comp.Score.str.extract(pat="([0-9]{1,2})[^0-9]+[0-9]{1,2}")
     comp["Goals_2"] = comp.Score.str.extract(pat="[0-9]{1,2}[^0-9]+([0-9]{1,2})")
     for i in range(1, 3):
@@ -121,6 +121,7 @@ def format_summaries(
 
     elo.loc[elo.Team == "Czechia", "Team"] = "Czech Republic"
     elo.loc[elo.Team == "Yugoslavia", "Team"] = "Serbia"
+    elo.loc[elo.Team == "Ireland", "Team"] = "Republic of Ireland"
     elo["Country"] = elo.Team
     elo.loc[
         elo.Team.isin(["England", "Scotland", "Wales", "Northern Ireland"]), "Country"
@@ -136,6 +137,7 @@ def format_summaries(
     penn.columns = ["Country", "Data Year", "GDP (PPP)", "Population"]
     penn.dropna(axis="index", inplace=True)
     penn.sort_values(by=["Data Year"], inplace=True)
+    penn.loc[penn.Country == "Ireland", "Country"] = "Republic of Ireland"
     # penn.info()
 
     summary = pd.merge_asof(
