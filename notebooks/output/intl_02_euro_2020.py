@@ -186,13 +186,13 @@ metric_histograms(summary, ['Rating', 'Average Rank',
 # In[7]:
 
 
-## fix data mismatch
+# ## fix data mismatch
 
-for col in ["Team_1", "Team_2"]:
-    print("\n")
-    print(match[~match[col].isin(summary.Team.values)][col].value_counts())
-    print("\n")
-    print(summary[~summary.Team.isin(match[col].values)].Team.value_counts())
+# for col in ["Team_1", "Team_2"]:
+#     print("\n")
+#     print(match[~match[col].isin(summary.Team.values)][col].value_counts())
+#     print("\n")
+#     print(summary[~summary.Team.isin(match[col].values)].Team.value_counts())
 
 
 # In[8]:
@@ -200,6 +200,8 @@ for col in ["Team_1", "Team_2"]:
 
 data = match.merge(summary, left_on=["Team_1", "Year"], right_on=["Team", "Year"]) #, suffixes=["", "_1"])
 data = data.merge(summary, left_on=["Team_2", "Year"], right_on=["Team", "Year"], suffixes=["", " (2)"])
+data.sort_values(by=["Date"], inplace=True)
+data.reset_index(drop=True, inplace=True)
 
 data["Elo_rating_diff"] = data["Rating"] - data["Rating (2)"]
 data["Home_advantage"] = data["Home_1"] - data["Home_2"]
@@ -213,7 +215,7 @@ data["Relative_ELO_rating"] = data["Rating"] / data["Rating (2)"]
 
 # model_years = [2000, 2004, 2008, 2012, 2016]
 live_years = [2021]
-data["Usage"] = "Model"
+data["Usage"] = "Training"
 data.loc[data.Year.isin(live_years), "Usage"] = "Live"
 
 # data = data[["Date", "Year", "Team_1", "Team_2", "Goal_diff", "Goal_total", "Elo_rating_diff", "Home_advantage", "Win_expectency_1",
@@ -533,7 +535,7 @@ gt_eval[['Name', 'R^2', 'RMSE', 'MedAE']]        .style        .background_gradi
 # In[23]:
 
 
-selected_gd_model = gd_model_list[2]["Reg"]
+selected_gd_model = gd_model_list[7]["Reg"]
 selected_gt_model = gt_model_list[3]["Reg"]
 
 selected_gd_model, selected_gt_model
@@ -557,14 +559,17 @@ selected_gd_model, selected_gt_model
 
 output = data.copy(deep=True)[["Date", "Year", "Team_1", "Team_2", "Usage", "Goals_1", "Goals_2", "Goal_diff", "Goal_total", "Result"]]
 output.columns = ["Date", "Year", "Team_1", "Team_2", "Usage", "Actual_score_1", "Actual_score_2", "Actual_goal_diff", "Actual_goal_total", "Actual_result"]
+output.loc[output.index.isin(gd_y_test.index), "Usage"] = "Testing"
 
 gd_pred = selected_gd_model.predict(data[gd_features])
 gt_pred = selected_gt_model.predict(data[gt_features])
 
+gd_weight = 1.05
+gt_weight = 1.15
 
 ## add weights?
-output["Predicted_score_1"] = ((gt_pred + gd_pred) / 2).round()
-output["Predicted_score_2"] = ((gt_pred - gd_pred) / 2).round()
+output["Predicted_score_1"] = (gd_weight * (gt_pred + gd_pred) / 2).round()
+output["Predicted_score_2"] = (gt_weight * (gt_pred - gd_pred) / 2).round()
 output["Predicted_goal_diff"] = output.Predicted_score_1 - output.Predicted_score_2
 output["Predicted_goal_total"] = output.Predicted_score_1 + output.Predicted_score_2
 output["Predicted_result"] = None
@@ -587,16 +592,31 @@ output.describe(include="all").T
 # In[25]:
 
 
-summary = pd.concat([
-    output[pd.notnull(output.Actual_result)].Year.value_counts().sort_index(),
-    output[pd.notnull(output.Actual_result)].groupby("Year")[["Points", "Correct_result", "Correct_goal_diff", "Correct_score",
-                                                              "Predicted_goal_total", "Actual_goal_total"]].mean(),
-    output[pd.notnull(output.Actual_result) & (output.Predicted_result != "Draw")].Year.value_counts() / output[pd.notnull(output.Actual_result)].Year.value_counts(),
-    output[pd.notnull(output.Actual_result) & (output.Actual_result != "Draw")].Year.value_counts() / output[pd.notnull(output.Actual_result)].Year.value_counts(),
-], axis=1)
-
-summary.columns = ["Matches played", "Points per game", "% correct result", "% correct goal diff", "% correct score",
-                   "Goals per game", "Goals per game (actual)", "% games won", "% games won (actual)"]
+def agg_by_col(df, col, asc=True):
+    """
+    INPUT:
+        df - Match-level output dataframe
+        col - Column to aggregate by
+        asc - Sort ascending (True) or descending (False)
+        
+    OUTPUT:
+        agg - Aggregated dataframe
+    """
+    agg = pd.concat([
+        df[pd.notnull(df.Actual_result)][col].value_counts().sort_index(),
+        df[pd.notnull(df.Actual_result)].groupby(col)[["Points", "Correct_result", "Correct_goal_diff", "Correct_score",
+                                                                  "Predicted_goal_total", "Actual_goal_total"]].mean(),
+        df[pd.notnull(df.Actual_result) & (df.Predicted_result != "Draw")][col].value_counts() / df[pd.notnull(df.Actual_result)][col].value_counts(),
+        df[pd.notnull(df.Actual_result) & (df.Actual_result != "Draw")][col].value_counts() / df[pd.notnull(df.Actual_result)][col].value_counts(),
+    ], axis=1)
+    agg.sort_index(ascending=asc, inplace=True)
+    agg.columns = ['Matches played', 'Points per game', '% correct result',
+       '% correct goal diff', '% correct score', 'Goals per game (predicted)',
+       'Goals per game (actual)', '% games won (predicted)',
+       '% games won (actual)']
+#     print(agg.columns)
+    
+    return agg
 
 overall = pd.DataFrame({
     "Matches played": output[pd.notnull(output.Actual_result)].shape[0],
@@ -604,16 +624,21 @@ overall = pd.DataFrame({
     "% correct result": output[pd.notnull(output.Actual_result)].Correct_result.mean(),
     "% correct goal diff": output[pd.notnull(output.Actual_result)].Correct_goal_diff.mean(),
     "% correct score": output[pd.notnull(output.Actual_result)].Correct_score.mean(),
-    "Goals per game": output[pd.notnull(output.Actual_result)].Predicted_goal_total.mean(),
+    "Goals per game (predicted)": output[pd.notnull(output.Actual_result)].Predicted_goal_total.mean(),
     "Goals per game (actual)": output[pd.notnull(output.Actual_result)].Actual_goal_total.mean(),
-    "% games won": output[pd.notnull(output.Actual_result) & (output.Predicted_result != "Draw")].shape[0] / output[pd.notnull(output.Actual_result)].shape[0],
+    "% games won (predicted)": output[pd.notnull(output.Actual_result) & (output.Predicted_result != "Draw")].shape[0] / output[pd.notnull(output.Actual_result)].shape[0],
     "% games won (actual)": output[pd.notnull(output.Actual_result) & (output.Actual_result != "Draw")].shape[0] / output[pd.notnull(output.Actual_result)].shape[0],
 }, index=["Overall"])
-summary = pd.concat([summary, overall], axis=0)
+# print(overall.columns)
 
+summary = pd.concat([agg_by_col(output, "Year"), agg_by_col(output, "Usage", asc=False), overall], axis=0)
 summary = summary.round(2)
-pct_cols = ["% correct result", "% correct goal diff", "% correct score", "% games won", "% games won (actual)"]
+pct_cols = []
+for col in summary.columns:
+    if col.startswith("%"):
+        pct_cols.append(col)
 summary[pct_cols] = (100 * summary[pct_cols]).astype(int).astype(str) + "%"
+
 summary
 
 
