@@ -212,6 +212,7 @@ data["Relative_GDP_per_capita"] = data["GDP (PPP) Per Capita"] / data["GDP (PPP)
 data["Relative_ELO_rating"] = data["Rating"] / data["Rating (2)"]
 # data["Relative_ELO_rank_1yr_change"] = data["1 Year Change Rank"] / data["1 Year Change Rank (2)"]
 # data["Relative_ELO_rating_1yr_change"] = data["1 Year Change Rating"] / data["1 Year Change Rating (2)"]
+# data["Combined_ELO_rating_1yr_change"] = data["1 Year Change Rating"].abs() + data["1 Year Change Rating (2)"].abs()
 
 # model_years = [2000, 2004, 2008, 2012, 2016]
 live_years = [2021]
@@ -324,6 +325,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 # from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
 # from sklearn.compose import TransformedTargetRegressor
+from sklearn.base import BaseEstimator, RegressorMixin
 
 from sklearn.metrics import median_absolute_error
 from sklearn.metrics import mean_squared_error
@@ -335,7 +337,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 # from sklearn.model_selection import learning_curve
 # from sklearn.model_selection import KFold
-
 from sklearn.model_selection import train_test_split
 
 # np.random.seed(1)
@@ -344,8 +345,8 @@ from sklearn.model_selection import train_test_split
 # In[15]:
 
 
-gd_features = ["Home_advantage", "Relative_experience", "Relative_population", "Relative_GDP_per_capita"]
-gt_features = ["Home_advantage", "Relative_experience", "Relative_population", "Relative_GDP_per_capita"]
+gd_features = ["Home_advantage", "Relative_experience", "Relative_population", "Relative_GDP_per_capita", "Elo_rating_diff"]
+gt_features = ["Home_advantage", "Relative_experience", "Relative_population", "Relative_GDP_per_capita", "Elo_rating_diff"]
 
 gd_target = "Goal_diff"
 gt_target = "Goal_total"
@@ -368,14 +369,15 @@ print("GT Test data has shape: {0}".format(gt_X_test.shape))
 # In[16]:
 
 
-# model = LinearRegression(fit_intercept=False, normalize=True)
-# model.fit(X_train, y_train)
+# # model = LinearRegression(fit_intercept=False, normalize=True)
+# model = EloRegressor()
+# model.fit(gd_X_train, gd_y_train)
 
-# y_pred = model.predict(X_test)
+# y_pred = model.predict(gd_X_test)
 
-# {"MedAE": median_absolute_error(y_test, y_pred),
-#             "RMSE": mean_squared_error(y_test, y_pred, squared=False),
-#             "R^2": r2_score(y_test, y_pred),
+# {"MedAE": median_absolute_error(gd_y_test, y_pred),
+#             "RMSE": mean_squared_error(gd_y_test, y_pred, squared=False),
+#             "R^2": r2_score(gd_y_test, y_pred),
 #            }
 
 
@@ -392,7 +394,7 @@ print("GT Test data has shape: {0}".format(gt_X_test.shape))
 # In[18]:
 
 
-get_ipython().run_cell_magic('time', '', '\n## add ELO model?\n\ndef model_pipe(model, X_train, y_train):\n    """\n    INPUT:\n        model: Untrained regression model\n        X_train: Training features\n        y_train: Training target\n        \n    OUTPUT:\n        model: Trained model\n    """\n    \n#     model = TransformedTargetRegressor(regressor=model, transformer=MinMaxScaler())\n    model = Pipeline(steps=[(\'standardizer\', StandardScaler()),\n#                             (\'normalizer\', MinMaxScaler()),\n                      (\'estimator\', model)])\n    model.fit(X_train, y_train)\n    \n    return model\n\ndef get_trained_models(X_train, y_train):\n    """\n    INPUT:\n        X_train: Training features\n        y_train: Training target\n        \n    OUTPUT:\n        model_list: List of trained models\n    """\n    model_list = [\n        {"Name": "Dummy (mean)", "Reg": model_pipe(DummyRegressor(strategy="mean"), X_train, y_train)},\n        {"Name": "Dummy (median)", "Reg": model_pipe(DummyRegressor(strategy="median"), X_train, y_train)},\n        {"Name": "Linear Reg", "Reg": model_pipe(LinearRegression(), X_train, y_train)}, #sometimes skews results table\n        {"Name": "Lasso", "Reg": model_pipe(Lasso(), X_train, y_train)},\n        {"Name": "Ridge", "Reg": model_pipe(Ridge(), X_train, y_train)},\n    #     {"Name": "Bayesian Ridge", "Reg": model_pipe(BayesianRidge(), X_train, y_train)},\n        {"Name": "Random Forest", "Reg": model_pipe(RandomForestRegressor(random_state=42), X_train, y_train)},\n    #     {"Name": "Random Forest (tuned)", "Reg": rf_tuned(X_train, y_train)},\n        {"Name": "Gradient Boost", "Reg": model_pipe(GradientBoostingRegressor(), X_train, y_train)},\n    #     {"Name": "K Neighbors", "Reg": model_pipe(KNeighborsRegressor(), X_train, y_train)},\n        {"Name": "SVM (linear)", "Reg": model_pipe(SVR(kernel="linear"), X_train, y_train)},\n        {"Name": "SVM (rbf)", "Reg": model_pipe(SVR(kernel="rbf"), X_train, y_train)},\n    #     {"Name": "Voting (RF+KNN)", "Reg": model_pipe(VotingRegressor([(\'rf\', RandomForestRegressor(random_state=42)), \n    #                                                             (\'knn\', KNeighborsRegressor())]), X_train, y_train)},\n    #     {"Name": "Voting (LR+RF+KNN)", "Reg": model_pipe(VotingRegressor([(\'lr\', LinearRegression()),\n    #                                                             (\'rf\', RandomForestRegressor(random_state=42)),\n    #                                                             (\'knn\', KNeighborsRegressor())]), X_train, y_train)},\n    ]\n\n    return model_list\n\ngd_model_list = get_trained_models(gd_X_train, gd_y_train)\ngt_model_list = get_trained_models(gt_X_train, gt_y_train)\n\nlen(gd_model_list), len(gt_model_list)')
+get_ipython().run_cell_magic('time', '', '\n## add ELO model?\nclass EloRegressor(BaseEstimator, RegressorMixin):\n    def __init__(self): #, yType="Diff", goalWeight=4., goalBoost=16.):\n        self.yType = "Diff"\n        self.goalWeight = 4.\n        self.goalBoost = 1.\n    \n    def _show_params(self):\n        print("_show_params...")\n        print("yType:", self.yType)\n        print("goalWeight:", self.goalWeight)\n        print("goalBoost:", self.goalBoost)\n        \n        return\n    \n    def _calc_output(self, X):\n        X_tmp = X.copy(deep=True)\n        X_tmp["EloRatingDiffWithHomeAdv"] = X_tmp["Elo_rating_diff"] + (100 * X_tmp.Home_advantage)\n        X_tmp["WinExpectency1Square"] = (10**((-X_tmp.EloRatingDiffWithHomeAdv)/400))+1\n        X_tmp["WinExpectency1"] = X_tmp["WinExpectency1Square"]**-1\n        X_tmp["RawGoalDiff"] = (self.goalWeight * (X_tmp.WinExpectency1 - 0.5)).round(0)\n        X_tmp["RawGoalDiffAbs"] = X_tmp["RawGoalDiff"].abs()\n        X_tmp["EitherWins"] = 0\n        X_tmp.loc[X_tmp.RawGoalDiffAbs > 0, "EitherWins"] = 1\n#         X_tmp["QualifyGoalsRankAvg"] = (X_tmp["QualifyGoalsRank1"] + X_tmp["QualifyGoalsRank2"]) / 2\n        X_tmp["ApplyGoalBoost"] = 0\n#         X_tmp.loc[X_tmp.QualifyGoalsRankAvg <= self.goalBoost, "ApplyGoalBoost"] = 1\n        X_tmp["Goals1"] = X_tmp["ApplyGoalBoost"]\n        X_tmp.loc[X_tmp.RawGoalDiff > 0, "Goals1"] = X_tmp.RawGoalDiff + X_tmp.ApplyGoalBoost\n        X_tmp["Goals2"] = X_tmp["ApplyGoalBoost"]\n        X_tmp.loc[X_tmp.RawGoalDiff <= 0, "Goals2"] = X_tmp.ApplyGoalBoost - X_tmp.RawGoalDiff\n        X_tmp["GoalDiff"] = X_tmp.Goals1 - X_tmp.Goals2\n        X_tmp["GoalDiffAbs"] = X_tmp.GoalDiff.abs()\n        X_tmp["GoalTotal"] = X_tmp.Goals1 + X_tmp.Goals2\n        \n        return X_tmp["Goal"+self.yType].values\n\n    def fit(self, X, y=None):\n        if y.name == "Goal_total":\n            self.yType = "Total"\n#         else:\n#             self.yType = "Diff"\n        y_tmp = self._calc_output(X).mean()\n        y_low = y.quantile(q=0.2)\n        y_high = y.quantile(q=0.8)\n        while y_tmp < y_low:\n            self.goalWeight += 0.05\n            y_tmp = self._calc_output(X).mean()\n        while y_tmp > y_high:\n            self.goalWeight -= 0.05\n            y_tmp = self._calc_output(X).mean()\n        self._show_params()\n        \n        return self\n\n    def predict(self, X, y=None):\n        self._show_params()\n        return self._calc_output(X)\n\ndef model_pipe(model, X_train, y_train):\n    """\n    INPUT:\n        model: Untrained regression model\n        X_train: Training features\n        y_train: Training target\n        \n    OUTPUT:\n        model: Trained model\n    """\n    \n#     model = TransformedTargetRegressor(regressor=model, transformer=MinMaxScaler())\n    model = Pipeline(steps=[(\'standardizer\', StandardScaler()),\n#                             (\'normalizer\', MinMaxScaler()),\n                      (\'estimator\', model)])\n    model.fit(X_train, y_train)\n    \n    return model\n\ndef get_trained_models(X_train, y_train):\n    """\n    INPUT:\n        X_train: Training features\n        y_train: Training target\n        \n    OUTPUT:\n        model_list: List of trained models\n    """\n    model_list = [\n        {"Name": "Dummy (mean)", "Reg": model_pipe(DummyRegressor(strategy="mean"), X_train, y_train)},\n        {"Name": "Dummy (median)", "Reg": model_pipe(DummyRegressor(strategy="median"), X_train, y_train)},\n        {"Name": "Linear Reg", "Reg": model_pipe(LinearRegression(), X_train, y_train)}, #sometimes skews results table\n        {"Name": "Lasso", "Reg": model_pipe(Lasso(), X_train, y_train)},\n        {"Name": "Ridge", "Reg": model_pipe(Ridge(), X_train, y_train)},\n    #     {"Name": "Bayesian Ridge", "Reg": model_pipe(BayesianRidge(), X_train, y_train)},\n        {"Name": "Random Forest", "Reg": model_pipe(RandomForestRegressor(random_state=42), X_train, y_train)},\n    #     {"Name": "Random Forest (tuned)", "Reg": rf_tuned(X_train, y_train)},\n        {"Name": "Gradient Boost", "Reg": model_pipe(GradientBoostingRegressor(), X_train, y_train)},\n    #     {"Name": "K Neighbors", "Reg": model_pipe(KNeighborsRegressor(), X_train, y_train)},\n        {"Name": "SVM (linear)", "Reg": model_pipe(SVR(kernel="linear"), X_train, y_train)},\n        {"Name": "SVM (rbf)", "Reg": model_pipe(SVR(kernel="rbf"), X_train, y_train)},\n    #     {"Name": "Voting (RF+KNN)", "Reg": model_pipe(VotingRegressor([(\'rf\', RandomForestRegressor(random_state=42)), \n    #                                                             (\'knn\', KNeighborsRegressor())]), X_train, y_train)},\n    #     {"Name": "Voting (LR+RF+KNN)", "Reg": model_pipe(VotingRegressor([(\'lr\', LinearRegression()),\n    #                                                             (\'rf\', RandomForestRegressor(random_state=42)),\n    #                                                             (\'knn\', KNeighborsRegressor())]), X_train, y_train)},\n        {"Name": "Elo", "Reg": EloRegressor().fit(X_train, y_train)}\n    ]\n\n    return model_list\n\ngd_model_list = get_trained_models(gd_X_train, gd_y_train)\ngt_model_list = get_trained_models(gt_X_train, gt_y_train)\n\nlen(gd_model_list), len(gt_model_list)')
 
 
 # In[ ]:
@@ -535,7 +537,7 @@ gt_eval[['Name', 'R^2', 'RMSE', 'MedAE']]        .style        .background_gradi
 # In[23]:
 
 
-selected_gd_model = gd_model_list[7]["Reg"]
+selected_gd_model = gd_model_list[9]["Reg"]
 selected_gt_model = gt_model_list[3]["Reg"]
 
 selected_gd_model, selected_gt_model
@@ -564,8 +566,8 @@ output.loc[output.index.isin(gd_y_test.index), "Usage"] = "Testing"
 gd_pred = selected_gd_model.predict(data[gd_features])
 gt_pred = selected_gt_model.predict(data[gt_features])
 
-gd_weight = 1.05
-gt_weight = 1.15
+gd_weight = 1 #.05
+gt_weight = 1 #.15
 
 ## add weights?
 output["Predicted_score_1"] = (gd_weight * (gt_pred + gd_pred) / 2).round()
@@ -590,6 +592,12 @@ output.describe(include="all").T
 
 
 # In[25]:
+
+
+output.loc[output.Usage == "Live", ["Predicted_score_1", "Predicted_score_2", "Predicted_goal_diff", "Predicted_goal_total"]].describe()#.T
+
+
+# In[26]:
 
 
 def agg_by_col(df, col, asc=True):
