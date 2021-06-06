@@ -24,7 +24,7 @@ This project is written mostly in Python using the Miniconda distribution for Wi
 * Analysis of goals in European leagues [notebook](notebooks/club_01_goals_around_europe.ipynb) [report](reports/club_01_goals_around_europe.md)
 * Predicting market value of Middlesbrough FC players [notebook](notebooks/boro_01_current_market_value.ipynb) [report](reports/boro_01_market_value.md)
 * Shots analysis of Lionel Messi at Barcelona [notebook](notebooks/messi_01_finding_leo.ipynb) [report](reports/messi_01_finding_leo.md)
-* Euro 2020 (2021) predictions [notebook](notebooks/intl_01_euro_2020.ipynb) [report](reports/intl_01_euro_2020.md)
+* Euro 2020 (2021) predictions [notebook](notebooks/intl_02_euro_2020.ipynb) [report](reports/intl_02_euro_2020.md)
 <!-- * [TBC] Which Boro players are most like Messi [notebook] [report]
 * [TBC] Can Messi do it on a cold midweek night in Stoke [notebook] [report]
 * [TBC] Boro player retention [notebook] [report] -->
