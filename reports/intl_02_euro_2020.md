@@ -183,6 +183,6 @@ Before the 2021 tournament this can be summarised as follows...
 <br />
 The predictions for Euro 2020 group matches were then entered into UEFA's Tournament and Match predictors.
 
-![png](figures/intl_02_uefa_groups_A_C.png)
-![png](figures/intl_02_uefa_groups_D_F.png)
-![png](figures/intl_02_uefa_groups_third_place.png)
+![png](figures/intl_02_uefa_groups_A_C.PNG)
+![png](figures/intl_02_uefa_groups_D_F.PNG)
+![png](figures/intl_02_uefa_groups_third_place.PNG)
