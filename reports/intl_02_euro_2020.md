@@ -50,8 +50,8 @@ Both targets were then fitted using a selection of 10 regression algorithms.
 
 (All but the EloRegressor had a standardised scaling applied to avoid any affects of differently scaled features)
 
-![png](figures/intl_02_eval_goal_diff.png)
-![png](figures/intl_02_eval_goal_total.png)
+![png](figures/intl_02_eval_goal_diff.PNG)
+![png](figures/intl_02_eval_goal_total.PNG)
 
 From this, I selected the Elo model for Goal diff and Lasso for Goal total.
 
