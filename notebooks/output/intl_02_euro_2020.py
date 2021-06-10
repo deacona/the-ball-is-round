@@ -175,24 +175,10 @@ data["Home_advantage"] = data["Home_1"] - data["Home_2"]
 data["Relative_experience"] = data["Matches Total"] / data["Matches Total (2)"]
 data["Relative_population"] = data["Population"] / data["Population (2)"]
 data["Relative_GDP_per_capita"] = data["GDP (PPP) Per Capita"] / data["GDP (PPP) Per Capita (2)"]
-# data["Relative_ELO_rating"] = data["Rating"] / data["Rating (2)"]
+data["Relative_ELO_rating"] = data["Rating"] / data["Rating (2)"]
 # data["Relative_ELO_rank_1yr_change"] = data["1 Year Change Rank"] / data["1 Year Change Rank (2)"]
 # data["Relative_ELO_rating_1yr_change"] = data["1 Year Change Rating"] / data["1 Year Change Rating (2)"]
 # data["Combined_ELO_rating_1yr_change"] = data["1 Year Change Rating"].abs() + data["1 Year Change Rating (2)"].abs()
-
-for col_2 in data.columns:
-    if not col_2.endswith(" (2)"):
-        continue
-    if not col_2.startswith(("Rank", "Rating", "Matches", "Goals")):
-        continue
-    col_1 = col_2.replace(" (2)", "")
-    col = "Relative_Elo_{0}".format(col_1)
-    data[col] = data[col_1] / data[col_2]
-#     print(col)
-
-data["Group_stage"] = 0
-data.loc[data.Round == "Group stage", "Group_stage"] = 1
-data = pd.concat([data, pd.get_dummies(data["Day"])], axis=1)
 
 # model_years = [2000, 2004, 2008, 2012, 2016]
 live_years = [2021]
@@ -204,7 +190,7 @@ data.loc[data.Year.isin(live_years), "Usage"] = "Live"
 #             "Relative_ELO_rating"]] #, "Relative_ELO_rank_1yr_change", "Relative_ELO_rating_1yr_change"
 # ]]
 
-print(data.columns)
+# data.columns
 data.describe().T
 
 
@@ -306,22 +292,8 @@ from sklearn.model_selection import train_test_split
 # In[14]:
 
 
-gd_features = ["Home_advantage", "Relative_experience", "Relative_population", "Relative_GDP_per_capita", "Elo_rating_diff",
-               'Group_stage', 'Fri', 'Mon', 'Sat', 'Sun', 'Thu', 'Tue', 'Wed',
-              'Relative_Elo_Rank Local', 'Relative_Elo_Rank Global',
-       'Relative_Elo_Rating', 'Relative_Elo_Matches Total',
-       'Relative_Elo_Matches Home', 'Relative_Elo_Matches Away',
-       'Relative_Elo_Matches Neutral', 'Relative_Elo_Matches Wins',
-       'Relative_Elo_Matches Losses', 'Relative_Elo_Matches Draws',
-       'Relative_Elo_Goals For', 'Relative_Elo_Goals Against']
-gt_features = ["Home_advantage", "Relative_experience", "Relative_population", "Relative_GDP_per_capita", "Elo_rating_diff",
-               'Group_stage', 'Fri', 'Mon', 'Sat', 'Sun', 'Thu', 'Tue', 'Wed',
-              'Relative_Elo_Rank Local', 'Relative_Elo_Rank Global',
-       'Relative_Elo_Rating', 'Relative_Elo_Matches Total',
-       'Relative_Elo_Matches Home', 'Relative_Elo_Matches Away',
-       'Relative_Elo_Matches Neutral', 'Relative_Elo_Matches Wins',
-       'Relative_Elo_Matches Losses', 'Relative_Elo_Matches Draws',
-       'Relative_Elo_Goals For', 'Relative_Elo_Goals Against']
+gd_features = ["Home_advantage", "Relative_experience", "Relative_population", "Relative_GDP_per_capita", "Elo_rating_diff"]
+gt_features = ["Home_advantage", "Relative_experience", "Relative_population", "Relative_GDP_per_capita", "Elo_rating_diff"]
 
 gd_target = "Goal_diff"
 gt_target = "Goal_total"
