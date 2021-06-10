@@ -9,10 +9,10 @@ SET /p projectPath="Enter Project path: "
 @REM SET projectPath=
 
 :: Remove virtual env when done
-CALL conda deactivate
-CALL conda env remove -n %projectName%
-CALL conda env list
-@PAUSE && @CLS
+@REM CALL conda deactivate
+@REM CALL conda env remove -n %projectName%
+@REM CALL conda env list
+@REM @PAUSE && @CLS
 
 :: Create virtual env
 CALL conda create -n %projectName% python=3
@@ -65,6 +65,8 @@ CALL python src/players.py
 @PAUSE && @CLS
 CALL python src/events.py
 @PAUSE && @CLS
+CALL python src/nations.py
+@PAUSE && @CLS
 
 :: Run data quality tests and launch Dash data quality dashboard
 CALL python src/quality.py
@@ -81,6 +83,6 @@ jupyter nbconvert --output-dir='.\notebooks\output' --to python .\notebooks\*.ip
 @PAUSE && @CLS
 jupyter nbconvert --no-input --output-dir='.\notebooks\output' --to markdown .\notebooks\*.ipynb
 @PAUSE && @CLS
-START /min jupyter lab
-@REM START /min jupyter lab --no-browser
+@REM START /min jupyter lab
+START /min jupyter lab --no-browser
 @PAUSE && @CLS

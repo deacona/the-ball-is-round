@@ -24,8 +24,8 @@ This project is written mostly in Python using the Miniconda distribution for Wi
 * Analysis of goals in European leagues [notebook](notebooks/club_01_goals_around_europe.ipynb) [report](reports/club_01_goals_around_europe.md)
 * Predicting market value of Middlesbrough FC players [notebook](notebooks/boro_01_current_market_value.ipynb) [report](reports/boro_01_market_value.md)
 * Shots analysis of Lionel Messi at Barcelona [notebook](notebooks/messi_01_finding_leo.ipynb) [report](reports/messi_01_finding_leo.md)
+* Euro 2020 (2021) predictions [notebook](notebooks/intl_02_euro_2020.ipynb) [report](reports/intl_02_euro_2020.md)
 <!-- * [TBC] Which Boro players are most like Messi [notebook] [report]
-* [TBC] World Cup 2022 predictions [notebook] [report]
 * [TBC] Can Messi do it on a cold midweek night in Stoke [notebook] [report]
 * [TBC] Boro player retention [notebook] [report] -->
 
@@ -53,8 +53,12 @@ This project is written mostly in Python using the Miniconda distribution for Wi
 
 ## 4. Licensing, Authors, Acknowledgements, etc.
 
-Shoutouts to all the creators and maintainers of libraries that made this work possible.
+Credit to all the data sources, not least...
+* [FBref](https://fbref.com/en/)
+* [Penn World Tables](https://www.ggdc.net/pwt) Feenstra, Robert C., Robert Inklaar and Marcel P. Timmer (2015), "The Next Generation of the Penn World Table" American Economic Review, 105(10), 3150-3182, available for download at www.ggdc.net/pwt
+* [Wikipedia](https://en.wikipedia.org/wiki)
+* [World Football Elo Ratings](https://www.eloratings.net/about)
 
-Also, kudos to the data sources for publishing so much varied and interesting footdall data.
+Shoutouts to all the creators and maintainers of libraries that made this work possible.
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
