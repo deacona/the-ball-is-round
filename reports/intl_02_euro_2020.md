@@ -7,15 +7,12 @@ __The challenge__
 
 Inspired by my performance in an office World Cup predictor, I decided to take that [model](intl_01_world_cup_2018.md) and, hopefully, improve on it for Euro 2020.
 
-I used the same scoring method as 3 years ago, but because I wasn't part of a similar competition this time, I wanted to make it more real by also entering Uefa's own prediction competition.
+I wasn't part of a similar competition this time, so decided to enter UEFA's online prediction competition.
 
-To recap, the original scoring system was 3 points for correct score, 2 points for correct goal difference, 1 point for correct result per game.
-
-The Uefa comp is simpler in that you just need to pick group stage positions/qualifiers and then knockout match winners, but I felt aiming for higher precision _should_ help.
 
 __The data__
 
-I wanted to make this more of a supervised learning model. To this end I looked at past (and present) competitions and metrics for the countries involed.
+I wanted to make this a supervised learning model. To this end I looked at past (and present) competitions and metrics for the countries involed.
 
 I gathered fixtures/results from FBRef, stadium info from Wikipedia, Elo data from eloratings.net, and population and GDP data from the Penn tables (as now maintained by University of Groningen). The past tournaments and Elo ratings went back to 2000. Penn tables data was taken as per the end of the previous calendar year (e.g. 1999 figures for matches played in 2000).
 
@@ -26,6 +23,7 @@ I gathered fixtures/results from FBRef, stadium info from Wikipedia, Elo data fr
 ![png](figures/intl_02_euro_2020_10_11.png)
 ![png](figures/intl_02_euro_2020_10_31.png)
 ![png](figures/intl_02_euro_2020_10_33.png)
+
 
 __The method__
 
@@ -62,6 +60,8 @@ From this, I selected the Elo model for Goal diff and Lasso for Goal total.
 __The results__
 
 The full dataset was assigned predictions, which could then be compared with actual results as they came in.
+
+As part of this, "prediction points" were calculated based on the same citeria used in the World Cup comp. To recap, the original scoring system was 3 points for correct score, 2 points for correct goal difference, 1 point for correct result per game.
 
 Before the 2021 tournament this can be summarised as follows...
 
@@ -183,7 +183,102 @@ Before the 2021 tournament this can be summarised as follows...
 <br />
 The predictions for Euro 2020 group matches were then entered into UEFA's Tournament and Match predictors.
 
-![png](figures/intl_02_uefa_groups_A_C.PNG)
-![png](figures/intl_02_uefa_groups_D_F.PNG)
-![png](figures/intl_02_uefa_groups_third_place.PNG)
+<table><tr>
+<td>
+<table border="1">
+  <thead>
+    <tr><th>Group A</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Italy</td></tr>
+    <tr><td>Switzerland</td></tr>
+    <tr><td>Turkey</td></tr>
+    <tr><td>Wales</td></tr>
+  </tbody>
+</table>
+</td>
+<td>
+<table border="1">
+  <thead>
+    <tr><th>Group B</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Belgium</td></tr>
+    <tr><td>Denmark</td></tr>
+    <tr><td>Russia</td></tr>
+    <tr><td>Finland</td></tr>
+  </tbody>
+</table>
+</td>
+<td>
+<table border="1">
+  <thead>
+    <tr><th>Group C</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Netherlands</td></tr>
+    <tr><td>Ukraine</td></tr>
+    <tr><td>Austria</td></tr>
+    <tr><td>North Macedonia</td></tr>
+  </tbody>
+</table>
+</td>
+</tr><tr>
+<td>
+<table border="1">
+  <thead>
+    <tr><th>Group D</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>England</td></tr>
+    <tr><td>Croatia</td></tr>
+    <tr><td>Czech Republic</td></tr>
+    <tr><td>Scotland</td></tr>
+  </tbody>
+</table>
+</td>
+<td>
+<table border="1">
+  <thead>
+    <tr><th>Group E</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Spain</td></tr>
+    <tr><td>Poland</td></tr>
+    <tr><td>Sweden</td></tr>
+    <tr><td>Slovakia</td></tr>
+  </tbody>
+</table>
+</td>
+<td>
+<table border="1">
+  <thead>
+    <tr><th>Group C</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Germany</td></tr>
+    <tr><td>France</td></tr>
+    <tr><td>Portugal</td></tr>
+    <tr><td>Hungary</td></tr>
+  </tbody>
+</table>
+</td>
+</tr><tr>
+<td>
+<table border="1">
+  <thead>
+    <tr><th>Third-placed teams</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Portugal</td></tr>
+    <tr><td>Austria</td></tr>
+    <tr><td>Sweden</td></tr>
+    <tr><td>Russia</td></tr>
+    <tr><td>Turkey</td></tr>
+    <tr><td>Czech Republic</td></tr>
+  </tbody>
+</table>
+</td>
+</tr></table>
+
 ![png](figures/intl_02_uefa_knockout.PNG)
