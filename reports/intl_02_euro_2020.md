@@ -186,3 +186,4 @@ The predictions for Euro 2020 group matches were then entered into UEFA's Tourna
 ![png](figures/intl_02_uefa_groups_A_C.PNG)
 ![png](figures/intl_02_uefa_groups_D_F.PNG)
 ![png](figures/intl_02_uefa_groups_third_place.PNG)
+![png](figures/intl_02_uefa_knockout.PNG)
