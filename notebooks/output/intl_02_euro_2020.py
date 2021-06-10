@@ -27,40 +27,6 @@
 # * Explore Data
 # * Verify Data Quality
 
-# ### EURO 2020 fixtures/results
-# * https://en.wikipedia.org/wiki/UEFA_Euro_2020
-# * https://www.whoscored.com/Regions/247/Tournaments/124/Seasons/7329/Stages/16297/Show/International-European-Championship-2020
-# * https://www.uefa.com/uefaeuro-2020/fixtures-results/#/md/33673
-# * https://fbref.com/en/comps/676/schedule/UEFA-Euro-Scores-and-Fixtures
-# 
-# ### Historic results
-# * https://www.staff.city.ac.uk/r.j.gerrard/football/aifrform.html (1871-2001)
-# * https://www.kaggle.com/martj42/international-football-results-from-1872-to-2017/data (1872-)
-# * https://fbref.com/en/comps/676/history/European-Championship-Seasons (2000-)
-# * https://en.wikipedia.org/wiki/UEFA_Euro_2020_qualifying (qualifying)
-# * https://fbref.com/en/comps/678/Euro-Qualifying-Stats (qualifying)
-# 
-# ### ELO ratings
-# * https://en.m.wikipedia.org/wiki/World_Football_Elo_Ratings
-# * https://www.eloratings.net/2021_European_Championship
-# * http://eloratings.net/2016_European_Championship_start
-# * https://www.eloratings.net/about
-# 
-# ### Historic trends
-# * https://blog.annabet.com/soccer-goal-probabilities-poisson-vs-actual-distribution/
-# * https://en.wikipedia.org/wiki/Poisson_distribution
-# 
-# ### GDP
-# * https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)
-# * https://en.wikipedia.org/wiki/List_of_countries_by_past_and_projected_GDP_(nominal)
-# * https://www.rug.nl/ggdc/productivity/pwt/
-# 
-# ### Prediction competitions
-# * https://www.squawka.com/en/euro-2020-predictions-odds-outright-group-winner-final/
-# * https://www.telegraph.co.uk/football/euro-2020-wallchart-predictor/
-# * https://gaming.uefa.com/en/uefaeuro2020tournamentpredictor/main
-# * https://www.uefa.com/uefaeuro-2020/news/0269-1232cabf40a1-47e385aa9131-1000--euro-2020-tournament-predictor-rules/
-
 # In[1]:
 
 
@@ -99,18 +65,18 @@ match.describe(include="all").T
 # In[3]:
 
 
-def metric_histograms(df, metrics):
+def metric_histograms(df, metrics, discrete=False):
 #     df = df_in.dropna(subset=[metric]).fillna("NULL")
     for metric in metrics:
         print("\n{0}\n".format(metric))
 #         df[metric].hist()
-        sns.histplot(data=df, x=metric, kde=True)
+        sns.histplot(data=df, x=metric, kde=True, discrete=discrete)
         plt.show()
 #         sns.boxplot(x=df[metric])
 #         plt.show()
         print("\n--------------------")
 
-metric_histograms(match, ["Goals_1", "Goals_2", "Goal_diff", "Goal_total"])
+metric_histograms(match, ["Goals_1", "Goals_2", "Goal_diff", "Goal_total"], discrete=True)
 
 
 # In[4]:
@@ -231,7 +197,14 @@ data.describe().T
 # In[9]:
 
 
-data.corr().style.background_gradient(cmap='coolwarm')
+skip_cols = [x+" (2)" for x in summary.columns]
+# print(skip_cols)
+skip_cols = summary.columns.tolist() + skip_cols
+# print(skip_cols)
+skip_cols = [x for x in skip_cols if x in data.columns ]
+# print(skip_cols)
+
+data.drop(columns=skip_cols).corr().style.background_gradient(cmap='coolwarm')
 
 
 # In[10]:
@@ -272,13 +245,6 @@ data.corr().style.background_gradient(cmap='coolwarm')
 # data_lim.corr().style.background_gradient(cmap='coolwarm')
 
 
-# In[13]:
-
-
-# sns.pairplot(data_lim, size = 2.5)
-# plt.show();
-
-
 # In[ ]:
 
 
@@ -292,26 +258,7 @@ data.corr().style.background_gradient(cmap='coolwarm')
 # * Build Model
 # * Assess Model
 
-# ### Updated WC model
-# * https://github.com/deacona/the-ball-is-round/blob/master/reports/intl_01_world_cup_2018.md
-# * https://github.com/deacona/the-ball-is-round/blob/master/notebooks/intl_01_world_cup_2018.ipynb
-# 
-# ### "Soccernomics"
-# * goal diff = (0.6666 * home adv) + (0.5 * relative experience) + (0.1 * relative population) + (0.1 * relative gdp/head) + ...
-# * e.g. England vs Germany at Euro 96
-#     * Home = England = 1
-#     * Exp = 84k v 84k = 0
-#     * Pop = 57 v 81 = -0.4
-#     * GDP/h = 1627492 / 57 v 2633828 / 81 = -0.1
-#     * GD = (0.6666 * 1) + (0.5 * 0) + (0.1 * -0.4) + (0.1 * -0.1) = 0.6
-# * http://www.soccernomics-agency.com/wordpress/wp-content/uploads/2017/10/soccer-convergence-1.pdf
-# 
-# ### Dixon-Coles (and other probability models)
-# * https://dashee87.github.io/football/python/predicting-football-results-with-statistical-modelling-dixon-coles-and-time-weighting/
-# * http://www.statsandsnakeoil.com/2018/06/05/modelling-the-world-cup-with-regista/
-# * http://opisthokonta.net/?cat=48
-
-# In[14]:
+# In[13]:
 
 
 from sklearn.dummy import DummyRegressor
@@ -342,7 +289,7 @@ from sklearn.model_selection import train_test_split
 # np.random.seed(1)
 
 
-# In[15]:
+# In[14]:
 
 
 gd_features = ["Home_advantage", "Relative_experience", "Relative_population", "Relative_GDP_per_capita", "Elo_rating_diff"]
@@ -366,7 +313,7 @@ print("GT Train data has shape: {0}".format(gt_X_train.shape))
 print("GT Test data has shape: {0}".format(gt_X_test.shape))
 
 
-# In[16]:
+# In[15]:
 
 
 # # model = LinearRegression(fit_intercept=False, normalize=True)
@@ -381,7 +328,7 @@ print("GT Test data has shape: {0}".format(gt_X_test.shape))
 #            }
 
 
-# In[17]:
+# In[16]:
 
 
 # params = pd.Series(model.coef_, index=X_train.columns)
@@ -391,7 +338,7 @@ print("GT Test data has shape: {0}".format(gt_X_test.shape))
 # pd.DataFrame({"effect": params.round(2), "error": err.round(2)})
 
 
-# In[18]:
+# In[17]:
 
 
 get_ipython().run_cell_magic('time', '', '\n## add ELO model?\nclass EloRegressor(BaseEstimator, RegressorMixin):\n    def __init__(self): #, yType="Diff", goalWeight=4., goalBoost=16.):\n        self.yType = "Diff"\n        self.goalWeight = 4.\n        self.goalBoost = 1.\n    \n    def _show_params(self):\n        print("_show_params...")\n        print("yType:", self.yType)\n        print("goalWeight:", self.goalWeight)\n        print("goalBoost:", self.goalBoost)\n        \n        return\n    \n    def _calc_output(self, X):\n        X_tmp = X.copy(deep=True)\n        X_tmp["EloRatingDiffWithHomeAdv"] = X_tmp["Elo_rating_diff"] + (100 * X_tmp.Home_advantage)\n        X_tmp["WinExpectency1Square"] = (10**((-X_tmp.EloRatingDiffWithHomeAdv)/400))+1\n        X_tmp["WinExpectency1"] = X_tmp["WinExpectency1Square"]**-1\n        X_tmp["RawGoalDiff"] = (self.goalWeight * (X_tmp.WinExpectency1 - 0.5)).round(0)\n        X_tmp["RawGoalDiffAbs"] = X_tmp["RawGoalDiff"].abs()\n        X_tmp["EitherWins"] = 0\n        X_tmp.loc[X_tmp.RawGoalDiffAbs > 0, "EitherWins"] = 1\n#         X_tmp["QualifyGoalsRankAvg"] = (X_tmp["QualifyGoalsRank1"] + X_tmp["QualifyGoalsRank2"]) / 2\n        X_tmp["ApplyGoalBoost"] = 0\n#         X_tmp.loc[X_tmp.QualifyGoalsRankAvg <= self.goalBoost, "ApplyGoalBoost"] = 1\n        X_tmp["Goals1"] = X_tmp["ApplyGoalBoost"]\n        X_tmp.loc[X_tmp.RawGoalDiff > 0, "Goals1"] = X_tmp.RawGoalDiff + X_tmp.ApplyGoalBoost\n        X_tmp["Goals2"] = X_tmp["ApplyGoalBoost"]\n        X_tmp.loc[X_tmp.RawGoalDiff <= 0, "Goals2"] = X_tmp.ApplyGoalBoost - X_tmp.RawGoalDiff\n        X_tmp["GoalDiff"] = X_tmp.Goals1 - X_tmp.Goals2\n        X_tmp["GoalDiffAbs"] = X_tmp.GoalDiff.abs()\n        X_tmp["GoalTotal"] = X_tmp.Goals1 + X_tmp.Goals2\n        \n        return X_tmp["Goal"+self.yType].values\n\n    def fit(self, X, y=None):\n        if y.name == "Goal_total":\n            self.yType = "Total"\n#         else:\n#             self.yType = "Diff"\n        y_tmp = self._calc_output(X).mean()\n        y_low = y.quantile(q=0.2)\n        y_high = y.quantile(q=0.8)\n        while y_tmp < y_low:\n            self.goalWeight += 0.05\n            y_tmp = self._calc_output(X).mean()\n        while y_tmp > y_high:\n            self.goalWeight -= 0.05\n            y_tmp = self._calc_output(X).mean()\n        self._show_params()\n        \n        return self\n\n    def predict(self, X, y=None):\n        self._show_params()\n        return self._calc_output(X)\n\ndef model_pipe(model, X_train, y_train):\n    """\n    INPUT:\n        model: Untrained regression model\n        X_train: Training features\n        y_train: Training target\n        \n    OUTPUT:\n        model: Trained model\n    """\n    \n#     model = TransformedTargetRegressor(regressor=model, transformer=MinMaxScaler())\n    model = Pipeline(steps=[(\'standardizer\', StandardScaler()),\n#                             (\'normalizer\', MinMaxScaler()),\n                      (\'estimator\', model)])\n    model.fit(X_train, y_train)\n    \n    return model\n\ndef get_trained_models(X_train, y_train):\n    """\n    INPUT:\n        X_train: Training features\n        y_train: Training target\n        \n    OUTPUT:\n        model_list: List of trained models\n    """\n    model_list = [\n        {"Name": "Dummy (mean)", "Reg": model_pipe(DummyRegressor(strategy="mean"), X_train, y_train)},\n        {"Name": "Dummy (median)", "Reg": model_pipe(DummyRegressor(strategy="median"), X_train, y_train)},\n        {"Name": "Linear Reg", "Reg": model_pipe(LinearRegression(), X_train, y_train)}, #sometimes skews results table\n        {"Name": "Lasso", "Reg": model_pipe(Lasso(), X_train, y_train)},\n        {"Name": "Ridge", "Reg": model_pipe(Ridge(), X_train, y_train)},\n    #     {"Name": "Bayesian Ridge", "Reg": model_pipe(BayesianRidge(), X_train, y_train)},\n        {"Name": "Random Forest", "Reg": model_pipe(RandomForestRegressor(random_state=42), X_train, y_train)},\n    #     {"Name": "Random Forest (tuned)", "Reg": rf_tuned(X_train, y_train)},\n        {"Name": "Gradient Boost", "Reg": model_pipe(GradientBoostingRegressor(), X_train, y_train)},\n    #     {"Name": "K Neighbors", "Reg": model_pipe(KNeighborsRegressor(), X_train, y_train)},\n        {"Name": "SVM (linear)", "Reg": model_pipe(SVR(kernel="linear"), X_train, y_train)},\n        {"Name": "SVM (rbf)", "Reg": model_pipe(SVR(kernel="rbf"), X_train, y_train)},\n    #     {"Name": "Voting (RF+KNN)", "Reg": model_pipe(VotingRegressor([(\'rf\', RandomForestRegressor(random_state=42)), \n    #                                                             (\'knn\', KNeighborsRegressor())]), X_train, y_train)},\n    #     {"Name": "Voting (LR+RF+KNN)", "Reg": model_pipe(VotingRegressor([(\'lr\', LinearRegression()),\n    #                                                             (\'rf\', RandomForestRegressor(random_state=42)),\n    #                                                             (\'knn\', KNeighborsRegressor())]), X_train, y_train)},\n        {"Name": "Elo", "Reg": EloRegressor().fit(X_train, y_train)}\n    ]\n\n    return model_list\n\ngd_model_list = get_trained_models(gd_X_train, gd_y_train)\ngt_model_list = get_trained_models(gt_X_train, gt_y_train)\n\nlen(gd_model_list), len(gt_model_list)')
@@ -409,12 +356,7 @@ get_ipython().run_cell_magic('time', '', '\n## add ELO model?\nclass EloRegresso
 # * Review Process
 # * Determine Next Steps
 
-# ```
-# # % correct score, goal diff, result, points
-# # vs historic trends (goals, W/D/L)
-# ```
-
-# In[19]:
+# In[18]:
 
 
 def get_model_scores(y_act, y_pred):
@@ -486,19 +428,19 @@ print("Goal total model")
 gt_eval = evaluate_models(gt_model_list, gt_X_test, gt_y_test, show_plots=show_eval_plots)
 
 
-# In[20]:
+# In[19]:
 
 
 gd_eval[['Name', 'R^2', 'RMSE', 'MedAE']]        .style        .background_gradient(cmap='Reds', subset=['RMSE', 'MedAE'])        .background_gradient(cmap='Greens', subset=['R^2'])
 
 
-# In[21]:
+# In[20]:
 
 
 gt_eval[['Name', 'R^2', 'RMSE', 'MedAE']]        .style        .background_gradient(cmap='Reds', subset=['RMSE', 'MedAE'])        .background_gradient(cmap='Greens', subset=['R^2'])
 
 
-# In[22]:
+# In[21]:
 
 
 # kfold = KFold(n_splits=10, shuffle=True, random_state=42)
@@ -534,7 +476,7 @@ gt_eval[['Name', 'R^2', 'RMSE', 'MedAE']]        .style        .background_gradi
 # plt.show()
 
 
-# In[23]:
+# In[22]:
 
 
 selected_gd_model = gd_model_list[9]["Reg"]
@@ -556,11 +498,11 @@ selected_gd_model, selected_gt_model
 # * Produce Final Report
 # * Review Project
 
-# In[24]:
+# In[23]:
 
 
-output = data.copy(deep=True)[["Date", "Year", "Team_1", "Team_2", "Usage", "Goals_1", "Goals_2", "Goal_diff", "Goal_total", "Result"]]
-output.columns = ["Date", "Year", "Team_1", "Team_2", "Usage", "Actual_score_1", "Actual_score_2", "Actual_goal_diff", "Actual_goal_total", "Actual_result"]
+output = data.copy(deep=True)[["Date", "Year", "Round", "Team_1", "Team_2", "Usage", "Goals_1", "Goals_2", "Goal_diff", "Goal_total", "Result"]]
+output.columns = ["Date", "Year", "Round", "Team_1", "Team_2", "Usage", "Actual_score_1", "Actual_score_2", "Actual_goal_diff", "Actual_goal_total", "Actual_result"]
 output.loc[output.index.isin(gd_y_test.index), "Usage"] = "Testing"
 
 gd_pred = selected_gd_model.predict(data[gd_features])
@@ -591,13 +533,7 @@ output.to_csv("../data/interim/intl_02_predictions.csv", index=False)
 output.describe(include="all").T
 
 
-# In[25]:
-
-
-output.loc[output.Usage == "Live", ["Predicted_score_1", "Predicted_score_2", "Predicted_goal_diff", "Predicted_goal_total"]].describe()#.T
-
-
-# In[26]:
+# In[24]:
 
 
 def agg_by_col(df, col, asc=True):
@@ -650,10 +586,113 @@ summary[pct_cols] = (100 * summary[pct_cols]).astype(int).astype(str) + "%"
 summary
 
 
-# In[ ]:
+# In[25]:
 
 
+output.loc[output.Usage == "Live"].describe().dropna(axis=1, how="any").T
 
+
+# In[26]:
+
+
+scores1 = output.loc[(output.Usage == "Live") & (output.Round == "Group stage"),
+                       ["Team_1", "Team_2", "Predicted_score_1", "Predicted_score_2"]]
+scores2 = scores1.copy(deep=True)
+
+scores1.columns = ["Team", "Team_opp", "Goals_for", "Goals_against"]
+scores2.columns = ["Team_opp", "Team", "Goals_against", "Goals_for"]
+
+scores = pd.concat([scores1, scores2])
+scores["Points"] = 1
+scores.loc[scores.Goals_for > scores.Goals_against, "Points"] = 3
+scores.loc[scores.Goals_for < scores.Goals_against, "Points"] = 0
+scores["Goal_diff_all"] = scores.Goals_for - scores.Goals_against
+
+group = {
+    "Turkey": "A",
+    "Italy": "A",
+    "Wales": "A",
+    "Switzerland": "A",
+    "Denmark": "B",
+    "Finland": "B",
+    "Belgium": "B",
+    "Russia": "B",
+    "Netherlands": "C",
+    "Ukraine": "C",
+    "Austria": "C",
+    "North Macedonia": "C",
+    "England": "D",
+    "Croatia": "D",
+    "Scotland": "D",
+    "Czech Republic": "D",
+    "Spain": "E",
+    "Sweden": "E",
+    "Poland": "E",
+    "Slovakia": "E",
+    "Hungary": "F",
+    "Portugal": "F",
+    "France": "F",
+    "Germany": "F",
+}
+scores["Group"] = scores.Team.map(group)
+
+rank = {
+    "Belgium": 1,
+    "Italy": 2,
+    "England": 3,
+    "Germany": 4,
+    "Spain": 5,
+    "Ukraine": 6,
+    "France": 7,
+    "Poland": 8,
+    "Switzerland": 9,
+    "Croatia": 10,
+    "Netherlands": 11,
+    "Russia": 12,
+    "Portugal": 13,
+    "Turkey": 14,
+    "Denmark": 15,
+    "Austria": 16,
+    "Sweden": 17,
+    "Czech Republic": 18,
+    "Wales": 19,
+    "Finland": 20,
+    "Slovakia": 22,
+    "Scotland": 29,
+    "North Macedonia": 30,
+    "Hungary": 31,
+}
+scores["Rank"] = 100 - scores.Team.map(rank)
+
+agg_info = {"Points": sum, "Goal_diff_all": sum, "Goals_for": sum, "Rank": max}
+
+thirds = []
+
+for x in "ABCDEF":
+    print("\n\n#### Group ", x)
+    group_table = scores[scores.Group == x].groupby(["Team"]).agg(agg_info)
+#     print(group_table)
+    
+    minis = []
+    for pts in group_table.Points.unique():
+        teams = group_table.loc[group_table.Points == pts].index.tolist()
+#         print(teams)
+        mini_table = scores[(scores.Group == x) & (scores.Team.isin(teams)) & (scores.Team_opp.isin(teams))].groupby(["Team"]).agg(agg_info)
+        mini_table.columns = ["Points_mini", "Goal_diff_mini", "Goals_for_mini", "Rank_mini"]
+#         print(mini_table)
+        minis.append(mini_table)
+    all_minis = pd.concat(minis, axis=0)
+        
+    full_table = pd.concat([group_table, all_minis], axis=1).sort_values(by=["Points", "Points_mini", "Goal_diff_mini", "Goal_diff_all", "Goals_for", "Rank"], ascending=False)
+    print(full_table)
+    
+#     print(full_table.iloc[2, :])
+    thirds.append(full_table.iloc[2, :4])
+    
+print("\n\n#### Third-placed teams")
+
+third_table = pd.concat(thirds, axis=1).T.sort_values(by=["Points", "Goal_diff_all", "Goals_for", "Rank"], ascending=False)
+third_table
 
 
 # In[ ]:

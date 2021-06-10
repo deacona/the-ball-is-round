@@ -19,13 +19,13 @@ I wanted to make this more of a supervised learning model. To this end I looked 
 
 I gathered fixtures/results from FBRef, stadium info from Wikipedia, Elo data from eloratings.net, and population and GDP data from the Penn tables (as now maintained by University of Groningen). The past tournaments and Elo ratings went back to 2000. Penn tables data was taken as per the end of the previous calendar year (e.g. 1999 figures for matches played in 2000).
 
-![png](figures/intl_02_euro_2020_7_5.png)
+![png](figures/intl_02_euro_2020_6_5.png)
+![png](figures/intl_02_euro_2020_6_7.png)
 ![png](figures/intl_02_euro_2020_7_7.png)
-![png](figures/intl_02_euro_2020_8_7.png)
-![png](figures/intl_02_euro_2020_11_1.png)
-![png](figures/intl_02_euro_2020_11_11.png)
-![png](figures/intl_02_euro_2020_11_31.png)
-![png](figures/intl_02_euro_2020_11_33.png)
+![png](figures/intl_02_euro_2020_10_1.png)
+![png](figures/intl_02_euro_2020_10_11.png)
+![png](figures/intl_02_euro_2020_10_31.png)
+![png](figures/intl_02_euro_2020_10_33.png)
 
 __The method__
 
@@ -55,8 +55,8 @@ Both targets were then fitted using a selection of 10 regression algorithms.
 
 From this, I selected the Elo model for Goal diff and Lasso for Goal total.
 
-![png](figures/intl_02_euro_2020_32_19.png)
-![png](figures/intl_02_euro_2020_32_27.png)
+![png](figures/intl_02_euro_2020_28_19.png)
+![png](figures/intl_02_euro_2020_28_27.png)
 
 
 __The results__
