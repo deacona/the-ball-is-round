@@ -44,6 +44,28 @@ def format_matches(
             "Notes",
         ],
     )
+    comp2 = utilities.folder_loader(
+        "fbr",
+        "competition2",
+        source_header=[
+            "Round",
+            "Wk",
+            "Day",
+            "Date",
+            "Time",
+            "Team_1",
+            "xG_1",
+            "Score",
+            "xG_2",
+            "Team_2",
+            "Attendance",
+            "Venue",
+            "Referee",
+            "Match Report",
+            "Notes",
+        ],
+    )
+    comp = pd.concat([comp, comp2], axis=0, sort=False, ignore_index=True)
     comp.dropna(subset=["Round"], inplace=True)
     comp.reset_index(drop=True, inplace=True)
     comp["Year"] = comp.Date.str[:4]

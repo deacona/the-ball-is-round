@@ -174,13 +174,13 @@ Date,Year,Round,Team_1,Team_2,Usage,Actual_score_1,Actual_score_2,Actual_goal_di
 2016-07-06,2016,Semi-finals,Portugal,Wales,Training,2.0,0.0,2.0,2.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
 2016-07-07,2016,Semi-finals,Germany,France,Training,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
 2016-07-10,2016,Final,Portugal,France,Training,1.0,0.0,1.0,1.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
-2021-06-11,2021,Group stage,Turkey,Italy,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
-2021-06-12,2021,Group stage,Belgium,Russia,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-12,2021,Group stage,Wales,Switzerland,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-12,2021,Group stage,Denmark,Finland,Live,,,,,,2.0,0.0,2.0,2.0,Win,,,,
-2021-06-13,2021,Group stage,England,Croatia,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-13,2021,Group stage,Austria,North Macedonia,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-13,2021,Group stage,Netherlands,Ukraine,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
+2021-06-11,2021,Group stage,Turkey,Italy,Live,0.0,3.0,-3.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2021-06-12,2021,Group stage,Belgium,Russia,Live,3.0,0.0,3.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2021-06-12,2021,Group stage,Wales,Switzerland,Live,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2021-06-12,2021,Group stage,Denmark,Finland,Live,0.0,1.0,-1.0,1.0,Loss,2.0,0.0,2.0,2.0,Win,0.0,0.0,0.0,0.0
+2021-06-13,2021,Group stage,England,Croatia,Live,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2021-06-13,2021,Group stage,Austria,North Macedonia,Live,3.0,1.0,2.0,4.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2021-06-13,2021,Group stage,Netherlands,Ukraine,Live,3.0,2.0,1.0,5.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
 2021-06-14,2021,Group stage,Spain,Sweden,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
 2021-06-14,2021,Group stage,Poland,Slovakia,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
 2021-06-14,2021,Group stage,Scotland,Czech Republic,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
