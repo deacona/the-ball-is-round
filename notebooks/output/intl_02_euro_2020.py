@@ -166,8 +166,25 @@ metric_histograms(summary, ['Rating', 'Average Rank',
 
 data = match.merge(summary, left_on=["Team_1", "Year"], right_on=["Team", "Year"]) #, suffixes=["", "_1"])
 data = data.merge(summary, left_on=["Team_2", "Year"], right_on=["Team", "Year"], suffixes=["", " (2)"])
-data.sort_values(by=["Date"], inplace=True)
+data.sort_values(by=["Date", "Team_1"], inplace=True, ascending=[True, False])
 data.reset_index(drop=True, inplace=True)
+
+## bit of a hack to maintain consistent match order when re-running
+sort_file = "../data/interim/intl_02_predictions.csv"
+sort_cols = ["Date", "Team_1"]
+if os.path.isfile(sort_file):
+    data_sort = pd.read_csv(sort_file)[sort_cols]
+    data_sort.reset_index(inplace=True)
+    # print(data_sort.info())
+    data = data.merge(data_sort, on=sort_cols, how="left")
+    data.sort_values(by=["index"] + sort_cols, inplace=True, ascending=True)
+#     data["index"].fillna("ffill", inplace=True)
+    data['index'] = data['index'].isna().cumsum() + data['index'].ffill()
+    data.set_index("index", inplace=True)
+#     data.sort_index(inplace=True)
+
+# print(data.head(10))
+# print(data.tail(10))
 
 data["Elo_rating_diff"] = data["Rating"] - data["Rating (2)"]
 data["Home_advantage"] = data["Home_1"] - data["Home_2"]

@@ -175,38 +175,46 @@ Date,Year,Round,Team_1,Team_2,Usage,Actual_score_1,Actual_score_2,Actual_goal_di
 2016-07-07,2016,Semi-finals,Germany,France,Training,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
 2016-07-10,2016,Final,Portugal,France,Training,1.0,0.0,1.0,1.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
 2021-06-11,2021,Group stage,Turkey,Italy,Live,0.0,3.0,-3.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
-2021-06-12,2021,Group stage,Belgium,Russia,Live,3.0,0.0,3.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2021-06-12,2021,Group stage,Belgium,Russia,Live,3.0,0.0,3.0,3.0,Win,2.0,0.0,2.0,2.0,Win,1.0,0.0,0.0,1.0
 2021-06-12,2021,Group stage,Wales,Switzerland,Live,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
-2021-06-12,2021,Group stage,Denmark,Finland,Live,0.0,1.0,-1.0,1.0,Loss,2.0,0.0,2.0,2.0,Win,0.0,0.0,0.0,0.0
+2021-06-12,2021,Group stage,Denmark,Finland,Live,0.0,1.0,-1.0,1.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
 2021-06-13,2021,Group stage,England,Croatia,Live,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
 2021-06-13,2021,Group stage,Austria,North Macedonia,Live,3.0,1.0,2.0,4.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
 2021-06-13,2021,Group stage,Netherlands,Ukraine,Live,3.0,2.0,1.0,5.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
-2021-06-14,2021,Group stage,Spain,Sweden,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-14,2021,Group stage,Poland,Slovakia,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-14,2021,Group stage,Scotland,Czech Republic,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-15,2021,Group stage,Hungary,Portugal,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
-2021-06-15,2021,Group stage,France,Germany,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-16,2021,Group stage,Finland,Russia,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
-2021-06-16,2021,Group stage,Italy,Switzerland,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-16,2021,Group stage,Turkey,Wales,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-17,2021,Group stage,Netherlands,Austria,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-17,2021,Group stage,Denmark,Belgium,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-17,2021,Group stage,Ukraine,North Macedonia,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-18,2021,Group stage,Croatia,Czech Republic,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-18,2021,Group stage,England,Scotland,Live,,,,,,2.0,0.0,2.0,2.0,Win,,,,
-2021-06-18,2021,Group stage,Sweden,Slovakia,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-19,2021,Group stage,Spain,Poland,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-19,2021,Group stage,Hungary,France,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
-2021-06-19,2021,Group stage,Portugal,Germany,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-20,2021,Group stage,Italy,Wales,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-06-20,2021,Group stage,Switzerland,Turkey,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-21,2021,Group stage,Ukraine,Austria,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-21,2021,Group stage,Finland,Belgium,Live,,,,,,0.0,2.0,-2.0,2.0,Loss,,,,
-2021-06-21,2021,Group stage,Russia,Denmark,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
-2021-06-21,2021,Group stage,North Macedonia,Netherlands,Live,,,,,,0.0,2.0,-2.0,2.0,Loss,,,,
-2021-06-22,2021,Group stage,Croatia,Scotland,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-22,2021,Group stage,Czech Republic,England,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
-2021-06-23,2021,Group stage,Slovakia,Spain,Live,,,,,,0.0,2.0,-2.0,2.0,Loss,,,,
-2021-06-23,2021,Group stage,Sweden,Poland,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-23,2021,Group stage,Portugal,France,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
-2021-06-23,2021,Group stage,Germany,Hungary,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
+2021-06-14,2021,Group stage,Spain,Sweden,Live,0.0,0.0,0.0,0.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-14,2021,Group stage,Poland,Slovakia,Live,1.0,2.0,-1.0,3.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-14,2021,Group stage,Scotland,Czech Republic,Live,0.0,2.0,-2.0,2.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2021-06-15,2021,Group stage,Hungary,Portugal,Live,0.0,3.0,-3.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2021-06-15,2021,Group stage,France,Germany,Live,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2021-06-16,2021,Group stage,Finland,Russia,Live,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-16,2021,Group stage,Italy,Switzerland,Live,3.0,0.0,3.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2021-06-16,2021,Group stage,Turkey,Wales,Live,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-17,2021,Group stage,Netherlands,Austria,Live,2.0,0.0,2.0,2.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2021-06-17,2021,Group stage,Denmark,Belgium,Live,1.0,2.0,-1.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,1.0,3.0
+2021-06-17,2021,Group stage,Ukraine,North Macedonia,Live,2.0,1.0,1.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,1.0,3.0
+2021-06-18,2021,Group stage,Croatia,Czech Republic,Live,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2021-06-18,2021,Group stage,England,Scotland,Live,0.0,0.0,0.0,0.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-18,2021,Group stage,Sweden,Slovakia,Live,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2021-06-19,2021,Group stage,Spain,Poland,Live,1.0,1.0,0.0,2.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-19,2021,Group stage,Hungary,France,Live,1.0,1.0,0.0,2.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2021-06-19,2021,Group stage,Portugal,Germany,Live,2.0,4.0,-2.0,6.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-20,2021,Group stage,Italy,Wales,Live,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2021-06-20,2021,Group stage,Switzerland,Turkey,Live,3.0,1.0,2.0,4.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-21,2021,Group stage,Ukraine,Austria,Live,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-21,2021,Group stage,Finland,Belgium,Live,0.0,2.0,-2.0,2.0,Loss,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,1.0,3.0
+2021-06-21,2021,Group stage,Russia,Denmark,Live,1.0,4.0,-3.0,5.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2021-06-21,2021,Group stage,North Macedonia,Netherlands,Live,0.0,3.0,-3.0,3.0,Loss,0.0,2.0,-2.0,2.0,Loss,1.0,0.0,0.0,1.0
+2021-06-22,2021,Group stage,Croatia,Scotland,Live,3.0,1.0,2.0,4.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2021-06-22,2021,Group stage,Czech Republic,England,Live,0.0,1.0,-1.0,1.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2021-06-23,2021,Group stage,Slovakia,Spain,Live,0.0,5.0,-5.0,5.0,Loss,0.0,2.0,-2.0,2.0,Loss,1.0,0.0,0.0,1.0
+2021-06-23,2021,Group stage,Sweden,Poland,Live,3.0,2.0,1.0,5.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-23,2021,Group stage,Portugal,France,Live,2.0,2.0,0.0,4.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0
+2021-06-23,2021,Group stage,Germany,Hungary,Live,2.0,2.0,0.0,4.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-26,2021,Round of 16,Italy,Austria,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
+2021-06-26,2021,Round of 16,Wales,Denmark,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
+2021-06-27,2021,Round of 16,Belgium,Portugal,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
+2021-06-27,2021,Round of 16,Netherlands,Czech Republic,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
+2021-06-28,2021,Round of 16,Croatia,Spain,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
+2021-06-28,2021,Round of 16,France,Switzerland,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
+2021-06-29,2021,Round of 16,England,Germany,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
+2021-06-29,2021,Round of 16,Sweden,Ukraine,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
