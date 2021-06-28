@@ -493,9 +493,9 @@ pickle_base = "../models/intl_02_{0}.pkl"
 
 pickle_files = {
     pickle_base.format("gd_model"): selected_gd_model,
-    pickle_base.format("gt_model"): selected_gd_model,
-    pickle_base.format("gd_features"): selected_gd_model,
-    pickle_base.format("gt_features"): selected_gd_model,
+    pickle_base.format("gt_model"): selected_gt_model,
+    pickle_base.format("gd_features"): gd_features,
+    pickle_base.format("gt_features"): gt_features,
 }
 
 for pkl, obj in pickle_files.items():
