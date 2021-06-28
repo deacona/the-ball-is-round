@@ -150,7 +150,7 @@ metric_histograms(summary, ['Rating', 'Average Rank',
 # * Integrate Data
 # * Format Data
 
-# In[8]:
+# In[7]:
 
 
 data = match.merge(summary, left_on=["Team_1", "Year"], right_on=["Team", "Year"]) #, suffixes=["", "_1"])
@@ -183,7 +183,7 @@ data.loc[data.Year.isin(live_years), "Usage"] = "Live"
 data.describe().T
 
 
-# In[9]:
+# In[8]:
 
 
 skip_cols = [x+" (2)" for x in summary.columns]
@@ -196,7 +196,7 @@ skip_cols = [x for x in skip_cols if x in data.columns ]
 data.drop(columns=skip_cols).corr().style.background_gradient(cmap='coolwarm')
 
 
-# In[12]:
+# In[9]:
 
 
 # data_lim.corr().style.background_gradient(cmap='coolwarm')
@@ -215,7 +215,7 @@ data.drop(columns=skip_cols).corr().style.background_gradient(cmap='coolwarm')
 # * Build Model
 # * Assess Model
 
-# In[13]:
+# In[10]:
 
 
 # from sklearn.dummy import DummyRegressor
@@ -246,7 +246,7 @@ from sklearn.base import BaseEstimator, RegressorMixin
 # # np.random.seed(1)
 
 
-# In[14]:
+# In[11]:
 
 
 class EloRegressor(BaseEstimator, RegressorMixin):
@@ -321,7 +321,7 @@ class EloRegressor(BaseEstimator, RegressorMixin):
 # * Produce Final Report
 # * Review Project
 
-# In[15]:
+# In[12]:
 
 
 pickle_base = "../models/intl_02_{0}.pkl"
@@ -340,18 +340,19 @@ with open(pickle_base.format("gt_features"), "rb") as pkl_4:
 selected_gd_model, gd_features, selected_gt_model, gt_features
 
 
-# In[16]:
+# In[13]:
 
 
 output_prev = pd.read_csv("../data/interim/intl_02_predictions.csv")
+output_prev["Year"] = output_prev.Year.astype(str)
 output_prev.info()
 
 
-# In[17]:
+# In[14]:
 
 
-output = data.copy(deep=True)[["Date", "Year", "Round", "Team_1", "Team_2", "Usage", "Goals_1", "Goals_2", "Goal_diff", "Goal_total", "Result"]]
-output.columns = ["Date", "Year", "Round", "Team_1", "Team_2", "Usage", "Actual_score_1", "Actual_score_2", "Actual_goal_diff", "Actual_goal_total", "Actual_result"]
+output_new = data.copy(deep=True)[["Date", "Year", "Round", "Team_1", "Team_2", "Usage", "Goals_1", "Goals_2", "Goal_diff", "Goal_total", "Result"]]
+output_new.columns = ["Date", "Year", "Round", "Team_1", "Team_2", "Usage", "Actual_score_1", "Actual_score_2", "Actual_goal_diff", "Actual_goal_total", "Actual_result"]
 # output.loc[output.index.isin(gd_y_test.index), "Usage"] = "Testing"
 
 gd_pred = selected_gd_model.predict(data[gd_features])
@@ -361,14 +362,13 @@ gd_weight = 1 #.05
 gt_weight = 1 #.15
 
 ## add weights?
-output["Predicted_score_1"] = (gd_weight * (gt_pred + gd_pred) / 2).round()
-output["Predicted_score_2"] = (gt_weight * (gt_pred - gd_pred) / 2).round()
+output_new["Predicted_score_1"] = (gd_weight * (gt_pred + gd_pred) / 2).round()
+output_new["Predicted_score_2"] = (gt_weight * (gt_pred - gd_pred) / 2).round()
 
 ## use earlier predictions where available
-output = pd.concat([output_prev, output], axis=0, ignore_index=True, sort=False)
-print(output.shape)
-output.drop_duplicates(subset=["Date", "Team_1"], keep="first", inplace=True)
-print(output.shape)
+output = output_prev.combine_first(output_new)
+output = output[output_prev.columns]
+# print(output.shape)
 
 output["Predicted_goal_diff"] = output.Predicted_score_1 - output.Predicted_score_2
 output["Predicted_goal_total"] = output.Predicted_score_1 + output.Predicted_score_2
@@ -389,7 +389,7 @@ output.to_csv("../data/interim/intl_02_predictions_live.csv", index=False)
 output.describe(include="all").T
 
 
-# In[18]:
+# In[15]:
 
 
 def agg_by_col(df, col, asc=True):
@@ -442,7 +442,7 @@ summary[pct_cols] = (100 * summary[pct_cols]).astype(int).astype(str) + "%"
 summary
 
 
-# In[19]:
+# In[16]:
 
 
 output.loc[output.Usage == "Live"].describe().dropna(axis=1, how="any").T
