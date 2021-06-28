@@ -1,7 +1,7 @@
 
 ## Euro 2020 (2021) predictions
 
-Computational notebook for this analysis can be found [here](../notebooks/intl_02_euro_2020.ipynb)
+Computational notebooks for this analysis can be found [here](../notebooks/intl_02_euro_2020.ipynb) and [here](../notebooks/intl_02_euro_2020_live.ipynb)
 
 __The challenge__
 
@@ -63,124 +63,6 @@ The full dataset was assigned predictions, which could then be compared with act
 
 As part of this, "prediction points" were calculated based on the same citeria used in the World Cup comp. To recap, the original scoring system was 3 points for correct score, 2 points for correct goal difference, 1 point for correct result per game.
 
-Before the 2021 tournament this can be summarised as follows...
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Matches played</th>
-      <th>Points per game</th>
-      <th>% correct result</th>
-      <th>% correct goal diff</th>
-      <th>% correct score</th>
-      <th>Goals per game (predicted)</th>
-      <th>Goals per game (actual)</th>
-      <th>% games won (predicted)</th>
-      <th>% games won (actual)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2000</th>
-      <td>31</td>
-      <td>0.71</td>
-      <td>35%</td>
-      <td>19%</td>
-      <td>16%</td>
-      <td>2.48</td>
-      <td>2.84</td>
-      <td>52%</td>
-      <td>87%</td>
-    </tr>
-    <tr>
-      <th>2004</th>
-      <td>31</td>
-      <td>0.74</td>
-      <td>42%</td>
-      <td>23%</td>
-      <td>10%</td>
-      <td>2.61</td>
-      <td>2.74</td>
-      <td>74%</td>
-      <td>74%</td>
-    </tr>
-    <tr>
-      <th>2008</th>
-      <td>31</td>
-      <td>0.74</td>
-      <td>35%</td>
-      <td>26%</td>
-      <td>13%</td>
-      <td>2.45</td>
-      <td>2.61</td>
-      <td>45%</td>
-      <td>87%</td>
-    </tr>
-    <tr>
-      <th>2012</th>
-      <td>31</td>
-      <td>0.84</td>
-      <td>42%</td>
-      <td>26%</td>
-      <td>16%</td>
-      <td>2.45</td>
-      <td>2.58</td>
-      <td>45%</td>
-      <td>84%</td>
-    </tr>
-    <tr>
-      <th>2016</th>
-      <td>51</td>
-      <td>0.86</td>
-      <td>45%</td>
-      <td>27%</td>
-      <td>14%</td>
-      <td>2.69</td>
-      <td>2.31</td>
-      <td>75%</td>
-      <td>78%</td>
-    </tr>
-    <tr>
-      <th>Training</th>
-      <td>140</td>
-      <td>0.81</td>
-      <td>42%</td>
-      <td>24%</td>
-      <td>14%</td>
-      <td>2.55</td>
-      <td>2.64</td>
-      <td>61%</td>
-      <td>81%</td>
-    </tr>
-    <tr>
-      <th>Testing</th>
-      <td>35</td>
-      <td>0.71</td>
-      <td>34%</td>
-      <td>26%</td>
-      <td>11%</td>
-      <td>2.57</td>
-      <td>2.37</td>
-      <td>56%</td>
-      <td>86%</td>
-    </tr>
-    <tr>
-      <th>Overall</th>
-      <td>175</td>
-      <td>0.79</td>
-      <td>41%</td>
-      <td>25%</td>
-      <td>14%</td>
-      <td>2.55</td>
-      <td>2.58</td>
-      <td>60%</td>
-      <td>82%</td>
-    </tr>
-  </tbody>
-</table>
-
-<br />
 The predictions for Euro 2020 group matches were then entered into UEFA's Tournament and Match predictors.
 
 <table><tr>
@@ -281,4 +163,151 @@ The predictions for Euro 2020 group matches were then entered into UEFA's Tourna
 </td>
 </tr></table>
 
+From this I could extrapolate the knockout results as follows...
+
 ![png](figures/intl_02_uefa_knockout.PNG)
+
+After the Group stage the knockout predictions were updated to the following...
+
+![png](figures/intl_02_uefa_knockout_2.PNG)
+
+Finally, here is a summary of all the models' predictions vs actual results...
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Matches played</th>
+      <th>Points per game</th>
+      <th>% correct result</th>
+      <th>% correct goal diff</th>
+      <th>% correct score</th>
+      <th>Goals per game (predicted)</th>
+      <th>Goals per game (actual)</th>
+      <th>% games won (predicted)</th>
+      <th>% games won (actual)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000</th>
+      <td>31</td>
+      <td>0.71</td>
+      <td>35%</td>
+      <td>19%</td>
+      <td>16%</td>
+      <td>2.48</td>
+      <td>2.84</td>
+      <td>52%</td>
+      <td>87%</td>
+    </tr>
+    <tr>
+      <th>2004</th>
+      <td>31</td>
+      <td>0.74</td>
+      <td>42%</td>
+      <td>23%</td>
+      <td>10%</td>
+      <td>2.61</td>
+      <td>2.74</td>
+      <td>74%</td>
+      <td>74%</td>
+    </tr>
+    <tr>
+      <th>2008</th>
+      <td>31</td>
+      <td>0.74</td>
+      <td>35%</td>
+      <td>26%</td>
+      <td>13%</td>
+      <td>2.45</td>
+      <td>2.61</td>
+      <td>45%</td>
+      <td>87%</td>
+    </tr>
+    <tr>
+      <th>2012</th>
+      <td>31</td>
+      <td>0.84</td>
+      <td>42%</td>
+      <td>26%</td>
+      <td>16%</td>
+      <td>2.45</td>
+      <td>2.58</td>
+      <td>45%</td>
+      <td>84%</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>51</td>
+      <td>0.86</td>
+      <td>45%</td>
+      <td>27%</td>
+      <td>14%</td>
+      <td>2.69</td>
+      <td>2.31</td>
+      <td>75%</td>
+      <td>78%</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>36</td>
+      <td>0.89</td>
+      <td>50%</td>
+      <td>31%</td>
+      <td>8%</td>
+      <td>2.53</td>
+      <td>2.61</td>
+      <td>67%</td>
+      <td>78%</td>
+    </tr>
+    <tr>
+      <th>Training</th>
+      <td>140</td>
+      <td>0.81</td>
+      <td>42%</td>
+      <td>24%</td>
+      <td>14%</td>
+      <td>2.55</td>
+      <td>2.64</td>
+      <td>61%</td>
+      <td>81%</td>
+    </tr>
+    <tr>
+      <th>Testing</th>
+      <td>35</td>
+      <td>0.71</td>
+      <td>34%</td>
+      <td>26%</td>
+      <td>11%</td>
+      <td>2.57</td>
+      <td>2.37</td>
+      <td>56%</td>
+      <td>86%</td>
+    </tr>
+    <tr>
+      <th>Live</th>
+      <td>36</td>
+      <td>0.89</td>
+      <td>50%</td>
+      <td>31%</td>
+      <td>8%</td>
+      <td>2.53</td>
+      <td>2.61</td>
+      <td>67%</td>
+      <td>78%</td>
+    </tr>
+    <tr>
+      <th>Overall</th>
+      <td>211</td>
+      <td>0.81</td>
+      <td>42%</td>
+      <td>26%</td>
+      <td>13%</td>
+      <td>2.55</td>
+      <td>2.59</td>
+      <td>61%</td>
+      <td>81%</td>
+    </tr>
+  </tbody>
+</table>
