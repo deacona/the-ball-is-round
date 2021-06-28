@@ -33,6 +33,7 @@
 import pandas as pd
 import os
 import numpy as np
+import pickle
 
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-whitegrid")
@@ -485,10 +486,24 @@ selected_gt_model = gt_model_list[3]["Reg"]
 selected_gd_model, selected_gt_model
 
 
-# In[ ]:
+# In[23]:
 
 
+pickle_base = "../models/intl_02_{0}.pkl"
 
+pickle_files = {
+    pickle_base.format("gd_model"): selected_gd_model,
+    pickle_base.format("gt_model"): selected_gt_model,
+    pickle_base.format("gd_features"): gd_features,
+    pickle_base.format("gt_features"): gt_features,
+}
+
+for pkl, obj in pickle_files.items():
+    print("Pickling {0}".format(pkl))
+    with open(pkl, "wb") as outfile:
+        pickle.dump(obj, outfile)
+
+print("Pickled {0}".format(pickle_files.keys()))
 
 
 # ## 6. Deployment
@@ -498,7 +513,7 @@ selected_gd_model, selected_gt_model
 # * Produce Final Report
 # * Review Project
 
-# In[23]:
+# In[24]:
 
 
 output = data.copy(deep=True)[["Date", "Year", "Round", "Team_1", "Team_2", "Usage", "Goals_1", "Goals_2", "Goal_diff", "Goal_total", "Result"]]
@@ -533,7 +548,7 @@ output.to_csv("../data/interim/intl_02_predictions.csv", index=False)
 output.describe(include="all").T
 
 
-# In[24]:
+# In[25]:
 
 
 def agg_by_col(df, col, asc=True):
@@ -586,13 +601,13 @@ summary[pct_cols] = (100 * summary[pct_cols]).astype(int).astype(str) + "%"
 summary
 
 
-# In[25]:
+# In[26]:
 
 
 output.loc[output.Usage == "Live"].describe().dropna(axis=1, how="any").T
 
 
-# In[26]:
+# In[27]:
 
 
 scores1 = output.loc[(output.Usage == "Live") & (output.Round == "Group stage"),

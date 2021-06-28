@@ -1,0 +1,220 @@
+Date,Year,Round,Team_1,Team_2,Usage,Actual_score_1,Actual_score_2,Actual_goal_diff,Actual_goal_total,Actual_result,Predicted_score_1,Predicted_score_2,Predicted_goal_diff,Predicted_goal_total,Predicted_result,Correct_result,Correct_goal_diff,Correct_score,Points
+2000-06-10,2000,Group stage,Belgium,Sweden,Training,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-11,2000,Group stage,Turkey,Italy,Training,1.0,2.0,-1.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,1.0,3.0
+2000-06-11,2000,Group stage,Netherlands,Czech Republic,Training,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2000-06-11,2000,Group stage,France,Denmark,Training,3.0,0.0,3.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2000-06-12,2000,Group stage,Germany,Romania,Training,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2000-06-12,2000,Group stage,Portugal,England,Training,3.0,2.0,1.0,5.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-13,2000,Group stage,Spain,Norway,Training,0.0,1.0,-1.0,1.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2000-06-13,2000,Group stage,Serbia,Slovenia,Training,3.0,3.0,0.0,6.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2000-06-14,2000,Group stage,Italy,Belgium,Training,2.0,0.0,2.0,2.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-15,2000,Group stage,Sweden,Turkey,Testing,0.0,0.0,0.0,0.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2000-06-16,2000,Group stage,Denmark,Netherlands,Training,0.0,3.0,-3.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2000-06-16,2000,Group stage,Czech Republic,France,Training,1.0,2.0,-1.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,1.0,3.0
+2000-06-17,2000,Group stage,England,Germany,Testing,1.0,0.0,1.0,1.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-17,2000,Group stage,Romania,Portugal,Training,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-18,2000,Group stage,Slovenia,Spain,Training,1.0,2.0,-1.0,3.0,Loss,0.0,2.0,-2.0,2.0,Loss,1.0,0.0,0.0,1.0
+2000-06-18,2000,Group stage,Norway,Serbia,Testing,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-19,2000,Group stage,Turkey,Belgium,Testing,2.0,0.0,2.0,2.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2000-06-19,2000,Group stage,Italy,Sweden,Training,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-20,2000,Group stage,England,Romania,Testing,2.0,3.0,-1.0,5.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-20,2000,Group stage,Portugal,Germany,Testing,3.0,0.0,3.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-21,2000,Group stage,France,Netherlands,Training,2.0,3.0,-1.0,5.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-21,2000,Group stage,Serbia,Spain,Training,3.0,4.0,-1.0,7.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-21,2000,Group stage,Slovenia,Norway,Training,0.0,0.0,0.0,0.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2000-06-21,2000,Group stage,Denmark,Czech Republic,Training,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-24,2000,Quarter-finals,Turkey,Portugal,Testing,0.0,2.0,-2.0,2.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2000-06-24,2000,Quarter-finals,Italy,Romania,Training,2.0,0.0,2.0,2.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-25,2000,Quarter-finals,Spain,France,Training,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2000-06-25,2000,Quarter-finals,Netherlands,Serbia,Training,6.0,1.0,5.0,7.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2000-06-28,2000,Semi-finals,France,Portugal,Training,2.0,1.0,1.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,1.0,3.0
+2000-06-29,2000,Semi-finals,Italy,Netherlands,Testing,3.0,0.0,3.0,3.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2000-07-02,2000,Final,France,Italy,Testing,2.0,1.0,1.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,1.0,3.0
+2004-06-12,2004,Group stage,Spain,Russia,Testing,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2004-06-12,2004,Group stage,Portugal,Greece,Training,1.0,2.0,-1.0,3.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2004-06-13,2004,Group stage,France,England,Training,2.0,1.0,1.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,1.0,3.0
+2004-06-13,2004,Group stage,Switzerland,Croatia,Training,0.0,0.0,0.0,0.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2004-06-14,2004,Group stage,Sweden,Bulgaria,Training,5.0,0.0,5.0,5.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2004-06-14,2004,Group stage,Denmark,Italy,Training,0.0,0.0,0.0,0.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0
+2004-06-15,2004,Group stage,Germany,Netherlands,Training,1.0,1.0,0.0,2.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2004-06-15,2004,Group stage,Czech Republic,Latvia,Training,2.0,1.0,1.0,3.0,Win,2.0,0.0,2.0,2.0,Win,1.0,0.0,0.0,1.0
+2004-06-16,2004,Group stage,Greece,Spain,Training,1.0,1.0,0.0,2.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2004-06-16,2004,Group stage,Russia,Portugal,Training,0.0,2.0,-2.0,2.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2004-06-17,2004,Group stage,Croatia,France,Testing,2.0,2.0,0.0,4.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2004-06-17,2004,Group stage,England,Switzerland,Testing,3.0,0.0,3.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2004-06-18,2004,Group stage,Italy,Sweden,Training,1.0,1.0,0.0,2.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2004-06-18,2004,Group stage,Bulgaria,Denmark,Training,0.0,2.0,-2.0,2.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2004-06-19,2004,Group stage,Netherlands,Czech Republic,Testing,2.0,3.0,-1.0,5.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2004-06-19,2004,Group stage,Latvia,Germany,Training,0.0,0.0,0.0,0.0,Draw,0.0,2.0,-2.0,2.0,Loss,0.0,0.0,0.0,0.0
+2004-06-20,2004,Group stage,Spain,Portugal,Training,0.0,1.0,-1.0,1.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2004-06-20,2004,Group stage,Russia,Greece,Training,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2004-06-21,2004,Group stage,Switzerland,France,Training,1.0,3.0,-2.0,4.0,Loss,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0
+2004-06-21,2004,Group stage,Croatia,England,Training,2.0,4.0,-2.0,6.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2004-06-22,2004,Group stage,Denmark,Sweden,Testing,2.0,2.0,0.0,4.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0
+2004-06-22,2004,Group stage,Italy,Bulgaria,Training,2.0,1.0,1.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,1.0,3.0
+2004-06-23,2004,Group stage,Netherlands,Latvia,Training,3.0,0.0,3.0,3.0,Win,2.0,0.0,2.0,2.0,Win,1.0,0.0,0.0,1.0
+2004-06-23,2004,Group stage,Germany,Czech Republic,Training,1.0,2.0,-1.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,1.0,3.0
+2004-06-24,2004,Quarter-finals,Portugal,England,Testing,6.0,2.0,4.0,8.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2004-06-25,2004,Quarter-finals,France,Greece,Testing,0.0,1.0,-1.0,1.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2004-06-26,2004,Quarter-finals,Sweden,Netherlands,Training,4.0,0.0,4.0,4.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2004-06-27,2004,Quarter-finals,Czech Republic,Denmark,Training,3.0,0.0,3.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2004-06-30,2004,Semi-finals,Portugal,Netherlands,Training,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2004-07-01,2004,Semi-finals,Greece,Czech Republic,Testing,1.0,0.0,1.0,1.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2004-07-04,2004,Final,Portugal,Greece,Training,0.0,1.0,-1.0,1.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2008-06-07,2008,Group stage,Switzerland,Czech Republic,Training,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-07,2008,Group stage,Portugal,Turkey,Training,2.0,0.0,2.0,2.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-08,2008,Group stage,Austria,Croatia,Training,0.0,1.0,-1.0,1.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2008-06-08,2008,Group stage,Germany,Poland,Testing,2.0,0.0,2.0,2.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2008-06-09,2008,Group stage,Netherlands,Italy,Testing,3.0,0.0,3.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-09,2008,Group stage,Romania,France,Training,0.0,0.0,0.0,0.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2008-06-10,2008,Group stage,Greece,Sweden,Training,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-10,2008,Group stage,Spain,Russia,Training,4.0,1.0,3.0,5.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2008-06-11,2008,Group stage,Switzerland,Turkey,Training,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-11,2008,Group stage,Czech Republic,Portugal,Training,1.0,3.0,-2.0,4.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-12,2008,Group stage,Austria,Poland,Training,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2008-06-12,2008,Group stage,Croatia,Germany,Training,2.0,1.0,1.0,3.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2008-06-13,2008,Group stage,Italy,Romania,Training,1.0,1.0,0.0,2.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2008-06-13,2008,Group stage,Netherlands,France,Training,4.0,1.0,3.0,5.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-14,2008,Group stage,Sweden,Spain,Training,1.0,2.0,-1.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,1.0,3.0
+2008-06-14,2008,Group stage,Greece,Russia,Training,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-15,2008,Group stage,Switzerland,Portugal,Testing,2.0,0.0,2.0,2.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-15,2008,Group stage,Turkey,Czech Republic,Training,3.0,2.0,1.0,5.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2008-06-16,2008,Group stage,Austria,Germany,Training,0.0,1.0,-1.0,1.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2008-06-16,2008,Group stage,Poland,Croatia,Training,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-17,2008,Group stage,France,Italy,Training,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-17,2008,Group stage,Netherlands,Romania,Training,2.0,0.0,2.0,2.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-18,2008,Group stage,Greece,Spain,Training,1.0,2.0,-1.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,1.0,3.0
+2008-06-18,2008,Group stage,Russia,Sweden,Training,2.0,0.0,2.0,2.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-19,2008,Quarter-finals,Portugal,Germany,Training,2.0,3.0,-1.0,5.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2008-06-20,2008,Quarter-finals,Croatia,Turkey,Training,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2008-06-21,2008,Quarter-finals,Netherlands,Russia,Training,1.0,3.0,-2.0,4.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2008-06-22,2008,Quarter-finals,Spain,Italy,Training,4.0,0.0,4.0,4.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2008-06-25,2008,Semi-finals,Germany,Turkey,Training,3.0,2.0,1.0,5.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2008-06-26,2008,Semi-finals,Russia,Spain,Training,0.0,3.0,-3.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2008-06-29,2008,Final,Germany,Spain,Training,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-08,2012,Group stage,Poland,Greece,Training,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2012-06-08,2012,Group stage,Russia,Czech Republic,Training,4.0,1.0,3.0,5.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-09,2012,Group stage,Netherlands,Denmark,Training,0.0,1.0,-1.0,1.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2012-06-09,2012,Group stage,Germany,Portugal,Training,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2012-06-10,2012,Group stage,Republic of Ireland,Croatia,Training,1.0,3.0,-2.0,4.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-10,2012,Group stage,Spain,Italy,Training,1.0,1.0,0.0,2.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2012-06-11,2012,Group stage,Ukraine,Sweden,Training,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-11,2012,Group stage,France,England,Training,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2012-06-12,2012,Group stage,Greece,Czech Republic,Testing,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-12,2012,Group stage,Poland,Russia,Training,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2012-06-13,2012,Group stage,Netherlands,Germany,Training,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-13,2012,Group stage,Denmark,Portugal,Training,2.0,3.0,-1.0,5.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-14,2012,Group stage,Italy,Croatia,Training,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2012-06-14,2012,Group stage,Spain,Republic of Ireland,Training,4.0,0.0,4.0,4.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2012-06-15,2012,Group stage,Ukraine,France,Training,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-15,2012,Group stage,Sweden,England,Training,2.0,3.0,-1.0,5.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-16,2012,Group stage,Greece,Russia,Testing,1.0,0.0,1.0,1.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-16,2012,Group stage,Czech Republic,Poland,Training,1.0,0.0,1.0,1.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-17,2012,Group stage,Portugal,Netherlands,Training,2.0,1.0,1.0,3.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2012-06-17,2012,Group stage,Denmark,Germany,Testing,1.0,2.0,-1.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,1.0,3.0
+2012-06-18,2012,Group stage,Croatia,Spain,Testing,0.0,1.0,-1.0,1.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2012-06-18,2012,Group stage,Italy,Republic of Ireland,Training,2.0,0.0,2.0,2.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-19,2012,Group stage,Sweden,France,Training,2.0,0.0,2.0,2.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-19,2012,Group stage,England,Ukraine,Training,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2012-06-21,2012,Quarter-finals,Czech Republic,Portugal,Testing,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2012-06-22,2012,Quarter-finals,Germany,Greece,Training,4.0,2.0,2.0,6.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2012-06-23,2012,Quarter-finals,Spain,France,Training,2.0,0.0,2.0,2.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2012-06-24,2012,Quarter-finals,England,Italy,Training,2.0,0.0,2.0,2.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2012-06-27,2012,Semi-finals,Portugal,Spain,Training,2.0,0.0,2.0,2.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2012-06-28,2012,Semi-finals,Germany,Italy,Training,1.0,2.0,-1.0,3.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2012-07-01,2012,Final,Spain,Italy,Training,4.0,0.0,4.0,4.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2016-06-10,2016,Group stage,France,Romania,Training,2.0,1.0,1.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,1.0,3.0
+2016-06-11,2016,Group stage,Wales,Slovakia,Training,2.0,1.0,1.0,3.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2016-06-11,2016,Group stage,Albania,Switzerland,Testing,0.0,1.0,-1.0,1.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2016-06-11,2016,Group stage,England,Russia,Testing,1.0,1.0,0.0,2.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2016-06-12,2016,Group stage,Poland,Northern Ireland,Testing,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2016-06-12,2016,Group stage,Turkey,Croatia,Training,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2016-06-12,2016,Group stage,Germany,Ukraine,Training,2.0,0.0,2.0,2.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2016-06-13,2016,Group stage,Republic of Ireland,Sweden,Training,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2016-06-13,2016,Group stage,Spain,Czech Republic,Training,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2016-06-13,2016,Group stage,Belgium,Italy,Training,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2016-06-14,2016,Group stage,Portugal,Iceland,Training,1.0,1.0,0.0,2.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2016-06-14,2016,Group stage,Austria,Hungary,Training,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2016-06-15,2016,Group stage,Romania,Switzerland,Training,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2016-06-15,2016,Group stage,France,Albania,Training,2.0,0.0,2.0,2.0,Win,2.0,0.0,2.0,2.0,Win,1.0,1.0,1.0,3.0
+2016-06-15,2016,Group stage,Russia,Slovakia,Testing,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2016-06-16,2016,Group stage,England,Wales,Testing,2.0,1.0,1.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,1.0,3.0
+2016-06-16,2016,Group stage,Germany,Poland,Training,0.0,0.0,0.0,0.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2016-06-16,2016,Group stage,Ukraine,Northern Ireland,Testing,0.0,2.0,-2.0,2.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2016-06-17,2016,Group stage,Spain,Turkey,Training,3.0,0.0,3.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2016-06-17,2016,Group stage,Czech Republic,Croatia,Training,2.0,2.0,0.0,4.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0
+2016-06-17,2016,Group stage,Italy,Sweden,Training,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2016-06-18,2016,Group stage,Iceland,Hungary,Testing,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2016-06-18,2016,Group stage,Portugal,Austria,Training,0.0,0.0,0.0,0.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2016-06-18,2016,Group stage,Belgium,Republic of Ireland,Training,3.0,0.0,3.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2016-06-19,2016,Group stage,Switzerland,France,Training,0.0,0.0,0.0,0.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2016-06-19,2016,Group stage,Romania,Albania,Training,0.0,1.0,-1.0,1.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2016-06-20,2016,Group stage,Slovakia,England,Training,0.0,0.0,0.0,0.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2016-06-20,2016,Group stage,Russia,Wales,Training,0.0,3.0,-3.0,3.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2016-06-21,2016,Group stage,Croatia,Spain,Training,2.0,1.0,1.0,3.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2016-06-21,2016,Group stage,Northern Ireland,Germany,Training,0.0,1.0,-1.0,1.0,Loss,0.0,2.0,-2.0,2.0,Loss,1.0,0.0,0.0,1.0
+2016-06-21,2016,Group stage,Ukraine,Poland,Training,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2016-06-21,2016,Group stage,Czech Republic,Turkey,Testing,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2016-06-22,2016,Group stage,Italy,Republic of Ireland,Testing,0.0,1.0,-1.0,1.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2016-06-22,2016,Group stage,Hungary,Portugal,Training,3.0,3.0,0.0,6.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2016-06-22,2016,Group stage,Iceland,Austria,Training,2.0,1.0,1.0,3.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2016-06-22,2016,Group stage,Sweden,Belgium,Training,0.0,1.0,-1.0,1.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2016-06-25,2016,Round of 16,Wales,Northern Ireland,Training,1.0,0.0,1.0,1.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2016-06-25,2016,Round of 16,Switzerland,Poland,Training,4.0,1.0,3.0,5.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2016-06-25,2016,Round of 16,Croatia,Portugal,Training,0.0,1.0,-1.0,1.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2016-06-26,2016,Round of 16,France,Republic of Ireland,Training,2.0,1.0,1.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,1.0,3.0
+2016-06-26,2016,Round of 16,Hungary,Belgium,Training,0.0,4.0,-4.0,4.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2016-06-26,2016,Round of 16,Germany,Slovakia,Training,3.0,0.0,3.0,3.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2016-06-27,2016,Round of 16,Italy,Spain,Training,2.0,0.0,2.0,2.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2016-06-27,2016,Round of 16,England,Iceland,Testing,1.0,2.0,-1.0,3.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2016-06-30,2016,Quarter-finals,Poland,Portugal,Training,3.0,1.0,2.0,4.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2016-07-01,2016,Quarter-finals,Wales,Belgium,Training,3.0,1.0,2.0,4.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2016-07-02,2016,Quarter-finals,Germany,Italy,Training,6.0,1.0,5.0,7.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2016-07-03,2016,Quarter-finals,France,Iceland,Training,5.0,2.0,3.0,7.0,Win,2.0,0.0,2.0,2.0,Win,1.0,0.0,0.0,1.0
+2016-07-06,2016,Semi-finals,Portugal,Wales,Training,2.0,0.0,2.0,2.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2016-07-07,2016,Semi-finals,Germany,France,Training,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2016-07-10,2016,Final,Portugal,France,Training,1.0,0.0,1.0,1.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2021-06-11,2021,Group stage,Turkey,Italy,Live,0.0,3.0,-3.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2021-06-12,2021,Group stage,Belgium,Russia,Live,1.0,1.0,0.0,2.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-12,2021,Group stage,Wales,Switzerland,Live,0.0,1.0,-1.0,1.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-12,2021,Group stage,Denmark,Finland,Live,3.0,0.0,3.0,3.0,Win,2.0,0.0,2.0,2.0,Win,1.0,0.0,0.0,1.0
+2021-06-13,2021,Group stage,England,Croatia,Live,3.0,2.0,1.0,5.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2021-06-13,2021,Group stage,Austria,North Macedonia,Live,3.0,1.0,2.0,4.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2021-06-13,2021,Group stage,Netherlands,Ukraine,Live,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2021-06-14,2021,Group stage,Spain,Sweden,Live,1.0,2.0,-1.0,3.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-14,2021,Group stage,Poland,Slovakia,Live,0.0,2.0,-2.0,2.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-14,2021,Group stage,Scotland,Czech Republic,Live,0.0,0.0,0.0,0.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0
+2021-06-15,2021,Group stage,Hungary,Portugal,Live,0.0,3.0,-3.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2021-06-15,2021,Group stage,France,Germany,Live,1.0,0.0,1.0,1.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-16,2021,Group stage,Finland,Russia,Live,0.0,2.0,-2.0,2.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2021-06-16,2021,Group stage,Italy,Switzerland,Live,0.0,1.0,-1.0,1.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-16,2021,Group stage,Turkey,Wales,Live,3.0,0.0,3.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-17,2021,Group stage,Netherlands,Austria,Live,2.0,0.0,2.0,2.0,Win,2.0,1.0,1.0,3.0,Win,1.0,0.0,0.0,1.0
+2021-06-17,2021,Group stage,Denmark,Belgium,Live,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-17,2021,Group stage,Ukraine,North Macedonia,Live,1.0,2.0,-1.0,3.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-18,2021,Group stage,Croatia,Czech Republic,Live,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2021-06-18,2021,Group stage,England,Scotland,Live,0.0,0.0,0.0,0.0,Draw,2.0,0.0,2.0,2.0,Win,0.0,0.0,0.0,0.0
+2021-06-18,2021,Group stage,Sweden,Slovakia,Live,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2021-06-19,2021,Group stage,Spain,Poland,Live,2.0,4.0,-2.0,6.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-19,2021,Group stage,Hungary,France,Live,1.0,1.0,0.0,2.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2021-06-19,2021,Group stage,Portugal,Germany,Live,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,1.0,3.0
+2021-06-20,2021,Group stage,Italy,Wales,Live,1.0,0.0,1.0,1.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
+2021-06-20,2021,Group stage,Switzerland,Turkey,Live,3.0,1.0,2.0,4.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-21,2021,Group stage,Ukraine,Austria,Live,0.0,3.0,-3.0,3.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-21,2021,Group stage,Finland,Belgium,Live,1.0,4.0,-3.0,5.0,Loss,0.0,2.0,-2.0,2.0,Loss,1.0,0.0,0.0,1.0
+2021-06-21,2021,Group stage,Russia,Denmark,Live,0.0,1.0,-1.0,1.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2021-06-21,2021,Group stage,North Macedonia,Netherlands,Live,0.0,2.0,-2.0,2.0,Loss,0.0,2.0,-2.0,2.0,Loss,1.0,1.0,1.0,3.0
+2021-06-22,2021,Group stage,Croatia,Scotland,Live,3.0,1.0,2.0,4.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-22,2021,Group stage,Czech Republic,England,Live,0.0,1.0,-1.0,1.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0
+2021-06-23,2021,Group stage,Slovakia,Spain,Live,3.0,2.0,1.0,5.0,Win,0.0,2.0,-2.0,2.0,Loss,0.0,0.0,0.0,0.0
+2021-06-23,2021,Group stage,Sweden,Poland,Live,2.0,2.0,0.0,4.0,Draw,1.0,1.0,0.0,2.0,Draw,1.0,1.0,0.0,2.0
+2021-06-23,2021,Group stage,Portugal,France,Live,0.0,5.0,-5.0,5.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-06-23,2021,Group stage,Germany,Hungary,Live,2.0,2.0,0.0,4.0,Draw,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-06-26,2021,Round of 16,Italy,Austria,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
+2021-06-26,2021,Round of 16,Wales,Denmark,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
+2021-06-27,2021,Round of 16,Belgium,Portugal,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
+2021-06-27,2021,Round of 16,Netherlands,Czech Republic,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
+2021-06-28,2021,Round of 16,France,Switzerland,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
+2021-06-28,2021,Round of 16,Croatia,Spain,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
+2021-06-29,2021,Round of 16,Sweden,Ukraine,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
+2021-06-29,2021,Round of 16,England,Germany,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
