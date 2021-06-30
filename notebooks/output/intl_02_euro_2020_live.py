@@ -345,6 +345,8 @@ selected_gd_model, gd_features, selected_gt_model, gt_features
 
 output_prev = pd.read_csv("../data/interim/intl_02_predictions.csv")
 output_prev["Year"] = output_prev.Year.astype(str)
+output_prev.sort_values(by=["Date", "Team_1"], inplace=True)
+output_prev.reset_index(drop=True, inplace=True)
 output_prev.info()
 
 
@@ -353,6 +355,9 @@ output_prev.info()
 
 output_new = data.copy(deep=True)[["Date", "Year", "Round", "Team_1", "Team_2", "Usage", "Goals_1", "Goals_2", "Goal_diff", "Goal_total", "Result"]]
 output_new.columns = ["Date", "Year", "Round", "Team_1", "Team_2", "Usage", "Actual_score_1", "Actual_score_2", "Actual_goal_diff", "Actual_goal_total", "Actual_result"]
+output_new["Year"] = output_new.Year.astype(str)
+output_new.sort_values(by=["Date", "Team_1"], inplace=True)
+output_new.reset_index(drop=True, inplace=True)
 # output.loc[output.index.isin(gd_y_test.index), "Usage"] = "Testing"
 
 gd_pred = selected_gd_model.predict(data[gd_features])
