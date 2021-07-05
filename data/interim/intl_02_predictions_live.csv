@@ -214,11 +214,13 @@ Date,Year,Round,Team_1,Team_2,Usage,Actual_score_1,Actual_score_2,Actual_goal_di
 2021-06-26,2021,Round of 16,Wales,Denmark,Live,0.0,4.0,-4.0,4.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
 2021-06-27,2021,Round of 16,Belgium,Portugal,Live,1.0,0.0,1.0,1.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
 2021-06-27,2021,Round of 16,Netherlands,Czech Republic,Live,0.0,2.0,-2.0,2.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
-2021-06-28,2021,Round of 16,Croatia,Spain,Live,3.0,5.0,-2.0,8.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
-2021-06-28,2021,Round of 16,France,Switzerland,Live,4.0,3.0,1.0,7.0,Win,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2021-06-28,2021,Round of 16,Croatia,Spain,Live,3.0,5.0,-2.0,8.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2021-06-28,2021,Round of 16,France,Switzerland,Live,4.0,3.0,1.0,7.0,Win,2.0,1.0,1.0,3.0,Win,1.0,1.0,0.0,2.0
 2021-06-29,2021,Round of 16,England,Germany,Live,2.0,0.0,2.0,2.0,Win,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
-2021-06-29,2021,Round of 16,Sweden,Ukraine,Live,1.0,2.0,-1.0,3.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
-2021-07-02,2021,Quarter-finals,Belgium,Italy,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
-2021-07-02,2021,Quarter-finals,Switzerland,Spain,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,
-2021-07-03,2021,Quarter-finals,Czech Republic,Denmark,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
-2021-07-03,2021,Quarter-finals,Ukraine,England,Live,,,,,,1.0,2.0,-1.0,3.0,Loss,,,,
+2021-06-29,2021,Round of 16,Sweden,Ukraine,Live,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,0.0,2.0,Draw,0.0,0.0,0.0,0.0
+2021-07-02,2021,Quarter-finals,Belgium,Italy,Live,1.0,2.0,-1.0,3.0,Loss,2.0,1.0,1.0,3.0,Win,0.0,0.0,0.0,0.0
+2021-07-02,2021,Quarter-finals,Switzerland,Spain,Live,1.0,1.0,0.0,2.0,Draw,1.0,2.0,-1.0,3.0,Loss,0.0,0.0,0.0,0.0
+2021-07-03,2021,Quarter-finals,Czech Republic,Denmark,Live,1.0,2.0,-1.0,3.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,1.0,1.0,3.0
+2021-07-03,2021,Quarter-finals,Ukraine,England,Live,0.0,4.0,-4.0,4.0,Loss,1.0,2.0,-1.0,3.0,Loss,1.0,0.0,0.0,1.0
+2021-07-06,2021,Semi-finals,Italy,Spain,Live,,,,,,1.0,1.0,0.0,2.0,Draw,,,,
+2021-07-07,2021,Semi-finals,England,Denmark,Live,,,,,,2.0,1.0,1.0,3.0,Win,,,,

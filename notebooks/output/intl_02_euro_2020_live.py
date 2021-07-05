@@ -155,7 +155,7 @@ metric_histograms(summary, ['Rating', 'Average Rank',
 
 data = match.merge(summary, left_on=["Team_1", "Year"], right_on=["Team", "Year"]) #, suffixes=["", "_1"])
 data = data.merge(summary, left_on=["Team_2", "Year"], right_on=["Team", "Year"], suffixes=["", " (2)"])
-data.sort_values(by=["Date"], inplace=True)
+data.sort_values(by=["Date", "Team_1"], inplace=True)
 data.reset_index(drop=True, inplace=True)
 
 data["Elo_rating_diff"] = data["Rating"] - data["Rating (2)"]
