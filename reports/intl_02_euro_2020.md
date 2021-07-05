@@ -251,15 +251,15 @@ Finally, here is a summary of all the models' predictions vs actual results...
     </tr>
     <tr>
       <th>2021</th>
-      <td>36</td>
-      <td>0.89</td>
-      <td>50%</td>
-      <td>31%</td>
-      <td>8%</td>
-      <td>2.53</td>
-      <td>2.61</td>
-      <td>67%</td>
-      <td>78%</td>
+      <td>48</td>
+      <td>0.96</td>
+      <td>54%</td>
+      <td>28%</td>
+      <td>12%</td>
+      <td>2.58</td>
+      <td>2.83</td>
+      <td>69%</td>
+      <td>81%</td>
     </tr>
     <tr>
       <th>Training</th>
@@ -287,27 +287,27 @@ Finally, here is a summary of all the models' predictions vs actual results...
     </tr>
     <tr>
       <th>Live</th>
-      <td>36</td>
-      <td>0.89</td>
-      <td>50%</td>
-      <td>31%</td>
-      <td>8%</td>
-      <td>2.53</td>
-      <td>2.61</td>
-      <td>67%</td>
-      <td>78%</td>
+      <td>48</td>
+      <td>0.96</td>
+      <td>54%</td>
+      <td>28%</td>
+      <td>12%</td>
+      <td>2.58</td>
+      <td>2.83</td>
+      <td>69%</td>
+      <td>81%</td>
     </tr>
     <tr>
       <th>Overall</th>
-      <td>211</td>
-      <td>0.81</td>
-      <td>42%</td>
+      <td>223</td>
+      <td>0.83</td>
+      <td>43%</td>
       <td>26%</td>
       <td>13%</td>
-      <td>2.55</td>
-      <td>2.59</td>
-      <td>61%</td>
-      <td>81%</td>
+      <td>2.56</td>
+      <td>2.64</td>
+      <td>62%</td>
+      <td>82%</td>
     </tr>
   </tbody>
 </table>
