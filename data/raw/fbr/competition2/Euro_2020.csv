@@ -4,7 +4,7 @@ Group stage,1,Sat,2021-06-12,17:00 (14:00),Wales wal,0.5,1–1,1.4,ch Switzerlan
 Group stage,1,Sat,2021-06-12,18:00 (17:00),Denmark dk,1.9,0–1,0.4,fi Finland,13790,Telia Parken (Neutral Site),Anthony Taylor,Match Report,
 Group stage,1,Sat,2021-06-12,22:00 (20:00),Belgium be,1.7,3–0,0.3,ru Russia,26264,Gazprom Arena (Neutral Site),Antonio Matéu Lahoz,Match Report,
 Group stage,1,Sun,2021-06-13,14:00,England eng,0.9,1–0,0.3,hr Croatia,18497,Wembley Stadium (Neutral Site),Daniele Orsato,Match Report,
-Group stage,1,Sun,2021-06-13,19:00 (17:00),Austria at,1.4,3–1,0.6,mk North Macedonia,9082,Arena Naţională (Neutral Site),Andreas Ekberg,Match Report,
+Group stage,1,Sun,2021-06-13,19:00 (17:00),Austria at,1.4,3–1,0.7,mk North Macedonia,9082,Arena Naţională (Neutral Site),Andreas Ekberg,Match Report,
 Group stage,1,Sun,2021-06-13,21:00 (20:00),Netherlands nl,1.4,3–2,0.6,ua Ukraine,15837,Johan Cruyff ArenA (Neutral Site),Felix Brych,Match Report,
 Group stage,1,Mon,2021-06-14,14:00,Scotland sco,1.8,0–2,0.9,cz Czech Republic,9847,Hampden Park (Neutral Site),Daniel Siebert,Match Report,
 Group stage,1,Mon,2021-06-14,17:00,Poland pl,1.3,1–2,0.3,sk Slovakia,12862,Gazprom Arena (Neutral Site),Ovidiu Hațegan,Match Report,
@@ -46,9 +46,10 @@ Round of 16,,Mon,2021-06-28,18:00 (17:00),Croatia hr,2.4,3–5,3.4,es Spain,2277
 Round of 16,,Mon,2021-06-28,22:00 (20:00),France fr,2.9,(4) 3–3 (5),1.7,ch Switzerland,22642,Arena Naţională (Neutral Site),Fernando Rapallini,Match Report,Switzerland won on penalty kicks following extra time
 Round of 16,,Tue,2021-06-29,17:00,England eng,1.0,2–0,1.4,de Germany,41973,Wembley Stadium (Neutral Site),Danny Makkelie,Match Report,
 Round of 16,,Tue,2021-06-29,20:00,Sweden se,1.1,1–2,1.4,ua Ukraine,9221,Hampden Park (Neutral Site),Daniele Orsato,Match Report,Required Extra Time
-Quarter-finals,,Fri,2021-07-02,19:00 (17:00),Switzerland ch,2.0,(1) 1–1 (3),3.8,es Spain,,Gazprom Arena,Michael Oliver,Match Report,Spain won on penalty kicks following extra time
-Quarter-finals,,Fri,2021-07-02,21:00 (20:00),Belgium be,1.7,1–2,1.3,it Italy,,Allianz Arena,Slavko Vinčič,Match Report,
-Quarter-finals,,Sat,2021-07-03,20:00 (17:00),Czech Republic cz,1.2,1–2,1.2,dk Denmark,,Bakı Olimpiya Stadionu,Björn Kuipers,Match Report,
-Quarter-finals,,Sat,2021-07-03,21:00 (20:00),Ukraine ua,0.3,0–4,1.3,eng England,,Stadio Olimpico,Felix Brych,Match Report,
-Semi-finals,,Tue,2021-07-06,20:00,Italy it,,,,es Spain,,Wembley Stadium,,Head-to-Head,
-Semi-finals,,Wed,2021-07-07,20:00,England eng,,,,dk Denmark,,Wembley Stadium,,Head-to-Head,
+Quarter-finals,,Fri,2021-07-02,19:00 (17:00),Switzerland ch,1.0,(1) 1–1 (3),3.0,es Spain,24764,Gazprom Arena,Michael Oliver,Match Report,Spain won on penalty kicks following extra time
+Quarter-finals,,Fri,2021-07-02,21:00 (20:00),Belgium be,1.7,1–2,1.3,it Italy,12984,Allianz Arena,Slavko Vinčič,Match Report,
+Quarter-finals,,Sat,2021-07-03,20:00 (17:00),Czech Republic cz,1.2,1–2,1.2,dk Denmark,16306,Bakı Olimpiya Stadionu,Björn Kuipers,Match Report,
+Quarter-finals,,Sat,2021-07-03,21:00 (20:00),Ukraine ua,0.3,0–4,1.3,eng England,11880,Stadio Olimpico,Felix Brych,Match Report,
+Semi-finals,,Tue,2021-07-06,20:00,Italy it,0.4,(4) 1–1 (2),1.7,es Spain,,Wembley Stadium,Felix Brych,Match Report,Italy won on penalty kicks following extra time
+Semi-finals,,Wed,2021-07-07,20:00,England eng,2.6,2–1,0.3,dk Denmark,,Wembley Stadium,Danny Makkelie,Match Report,Required Extra Time
+Final,,Sun,2021-07-11,20:00,Italy it,,,,eng England,,Wembley Stadium,,Head-to-Head,
