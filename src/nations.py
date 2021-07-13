@@ -73,8 +73,8 @@ def format_matches(
     comp["Team_1"] = comp["Team_1"].str[:-3].str.strip()
     comp["Team_abbrev_2"] = comp["Team_2"].str[:3].str.strip()
     comp["Team_2"] = comp["Team_2"].str[3:].str.strip()
-    comp["Goals_1"] = comp.Score.str.extract(pat="([0-9]{1,2})[^0-9]+[0-9]{1,2}")
-    comp["Goals_2"] = comp.Score.str.extract(pat="[0-9]{1,2}[^0-9]+([0-9]{1,2})")
+    comp["Goals_1"] = comp.Score.str.extract(pat="(?:^|\) )([0-9]{1,2})[^0-9]+[0-9]{1,2}")
+    comp["Goals_2"] = comp.Score.str.extract(pat="[0-9]{1,2}[^0-9]+([0-9]{1,2})(?:$| \()")
     for i in range(1, 3):
         comp["Goals_" + str(i)] = pd.to_numeric(
             comp["Goals_" + str(i)], errors="coerce"

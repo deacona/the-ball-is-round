@@ -24,9 +24,9 @@
 * Explore Data
 * Verify Data Quality
 
-    2021-07-09 21:04:15,552 - INFO - Building master filepath for nations_matches
-    2021-07-09 21:04:15,556 - INFO - Fetching C:\Users\adeacon\Documents\GitHub\the-ball-is-round\data\processed\ftb_nations_matches.txt
-    2021-07-09 21:04:15,557 - INFO - Building master filepath for nations_matches
+    2021-07-13 21:11:29,844 - INFO - Building master filepath for nations_matches
+    2021-07-13 21:11:29,848 - INFO - Fetching C:\Users\adeacon\Documents\GitHub\the-ball-is-round\data\processed\ftb_nations_matches.txt
+    2021-07-13 21:11:29,849 - INFO - Building master filepath for nations_matches
     
 
 
@@ -164,12 +164,12 @@
     </tr>
     <tr>
       <th>Goals_1</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>1.42667</td>
-      <td>1.31448</td>
+      <td>1.27876</td>
+      <td>1.18404</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
@@ -178,12 +178,12 @@
     </tr>
     <tr>
       <th>Goals_2</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>1.22222</td>
-      <td>1.10778</td>
+      <td>1.22124</td>
+      <td>1.10542</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
@@ -192,12 +192,12 @@
     </tr>
     <tr>
       <th>Goal_diff</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>0.204444</td>
-      <td>1.81092</td>
+      <td>0.0575221</td>
+      <td>1.67365</td>
       <td>-5</td>
       <td>-1</td>
       <td>0</td>
@@ -208,7 +208,7 @@
       <th>Venue</th>
       <td>226</td>
       <td>60</td>
-      <td>Stade de France</td>
+      <td>Ernst-Happel-Stadion</td>
       <td>7</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -236,7 +236,7 @@
       <th>Venue_city</th>
       <td>134</td>
       <td>34</td>
-      <td>Vienna</td>
+      <td>Saint-Denis</td>
       <td>7</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -276,12 +276,12 @@
     </tr>
     <tr>
       <th>Goal_total</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>2.64889</td>
-      <td>1.62192</td>
+      <td>2.5</td>
+      <td>1.56418</td>
       <td>0</td>
       <td>1</td>
       <td>2</td>
@@ -290,10 +290,10 @@
     </tr>
     <tr>
       <th>Result</th>
-      <td>225</td>
+      <td>226</td>
       <td>3</td>
-      <td>Win</td>
-      <td>96</td>
+      <td>Loss</td>
+      <td>88</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -369,7 +369,7 @@
     Quarter-finals     24
     Round of 16        16
     Semi-finals        12
-    Final               5
+    Final               6
     Name: Round, dtype: int64
     
 
@@ -384,7 +384,7 @@
     
     Day
     
-    Sun    43
+    Sun    44
     Sat    40
     Wed    35
     Mon    32
@@ -412,15 +412,15 @@
     17:00            12
     21:45 (19:45)    11
     15:00 (14:00)    10
-    20:00             7
+    20:00             8
     19:00 (17:00)     7
     22:00 (20:00)     4
-    20:00 (17:00)     3
     14:00             3
+    20:00 (17:00)     3
     16:00 (14:00)     2
-    20:00 (19:00)     1
     17:00 (14:00)     1
     14:30 (13:30)     1
+    20:00 (19:00)     1
     Name: Time, dtype: int64
     
 
@@ -435,8 +435,8 @@
     
     Year
     
+    2021    51
     2016    51
-    2021    50
     2012    31
     2008    31
     2004    31
@@ -463,7 +463,7 @@
     Austria        13
     Switzerland    12
     Poland         11
-    England         2
+    England         3
     Italy           1
     Russia          1
     Germany         1
@@ -481,9 +481,9 @@
     
     Result
     
-    Win     96
     Loss    88
-    Draw    41
+    Win     85
+    Draw    53
     Name: Result, dtype: int64
     
 
@@ -497,9 +497,9 @@
     --------------------
     
 
-    2021-07-09 21:04:17,548 - INFO - Building master filepath for nations_summaries
-    2021-07-09 21:04:17,549 - INFO - Fetching C:\Users\adeacon\Documents\GitHub\the-ball-is-round\data\processed\ftb_nations_summaries.txt
-    2021-07-09 21:04:17,550 - INFO - Building master filepath for nations_summaries
+    2021-07-13 21:11:31,704 - INFO - Building master filepath for nations_summaries
+    2021-07-13 21:11:31,705 - INFO - Fetching C:\Users\adeacon\Documents\GitHub\the-ball-is-round\data\processed\ftb_nations_summaries.txt
+    2021-07-13 21:11:31,707 - INFO - Building master filepath for nations_summaries
     
 
 
@@ -569,7 +569,7 @@
       <th>Team</th>
       <td>112</td>
       <td>35</td>
-      <td>Germany</td>
+      <td>Czech Republic</td>
       <td>6</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -1141,9 +1141,9 @@
     </tr>
     <tr>
       <th>Goals_1</th>
-      <td>225.0</td>
-      <td>1.426667e+00</td>
-      <td>1.314480e+00</td>
+      <td>226.0</td>
+      <td>1.278761e+00</td>
+      <td>1.184038e+00</td>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>1.000000</td>
@@ -1152,9 +1152,9 @@
     </tr>
     <tr>
       <th>Goals_2</th>
-      <td>225.0</td>
-      <td>1.222222e+00</td>
-      <td>1.107783e+00</td>
+      <td>226.0</td>
+      <td>1.221239e+00</td>
+      <td>1.105417e+00</td>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>1.000000</td>
@@ -1163,9 +1163,9 @@
     </tr>
     <tr>
       <th>Goal_diff</th>
-      <td>225.0</td>
-      <td>2.044444e-01</td>
-      <td>1.810924e+00</td>
+      <td>226.0</td>
+      <td>5.752212e-02</td>
+      <td>1.673655e+00</td>
       <td>-5.000000</td>
       <td>-1.000000</td>
       <td>0.000000</td>
@@ -1196,9 +1196,9 @@
     </tr>
     <tr>
       <th>Goal_total</th>
-      <td>225.0</td>
-      <td>2.648889e+00</td>
-      <td>1.621923e+00</td>
+      <td>226.0</td>
+      <td>2.500000e+00</td>
+      <td>1.564182e+00</td>
       <td>0.000000</td>
       <td>1.000000</td>
       <td>2.000000</td>
@@ -1721,423 +1721,429 @@
 
 
 <style  type="text/css" >
-#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col0,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col1,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col2,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col3,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col4,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col5,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col6,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col11,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col7,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col8,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col9,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col10,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col6,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col11{
+#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col0,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col1,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col2,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col3,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col4,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col5,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col6,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col11,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col7,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col8,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col9,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col10,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col6,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col11{
             background-color:  #b40426;
             color:  #f1f1f1;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col1,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col4,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col8{
-            background-color:  #adc9fd;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col1{
+            background-color:  #b9d0f9;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col2{
-            background-color:  #dd5f4b;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col2{
+            background-color:  #e36b54;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col3{
-            background-color:  #6485ec;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col3,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col10{
+            background-color:  #7093f3;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col4,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col1,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col4,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col7{
-            background-color:  #bbd1f8;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col4{
+            background-color:  #b3cdfb;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col5{
-            background-color:  #f39778;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col5{
+            background-color:  #f59f80;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col6{
-            background-color:  #cedaeb;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col6{
+            background-color:  #dadce0;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col7,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col2{
-            background-color:  #c6d6f1;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col7,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col7{
+            background-color:  #cfdaea;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col8{
-            background-color:  #5e7de7;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col9,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col9{
-            background-color:  #7295f4;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col10{
-            background-color:  #93b5fe;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col11,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col2,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col1{
-            background-color:  #ccd9ed;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col0,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col2,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col6,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col8,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col10,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col11,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col1,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col5,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col7,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col4,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col9,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col3{
-            background-color:  #3b4cc0;
-            color:  #f1f1f1;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col3{
-            background-color:  #4a63d3;
-            color:  #f1f1f1;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col4,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col10{
-            background-color:  #a9c6fd;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col5{
-            background-color:  #f4c5ad;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col7,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col11,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col6{
-            background-color:  #c3d5f4;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col9,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col5{
-            background-color:  #5a78e4;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col0{
-            background-color:  #eb7d62;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col3{
-            background-color:  #688aef;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col4,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col7,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col1{
-            background-color:  #c7d7f0;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col5{
-            background-color:  #86a9fc;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col6{
-            background-color:  #e5d8d1;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col7,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col6{
-            background-color:  #c0d4f5;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col8,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col10{
-            background-color:  #6180e9;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col9{
-            background-color:  #5d7ce6;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col10{
-            background-color:  #a2c1ff;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col11{
-            background-color:  #e3d9d3;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col0,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col0{
-            background-color:  #6788ee;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col2,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col2,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col7{
-            background-color:  #cdd9ec;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col4,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col7,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col7{
-            background-color:  #b1cbfc;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col5,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col5{
-            background-color:  #5470de;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col6,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col0{
-            background-color:  #6f92f3;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col7{
-            background-color:  #dc5d4a;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col8{
-            background-color:  #4961d2;
-            color:  #f1f1f1;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col9,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col6{
-            background-color:  #779af7;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col10,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col3{
-            background-color:  #82a6fb;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col11{
-            background-color:  #6c8ff1;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col0,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col5{
-            background-color:  #5572df;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col1{
-            background-color:  #afcafc;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col3,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col8{
-            background-color:  #445acc;
-            color:  #f1f1f1;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col6,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col1{
-            background-color:  #84a7fc;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col8{
-            background-color:  #4e68d8;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col9{
-            background-color:  #4257c9;
-            color:  #f1f1f1;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col11{
-            background-color:  #81a4fb;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col0,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col1{
-            background-color:  #f39577;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col2{
-            background-color:  #dfdbd9;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col3,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col5{
-            background-color:  #5977e3;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col6,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col11{
-            background-color:  #8badfd;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col8{
-            background-color:  #506bda;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col9,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col3{
-            background-color:  #7597f6;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col10{
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col8{
             background-color:  #6a8bef;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col0,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col0{
-            background-color:  #aec9fc;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col2{
-            background-color:  #f5c0a7;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col3{
-            background-color:  #3c4ec2;
-            color:  #f1f1f1;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col8,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col10{
-            background-color:  #a7c5fe;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col9{
-            background-color:  #90b2fe;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col3{
-            background-color:  #e97a5f;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col5{
-            background-color:  #6282ea;
-            color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col10{
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col9,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col9{
             background-color:  #7da0f9;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col11{
-            background-color:  #7699f6;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col10{
+            background-color:  #9fbfff;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col1,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col4{
-            background-color:  #bad0f8;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col11{
+            background-color:  #d9dce1;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col2,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col10{
-            background-color:  #d2dbe8;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col0,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col2,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col6,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col8,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col10,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col11,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col1,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col5,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col7,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col4,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col9,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col3{
+            background-color:  #3b4cc0;
+            color:  #f1f1f1;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col3{
+            background-color:  #4a63d3;
+            color:  #f1f1f1;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col4,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col10{
+            background-color:  #a9c6fd;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col3{
-            background-color:  #5673e0;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col5{
+            background-color:  #f7b093;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col4,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col8,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col11{
-            background-color:  #c1d4f4;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col7,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col11,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col6{
+            background-color:  #c3d5f4;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col6{
-            background-color:  #d3dbe7;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col9{
+            background-color:  #5a78e4;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col9,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col5{
-            background-color:  #7b9ff9;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col0{
+            background-color:  #f29274;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col11,#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col7{
-            background-color:  #d5dbe5;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col3,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col9{
+            background-color:  #7295f4;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col0{
-            background-color:  #80a3fa;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col4{
+            background-color:  #c4d5f3;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col4{
-            background-color:  #b7cff9;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col5{
+            background-color:  #6e90f2;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col8{
-            background-color:  #7a9df8;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col6{
+            background-color:  #edd1c2;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col10{
-            background-color:  #536edd;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col7{
+            background-color:  #c7d7f0;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col0{
-            background-color:  #89acfd;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col8,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col0{
+            background-color:  #688aef;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col1{
-            background-color:  #a5c3fe;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col9,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col5{
+            background-color:  #6384eb;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col2{
-            background-color:  #e4d9d2;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col10,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col8{
+            background-color:  #abc8fd;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col4{
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col11{
+            background-color:  #ecd3c5;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col1,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col1,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col4{
             background-color:  #bcd2f7;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col1{
-            background-color:  #85a8fc;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col2{
+            background-color:  #d4dbe6;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col2{
-            background-color:  #f5c1a9;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col4,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col1,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col7,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col7{
+            background-color:  #b1cbfc;
             color:  #000000;
-        }#T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col9{
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col5{
+            background-color:  #6485ec;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col6,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col0{
+            background-color:  #6f92f3;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col7{
+            background-color:  #dc5d4a;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col8{
+            background-color:  #4961d2;
+            color:  #f1f1f1;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col9,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col6{
+            background-color:  #779af7;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col10,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col3{
+            background-color:  #82a6fb;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col11{
+            background-color:  #6c8ff1;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col0{
+            background-color:  #3f53c6;
+            color:  #f1f1f1;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col2,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col1{
+            background-color:  #cad8ef;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col3,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col8{
+            background-color:  #445acc;
+            color:  #f1f1f1;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col6{
+            background-color:  #84a7fc;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col8{
+            background-color:  #4e68d8;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col9{
+            background-color:  #4257c9;
+            color:  #f1f1f1;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col10,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col3{
+            background-color:  #6180e9;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col11,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col0{
+            background-color:  #81a4fb;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col0{
+            background-color:  #f6a283;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col1{
+            background-color:  #ee8468;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col2{
+            background-color:  #d1dae9;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col4,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col8,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col1,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col10{
+            background-color:  #a7c5fe;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col6,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col11,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col9{
+            background-color:  #90b2fe;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col8,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col3{
+            background-color:  #5673e0;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col0,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col4,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col0{
+            background-color:  #b7cff9;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col1{
+            background-color:  #86a9fc;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col2{
+            background-color:  #f7b79b;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col3{
+            background-color:  #3c4ec2;
+            color:  #f1f1f1;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col4,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col7{
+            background-color:  #bbd1f8;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col5{
+            background-color:  #6282ea;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col0{
+            background-color:  #6b8df0;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col2,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col1,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col7{
+            background-color:  #cdd9ec;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col3{
+            background-color:  #e97a5f;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col5,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col11{
+            background-color:  #7699f6;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col10,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col9{
+            background-color:  #7b9ff9;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col2{
+            background-color:  #d7dce3;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col4,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col8,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col11{
+            background-color:  #c1d4f4;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col5{
+            background-color:  #6788ee;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col6,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col2{
+            background-color:  #d3dbe7;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col10{
+            background-color:  #d2dbe8;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col11,#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col7{
+            background-color:  #d5dbe5;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col5{
+            background-color:  #8badfd;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col6{
+            background-color:  #c0d4f5;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col8{
+            background-color:  #7a9df8;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col10{
+            background-color:  #536edd;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col0{
+            background-color:  #8caffe;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col2{
+            background-color:  #ead4c8;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col3{
+            background-color:  #7597f6;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col5{
+            background-color:  #6687ed;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col1{
+            background-color:  #88abfd;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col2{
+            background-color:  #f7b89c;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col4{
+            background-color:  #bad0f8;
+            color:  #000000;
+        }#T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col9{
             background-color:  #94b6ff;
             color:  #000000;
-        }</style><table id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131" ><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Goals_1</th>        <th class="col_heading level0 col1" >Goals_2</th>        <th class="col_heading level0 col2" >Goal_diff</th>        <th class="col_heading level0 col3" >Home_1</th>        <th class="col_heading level0 col4" >Home_2</th>        <th class="col_heading level0 col5" >Goal_total</th>        <th class="col_heading level0 col6" >Elo_rating_diff</th>        <th class="col_heading level0 col7" >Home_advantage</th>        <th class="col_heading level0 col8" >Relative_experience</th>        <th class="col_heading level0 col9" >Relative_population</th>        <th class="col_heading level0 col10" >Relative_GDP_per_capita</th>        <th class="col_heading level0 col11" >Relative_ELO_rating</th>    </tr></thead><tbody>
+        }</style><table id="T_85a74e22_e416_11eb_b1d3_74d83eb26131" ><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >Goals_1</th>        <th class="col_heading level0 col1" >Goals_2</th>        <th class="col_heading level0 col2" >Goal_diff</th>        <th class="col_heading level0 col3" >Home_1</th>        <th class="col_heading level0 col4" >Home_2</th>        <th class="col_heading level0 col5" >Goal_total</th>        <th class="col_heading level0 col6" >Elo_rating_diff</th>        <th class="col_heading level0 col7" >Home_advantage</th>        <th class="col_heading level0 col8" >Relative_experience</th>        <th class="col_heading level0 col9" >Relative_population</th>        <th class="col_heading level0 col10" >Relative_GDP_per_capita</th>        <th class="col_heading level0 col11" >Relative_ELO_rating</th>    </tr></thead><tbody>
                 <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row0" class="row_heading level0 row0" >Goals_1</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col0" class="data row0 col0" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col1" class="data row0 col1" >-0.111391</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col2" class="data row0 col2" >0.794002</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col3" class="data row0 col3" >0.048040</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col4" class="data row0 col4" >-0.014526</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col5" class="data row0 col5" >0.734365</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col6" class="data row0 col6" >0.274183</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col7" class="data row0 col7" >0.045975</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col8" class="data row0 col8" >0.074838</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col9" class="data row0 col9" >0.125363</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col10" class="data row0 col10" >0.156935</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row0_col11" class="data row0 col11" >0.271003</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row0" class="row_heading level0 row0" >Goals_1</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col0" class="data row0 col0" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col1" class="data row0 col1" >-0.067703</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col2" class="data row0 col2" >0.752173</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col3" class="data row0 col3" >0.088909</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col4" class="data row0 col4" >-0.050769</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col5" class="data row0 col5" >0.709123</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col6" class="data row0 col6" >0.330161</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col7" class="data row0 col7" >0.098446</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col8" class="data row0 col8" >0.109553</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col9" class="data row0 col9" >0.162116</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col10" class="data row0 col10" >0.198741</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row0_col11" class="data row0 col11" >0.329032</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row1" class="row_heading level0 row1" >Goals_2</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col0" class="data row1 col0" >-0.111391</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col1" class="data row1 col1" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col2" class="data row1 col2" >-0.692577</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col3" class="data row1 col3" >-0.042262</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col4" class="data row1 col4" >-0.102597</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col5" class="data row1 col5" >0.592730</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col6" class="data row1 col6" >-0.309664</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col7" class="data row1 col7" >0.026431</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col8" class="data row1 col8" >-0.047353</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col9" class="data row1 col9" >0.050959</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col10" class="data row1 col10" >-0.150840</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row1_col11" class="data row1 col11" >-0.302684</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row1" class="row_heading level0 row1" >Goals_2</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col0" class="data row1 col0" >-0.067703</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col1" class="data row1 col1" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col2" class="data row1 col2" >-0.708378</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col3" class="data row1 col3" >-0.041997</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col4" class="data row1 col4" >-0.101683</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col5" class="data row1 col5" >0.655457</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col6" class="data row1 col6" >-0.309717</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col7" class="data row1 col7" >0.028566</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col8" class="data row1 col8" >-0.046900</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col9" class="data row1 col9" >0.051137</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col10" class="data row1 col10" >-0.150433</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row1_col11" class="data row1 col11" >-0.302692</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row2" class="row_heading level0 row2" >Goal_diff</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col0" class="data row2 col0" >0.794002</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col1" class="data row2 col1" >-0.692577</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col2" class="data row2 col2" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col3" class="data row2 col3" >0.060723</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col4" class="data row2 col4" >0.052217</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col5" class="data row2 col5" >0.170461</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col6" class="data row2 col6" >0.388447</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col7" class="data row2 col7" >0.017203</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col8" class="data row2 col8" >0.083289</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col9" class="data row2 col9" >0.059823</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col10" class="data row2 col10" >0.206186</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row2_col11" class="data row2 col11" >0.381869</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row2" class="row_heading level0 row2" >Goal_diff</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col0" class="data row2 col0" >0.752173</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col1" class="data row2 col1" >-0.708378</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col2" class="data row2 col2" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col3" class="data row2 col3" >0.090638</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col4" class="data row2 col4" >0.031242</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col5" class="data row2 col5" >0.068757</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col6" class="data row2 col6" >0.438136</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col7" class="data row2 col7" >0.050779</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col8" class="data row2 col8" >0.108480</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col9" class="data row2 col9" >0.080915</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col10" class="data row2 col10" >0.239959</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row2_col11" class="data row2 col11" >0.432699</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row3" class="row_heading level0 row3" >Home_1</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col0" class="data row3 col0" >0.048040</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col1" class="data row3 col1" >-0.042262</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col2" class="data row3 col2" >0.060723</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col3" class="data row3 col3" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col4" class="data row3 col4" >-0.061366</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col5" class="data row3 col5" >0.010068</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col6" class="data row3 col6" >-0.093970</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col7" class="data row3 col7" >0.802805</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col8" class="data row3 col8" >0.002473</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col9" class="data row3 col9" >0.144338</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col10" class="data row3 col10" >0.102674</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row3_col11" class="data row3 col11" >-0.098387</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row3" class="row_heading level0 row3" >Home_1</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col0" class="data row3 col0" >0.088909</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col1" class="data row3 col1" >-0.041997</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col2" class="data row3 col2" >0.090638</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col3" class="data row3 col3" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col4" class="data row3 col4" >-0.061366</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col5" class="data row3 col5" >0.037622</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col6" class="data row3 col6" >-0.093970</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col7" class="data row3 col7" >0.802805</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col8" class="data row3 col8" >0.002473</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col9" class="data row3 col9" >0.144338</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col10" class="data row3 col10" >0.102674</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row3_col11" class="data row3 col11" >-0.098387</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row4" class="row_heading level0 row4" >Home_2</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col0" class="data row4 col0" >-0.014526</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col1" class="data row4 col1" >-0.102597</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col2" class="data row4 col2" >0.052217</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col3" class="data row4 col3" >-0.061366</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col4" class="data row4 col4" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col5" class="data row4 col5" >-0.081847</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col6" class="data row4 col6" >-0.014328</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col7" class="data row4 col7" >-0.644382</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col8" class="data row4 col8" >0.020895</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col9" class="data row4 col9" >-0.030583</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col10" class="data row4 col10" >-0.007149</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row4_col11" class="data row4 col11" >-0.020045</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row4" class="row_heading level0 row4" >Home_2</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col0" class="data row4 col0" >-0.050769</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col1" class="data row4 col1" >-0.101683</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col2" class="data row4 col2" >0.031242</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col3" class="data row4 col3" >-0.061366</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col4" class="data row4 col4" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col5" class="data row4 col5" >-0.110291</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col6" class="data row4 col6" >-0.014328</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col7" class="data row4 col7" >-0.644382</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col8" class="data row4 col8" >0.020895</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col9" class="data row4 col9" >-0.030583</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col10" class="data row4 col10" >-0.007149</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row4_col11" class="data row4 col11" >-0.020045</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row5" class="row_heading level0 row5" >Goal_total</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col0" class="data row5 col0" >0.734365</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col1" class="data row5 col1" >0.592730</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col2" class="data row5 col2" >0.170461</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col3" class="data row5 col3" >0.010068</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col4" class="data row5 col4" >-0.081847</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col5" class="data row5 col5" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col6" class="data row5 col6" >0.010708</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col7" class="data row5 col7" >0.055313</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col8" class="data row5 col8" >0.028310</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col9" class="data row5 col9" >0.136404</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col10" class="data row5 col10" >0.024162</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row5_col11" class="data row5 col11" >0.012898</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row5" class="row_heading level0 row5" >Goal_total</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col0" class="data row5 col0" >0.709123</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col1" class="data row5 col1" >0.655457</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col2" class="data row5 col2" >0.068757</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col3" class="data row5 col3" >0.037622</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col4" class="data row5 col4" >-0.110291</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col5" class="data row5 col5" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col6" class="data row5 col6" >0.031043</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col7" class="data row5 col7" >0.094708</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col8" class="data row5 col8" >0.049784</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col9" class="data row5 col9" >0.158856</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col10" class="data row5 col10" >0.044130</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row5_col11" class="data row5 col11" >0.035153</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row6" class="row_heading level0 row6" >Elo_rating_diff</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col0" class="data row6 col0" >0.274183</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col1" class="data row6 col1" >-0.309664</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col2" class="data row6 col2" >0.388447</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col3" class="data row6 col3" >-0.093970</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col4" class="data row6 col4" >-0.014328</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col5" class="data row6 col5" >0.010708</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col6" class="data row6 col6" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col7" class="data row6 col7" >-0.063436</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col8" class="data row6 col8" >0.295572</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col9" class="data row6 col9" >0.215862</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col10" class="data row6 col10" >0.227179</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row6_col11" class="data row6 col11" >0.996969</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row6" class="row_heading level0 row6" >Elo_rating_diff</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col0" class="data row6 col0" >0.330161</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col1" class="data row6 col1" >-0.309717</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col2" class="data row6 col2" >0.438136</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col3" class="data row6 col3" >-0.093970</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col4" class="data row6 col4" >-0.014328</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col5" class="data row6 col5" >0.031043</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col6" class="data row6 col6" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col7" class="data row6 col7" >-0.063436</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col8" class="data row6 col8" >0.295572</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col9" class="data row6 col9" >0.215862</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col10" class="data row6 col10" >0.227179</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row6_col11" class="data row6 col11" >0.996969</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row7" class="row_heading level0 row7" >Home_advantage</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col0" class="data row7 col0" >0.045975</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col1" class="data row7 col1" >0.026431</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col2" class="data row7 col2" >0.017203</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col3" class="data row7 col3" >0.802805</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col4" class="data row7 col4" >-0.644382</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col5" class="data row7 col5" >0.055313</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col6" class="data row7 col6" >-0.063436</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col7" class="data row7 col7" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col8" class="data row7 col8" >-0.010587</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col9" class="data row7 col9" >0.128854</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col10" class="data row7 col10" >0.082934</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row7_col11" class="data row7 col11" >-0.063405</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row7" class="row_heading level0 row7" >Home_advantage</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col0" class="data row7 col0" >0.098446</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col1" class="data row7 col1" >0.028566</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col2" class="data row7 col2" >0.050779</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col3" class="data row7 col3" >0.802805</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col4" class="data row7 col4" >-0.644382</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col5" class="data row7 col5" >0.094708</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col6" class="data row7 col6" >-0.063436</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col7" class="data row7 col7" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col8" class="data row7 col8" >-0.010587</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col9" class="data row7 col9" >0.128854</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col10" class="data row7 col10" >0.082934</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row7_col11" class="data row7 col11" >-0.063405</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row8" class="row_heading level0 row8" >Relative_experience</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col0" class="data row8 col0" >0.074838</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col1" class="data row8 col1" >-0.047353</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col2" class="data row8 col2" >0.083289</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col3" class="data row8 col3" >0.002473</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col4" class="data row8 col4" >0.020895</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col5" class="data row8 col5" >0.028310</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col6" class="data row8 col6" >0.295572</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col7" class="data row8 col7" >-0.010587</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col8" class="data row8 col8" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col9" class="data row8 col9" >0.157891</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col10" class="data row8 col10" >0.377200</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row8_col11" class="data row8 col11" >0.308726</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row8" class="row_heading level0 row8" >Relative_experience</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col0" class="data row8 col0" >0.109553</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col1" class="data row8 col1" >-0.046900</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col2" class="data row8 col2" >0.108480</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col3" class="data row8 col3" >0.002473</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col4" class="data row8 col4" >0.020895</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col5" class="data row8 col5" >0.049784</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col6" class="data row8 col6" >0.295572</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col7" class="data row8 col7" >-0.010587</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col8" class="data row8 col8" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col9" class="data row8 col9" >0.157891</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col10" class="data row8 col10" >0.377200</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row8_col11" class="data row8 col11" >0.308726</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row9" class="row_heading level0 row9" >Relative_population</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col0" class="data row9 col0" >0.125363</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col1" class="data row9 col1" >0.050959</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col2" class="data row9 col2" >0.059823</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col3" class="data row9 col3" >0.144338</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col4" class="data row9 col4" >-0.030583</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col5" class="data row9 col5" >0.136404</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col6" class="data row9 col6" >0.215862</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col7" class="data row9 col7" >0.128854</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col8" class="data row9 col8" >0.157891</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col9" class="data row9 col9" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col10" class="data row9 col10" >-0.056638</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row9_col11" class="data row9 col11" >0.229049</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row9" class="row_heading level0 row9" >Relative_population</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col0" class="data row9 col0" >0.162116</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col1" class="data row9 col1" >0.051137</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col2" class="data row9 col2" >0.080915</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col3" class="data row9 col3" >0.144338</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col4" class="data row9 col4" >-0.030583</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col5" class="data row9 col5" >0.158856</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col6" class="data row9 col6" >0.215862</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col7" class="data row9 col7" >0.128854</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col8" class="data row9 col8" >0.157891</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col9" class="data row9 col9" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col10" class="data row9 col10" >-0.056638</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row9_col11" class="data row9 col11" >0.229049</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row10" class="row_heading level0 row10" >Relative_GDP_per_capita</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col0" class="data row10 col0" >0.156935</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col1" class="data row10 col1" >-0.150840</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col2" class="data row10 col2" >0.206186</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col3" class="data row10 col3" >0.102674</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col4" class="data row10 col4" >-0.007149</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col5" class="data row10 col5" >0.024162</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col6" class="data row10 col6" >0.227179</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col7" class="data row10 col7" >0.082934</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col8" class="data row10 col8" >0.377200</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col9" class="data row10 col9" >-0.056638</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col10" class="data row10 col10" >1.000000</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row10_col11" class="data row10 col11" >0.224446</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row10" class="row_heading level0 row10" >Relative_GDP_per_capita</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col0" class="data row10 col0" >0.198741</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col1" class="data row10 col1" >-0.150433</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col2" class="data row10 col2" >0.239959</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col3" class="data row10 col3" >0.102674</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col4" class="data row10 col4" >-0.007149</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col5" class="data row10 col5" >0.044130</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col6" class="data row10 col6" >0.227179</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col7" class="data row10 col7" >0.082934</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col8" class="data row10 col8" >0.377200</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col9" class="data row10 col9" >-0.056638</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col10" class="data row10 col10" >1.000000</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row10_col11" class="data row10 col11" >0.224446</td>
             </tr>
             <tr>
-                        <th id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131level0_row11" class="row_heading level0 row11" >Relative_ELO_rating</th>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col0" class="data row11 col0" >0.271003</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col1" class="data row11 col1" >-0.302684</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col2" class="data row11 col2" >0.381869</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col3" class="data row11 col3" >-0.098387</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col4" class="data row11 col4" >-0.020045</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col5" class="data row11 col5" >0.012898</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col6" class="data row11 col6" >0.996969</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col7" class="data row11 col7" >-0.063405</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col8" class="data row11 col8" >0.308726</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col9" class="data row11 col9" >0.229049</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col10" class="data row11 col10" >0.224446</td>
-                        <td id="T_d96a2d8a_e0f0_11eb_b914_74d83eb26131row11_col11" class="data row11 col11" >1.000000</td>
+                        <th id="T_85a74e22_e416_11eb_b1d3_74d83eb26131level0_row11" class="row_heading level0 row11" >Relative_ELO_rating</th>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col0" class="data row11 col0" >0.329032</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col1" class="data row11 col1" >-0.302692</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col2" class="data row11 col2" >0.432699</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col3" class="data row11 col3" >-0.098387</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col4" class="data row11 col4" >-0.020045</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col5" class="data row11 col5" >0.035153</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col6" class="data row11 col6" >0.996969</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col7" class="data row11 col7" >-0.063405</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col8" class="data row11 col8" >0.308726</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col9" class="data row11 col9" >0.229049</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col10" class="data row11 col10" >0.224446</td>
+                        <td id="T_85a74e22_e416_11eb_b1d3_74d83eb26131row11_col11" class="data row11 col11" >1.000000</td>
             </tr>
     </tbody></table>
 
@@ -2340,12 +2346,12 @@
     </tr>
     <tr>
       <th>Actual_score_1</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>1.42667</td>
-      <td>1.31448</td>
+      <td>1.40708</td>
+      <td>1.29366</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
@@ -2354,12 +2360,12 @@
     </tr>
     <tr>
       <th>Actual_score_2</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>1.22222</td>
-      <td>1.10778</td>
+      <td>1.22124</td>
+      <td>1.10542</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
@@ -2368,12 +2374,12 @@
     </tr>
     <tr>
       <th>Actual_goal_diff</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>0.204444</td>
-      <td>1.81092</td>
+      <td>0.185841</td>
+      <td>1.79653</td>
       <td>-5</td>
       <td>-1</td>
       <td>0</td>
@@ -2382,24 +2388,24 @@
     </tr>
     <tr>
       <th>Actual_goal_total</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>2.64889</td>
-      <td>1.62192</td>
+      <td>2.62832</td>
+      <td>1.60108</td>
       <td>0</td>
-      <td>1</td>
+      <td>1.25</td>
       <td>2</td>
       <td>3</td>
       <td>8</td>
     </tr>
     <tr>
       <th>Actual_result</th>
-      <td>225</td>
+      <td>226</td>
       <td>3</td>
       <td>Win</td>
-      <td>96</td>
+      <td>94</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -2480,12 +2486,12 @@
     </tr>
     <tr>
       <th>Correct_result</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>0.435556</td>
-      <td>0.496935</td>
+      <td>0.438053</td>
+      <td>0.497249</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2494,12 +2500,12 @@
     </tr>
     <tr>
       <th>Correct_goal_diff</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>0.257778</td>
-      <td>0.438386</td>
+      <td>0.261062</td>
+      <td>0.440189</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2508,12 +2514,12 @@
     </tr>
     <tr>
       <th>Correct_score</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>0.137778</td>
-      <td>0.345435</td>
+      <td>0.146018</td>
+      <td>0.353908</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2522,12 +2528,12 @@
     </tr>
     <tr>
       <th>Points</th>
-      <td>225</td>
+      <td>226</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>0.831111</td>
-      <td>1.1011</td>
+      <td>0.845133</td>
+      <td>1.11471</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2635,15 +2641,15 @@
     </tr>
     <tr>
       <th>2021</th>
-      <td>50</td>
-      <td>0.98</td>
-      <td>54%</td>
-      <td>30%</td>
-      <td>14%</td>
-      <td>2.58</td>
-      <td>2.88</td>
-      <td>68%</td>
-      <td>82%</td>
+      <td>51</td>
+      <td>1.04</td>
+      <td>55%</td>
+      <td>31%</td>
+      <td>18%</td>
+      <td>2.57</td>
+      <td>2.78</td>
+      <td>67%</td>
+      <td>76%</td>
     </tr>
     <tr>
       <th>Training</th>
@@ -2671,27 +2677,27 @@
     </tr>
     <tr>
       <th>Live</th>
-      <td>50</td>
-      <td>0.98</td>
-      <td>54%</td>
-      <td>30%</td>
-      <td>14%</td>
-      <td>2.58</td>
-      <td>2.88</td>
-      <td>68%</td>
-      <td>82%</td>
+      <td>51</td>
+      <td>1.04</td>
+      <td>55%</td>
+      <td>31%</td>
+      <td>18%</td>
+      <td>2.57</td>
+      <td>2.78</td>
+      <td>67%</td>
+      <td>76%</td>
     </tr>
     <tr>
       <th>Overall</th>
-      <td>225</td>
-      <td>0.83</td>
+      <td>226</td>
+      <td>0.85</td>
       <td>44%</td>
       <td>26%</td>
-      <td>14%</td>
+      <td>15%</td>
       <td>2.56</td>
-      <td>2.65</td>
+      <td>2.63</td>
       <td>62%</td>
-      <td>82%</td>
+      <td>81%</td>
     </tr>
   </tbody>
 </table>
@@ -2733,44 +2739,44 @@
   <tbody>
     <tr>
       <th>Actual_score_1</th>
-      <td>50.0</td>
-      <td>1.280000</td>
-      <td>1.195911</td>
+      <td>51.0</td>
+      <td>1.196078</td>
+      <td>1.077397</td>
       <td>0.0</td>
-      <td>0.00</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>2.0</td>
-      <td>4.0</td>
+      <td>3.0</td>
     </tr>
     <tr>
       <th>Actual_score_2</th>
-      <td>50.0</td>
-      <td>1.600000</td>
-      <td>1.355262</td>
+      <td>51.0</td>
+      <td>1.588235</td>
+      <td>1.344269</td>
       <td>0.0</td>
-      <td>1.00</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>2.0</td>
       <td>5.0</td>
     </tr>
     <tr>
       <th>Actual_goal_diff</th>
-      <td>50.0</td>
-      <td>-0.320000</td>
-      <td>1.910658</td>
+      <td>51.0</td>
+      <td>-0.392157</td>
+      <td>1.822947</td>
       <td>-5.0</td>
-      <td>-1.75</td>
+      <td>-1.5</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>3.0</td>
     </tr>
     <tr>
       <th>Actual_goal_total</th>
-      <td>50.0</td>
-      <td>2.880000</td>
-      <td>1.698018</td>
+      <td>51.0</td>
+      <td>2.784314</td>
+      <td>1.616338</td>
       <td>0.0</td>
-      <td>2.00</td>
+      <td>2.0</td>
       <td>3.0</td>
       <td>4.0</td>
       <td>8.0</td>
@@ -2781,7 +2787,7 @@
       <td>1.333333</td>
       <td>0.588784</td>
       <td>0.0</td>
-      <td>1.00</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>2.0</td>
       <td>2.0</td>
@@ -2792,7 +2798,7 @@
       <td>1.235294</td>
       <td>0.513351</td>
       <td>0.0</td>
-      <td>1.00</td>
+      <td>1.0</td>
       <td>1.0</td>
       <td>2.0</td>
       <td>2.0</td>
@@ -2803,7 +2809,7 @@
       <td>0.098039</td>
       <td>0.984985</td>
       <td>-2.0</td>
-      <td>-1.00</td>
+      <td>-1.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>2.0</td>
@@ -2814,51 +2820,51 @@
       <td>2.568627</td>
       <td>0.500196</td>
       <td>2.0</td>
-      <td>2.00</td>
+      <td>2.0</td>
       <td>3.0</td>
       <td>3.0</td>
       <td>3.0</td>
     </tr>
     <tr>
       <th>Correct_result</th>
-      <td>50.0</td>
-      <td>0.540000</td>
-      <td>0.503457</td>
+      <td>51.0</td>
+      <td>0.549020</td>
+      <td>0.502543</td>
       <td>0.0</td>
-      <td>0.00</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>Correct_goal_diff</th>
-      <td>50.0</td>
-      <td>0.300000</td>
-      <td>0.462910</td>
+      <td>51.0</td>
+      <td>0.313725</td>
+      <td>0.468623</td>
       <td>0.0</td>
-      <td>0.00</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>Correct_score</th>
-      <td>50.0</td>
-      <td>0.140000</td>
-      <td>0.350510</td>
+      <td>51.0</td>
+      <td>0.176471</td>
+      <td>0.385013</td>
       <td>0.0</td>
-      <td>0.00</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>Points</th>
-      <td>50.0</td>
-      <td>0.980000</td>
-      <td>1.097121</td>
+      <td>51.0</td>
+      <td>1.039216</td>
+      <td>1.148230</td>
       <td>0.0</td>
-      <td>0.00</td>
+      <td>0.0</td>
       <td>1.0</td>
       <td>2.0</td>
       <td>3.0</td>

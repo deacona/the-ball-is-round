@@ -7,7 +7,7 @@ __The challenge__
 
 Inspired by my performance in an office World Cup predictor, I decided to take that [model](intl_01_world_cup_2018.md) and, hopefully, improve on it for Euro 2020.
 
-I wasn't part of a similar competition this time, so decided to enter UEFA's online prediction competition.
+I wasn't part of a similar workplace competition this time, so decided to enter UEFA's online prediction competition.
 
 
 __The data__
@@ -27,7 +27,7 @@ I gathered fixtures/results from FBRef, stadium info from Wikipedia, Elo data fr
 
 __The method__
 
-I focussed on what I felt were a handful of key indicators from previous work: Elo ratings and Home advantage (as used in WC 2018 predictions), and Experience, Population and GDP per capita (as used in Soccernomics by Simon Kuper & Szymanski).
+I focussed on what I felt were a handful of key indicators from previous work: Elo ratings and Home advantage (as used in WC 2018 predictions), and Experience, Population and GDP per capita (as used in Soccernomics by Kuper & Szymanski).
 
 A random 20% of the past tournament matches were held for testing. This gave us 140 training samples and 35 test samples.
 
@@ -42,9 +42,9 @@ Both targets were then fitted using a selection of 10 regression algorithms.
 * Ridge
 * Random Forest
 * Gradient Boost
-* Support Vector Machine (linear)
-* Support Vector Machine (rbf)
-* Custom Elo Regressor - approximates my WC 2018 model
+* Support Vector Machine (linear kernel)
+* Support Vector Machine (rbf kernel)
+* Custom Elo Regressor - approximates my World Cup 2018 model
 
 (All but the EloRegressor had a standardised scaling applied to avoid any affects of differently scaled features)
 
@@ -251,15 +251,15 @@ Finally, here is a summary of all the models' predictions vs actual results...
     </tr>
     <tr>
       <th>2021</th>
-      <td>50</td>
-      <td>0.98</td>
-      <td>54%</td>
-      <td>30%</td>
-      <td>14%</td>
-      <td>2.58</td>
-      <td>2.88</td>
-      <td>68%</td>
-      <td>82%</td>
+      <td>51</td>
+      <td>1.04</td>
+      <td>55%</td>
+      <td>31%</td>
+      <td>18%</td>
+      <td>2.57</td>
+      <td>2.78</td>
+      <td>67%</td>
+      <td>76%</td>
     </tr>
     <tr>
       <th>Training</th>
@@ -287,27 +287,29 @@ Finally, here is a summary of all the models' predictions vs actual results...
     </tr>
     <tr>
       <th>Live</th>
-      <td>50</td>
-      <td>0.98</td>
-      <td>54%</td>
-      <td>30%</td>
-      <td>14%</td>
-      <td>2.58</td>
-      <td>2.88</td>
-      <td>68%</td>
-      <td>82%</td>
+      <td>51</td>
+      <td>1.04</td>
+      <td>55%</td>
+      <td>31%</td>
+      <td>18%</td>
+      <td>2.57</td>
+      <td>2.78</td>
+      <td>67%</td>
+      <td>76%</td>
     </tr>
     <tr>
       <th>Overall</th>
-      <td>225</td>
-      <td>0.83</td>
+      <td>226</td>
+      <td>0.85</td>
       <td>44%</td>
       <td>26%</td>
-      <td>14%</td>
+      <td>15%</td>
       <td>2.56</td>
-      <td>2.65</td>
+      <td>2.63</td>
       <td>62%</td>
-      <td>82%</td>
+      <td>81%</td>
     </tr>
   </tbody>
 </table>
+
+I was really pleased with how the model performed. In the Uefa match predictor I placed in the top 20% of all competitors with 145 pts (vs 255 for the winner). As I didn't make any first score predictions or use the 2x boosters avaialable, I felt this was pretty reasonable. In the Uefa tournament predictor, I placed in the top 32% with 49ts, and in the top 9% with 24pts just for the knockout predictions. As with my World Cup model it under-predicted the number of goals and wins. But within a much more robust and test-able framework there's greater scope to refine this before the next tournament!
